@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Written on fre. nov. 20 15:13:08 2015 by Qt Creator 3.4.0-->
+<externaltool id="TabsToSpaces">
+    <description>Replace 1 TAB with 4 spaces in the selected text, only initial</description>
+    <displayname>TabsToSpaces</displayname>
+    <category>Text</category>
+    <executable output="replaceselection" error="ignore" modifiesdocument="yes">
+        <path>expand</path>
+        <arguments>-t 4 -i</arguments>
+        <input>%{CurrentDocument:Selection}</input>
+        <workingdirectory>%{CurrentDocument:Path}</workingdirectory>
+    </executable>
+</externaltool>

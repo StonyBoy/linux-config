@@ -1,0 +1,251 @@
+# i3 config file (v4)
+#
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+
+set $mod Mod4
+set $lock_bkg "/home/steen/Pictures/Wallpapers/bark.png"
+set $wallpaper "/home/steen/Pictures/Wallpapers/Sommerferie 2017/IMG_6779.JPG"
+set $monitor_left DVI-0
+set $monitor_right HDMI-0
+set $wrkspc1  "1: Editor "
+set $wrkspc2  "2: Builds "
+set $wrkspc3  "3: Term "
+set $wrkspc4  "4: Internet "
+set $wrkspc5  "5: Mail "
+set $wrkspc6  "6: Music "
+set $wrkspc7  "7: Files "
+set $wrkspc8  "8: Remote "
+set $wrkspc9  "9: Private "
+set $wrkspc10 "10: VPN "
+
+# Setting up monitors
+# exec --no-startup-id xrandr -d :0 --output VGA-0 --off --output $monitor_left --mode 1920x1200 --primary --output $monitor_right --mode 1920x1080 --right-of $monitor_left
+
+# Bind the workspaces for the left monitor
+# workspace $wrkspc1 output $monitor_left
+# workspace $wrkspc3 output $monitor_left
+# workspace $wrkspc5 output $monitor_left
+# workspace $wrkspc7 output $monitor_left
+# workspace $wrkspc9 output $monitor_left
+
+# Bind the workspaces for the right monitor
+# workspace $wrkspc2  output $monitor_right
+# workspace $wrkspc4  output $monitor_right
+# workspace $wrkspc6  output $monitor_right
+# workspace $wrkspc8  output $monitor_right
+# workspace $wrkspc10 output $monitor_right
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+# font pango:monospace 8
+font pango:SFNS Display 12
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+set $terminal xfce4-terminal
+bindsym $mod+Return exec $terminal
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+ae focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+ae move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace $wrkspc1
+bindsym $mod+2 workspace $wrkspc2
+bindsym $mod+3 workspace $wrkspc3
+bindsym $mod+4 workspace $wrkspc4
+bindsym $mod+5 workspace $wrkspc5
+bindsym $mod+6 workspace $wrkspc6
+bindsym $mod+7 workspace $wrkspc7
+bindsym $mod+8 workspace $wrkspc8
+bindsym $mod+9 workspace $wrkspc9
+bindsym $mod+0 workspace $wrkspc10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $wrkspc1
+bindsym $mod+Shift+2 move container to workspace $wrkspc2
+bindsym $mod+Shift+3 move container to workspace $wrkspc3
+bindsym $mod+Shift+4 move container to workspace $wrkspc4
+bindsym $mod+Shift+5 move container to workspace $wrkspc5
+bindsym $mod+Shift+6 move container to workspace $wrkspc6
+bindsym $mod+Shift+7 move container to workspace $wrkspc7
+bindsym $mod+Shift+8 move container to workspace $wrkspc8
+bindsym $mod+Shift+9 move container to workspace $wrkspc9
+bindsym $mod+Shift+0 move container to workspace $wrkspc10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym ae resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+# Steen
+# ============================================================================
+
+# Start a composite manager for window transition effects
+# exec --no-startup-id compton -b
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+    position top
+    font pango:SFNS Display 8
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+}
+
+exec feh --bg-fill $wallpaper
+bindsym $mod+ctrl+l exec i3lock -ti $lock_bkg
+bindsym $mod+ctrl+w exec feh --bg-fill $wallpaper
+
+# Next/previous workspace
+bindsym Mod1+Tab workspace next
+bindsym Mod1+Shift+Tab workspace prev
+bindsym $mod+Tab workspace back_and_forth
+
+# Workspace 1
+exec --no-startup-id qtcreator
+for_window [class="QtCreator"] move to workspace $wrkspc1
+
+# Workspace 2
+exec $terminal
+
+# Workspace 4
+exec --no-startup-id chromium
+# for_window [class="Chromium"] move to workspace $wrkspc4
+
+# Workspace 6
+exec --no-startup-id spotify
+for_window [class="Spotify"] move to workspace $wrkspc6
+
+# Move workspace to outputs
+bindsym $mod+Mod1+Left  move workspace to output left
+bindsym $mod+Mod1+Down  move workspace to output down
+bindsym $mod+Mod1+Up    move workspace to output up
+bindsym $mod+Mod1+Right move workspace to output right
+
+# Move workspace to output mode
+set $mode_move Move workspace: (L)eft, (Right)
+mode "$mode_move" {
+        bindsym l move workspace to output left
+        bindsym r move workspace to output right
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+m mode "$mode_move"
+
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +10% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -10% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Media player controls
+bindsym XF86AudioPlay exec  --no-startup-id playerctl play
+bindsym XF86AudioPause exec --no-startup-id playerctl pause
+bindsym XF86AudioNext exec  --no-startup-id playerctl next
+bindsym XF86AudioPrev exec  --no-startup-id playerctl previous
+
+# Menu
+
+# start dmenu (a program launcher)
+# bindsym $mod+d exec dmenu_run
+
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# Use the more fancy rofi menu
+bindsym $mod+d exec rofi -show run -lines 5 -eh 2 -width 100 -padding 500 -opacity "80" -bw 0 -columns 2 -font "System San Francisco Display 12"
+
+# Exit Menu
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+set $mode_system System (l) lock, (u) switch user, (x) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3lock -ti $lock_bkg && sleep 1, mode "default"
+    bindsym u exec --no-startup-id dm-tool switch-to-greeter, mode "default"
+    bindsym x exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id i3lock -ti $lock_bkg && sleep 1 && sudo systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id i3lock -ti $lock_bkg && sleep 1 && sudo systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id sudo systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id sudo systemctl poweroff -i, mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+e mode "$mode_system"
+

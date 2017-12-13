@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Produced by Beyond Compare 4 from Scooter Software -->
+<BCCommands Version="1" MinVersion="1">
+	<TTextCompareCommands>
+		<Items>
+			<DiffSectionNextAction Value="Alt+Down"/>
+			<DiffSectionPrevAction Value="Alt+Up"/>
+			<ExistsNextAction Value="None"/>
+			<ExistsPrevAction Value="None"/>
+			<FindNextAction Value="Ctrl+G"/>
+			<GoToAction Value="None"/>
+		</Items>
+	</TTextCompareCommands>
+</BCCommands>

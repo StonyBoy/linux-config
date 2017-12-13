@@ -1,0 +1,7 @@
+[Match]
+MACAddress=60:a4:4c:b0:5e:c6
+
+[Link]
+Name=wan
+MACAddressPolicy=persistent 
+

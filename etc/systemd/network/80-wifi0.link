@@ -1,0 +1,7 @@
+[Match]
+MACAddress=1e:22:f7:2a:9b:7a
+
+[Link]
+Name=wifi0
+MACAddressPolicy=persistent 
+

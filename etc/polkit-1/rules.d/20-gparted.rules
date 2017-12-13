@@ -1,0 +1,9 @@
+/* Allow users in wheel group to run GParted without authentication */
+
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.archlinux.pkexec.gparted" &&
+        subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+    }
+});
+

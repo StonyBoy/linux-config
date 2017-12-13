@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Written on fre. nov. 20 15:13:20 2015 by Qt Creator 3.4.0-->
+<externaltool id="sort">
+    <description>Sorts the selected text</description>
+    <displayname>Sort Selection</displayname>
+    <category>Text</category>
+    <executable output="replaceselection" error="ignore" modifiesdocument="yes">
+        <path>sort</path>
+        <input>%{CurrentDocument:Selection}</input>
+        <workingdirectory>%{CurrentDocument:Path}</workingdirectory>
+    </executable>
+</externaltool>

@@ -1,0 +1,34 @@
+[color]
+        diff = auto
+        status = auto
+        branch = auto
+        interactive = auto
+
+[diff]
+        renames = copy
+
+[clean]
+        requireForce = true
+
+[gc]
+        auto = 0
+        autopacklimit = 0
+        packrefs = false
+
+[apply]
+        whitespace = strip
+
+[alias]
+        ci = commit
+        co = checkout
+        st = status
+        stat = status
+
+[core]
+        excludesfile = ~/.gitignore
+
+[push]
+        default = simple
+
+[include]
+        path = .gitconfig.private

@@ -1,0 +1,11 @@
+*.swp
+*.swo
+*.log
+config.status
+tags
+.clang_complete
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+compile_commands.json
+ID
