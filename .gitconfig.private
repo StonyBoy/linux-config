@@ -1,0 +1,79 @@
+[user]
+        name  = 
+        email = 
+
+[core]
+        editor = vim
+
+[alias]
+        b = !git branch -vv
+        cp = cherry-pick
+        dc = !git diff --cached
+        dt = difftool
+        mt = mergetool
+        findfile = !git ls-files | grep -i
+        k = !gitk --all &
+        la = !git config -l | grep alias | cut -c 7-
+        l = log --decorate
+        ll  =   !git log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat
+        ls  =   !git log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate
+        mt = mergetool
+        r = reset
+        rh = !git reset --hard
+        rhom = !git reset --hard origin/master
+        rom  = !git reset --mixed origin/master
+        sh  =   !git show --no-patch
+        shf =   !git show --name-only --format=""
+        sho =   !git show --name-only
+        since = !git log --pretty=format:\"%aD|%H|%an|%s\" --no-merges HEAD --not
+        s = status
+        tom = !git branch -u origin/master
+        ts = !git tag -l --format=\"%(align:50,left)%(refname:lstrip=2)%(end)  :   %(objectname)   :   %(contents:subject)\" t-*
+        unstage = !git reset HEAD --
+        v = !git --version
+        w = rev-parse --abbrev-ref HEAD
+        prune-branches = !git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -d
+
+[color]
+        ui = true
+
+[diff]
+        tool = bc3
+
+[merge]
+        tool = bc3
+
+[difftool]
+        prompt = false
+
+[mergetool]
+        prompt = false
+
+[difftool "bc3"]
+        trustExitCode = true
+
+[mergetool "bc3"]
+        trustExitCode = true
+
+[grep]
+        extendRegexp = true
+        lineNumber = true
+        patternType = perl
+
+[rerere]
+        enabled = true
+
+[log]
+        decorate = short
+
+[color.decorate]
+        head = blue reverse
+        branch = blue
+        tag = green
+
+# [difftool "bcompare"]
+#         cmd = "/usr/bin/bcompare" -solo "$LOCAL" "$REMOTE"
+# 
+# [mergetool "bcompare"]
+#         cmd = "/usr/bin/bcompare" -solo "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+
