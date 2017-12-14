@@ -1,10 +1,13 @@
 ! Steen Hegelund
 ! 14-dec-2017
 
-URxvt.font:            xft:DejaVu Sans Mono for Powerline:antialias=true:size=11
-URxvt.boldFont:        xft:DejaVu Sans Mono for Powerline:bold:antialias=true:size=11
-URxvt.italicFont:      xft:DejaVu Sans Mono for Powerline:italic:antialias=true:size=11
-URxvt.boldItalicFont:  xft:DejaVu Sans Mono for Powerline:bold:italic:antialias=true:size=11
+URxvt.font:            xft:Droid Sans Mono:antialias=true:size=10
+URxvt.boldFont:        xft:Droid Sans Mono:bold:antialias=true:size=10
+URxvt.italicFont:      xft:Droid Sans Mono:italic:antialias=true:size=10
+URxvt.boldItalicFont:  xft:Droid Sans Mono:bold:italic:antialias=true:size=10
+
+! Perl Extensions to urxvt
+URxvt.perl-ext-common:      default,clipboard,font-size
 
 ! Stay focused on a particular part of scrollback buffer when scrolled up from the bottom
 ! URxvt-unicode terminal: do not scroll with output
@@ -36,31 +39,24 @@ URxvt.keysym.Shift-Up:   command:\033]720;1\007
 URxvt.keysym.Shift-Down: command:\033]721;1\007
 
 ! Discard scroll buffer history
-URxvt.keysym.C-k:        \ echo -ne '\\033c'\n
+URxvt.keysym.C-G:        \ echo -ne '\\033c'\n
 
-! ! keyboard-select
-! URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
-! URxvt.url-select.launcher:  chromium
-! URxvt.url-select.underline: true
-! ! URxvt.keysym.M-u:           perl:url-select:select_next
-! URxvt.keysym.M-s: perl:keyboard-select:activate
-! URxvt.keysym.M-r: perl:keyboard-select:search
-! 
-! 
-! ! clipboard
-! ! update clipboard whenever primary gets updated
-! URxvt.clipboard.autocopy: true
-! URxvt.keysym.M-c: perl:clipboard:copy
-! URxvt.keysym.M-v: perl:clipboard:paste
-! URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
-! 
-! ! `font-size` plugin
-! URxvt.keysym.C-minus: perl:font-size:decrease
-! URxvt.keysym.C-equal: perl:font-size:increase
-! ! The default font increase step size is 1. This is for portability across all
-! ! fonts (some fonts do not support particular font sizes). Because changing font
-! ! size only really makes sense for anti-aliased fonts (Terminus is bitmapped),
-! ! and because anti-aliased fonts support any size, it makes sense to just use a
-! ! size step of 4 for faster transitions between font size changes.
-! URxvt.font-size.step: 4
+! clipboard
+! update clipboard whenever primary gets updated
+URxvt.clipboard.autocopy: true
+! Use ctrl+shift+c and ctrl+shift-v as copy/paste shortcuts
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.keysym.C-C: perl:clipboard:copy
+URxvt.keysym.C-V: perl:clipboard:paste
+URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
+
+! Font size
+URxvt.keysym.C-plus:      font-size:increase
+URxvt.keysym.C-minus:     font-size:decrease
+URxvt.keysym.C-S-plus:    font-size:incglobal
+URxvt.keysym.C-S-minus:   font-size:decglobal
+URxvt.keysym.C-equal:     font-size:reset
+URxvt.keysym.C-question:  font-size:show
+URxvt.font-size.step:     1
 
