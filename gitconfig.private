@@ -12,7 +12,6 @@
         dt = difftool
         mt = mergetool
         findfile = !git ls-files | grep -i
-        k = !gitk --all &
         la = !git config -l | grep alias | cut -c 7-
         l = log --decorate
         ll  =   !git log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat
@@ -20,14 +19,13 @@
         mt = mergetool
         r = reset
         rh = !git reset --hard
-        rhom = !git reset --hard origin/master
-        rom  = !git reset --mixed origin/master
         sh  =   !git show --no-patch
         shf =   !git show --name-only --format=""
         sho =   !git show --name-only
+        shs =   "!diffstat()    { git diff --stat ${1-HEAD}~1..${1-HEAD} ; }; diffstat"
+        pat =   "!gitpatchsha() { git format-patch -M -C ${1-HEAD}~1..${1-HEAD} ; }; gitpatchsha"
         since = !git log --pretty=format:\"%aD|%H|%an|%s\" --no-merges HEAD --not
         s = status
-        tom = !git branch -u origin/master
         ts = !git tag -l --format=\"%(align:50,left)%(refname:lstrip=2)%(end)  :   %(objectname)   :   %(contents:subject)\" t-*
         unstage = !git reset HEAD --
         v = !git --version

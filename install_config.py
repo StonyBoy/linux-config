@@ -143,6 +143,7 @@ elements = [
         'bash_profile',
         'bashrc',
         'gitconfig',
+        'gitconfig.private',
         'gitignore',
         'inputrc',
         'profile',
