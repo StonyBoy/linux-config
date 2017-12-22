@@ -8,7 +8,19 @@
 			<ExistsNextAction Value="None"/>
 			<ExistsPrevAction Value="None"/>
 			<FindNextAction Value="Ctrl+G"/>
-			<GoToAction Value="None"/>
+			<FindPrevAction Value="Shift+Ctrl+G"/>
+			<GoToAction Value="Ctrl+N"/>
 		</Items>
 	</TTextCompareCommands>
+	<TTextMergeCommands>
+		<Items>
+			<DiffSectionNextAction Value="Alt+Down"/>
+			<DiffSectionPrevAction Value="Alt+Up"/>
+			<ExistsNextAction Value="None"/>
+			<ExistsPrevAction Value="None"/>
+			<GoToAction Value="Ctrl+N"/>
+			<FindNextAction Value="Ctrl+G"/>
+			<FindPrevAction Value="Shift+Ctrl+G"/>
+		</Items>
+	</TTextMergeCommands>
 </BCCommands>
