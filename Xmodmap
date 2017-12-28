@@ -1,2 +1,3 @@
-keycode 127 = XF86AudioPlay
-
+keycode 127 = XF86AudioPlay XF86AudioPlay XF86AudioPlay XF86AudioPlay
+keycode 107 = XF86AudioLowerVolume XF86AudioLowerVolume XF86AudioLowerVolume XF86AudioLowerVolume
+keycode 78  = XF86AudioRaiseVolume XF86AudioRaiseVolume XF86AudioRaiseVolume XF86AudioRaiseVolume
