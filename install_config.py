@@ -13,6 +13,7 @@ class UserChoice(enum.Enum):
     SkipFile = '.X.'
     OverWriteFile = '=>*'
     InstallFile = '==>'
+    SameFile = '==='
 
 
 class Installer:
@@ -23,6 +24,9 @@ class Installer:
 
     def exists(self):
         return os.path.exists(self.dst_path)
+
+    def is_same(self):
+        return os.path.exists(self.dst_path) and os.path.islink(self.dst_path) and os.readlink(self.dst_path) == self.src_path
 
     def overwrite_existing_prompt(self):
         prompt = '{} already exists - Do you want to overwrite it: (N/y) > '.format(self.dst_path)
@@ -41,7 +45,10 @@ class Installer:
         return response.lower()
 
     def user_selection(self):
-        if self.exists():
+        if self.is_same():
+            print('Already: {}'.format(self.src_path))
+            self.user_choice = UserChoice.SameFile
+        elif self.exists():
             if self.overwrite_existing_prompt() == 'y':
                 self.user_choice = UserChoice.OverWriteFile
             else:
@@ -56,7 +63,7 @@ class Installer:
         print('{:40s} {} {}'.format(os.path.basename(self.src_path), self.user_choice.value, self.dst_path))
 
     def user_action(self):
-        if self.user_choice == UserChoice.SkipFile:
+        if self.user_choice == UserChoice.SkipFile or self.user_choice == UserChoice.SameFile:
             return
         if self.user_choice == UserChoice.OverWriteFile:
             os.remove(self.dst_path)
