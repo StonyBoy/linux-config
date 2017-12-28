@@ -60,6 +60,9 @@ class Installer:
             return
         if self.user_choice == UserChoice.OverWriteFile:
             os.remove(self.dst_path)
+        dst_dir = os.path.dirname(self.dst_path)
+        if not os.path.exists(dst_dir):
+            os.makedirs(dst_dir)
         os.symlink(self.src_path, self.dst_path)
 
 
