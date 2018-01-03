@@ -6,7 +6,7 @@ if [ "${TERM}" == "rxvt-unicode" ]; then
   printf "\33]701;$LC_CTYPE\007"
 fi
 
-PROFILE_BASE=$(readlink -f $(dirname $(readlink -f ${BASH_SOURCE[0]}))/..)
+PROFILE_BASE=$(readlink $(dirname $(readlink ${BASH_SOURCE[0]}))/..)
 if [ -e $PROFILE_BASE/scripts ]
 then
     export PATH=$PATH:$PROFILE_BASE/scripts
