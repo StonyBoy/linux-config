@@ -7,7 +7,7 @@
 # Debugging
 # set -x
 
-export PATH=~/scripts:~/.local/bin:~/bin:$PATH
+export PATH=~/scripts:~/.local/bin:~/bin:/usr/local/bin:$PATH
 export PAGER='less -s'
 
 # Powerline provides avanced shell and GIT status
