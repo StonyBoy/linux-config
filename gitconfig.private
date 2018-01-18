@@ -1,7 +1,3 @@
-[user]
-        name  = 
-        email = 
-
 [core]
         editor = vim
 
@@ -11,11 +7,12 @@
         dc = !git diff --cached
         dt = difftool
         mt = mergetool
+        dtlast = !git difftool HEAD~1 HEAD
         findfile = !git ls-files | grep -i
         la = !git config -l | grep alias | cut -c 7-
         l = log --decorate
-        ll  =   !git log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat
-        ls  =   !git log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate
+        ls  =   !git log --pretty=format:\"%C(yellow)%h%Cred%d | %Creset%s%Cblue | [%cn]\" --decorate
+        ll  =   !git log --decorate --stat
         mt = mergetool
         r = reset
         rh = !git reset --hard
@@ -74,4 +71,7 @@
 # 
 # [mergetool "bcompare"]
 #         cmd = "/usr/bin/bcompare" -solo "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+
+[include]
+        path = .gitconfig.private.user
 
