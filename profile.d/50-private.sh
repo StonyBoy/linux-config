@@ -1,4 +1,5 @@
-# -*-sh-*- 
+#! /bin/bash
+# -*-sh-*-
 # .bash_profile
 # Time-stamp: <28-dec-17 21:09>
 # Settings for all interactive shells
@@ -21,6 +22,11 @@ export XDG_CONFIG_HOME=~/.config
 #     fi
 # fi
 
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
 # Set core file size limit
 ulimit -c unlimited
 
@@ -30,10 +36,12 @@ ulimit -c unlimited
 # Capslock as Ctrl
 # /usr/bin/setxkbmap -option "caps:ctrl_modifier"
 
-# Keyboard mapping for keyboards without multimedia keys (PrintScreen, ScrollLock, Pause)
-# xmodmap -e "keycode 107 = XF86AudioLowerVolume XF86AudioLowerVolume XF86AudioLowerVolume XF86AudioLowerVolume"
-# xmodmap -e "keycode 78  = XF86AudioRaiseVolume XF86AudioRaiseVolume XF86AudioRaiseVolume XF86AudioRaiseVolume"
-# xmodmap -e "keycode 127 = XF86AudioPlay XF86AudioPlay XF86AudioPlay XF86AudioPlay"
+# Keyboard mapping for keyboards without multimedia keys (PrintScreen, ScrollLock, Pause, F11, F12)
+xmodmap -e "keycode 107 = XF86AudioLowerVolume XF86AudioLowerVolume XF86AudioLowerVolume XF86AudioLowerVolume"
+xmodmap -e "keycode 78  = XF86AudioRaiseVolume XF86AudioRaiseVolume XF86AudioRaiseVolume XF86AudioRaiseVolume"
+xmodmap -e "keycode 127 = XF86AudioPlay XF86AudioPlay XF86AudioPlay XF86AudioPlay"
+xmodmap -e "keycode 95  = XF86AudioPrev XF86AudioPrev XF86AudioPrev XF86AudioPrev"
+xmodmap -e "keycode 96  = XF86AudioNext XF86AudioNext XF86AudioNext XF86AudioNext"
 
 # Global Command aliases
 
@@ -75,9 +83,15 @@ function _complete_qtproj()
 
 function qtproj()
 {
-    python3 ~/src/python/qtcreator_project/qtcreator_webstax_project.py "$*"
+    python3 ~/src/python/qtcreator_project/qtcreator_webstax_project.py $*
 }
 complete -F _complete_qtproj qtproj
+
+function wsproj()
+{
+    make clang_complete
+    python3 ~/src/python/qtcreator_project/qtcreator_webstax_project.py $(basename $(dirname $PWD))
+}
 
 function filtertext()
 {

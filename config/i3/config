@@ -3,37 +3,37 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-set $lock_bkg "/home/steen/Pictures/Wallpapers/bark.png"
-set $wallpaper "/home/steen/Pictures/Wallpapers/Sommerferie 2017/IMG_6779.JPG"
-set $monitor_left DVI-0
-set $monitor_right HDMI-0
+set $lock_bkg  "/home/shegelun/Pictures/Wallpapers/væg.png"
+set $wallpaper "/home/shegelun/Pictures/Wallpapers/Sommerferie 2017/IMG_6779.JPG"
+set $monitor_left "DVI-0"
+set $monitor_right "HDMI-0"
 set $wrkspc1  "1: Editor "
 set $wrkspc2  "2: Builds "
-set $wrkspc3  "3: Term "
-set $wrkspc4  "4: Internet "
-set $wrkspc5  "5: Mail "
-set $wrkspc6  "6: Music "
-set $wrkspc7  "7: Files "
-set $wrkspc8  "8: Remote "
+set $wrkspc3  "3: Internet "
+set $wrkspc4  "4: Files "
+set $wrkspc5  "5: Remote "
+set $wrkspc6  "6: Term "
+set $wrkspc7  "7: Mail "
+set $wrkspc8  "8: Music "
 set $wrkspc9  "9: Private "
 set $wrkspc10 "10: VPN "
 
 # Setting up monitors
-# exec --no-startup-id xrandr -d :0 --output VGA-0 --off --output $monitor_left --mode 1920x1200 --primary --output $monitor_right --mode 1920x1080 --right-of $monitor_left
+exec --no-startup-id xrandr -d :0 --output VGA-0 --off --output $monitor_left --mode 1920x1200 --primary --output $monitor_right --mode 1920x1080 --right-of $monitor_left
 
 # Bind the workspaces for the left monitor
-# workspace $wrkspc1 output $monitor_left
-# workspace $wrkspc3 output $monitor_left
-# workspace $wrkspc5 output $monitor_left
-# workspace $wrkspc7 output $monitor_left
-# workspace $wrkspc9 output $monitor_left
+workspace $wrkspc1 output $monitor_left
+workspace $wrkspc2 output $monitor_left
+workspace $wrkspc3 output $monitor_left
+workspace $wrkspc4 output $monitor_left
+workspace $wrkspc5 output $monitor_left
 
 # Bind the workspaces for the right monitor
-# workspace $wrkspc2  output $monitor_right
-# workspace $wrkspc4  output $monitor_right
-# workspace $wrkspc6  output $monitor_right
-# workspace $wrkspc8  output $monitor_right
-# workspace $wrkspc10 output $monitor_right
+workspace $wrkspc6  output $monitor_right
+workspace $wrkspc7  output $monitor_right
+workspace $wrkspc8  output $monitor_right
+workspace $wrkspc9  output $monitor_right
+workspace $wrkspc10 output $monitor_right
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -90,16 +90,16 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+period floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+period focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+d focus child
 
 # switch to workspace
 bindsym $mod+1 workspace $wrkspc1
@@ -148,7 +148,6 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
 bindsym $mod+r mode "resize"
 
 
@@ -174,21 +173,30 @@ bindsym $mod+ctrl+w exec feh --bg-fill $wallpaper
 bindsym Mod1+Tab workspace next
 bindsym Mod1+Shift+Tab workspace prev
 bindsym $mod+Tab workspace back_and_forth
+# Enable automatic back-and-forth between the two latest used workspaces
+# This seem to cause problems for workspace window assignment
+# workspace_auto_back_and_forth yes
 
 # Workspace 1
 exec --no-startup-id qtcreator
 for_window [class="QtCreator"] move to workspace $wrkspc1
 
-# Workspace 2
-exec $terminal
-
 # Workspace 4
-exec --no-startup-id chromium
-# for_window [class="Chromium"] move to workspace $wrkspc4
+exec --no-startup-id Thunar
+for_window [class="Thunar"] move to workspace $wrkspc4
 
-# Workspace 6
+# Workspace 5
+exec --no-startup-id bcompare
+for_window [class="[Bb]compare"] move to workspace $wrkspc5
+
+# Workspace 8
 exec --no-startup-id spotify
-for_window [class="Spotify"] move to workspace $wrkspc6
+for_window [class="Spotify"] move to workspace $wrkspc8
+
+# No particular workspace
+exec $terminal
+exec --no-startup-id chromium
+
 
 # Move workspace to outputs
 bindsym $mod+Mod1+Left  move workspace to output left
@@ -208,8 +216,8 @@ mode "$mode_move" {
 bindsym $mod+m mode "$mode_move"
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +10% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -10% #decrease sound volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle # mute sound
 
 # Media player controls
@@ -220,18 +228,10 @@ bindsym XF86AudioPrev exec  --no-startup-id playerctl previous
 
 # Menu
 
-# start dmenu (a program launcher)
-# bindsym $mod+d exec dmenu_run
-
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-# Use the more fancy rofi menu
-bindsym $mod+d exec rofi -show run -lines 5 -eh 2 -width 100 -padding 500 -opacity "80" -bw 0 -columns 2 -font "System San Francisco Display 12"
+# Use the rofi menu
+bindsym $mod+space exec rofi -show run -lines 5 -eh 2 -width 100 -padding 500 -opacity "80" -bw 0 -columns 2 -font "System San Francisco Display 12"
 
 # Exit Menu
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 set $mode_system System (l) lock, (u) switch user, (x) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {

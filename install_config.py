@@ -6,14 +6,21 @@ import sys
 import readline
 import shutil
 import enum
-
+import subprocess
 
 
 class UserChoice(enum.Enum):
-    SkipFile = '.X.'
+    SkipFile = '...'
     OverWriteFile = '=>*'
     InstallFile = '==>'
-    SameFile = '==='
+
+
+class FileStatus(enum.Enum):
+    Missing = ' .'
+    DifferentContent = '-+'
+    SameContent = '=='
+    Linked = ' >'
+    CorrectLink = '>>'
 
 
 class Installer:
@@ -21,49 +28,66 @@ class Installer:
         self.src_path = os.path.abspath(os.path.expanduser(src_path))
         self.dst_path = os.path.abspath(os.path.expanduser(dst_path))
         self.user_choice = UserChoice.InstallFile
+        self.file_status = FileStatus.Missing
+        if os.path.exists(self.dst_path):
+            if os.path.islink(self.dst_path):
+                if os.readlink(self.dst_path) == self.src_path:
+                    self.file_status = FileStatus.CorrectLink
+                else:
+                    self.file_status = FileStatus.Linked
+            else:
+                if self.compare_contents():
+                    self.file_status = FileStatus.SameContent
+                else:
+                    self.file_status = FileStatus.DifferentContent
 
-    def exists(self):
-        return os.path.exists(self.dst_path)
+    def status(self):
+        return '{:2s} {:60s} : {}'.format(self.file_status.value, os.path.relpath(self.src_path), self.dst_path)
 
-    def is_same(self):
-        return os.path.exists(self.dst_path) and os.path.islink(self.dst_path) and os.readlink(self.dst_path) == self.src_path
+    def compare_contents(self):
+        return subprocess.run(['diff', '-q', '-a', self.dst_path, self.src_path], stdout=subprocess.PIPE).returncode == 0
 
-    def overwrite_existing_prompt(self):
-        prompt = '{} already exists - Do you want to overwrite it: (N/y) > '.format(self.dst_path)
+    def missing_file_prompt(self):
+        prompt = 'File is missing, Do you want to install {}: (Y/n) > '.format(self.dst_path)
         response = input(prompt)
         return response.lower()
 
-    def install_prompt(self):
-        prompt = 'Do you want to install {}: (Y/n) > '.format(self.dst_path)
+    def overwrite_existing_prompt(self):
+        if self.file_status == FileStatus.Linked:
+            prompt = '{} is linked to another file, Do you want to replace the link: (Y/n) > '.format(self.dst_path)
+        elif self.file_status == FileStatus.SameContent:
+            prompt = '{} already exists with the same content - Do you want to replace it with a link: (N/y) > '.format(self.dst_path)
+        else:
+            prompt = '{} already exists - Do you want to replace it: (N/y) > '.format(self.dst_path)
         response = input(prompt)
         return response.lower()
 
     @staticmethod
     def go_ahead_prompt():
-        prompt = 'Do you want to continue: (Y/n) > '
+        prompt = 'Do you want to continue: (y/N) > '
         response = input(prompt)
         return response.lower()
 
     def user_selection(self):
-        if self.is_same():
-            print('Already: {}'.format(self.src_path))
-            self.user_choice = UserChoice.SameFile
-        elif self.exists():
-            if self.overwrite_existing_prompt() == 'y':
-                self.user_choice = UserChoice.OverWriteFile
-            else:
-                print('Skipping: {}'.format(self.src_path))
-                self.user_choice = UserChoice.SkipFile
-        elif self.install_prompt() == 'y':
-            self.user_choice = UserChoice.InstallFile
-        else:
+        if self.file_status == FileStatus.CorrectLink:
             self.user_choice = UserChoice.SkipFile
+        else:
+            if self.file_status == FileStatus.Missing:
+                if self.missing_file_prompt():
+                    self.user_choice = UserChoice.InstallFile
+                else:
+                    self.user_choice = UserChoice.SkipFile
+            else:
+                if self.overwrite_existing_prompt() == 'y':
+                    self.user_choice = UserChoice.OverWriteFile
+                else:
+                    self.user_choice = UserChoice.SkipFile
 
     def show_selection(self):
-        print('{:40s} {} {}'.format(os.path.basename(self.src_path), self.user_choice.value, self.dst_path))
+        print('{:2s} {:60s} {} {}'.format(self.file_status.value, os.path.relpath(self.src_path), self.user_choice.value, self.dst_path))
 
     def user_action(self):
-        if self.user_choice == UserChoice.SkipFile or self.user_choice == UserChoice.SameFile:
+        if self.user_choice == UserChoice.SkipFile:
             return
         if self.user_choice == UserChoice.OverWriteFile:
             os.remove(self.dst_path)
@@ -93,14 +117,16 @@ class Group:
         self.elements = []
         self.installers = []
 
+    def create_installers(self):
+        for item in self.elements:
+            self.installers.append(Installer(item.get_fullpath(), self.get_destination(item)))
+
     def get_destination(self, item):
         pass
 
     def prepare_install(self):
-        for item in self.elements:
-            installer = Installer(item.get_fullpath(), self.get_destination(item))
+        for installer in self.installers:
             installer.user_selection()
-            self.installers.append(installer)
 
     def show_selection(self):
         for installer in self.installers:
@@ -115,8 +141,8 @@ class Group:
 
     def __str__(self):
         result = self.get_group()
-        for item in self.elements:
-            result += '\n    {:40s} -> {}'.format(item.name, self.get_destination(item))
+        for installer in self.installers:
+            result += '\n    ' + installer.status()
         return result
 
 
@@ -125,6 +151,7 @@ class FileList(Group):
         super().__init__(src, dst, dotname)
         for file in files:
             self.elements.append(File(src, file))
+        self.create_installers()
 
     def get_destination(self, item):
         return os.path.join(self.destination, '.' + item.name if self.dot_rename_dst else item.name)
@@ -139,12 +166,31 @@ class Folder(Group):
         for root, folders, files in os.walk(src):
             for file in files:
                 self.elements.append(File(root, file))
+        self.create_installers()
 
     def get_destination(self, item):
         return os.path.join(self.destination, '.' + item.get_fullpath() if self.dot_rename_dst else item.get_fullpath())
 
     def get_group(self):
         return '{}/ -> {}'.format(self.source, os.path.abspath(os.path.expanduser(self.destination)))
+
+
+def do_installation_of(items):
+    try:
+        for item in items:
+            print(item)
+        print()
+        for item in items:
+            item.prepare_install()
+        for item in items:
+            item.show_selection()
+        print()
+        if Installer.go_ahead_prompt() == 'y':
+            for item in items:
+                item.install()
+    except KeyboardInterrupt:
+        print('\n\n *** Installation Aborted ***')
+        sys.exit(1)
 
 
 elements = [
@@ -162,19 +208,11 @@ elements = [
         'Xmodmap',
         'tmux.conf'),
     Folder('profile.d'),
-    Folder('scripts'),
+    Folder('scripts', dotname=False),
     Folder('config'),
 ]
 
-if __name__ == '__main__':
-    for item in elements:
-        print(item)
-    for elem in elements:
-        elem.prepare_install()
-    for elem in elements:
-        elem.show_selection()
-    if Installer.go_ahead_prompt() == 'y':
-        for elem in elements:
-            elem.install()
 
+if __name__ == '__main__':
+    do_installation_of(elements)
 
