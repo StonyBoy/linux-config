@@ -7,7 +7,7 @@ import readline
 import shutil
 import enum
 import subprocess
-
+import pathlib
 
 class UserChoice(enum.Enum):
     SkipFile = '...'
@@ -161,15 +161,17 @@ class FileList(Group):
 
 
 class Folder(Group):
-    def __init__(self, src, dst='~', dotname=True):
-        super().__init__(src, dst, dotname)
+    def __init__(self, src, dst):
+        super().__init__(src, dst, False)
         for root, folders, files in os.walk(src):
             for file in files:
                 self.elements.append(File(root, file))
         self.create_installers()
 
     def get_destination(self, item):
-        return os.path.join(self.destination, '.' + item.get_fullpath() if self.dot_rename_dst else item.get_fullpath())
+        path = pathlib.Path(item.get_fullpath())
+        relative_path = path.relative_to(*path.parts[:1])
+        return os.path.join(self.destination, relative_path)
 
     def get_group(self):
         return '{}/ -> {}'.format(self.source, os.path.abspath(os.path.expanduser(self.destination)))
@@ -207,9 +209,10 @@ elements = [
         'Xdefaults',
         'Xmodmap',
         'tmux.conf'),
-    Folder('profile.d'),
-    Folder('scripts', dotname=False),
-    Folder('config'),
+    Folder('profile.d', '~/.profile.d'),
+    Folder('scripts', '~/scripts'),
+    Folder('config', '~/.config'),
+    Folder('PyCharm', '~/.PyCharmCE2017.3'),
 ]
 
 
