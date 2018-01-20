@@ -1,7 +1,7 @@
 #! /bin/bash
 # -*-sh-*-
 # .bash_profile
-# Time-stamp: <28-dec-17 21:09>
+# Time-stamp: <20-jan-18 21:09>
 # Settings for all interactive shells
 
 # Debugging
@@ -10,7 +10,7 @@
 export PATH=~/scripts:~/.local/bin:~/bin:/usr/local/bin:$PATH
 export PAGER='less -s'
 
-# Powerline provides avanced shell and GIT status
+# Powerline provides advanced shell and GIT status
 # Install with pip install powerline-status
 # and pip install powerline-gitstatus
 export XDG_CONFIG_HOME=~/.config
@@ -37,11 +37,11 @@ ulimit -c unlimited
 # /usr/bin/setxkbmap -option "caps:ctrl_modifier"
 
 # Keyboard mapping for keyboards without multimedia keys (PrintScreen, ScrollLock, Pause, F11, F12)
-xmodmap -e "keycode 107 = XF86AudioLowerVolume XF86AudioLowerVolume XF86AudioLowerVolume XF86AudioLowerVolume"
-xmodmap -e "keycode 78  = XF86AudioRaiseVolume XF86AudioRaiseVolume XF86AudioRaiseVolume XF86AudioRaiseVolume"
-xmodmap -e "keycode 127 = XF86AudioPlay XF86AudioPlay XF86AudioPlay XF86AudioPlay"
-xmodmap -e "keycode 95  = XF86AudioPrev XF86AudioPrev XF86AudioPrev XF86AudioPrev"
-xmodmap -e "keycode 96  = XF86AudioNext XF86AudioNext XF86AudioNext XF86AudioNext"
+# xmodmap -e "keycode 107 = XF86AudioLowerVolume XF86AudioLowerVolume XF86AudioLowerVolume XF86AudioLowerVolume"
+# xmodmap -e "keycode 78  = XF86AudioRaiseVolume XF86AudioRaiseVolume XF86AudioRaiseVolume XF86AudioRaiseVolume"
+# xmodmap -e "keycode 127 = XF86AudioPlay XF86AudioPlay XF86AudioPlay XF86AudioPlay"
+# xmodmap -e "keycode 95  = XF86AudioPrev XF86AudioPrev XF86AudioPrev XF86AudioPrev"
+# xmodmap -e "keycode 96  = XF86AudioNext XF86AudioNext XF86AudioNext XF86AudioNext"
 
 # Global Command aliases
 
@@ -107,50 +107,6 @@ function filtertext()
     fi
 }
 
-function _complete_start_vnc()
-{
-    COMPREPLY=( $( compgen -W "mac pc single" -- ${COMP_WORDS[COMP_CWORD]} ) )
-    return 0
-}
-
-function show_vnc()
-{
-    echo "VNC Service: "
-    systemctl status x0vncserver | grep "Active:"
-}
-
-function start_vnc()
-{
-    x0vncserver -display :0 -Geometry 1920x1200 -SecurityTypes vncauth,tlsvnc -rfbauth ~/.vnc/passwd -rfbport 5900
-}
-complete -F _complete_start_vnc start_vnc
-
-function show_ip()
-{
-    ip addr list wan | grep 'inet ' | grep -v '127.0.0.1' | cut -d" " -f6
-}
-
-function _complete_displaymode()
-{
-    COMPREPLY=( $( compgen -W "wide single show" -- ${COMP_WORDS[COMP_CWORD]} ) )
-    return 0
-}
-
-function displaymode()
-{
-    local PRI=DVI-0
-    local SEC=HDMI-0
-    if [[ "$1" == "wide" ]]; then
-        xrandr --display :0 --screen 0 --fb 3840x1200  --output ${SEC} --mode 1920x1080 --output ${PRI} --mode 1920x1200 --left-of ${SEC} --primary
-    elif [[ "$1" == "single" ]]; then
-        xrandr --display :0 --screen 0 --fb 1920x1200  --output ${PRI} --mode 1920x1200 --primary --output ${SEC} --off
-    elif [[ "$1" == "show" ]]; then
-        xrandr --display :0 | grep " connected" | cut -d" " -f1 
-    else
-        xrandr
-    fi
-}
-complete -F _complete_displaymode displaymode dm
 
 function jointime()
 {
