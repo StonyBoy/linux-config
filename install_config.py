@@ -206,8 +206,6 @@ elements = [
         'inputrc',
         'profile',
         'vimrc',
-        'Xdefaults',
-        'Xmodmap',
         'tmux.conf'),
     Folder('profile.d', '~/.profile.d'),
     Folder('scripts', '~/scripts'),
