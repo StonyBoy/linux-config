@@ -163,6 +163,9 @@ bar {
     position top
     font pango:SFNS Display 8
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    # Avoid accidental workspace switching when scrolling the wheel in the bar
+    wheel_up_cmd nop
+    wheel_down_cmd nop
 }
 
 exec feh --bg-fill $wallpaper
