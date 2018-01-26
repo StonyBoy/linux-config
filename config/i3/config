@@ -223,10 +223,6 @@ bindsym $mod+m mode "$mode_move"
 # bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 # bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 
-# bindsym XF86AudioMute exec --no-startup-id volume 5 pulse "USB-Audio - Jabra EVOLVE LINK" 3
-# bindsym $mod+x exec --no-startup-id /home/shegelun/scripts/volume 5 pulse "USB-Audio - Jabra EVOLVE LINK" 4
-# bindsym $mod+z exec --no-startup-id /home/shegelun/scripts/volume 5 pulse "USB-Audio - Jabra EVOLVE LINK" 5
-
 bindsym XF86AudioRaiseVolume exec --no-startup-id /home/shegelun/scripts/volume 5 pulse "USB-Audio - Jabra EVOLVE LINK" 4
 bindsym XF86AudioLowerVolume exec --no-startup-id /home/shegelun/scripts/volume 5 pulse "USB-Audio - Jabra EVOLVE LINK" 5
 
