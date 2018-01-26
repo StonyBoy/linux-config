@@ -19,6 +19,11 @@
 
 # set -x
 
+# $1 : Volume Step
+# $2 : Mixer
+# $3 : Sink name
+# $4 : Command: Up, Down, Mute
+
 # The second parameter overrides the mixer selection
 # For PulseAudio users, use "pulse"
 # For Jack/Jack2 users, use "jackplug"
@@ -67,6 +72,8 @@ format() {
 }
 
 #------------------------------------------------------------------------
+
+BLOCK_BUTTON="${4:-$BLOCK_BUTTON}"
 
 case $BLOCK_BUTTON in
   3) amixer -q -D $MIXER -c $CARD sset $SCONTROL $(capability) toggle ;;  # right click, mute/unmute
