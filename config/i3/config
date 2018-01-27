@@ -3,8 +3,8 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-set $lock_bkg  "/home/shegelun/Pictures/Wallpapers/væg.png"
-set $wallpaper "/home/shegelun/Pictures/Wallpapers/Sommerferie 2017/IMG_6779.JPG"
+set $lock_bkg "/home/steen/Pictures/Wallpapers/bark.png"
+set $wallpaper "/home/steen/Pictures/Wallpapers/Sommerferie 2017/IMG_6779.JPG"
 set $monitor_left "DVI-0"
 set $monitor_right "HDMI-0"
 set $wrkspc1  "1: Editor "
@@ -19,21 +19,21 @@ set $wrkspc9  "9: Private "
 set $wrkspc10 "10: VPN "
 
 # Setting up monitors
-exec --no-startup-id xrandr -d :0 --output VGA-0 --off --output $monitor_left --mode 1920x1200 --primary --output $monitor_right --mode 1920x1080 --right-of $monitor_left
+# exec --no-startup-id xrandr -d :0 --output VGA-0 --off --output $monitor_left --mode 1920x1200 --primary --output $monitor_right --mode 1920x1080 --right-of $monitor_left
 
 # Bind the workspaces for the left monitor
-workspace $wrkspc1 output $monitor_left
-workspace $wrkspc2 output $monitor_left
-workspace $wrkspc3 output $monitor_left
-workspace $wrkspc4 output $monitor_left
-workspace $wrkspc5 output $monitor_left
+# workspace $wrkspc1 output $monitor_left
+# workspace $wrkspc2 output $monitor_left
+# workspace $wrkspc3 output $monitor_left
+# workspace $wrkspc4 output $monitor_left
+# workspace $wrkspc5 output $monitor_left
 
 # Bind the workspaces for the right monitor
-workspace $wrkspc6  output $monitor_right
-workspace $wrkspc7  output $monitor_right
-workspace $wrkspc8  output $monitor_right
-workspace $wrkspc9  output $monitor_right
-workspace $wrkspc10 output $monitor_right
+# workspace $wrkspc6  output $monitor_right
+# workspace $wrkspc7  output $monitor_right
+# workspace $wrkspc8  output $monitor_right
+# workspace $wrkspc9  output $monitor_right
+# workspace $wrkspc10 output $monitor_right
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -223,8 +223,8 @@ bindsym $mod+m mode "$mode_move"
 # bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 # bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id /home/shegelun/scripts/volume 5 pulse "USB-Audio - Jabra EVOLVE LINK" 4
-bindsym XF86AudioLowerVolume exec --no-startup-id /home/shegelun/scripts/volume 5 pulse "USB-Audio - Jabra EVOLVE LINK" 5
+bindsym XF86AudioRaiseVolume exec --no-startup-id /home/shegelun/scripts/volume 5 pulse "HDA-Intel - HDA Intel PCH" 4
+bindsym XF86AudioLowerVolume exec --no-startup-id /home/shegelun/scripts/volume 5 pulse "HDA-Intel - HDA Intel PCH" 5
 
 # Media player controls
 bindsym XF86AudioPlay exec  --no-startup-id playerctl play-pause
