@@ -48,13 +48,13 @@ class Installer:
         return subprocess.run(['diff', '-q', '-a', self.dst_path, self.src_path], stdout=subprocess.PIPE).returncode == 0
 
     def missing_file_prompt(self):
-        prompt = 'File is missing, Do you want to install {}: (Y/n) > '.format(self.dst_path)
+        prompt = 'File is missing, Do you want to install {}: (N/y) > '.format(self.dst_path)
         response = input(prompt)
         return response.lower()
 
     def overwrite_existing_prompt(self):
         if self.file_status == FileStatus.Linked:
-            prompt = '{} is linked to another file, Do you want to replace the link: (Y/n) > '.format(self.dst_path)
+            prompt = '{} is linked to another file, Do you want to replace the link: (N/y) > '.format(self.dst_path)
         elif self.file_status == FileStatus.SameContent:
             prompt = '{} already exists with the same content - Do you want to replace it with a link: (N/y) > '.format(self.dst_path)
         else:
@@ -64,7 +64,7 @@ class Installer:
 
     @staticmethod
     def go_ahead_prompt():
-        prompt = 'Do you want to continue: (y/N) > '
+        prompt = 'Do you want to continue: (N/y) > '
         response = input(prompt)
         return response.lower()
 
@@ -73,7 +73,7 @@ class Installer:
             self.user_choice = UserChoice.SkipFile
         else:
             if self.file_status == FileStatus.Missing:
-                if self.missing_file_prompt():
+                if self.missing_file_prompt() = 'y':
                     self.user_choice = UserChoice.InstallFile
                 else:
                     self.user_choice = UserChoice.SkipFile
