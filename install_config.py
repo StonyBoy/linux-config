@@ -73,7 +73,7 @@ class Installer:
             self.user_choice = UserChoice.SkipFile
         else:
             if self.file_status == FileStatus.Missing:
-                if self.missing_file_prompt() = 'y':
+                if self.missing_file_prompt() == 'y':
                     self.user_choice = UserChoice.InstallFile
                 else:
                     self.user_choice = UserChoice.SkipFile
@@ -95,6 +95,9 @@ class Installer:
         if not os.path.exists(dst_dir):
             os.makedirs(dst_dir)
         os.symlink(self.src_path, self.dst_path)
+
+    def wants_installation(self):
+        return self.user_choice == UserChoice.OverWriteFile or self.user_choice == UserChoice.InstallFile
 
 
 class File:
@@ -138,6 +141,13 @@ class Group:
 
     def get_group(self):
         pass
+
+    def wants_installation(self):
+        result = False
+        for installer in self.installers:
+            result = result or installer.wants_installation()
+        return result
+
 
     def __str__(self):
         result = self.get_group()
@@ -184,12 +194,16 @@ def do_installation_of(items):
         print()
         for item in items:
             item.prepare_install()
+        installation_needed = False
         for item in items:
-            item.show_selection()
-        print()
-        if Installer.go_ahead_prompt() == 'y':
+            installation_needed = installation_needed or item.wants_installation()
+        if installation_needed:
             for item in items:
-                item.install()
+                item.show_selection()
+            print()
+            if Installer.go_ahead_prompt() == 'y':
+                for item in items:
+                    item.install()
     except KeyboardInterrupt:
         print('\n\n *** Installation Aborted ***')
         sys.exit(1)
