@@ -239,14 +239,14 @@ bindsym $mod+space exec rofi -show run -lines 5 -eh 2 -width 100 -padding 500 -o
 
 # Exit Menu
 
-set $mode_system System (l) lock, (u) switch user, (x) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+set $mode_system System (l) lock, (u) switch user, (x) logout, (s) suspend, (h) hibernate, (Shift+r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id i3lock -ti $lock_bkg && sleep 1, mode "default"
     bindsym u exec --no-startup-id dm-tool switch-to-greeter, mode "default"
     bindsym x exec --no-startup-id i3-msg exit, mode "default"
     bindsym s exec --no-startup-id i3lock -ti $lock_bkg && sleep 1 && sudo systemctl suspend, mode "default"
     bindsym h exec --no-startup-id i3lock -ti $lock_bkg && sleep 1 && sudo systemctl hibernate, mode "default"
-    bindsym r exec --no-startup-id sudo systemctl reboot, mode "default"
+    bindsym Shift+r exec --no-startup-id sudo systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id sudo systemctl poweroff -i, mode "default"
     # back to normal: Enter or Escape
     bindsym Return mode "default"
