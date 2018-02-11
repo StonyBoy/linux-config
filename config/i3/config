@@ -223,8 +223,8 @@ bindsym $mod+m mode "$mode_move"
 # bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 # bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id /home/shegelun/scripts/volume 5 pulse "HDA-Intel - HDA Intel PCH" 4
-bindsym XF86AudioLowerVolume exec --no-startup-id /home/shegelun/scripts/volume 5 pulse "HDA-Intel - HDA Intel PCH" 5
+bindsym XF86AudioRaiseVolume exec --no-startup-id /home/steen/scripts/volume 5 pulse "HDA-Intel - HDA Intel PCH" 4
+bindsym XF86AudioLowerVolume exec --no-startup-id /home/steen/scripts/volume 5 pulse "HDA-Intel - HDA Intel PCH" 5
 
 # Media player controls
 bindsym XF86AudioPlay exec  --no-startup-id playerctl play-pause
