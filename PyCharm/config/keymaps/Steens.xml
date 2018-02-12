@@ -96,11 +96,14 @@
   <action id="InsertLiveTemplate" />
   <action id="NextDiff" />
   <action id="NextEditorTab" />
-  <action id="NextTab" />
+  <action id="NextTab">
+    <keyboard-shortcut first-keystroke="ctrl tab" />
+  </action>
   <action id="OpenFile">
     <keyboard-shortcut first-keystroke="ctrl o" />
   </action>
   <action id="OverrideMethods" />
+  <action id="PreviousEditorTab" />
   <action id="PreviousTab">
     <keyboard-shortcut first-keystroke="shift ctrl tab" />
   </action>

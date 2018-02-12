@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 '''
 Install links
 '''
@@ -48,13 +49,13 @@ class Installer:
         return subprocess.run(['diff', '-q', '-a', self.dst_path, self.src_path], stdout=subprocess.PIPE).returncode == 0
 
     def missing_file_prompt(self):
-        prompt = 'File is missing, Do you want to install {}: (Y/n) > '.format(self.dst_path)
+        prompt = 'File is missing, Do you want to install {}: (N/y) > '.format(self.dst_path)
         response = input(prompt)
         return response.lower()
 
     def overwrite_existing_prompt(self):
         if self.file_status == FileStatus.Linked:
-            prompt = '{} is linked to another file, Do you want to replace the link: (Y/n) > '.format(self.dst_path)
+            prompt = '{} is linked to another file, Do you want to replace the link: (N/y) > '.format(self.dst_path)
         elif self.file_status == FileStatus.SameContent:
             prompt = '{} already exists with the same content - Do you want to replace it with a link: (N/y) > '.format(self.dst_path)
         else:
@@ -64,7 +65,7 @@ class Installer:
 
     @staticmethod
     def go_ahead_prompt():
-        prompt = 'Do you want to continue: (y/N) > '
+        prompt = 'Do you want to continue: (N/y) > '
         response = input(prompt)
         return response.lower()
 
@@ -73,7 +74,7 @@ class Installer:
             self.user_choice = UserChoice.SkipFile
         else:
             if self.file_status == FileStatus.Missing:
-                if self.missing_file_prompt():
+                if self.missing_file_prompt() == 'y':
                     self.user_choice = UserChoice.InstallFile
                 else:
                     self.user_choice = UserChoice.SkipFile
@@ -95,6 +96,9 @@ class Installer:
         if not os.path.exists(dst_dir):
             os.makedirs(dst_dir)
         os.symlink(self.src_path, self.dst_path)
+
+    def wants_installation(self):
+        return self.user_choice == UserChoice.OverWriteFile or self.user_choice == UserChoice.InstallFile
 
 
 class File:
@@ -138,6 +142,13 @@ class Group:
 
     def get_group(self):
         pass
+
+    def wants_installation(self):
+        result = False
+        for installer in self.installers:
+            result = result or installer.wants_installation()
+        return result
+
 
     def __str__(self):
         result = self.get_group()
@@ -184,12 +195,16 @@ def do_installation_of(items):
         print()
         for item in items:
             item.prepare_install()
+        installation_needed = False
         for item in items:
-            item.show_selection()
-        print()
-        if Installer.go_ahead_prompt() == 'y':
+            installation_needed = installation_needed or item.wants_installation()
+        if installation_needed:
             for item in items:
-                item.install()
+                item.show_selection()
+            print()
+            if Installer.go_ahead_prompt() == 'y':
+                for item in items:
+                    item.install()
     except KeyboardInterrupt:
         print('\n\n *** Installation Aborted ***')
         sys.exit(1)
