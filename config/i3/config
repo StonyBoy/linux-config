@@ -11,12 +11,12 @@ set $wrkspc1  "1: Editor "
 set $wrkspc2  "2: Builds "
 set $wrkspc3  "3: Internet "
 set $wrkspc4  "4: Files "
-set $wrkspc5  "5: Compare "
+set $wrkspc5  "5: Compare "
 set $wrkspc6  "6: Term "
 set $wrkspc7  "7: Mail "
-set $wrkspc8  "8: Music "
+set $wrkspc8  "8: Music "
 set $wrkspc9  "9: Private "
-set $wrkspc10 "10: VPN "
+set $wrkspc10 "10: VPN "
 
 # Setting up monitors
 exec --no-startup-id xrandr -d :0 --output VGA-0 --off --output $large_monitor --mode 1920x1200 --primary --output $small_monitor --mode 1920x1080 --left-of $large_monitor
@@ -153,6 +153,9 @@ bindsym $mod+r mode "resize"
 
 # Steen
 # ============================================================================
+
+# NumLock is ON
+exec_always --no-startup-id numlockx on
 
 # Start a composite manager for window transition effects
 # exec --no-startup-id compton -b
