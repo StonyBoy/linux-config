@@ -11,6 +11,14 @@
     <keyboard-shortcut first-keystroke="meta p" />
   </action>
   <action id="EditorPreviousWord" />
+  <action id="EditorTextEnd">
+    <keyboard-shortcut first-keystroke="meta end" />
+    <keyboard-shortcut first-keystroke="ctrl end" />
+  </action>
+  <action id="EditorTextStart">
+    <keyboard-shortcut first-keystroke="meta home" />
+    <keyboard-shortcut first-keystroke="ctrl home" />
+  </action>
   <action id="FileChooser.TogglePathShowing" />
   <action id="Git.Reword.Commit">
     <keyboard-shortcut first-keystroke="shift f6" />
