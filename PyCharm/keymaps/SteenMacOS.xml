@@ -7,7 +7,11 @@
     <mouse-shortcut keystroke="button4" />
     <keyboard-shortcut first-keystroke="alt left" />
   </action>
+  <action id="CommentByLineComment">
+    <keyboard-shortcut first-keystroke="meta p" />
+  </action>
   <action id="EditorPreviousWord" />
+  <action id="FileChooser.TogglePathShowing" />
   <action id="Git.Reword.Commit">
     <keyboard-shortcut first-keystroke="shift f6" />
   </action>
@@ -22,6 +26,7 @@
   <action id="OpenFile">
     <keyboard-shortcut first-keystroke="meta o" />
   </action>
+  <action id="ParameterInfo" />
   <action id="ShelvedChanges.Rename">
     <keyboard-shortcut first-keystroke="shift f6" />
   </action>
