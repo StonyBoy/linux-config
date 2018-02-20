@@ -215,6 +215,7 @@ elements = [
         'bash_logout',
         'bash_profile',
         'bashrc',
+        'clang-format',
         'gitconfig',
         'gitconfig.private',
         'gitignore',
