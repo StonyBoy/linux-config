@@ -9,6 +9,8 @@ import shutil
 import enum
 import subprocess
 import pathlib
+import argparse
+
 
 class UserChoice(enum.Enum):
     SkipFile = '...'
@@ -17,11 +19,12 @@ class UserChoice(enum.Enum):
 
 
 class FileStatus(enum.Enum):
+    Hidden = '##'
     Missing = ' .'
     DifferentContent = '-+'
     SameContent = '=='
     Linked = ' >'
-    CorrectLink = '>>'
+    CorrectLink = 'OK'
 
 
 class Installer:
@@ -70,7 +73,7 @@ class Installer:
         return response.lower()
 
     def user_selection(self):
-        if self.file_status == FileStatus.CorrectLink:
+        if self.file_status == FileStatus.CorrectLink or self.file_status == FileStatus.Hidden:
             self.user_choice = UserChoice.SkipFile
         else:
             if self.file_status == FileStatus.Missing:
@@ -85,9 +88,12 @@ class Installer:
                     self.user_choice = UserChoice.SkipFile
 
     def show_selection(self):
-        print('{:2s} {:60s} {} {}'.format(self.file_status.value, os.path.relpath(self.src_path), self.user_choice.value, self.dst_path))
+        if not self.hidden():
+            print('{:2s} {:60s} {} {}'.format(self.file_status.value, os.path.relpath(self.src_path), self.user_choice.value, self.dst_path))
 
     def user_action(self):
+        if self.file_status == FileStatus.Hidden:
+            return
         if self.user_choice == UserChoice.SkipFile:
             return
         if self.user_choice == UserChoice.OverWriteFile:
@@ -98,7 +104,13 @@ class Installer:
         os.symlink(self.src_path, self.dst_path)
 
     def wants_installation(self):
-        return self.user_choice == UserChoice.OverWriteFile or self.user_choice == UserChoice.InstallFile
+        return self.file_status != FileStatus.Hidden and (self.user_choice == UserChoice.OverWriteFile or self.user_choice == UserChoice.InstallFile)
+
+    def hide(self):
+        self.file_status = FileStatus.Hidden
+
+    def hidden(self):
+        return self.file_status == FileStatus.Hidden
 
 
 class File:
@@ -149,11 +161,15 @@ class Group:
             result = result or installer.wants_installation()
         return result
 
+    def __iter__(self):
+        for installer in self.installers:
+            yield installer
 
     def __str__(self):
         result = self.get_group()
         for installer in self.installers:
-            result += '\n    ' + installer.status()
+            if not installer.hidden():
+                result += '\n    ' + installer.status()
         return result
 
 
@@ -188,10 +204,29 @@ class Folder(Group):
         return '{}/ -> {}'.format(self.source, os.path.abspath(os.path.expanduser(self.destination)))
 
 
-def do_installation_of(items):
+def filter_items(items, args):
+    def hide_this(item, options):
+        if options.nolinked and item.file_status == FileStatus.Linked:
+            return True
+        if options.nomissing and item.file_status == FileStatus.Missing:
+            return True
+        if options.nook and item.file_status == FileStatus.CorrectLink:
+            return True
+        return False
+    for group in items:
+        for installer in group:
+            if hide_this(installer, args):
+                installer.hide()
+
+
+def do_installation_of(items, args):
+    filter_items(items, args)
     try:
         for item in items:
             print(item)
+        print()
+        for legend in FileStatus:
+            print('  {} means {}'.format(legend.value, legend.name))
         print()
         for item in items:
             item.prepare_install()
@@ -233,5 +268,10 @@ elements = [
 
 
 if __name__ == '__main__':
-    do_installation_of(elements)
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument('--omit-linked', '-l', action='store_true', dest='nolinked', help='Do not include linked files that are linked elsewhere', default=False)
+    parser.add_argument('--omit-missing', '-m', action='store_true', dest='nomissing', help='Do not include files that are missing', default=False)
+    parser.add_argument('--omit-ok', '-k', action='store_true', dest='nook', help='Do not include files that are OK', default=False)
+    args = parser.parse_args()
+    do_installation_of(elements, args)
 
