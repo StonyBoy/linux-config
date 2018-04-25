@@ -203,10 +203,6 @@ for_window [class="Skype"] move to workspace $wrkspc7
 exec --no-startup-id spotify
 for_window [class="Spotify"] move to workspace $wrkspc8
 
-# Workspace 10
-exec --no-startup-id skypeforlinux
-for_window [class="Skype"] move to workspace $wrkspc10
-
 # No particular workspace
 exec $terminal
 exec --no-startup-id chromium
