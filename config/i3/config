@@ -195,6 +195,10 @@ for_window [class="Thunar"] move to workspace $wrkspc4
 exec --no-startup-id bcompare
 for_window [class="[Bb]compare"] move to workspace $wrkspc5
 
+# Workspace 7
+exec --no-startup-id skypeforlinux
+for_window [class="Skype"] move to workspace $wrkspc7
+
 # Workspace 8
 exec --no-startup-id spotify
 for_window [class="Spotify"] move to workspace $wrkspc8

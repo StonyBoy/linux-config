@@ -56,6 +56,7 @@ alias psc='ps -o pid,user,args -H -C'
 alias dm='displaymode'
 alias bc='bcompare'
 alias cf='clang-format -i'
+alias lsblk='lsblk --output NAME,FSTYPE,LABEL,UUID,PARTUUID,MOUNTPOINT'
 
 # Functions
 
