@@ -1,0 +1,6 @@
+{
+    "workbench.colorTheme": "Default Light+",
+    "workbench.iconTheme": "vscode-icons",
+    "[cpp]": {},
+    "terminal.external.linuxExec": "urxvt",
+}
