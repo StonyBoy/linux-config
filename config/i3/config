@@ -3,8 +3,8 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-set $lock_bkg "/home/steen/Pictures/Wallpapers/bark.png"
-set $wallpaper "/home/steen/Pictures/Wallpapers/Sommerferie 2017/IMG_6779.JPG"
+set $lock_bkg  "/home/shegelun/Pictures/Wallpapers/væg.png"
+set $wallpaper "/home/shegelun/Pictures/Wallpapers/Sommerferie 2017/IMG_6779.JPG"
 set $small_monitor "HDMI-0"
 set $large_monitor "DVI-0"
 set $wrkspc1  "1: Editor "
@@ -19,21 +19,21 @@ set $wrkspc9  "9: Private "
 set $wrkspc10 "10: VPN "
 
 # Setting up monitors
-# exec --no-startup-id xrandr -d :0 --output VGA-0 --off --output $large_monitor --mode 1920x1200 --primary --output $small_monitor --mode 1920x1080 --left-of $large_monitor
+exec --no-startup-id xrandr -d :0 --output VGA-0 --off --output $large_monitor --mode 1920x1200 --primary --output $small_monitor --mode 1920x1080 --left-of $large_monitor
 
 # Bind the workspaces for the large monitor
-# workspace $wrkspc1 output $large_monitor
-# workspace $wrkspc2 output $large_monitor
-# workspace $wrkspc3 output $large_monitor
-# workspace $wrkspc4 output $large_monitor
-# workspace $wrkspc5 output $large_monitor
+workspace $wrkspc1 output $large_monitor
+workspace $wrkspc2 output $large_monitor
+workspace $wrkspc3 output $large_monitor
+workspace $wrkspc4 output $large_monitor
+workspace $wrkspc5 output $large_monitor
 
 # Bind the workspaces for the small monitor
-# workspace $wrkspc6  output $small_monitor
-# workspace $wrkspc7  output $small_monitor
-# workspace $wrkspc8  output $small_monitor
-# workspace $wrkspc9  output $small_monitor
-# workspace $wrkspc10 output $small_monitor
+workspace $wrkspc6  output $small_monitor
+workspace $wrkspc7  output $small_monitor
+workspace $wrkspc8  output $small_monitor
+workspace $wrkspc9  output $small_monitor
+workspace $wrkspc10 output $small_monitor
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -226,9 +226,9 @@ mode "$mode_move" {
 bindsym $mod+m mode "$mode_move"
 
 # Audio controls
-bindsym XF86AudioMute exec --no-startup-id /home/steen/scripts/volume 5 pulse "HDA-Intel - HDA Intel PCH" 3
-bindsym XF86AudioRaiseVolume exec --no-startup-id /home/steen/scripts/volume 5 pulse "HDA-Intel - HDA Intel PCH" 4
-bindsym XF86AudioLowerVolume exec --no-startup-id /home/steen/scripts/volume 5 pulse "HDA-Intel - HDA Intel PCH" 5
+bindsym XF86AudioMute exec --no-startup-id /home/shegelun/scripts/volume 5 pulse "USB-Audio - Jabra EVOLVE LINK" 3
+bindsym XF86AudioRaiseVolume exec --no-startup-id /home/shegelun/scripts/volume 5 pulse "USB-Audio - Jabra EVOLVE LINK" 4
+bindsym XF86AudioLowerVolume exec --no-startup-id /home/shegelun/scripts/volume 5 pulse "USB-Audio - Jabra EVOLVE LINK" 5
 
 # Media player controls
 bindsym XF86AudioPlay exec  --no-startup-id playerctl play-pause
