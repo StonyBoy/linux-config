@@ -60,10 +60,6 @@
         "command": "editor.debug.action.runToCursor"
     },
     {
-        "key": "f2",
-        "command": "workbench.action.gotoSymbol"
-    },
-    {
         "key": "ctrl+shift+o",
         "command": "-workbench.action.gotoSymbol"
     },
@@ -110,5 +106,35 @@
     {
         "key": "ctrl+alt+-",
         "command": "-workbench.action.navigateBack"
+    },
+    {
+        "key": "f2",
+        "command": "editor.action.goToDeclaration",
+        "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+    },
+    {
+        "key": "f12",
+        "command": "-editor.action.goToDeclaration",
+        "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+    },
+    {
+        "key": "shift+f2",
+        "command": "C_Cpp.GoToDeclaration",
+        "when": "editorTextFocus && editorLangId == 'cpp'"
+    },
+    {
+        "key": "ctrl+f12",
+        "command": "-C_Cpp.GoToDeclaration",
+        "when": "editorTextFocus && editorLangId == 'cpp'"
+    },
+    {
+        "key": "shift+f2",
+        "command": "C_Cpp.GoToDeclaration",
+        "when": "editorTextFocus && editorLangId == 'c'"
+    },
+    {
+        "key": "ctrl+f12",
+        "command": "-C_Cpp.GoToDeclaration",
+        "when": "editorTextFocus && editorLangId == 'c'"
     }
 ]

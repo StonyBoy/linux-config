@@ -3,4 +3,5 @@
     "workbench.iconTheme": "vscode-icons",
     "[cpp]": {},
     "terminal.external.linuxExec": "urxvt",
+    "files.autoSave": "afterDelay",
 }
