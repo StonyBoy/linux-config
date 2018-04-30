@@ -136,5 +136,13 @@
         "key": "ctrl+f12",
         "command": "-C_Cpp.GoToDeclaration",
         "when": "editorTextFocus && editorLangId == 'c'"
+    },
+    {
+        "key": "ctrl+shift+[Period]",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "ctrl+shift+[Equal]",
+        "command": "-workbench.action.terminal.toggleTerminal"
     }
 ]

@@ -25,7 +25,15 @@ export XDG_CONFIG_HOME=~/.config
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
+# Avoid rvmsudo complaints
+export rvmsudo_secure_path=1
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# Add Rusts Cargo to path if present
+if [[ -d ~/.cargo/bin ]]; then
+    export PATH="$PATH:$HOME/.cargo/bin"
+fi
 
 # Set core file size limit
 ulimit -c unlimited
@@ -135,12 +143,14 @@ function _complete_displaymode()
 
 function displaymode()
 {
-    local PRI=DVI-0
-    local SEC=HDMI-0
+    local small_monitor=HDMI-0
+    local large_monitor=DVI-0
     if [[ "$1" == "wide" ]]; then
-        xrandr --display :0 --screen 0 --fb 3840x1200  --output ${SEC} --mode 1920x1080 --output ${PRI} --mode 1920x1200 --left-of ${SEC} --primary
+        xrandr -d :0 --fb 3840x1200 --output VGA-0 --off --output $large_monitor --mode 1920x1200 --primary --output $small_monitor --mode 1920x1080 --left-of $large_monitor
     elif [[ "$1" == "single" ]]; then
-        xrandr --display :0 --screen 0 --fb 1920x1200  --output ${PRI} --mode 1920x1200 --primary --output ${SEC} --off
+        xrandr -d :0 --fb 1920x1200 --output VGA-0 --off --output $large_monitor --mode 1920x1200 --primary --output $small_monitor --off
+    elif [[ "$1" == "small" ]]; then
+        xrandr -d :0 --fb 1920x1080 --output VGA-0 --off --output $large_monitor --off --output $small_monitor --mode 1920x1080 --primary
     elif [[ "$1" == "show" ]]; then
         xrandr --display :0 | grep " connected" | cut -d" " -f1 
     else
@@ -161,3 +171,7 @@ function leavetime()
     echo Leave: $NOW  >> ~/.worklog/log.txt
 }
 
+function set_title()
+{
+    PROMPT_COMMAND="echo -ne \"\e]0;$*\a\""
+}
