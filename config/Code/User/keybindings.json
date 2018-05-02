@@ -160,5 +160,9 @@
     {
         "key": "ctrl+shift+-",
         "command": "-workbench.action.navigateForward"
+    },
+    {
+        "key": "ctrl+shift+r",
+        "command": "extension.toggleCodelens"
     }
 ]
