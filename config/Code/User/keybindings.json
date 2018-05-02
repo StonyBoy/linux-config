@@ -144,5 +144,25 @@
     {
         "key": "ctrl+shift+[Equal]",
         "command": "-workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.gotoLine"
+    },
+    {
+        "key": "ctrl+g",
+        "command": "-workbench.action.gotoLine"
+    },
+    {
+        "key": "alt+right",
+        "command": "workbench.action.navigateForward"
+    },
+    {
+        "key": "ctrl+shift+-",
+        "command": "-workbench.action.navigateForward"
+    },
+    {
+        "key": "ctrl+shift+r",
+        "command": "extension.toggleCodelens"
     }
 ]

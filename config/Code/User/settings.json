@@ -5,5 +5,9 @@
     "terminal.external.linuxExec": "urxvt",
     "files.autoSave": "afterDelay",
     "editor.fontSize": 12,
-    "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontFamily": "'Inconsolata', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.renderWhitespace": "all",
+    "editor.minimap.enabled": false,
+    "terminal.integrated.fontSize": 12,
+    "terminal.integrated.scrollback": 10000,
 }

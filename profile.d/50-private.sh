@@ -137,7 +137,7 @@ function show_ip()
 
 function _complete_displaymode()
 {
-    COMPREPLY=( $( compgen -W "wide single show" -- ${COMP_WORDS[COMP_CWORD]} ) )
+    COMPREPLY=( $( compgen -W "wide single small show" -- ${COMP_WORDS[COMP_CWORD]} ) )
     return 0
 }
 
