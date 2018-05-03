@@ -13,7 +13,7 @@ set $wrkspc3  "3: Internet "
 set $wrkspc4  "4: Files "
 set $wrkspc5  "5: Compare "
 set $wrkspc6  "6: Term "
-set $wrkspc7  "7: Mail "
+set $wrkspc7  "7: Skype "
 set $wrkspc8  "8: Music "
 set $wrkspc9  "9: Private "
 set $wrkspc10 "10: VPN "
@@ -158,11 +158,11 @@ bindsym $mod+r mode "resize"
 exec_always --no-startup-id numlockx on
 
 # Start a composite manager for window transition effects
-exec --no-startup-id compton -b
+# exec --no-startup-id compton -b
 
 # Window colors
 # class                 border  backgr. text    indicator child_border
-client.focused          #035b22 #035b22 #ffffff #2e9ef4   #285577
+client.focused          #595959 #003ea5 #ffffff #2e9ef4   #285577
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -170,11 +170,11 @@ client.focused          #035b22 #035b22 #ffffff #2e9ef4   #285577
 bar {
     position top
     colors {
-        background #003300
+        background #001230
         statusline #f2f2f2
         # <colorclass> <border> <background> <text>
-        inactive_workspace #4f4f4f #003300 #f2f2f2
-        focused_workspace  #4f4f4f #035b22 #f2f2f2
+        inactive_workspace #595959 #001230 #f2f2f2
+        focused_workspace  #595959 #003ea5 #f2f2f2
     }
     font pango:Inconsolata 9
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
