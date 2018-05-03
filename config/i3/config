@@ -158,17 +158,29 @@ bindsym $mod+r mode "resize"
 exec_always --no-startup-id numlockx on
 
 # Start a composite manager for window transition effects
-# exec --no-startup-id compton -b
+exec --no-startup-id compton -b
+
+# Window colors
+# class                 border  backgr. text    indicator child_border
+client.focused          #035b22 #035b22 #ffffff #2e9ef4   #285577
+
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
     position top
-    font pango:SFNS Display 8
+    colors {
+        background #003300
+        statusline #f2f2f2
+        # <colorclass> <border> <background> <text>
+        inactive_workspace #4f4f4f #003300 #f2f2f2
+        focused_workspace  #4f4f4f #035b22 #f2f2f2
+    }
+    font pango:Inconsolata 9
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
-    # Avoid accidental workspace switching when scrolling the wheel in the bar
-    wheel_up_cmd nop
-    wheel_down_cmd nop
+    # Avoid accidental workspace switching when scrolling the wheel (up/down) in the bar
+    bindsym button4 nop
+    bindsym button5 nop
 }
 
 exec feh --bg-fill $wallpaper
@@ -184,8 +196,8 @@ bindsym $mod+Tab workspace back_and_forth
 # workspace_auto_back_and_forth yes
 
 # Workspace 1
-exec --no-startup-id qtcreator
-for_window [class="QtCreator"] move to workspace $wrkspc1
+exec --no-startup-id code
+for_window [class="Code"] move to workspace $wrkspc1
 
 # Workspace 4
 exec --no-startup-id Thunar
