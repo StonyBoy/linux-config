@@ -1,0 +1,27 @@
+{
+	// Place your snippets for cpp here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"Microsemi Application Copyright": {
+		"prefix": "mscccr",
+		"body": ["/*\nCopyright (c) 2006-2018 Microsemi Corporation \"Microsemi\". All Rights Reserved.\n\nUnpublished rights reserved under the copyright laws of the United States of\nAmerica, other countries and international treaties. Permission to use, copy,\nstore and modify, the software and its source code is granted but only in\nconnection with products utilizing the Microsemi switch and PHY products.\nPermission is also granted for you to integrate into other products, disclose,\ntransmit and distribute the software only in an absolute machine readable\nformat (e.g. HEX file) and only in or with products utilizing the Microsemi\nswitch and PHY products.  The source code of the software may not be\ndisclosed, transmitted or distributed without the prior written permission of\nMicrosemi.\n\nThis copyright notice must appear in any copy, modification, disclosure,\ntransmission or distribution of the software.  Microsemi retains all\nownership, copyright, trade secret and proprietary rights in the software and\nits source code, including all modifications thereto.\n\nTHIS SOFTWARE HAS BEEN PROVIDED \"AS IS\". MICROSEMI HEREBY DISCLAIMS ALL\nWARRANTIES OF ANY KIND WITH RESPECT TO THE SOFTWARE, WHETHER SUCH WARRANTIES\nARE EXPRESS, IMPLIED, STATUTORY OR OTHERWISE INCLUDING, WITHOUT LIMITATION,\nWARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR USE OR PURPOSE AND\nNON-INFRINGEMENT.\n*/"],
+		"description": "The CPP MSCC APPL Copyright header"
+	},
+	"Microsemi MESA API Copyright": {
+		"prefix": "msccapicr",
+		"body": ["/*\n Copyright (c) 2004-2018 Microsemi Corporation \"Microsemi\".\n\n Permission is hereby granted, free of charge, to any person obtaining a copy\n of this software and associated documentation files (the \"Software\"), to deal\n in the Software without restriction, including without limitation the rights\n to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n copies of the Software, and to permit persons to whom the Software is\n furnished to do so, subject to the following conditions:\n\n The above copyright notice and this permission notice shall be included in all\n copies or substantial portions of the Software.\n\n THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n SOFTWARE.\n*/\n"],
+		"description": "The CPP MSCC MESA API Copyright header"
+	}
+
+	
+}
