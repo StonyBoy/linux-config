@@ -181,8 +181,9 @@ function setdk_default()
 {
     # Keymaps are handled in /etc/X11/xorg.conf.d/00-keyboard.conf via localectl
     local RULES=${1:-evdev}
+    local LEVEL=${2:-0}
     # Values? check: man xkeyboard-config
-    setxkbmap -rules $RULES -model pc105 -layout dk -option -variant "nodeadkeys" -option "caps:ctrl_modifier" -verbose 10
+    setxkbmap -rules $RULES -model pc105 -layout dk -variant "nodeadkeys" -option "caps:ctrl_modifier" -verbose $LEVEL
     multimedia_keys
 }
 
