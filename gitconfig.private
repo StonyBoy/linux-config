@@ -7,7 +7,7 @@
         dc = !git diff --cached
         dt = difftool
         mt = mergetool
-        dtlast = !git difftool HEAD~1 HEAD
+        dtlast = !git difftool HEAD~1
         findfile = !git ls-files | grep -i
         la = !git config -l | grep alias | cut -c 7-
         l = log --decorate

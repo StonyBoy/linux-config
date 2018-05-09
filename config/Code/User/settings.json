@@ -4,10 +4,11 @@
     "[cpp]": {},
     "terminal.external.linuxExec": "urxvt",
     "files.autoSave": "afterDelay",
-    "editor.fontSize": 12,
+    "editor.fontSize": 13,
     "editor.fontFamily": "'Inconsolata', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.renderWhitespace": "all",
     "editor.minimap.enabled": false,
-    "terminal.integrated.fontSize": 12,
+    "terminal.integrated.fontSize": 13,
     "terminal.integrated.scrollback": 10000,
+    "editor.codeLens": false,
 }

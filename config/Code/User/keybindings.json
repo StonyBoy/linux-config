@@ -162,27 +162,19 @@
         "command": "-workbench.action.navigateForward"
     },
     {
-        "key": "ctrl+shift+r",
+        "key": "ctrl+shift+t",
         "command": "extension.toggleCodelens"
     },
     {
         "key": "alt+down",
-        "command": "editor.action.diffReview.next",
-        "when": "isInDiffEditor"
-    },
-    {
-        "key": "f7",
-        "command": "-editor.action.diffReview.next",
-        "when": "isInDiffEditor"
+        "command": "workbench.action.compareEditor.nextChange"
     },
     {
         "key": "alt+up",
-        "command": "editor.action.diffReview.prev",
-        "when": "isInDiffEditor"
+        "command": "workbench.action.compareEditor.previousChange"
     },
     {
-        "key": "shift+f7",
-        "command": "-editor.action.diffReview.prev",
-        "when": "isInDiffEditor"
+        "key": "ctrl+shift+t",
+        "command": "-workbench.action.reopenClosedEditor"
     }
 ]
