@@ -7,7 +7,8 @@
 # Debugging
 # set -x
 
-export PATH=~/scripts:~/.local/bin:~/bin:/usr/local/bin:$PATH
+# export PATH=~/scripts:~/.local/bin:~/bin:/usr/local/bin:$PATH
+export PATH=~/scripts:~/.local/bin:~/bin:$PATH
 export PAGER='less -s'
 
 # Powerline provides avanced shell and GIT status
@@ -193,3 +194,15 @@ function setdk_xorg()
 }
 
 setdk_default
+
+function set_clang()
+{
+    export CC=/usr/bin/clang
+    export CXX=/usr/bin/clang++
+}
+
+function set_gcc()
+{
+    export CC=/usr/bin/gcc
+    export CXX=/usr/bin/g++
+}
