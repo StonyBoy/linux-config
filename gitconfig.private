@@ -5,22 +5,23 @@
         b = !git branch -vv
         cp = cherry-pick
         dc = !git diff --cached
+        dtc = !git difftool --cached
         dt = difftool
         mt = mergetool
         dtlast = !git difftool HEAD~1
         findfile = !git ls-files | grep -i
         la = !git config -l | grep alias | cut -c 7-
         l = log --decorate
-        ls  =   !git log --pretty=format:\"%C(yellow)%h%Cred%d | %Creset%s%Cblue | [%cn]\" --decorate
-        ll  =   !git log --decorate --stat
+        ls = !git log --pretty=format:\"%C(yellow)%h%Cred%d | %Creset%s%Cblue | [%cn]\" --decorate
+        ll = !git log --decorate --stat
         mt = mergetool
         r = reset
         rh = !git reset --hard
-        sh  =   !git show --no-patch
-        shf =   !git show --name-only --format=""
-        sho =   !git show --name-only
-        shs =   "!diffstat()    { git diff --stat ${1-HEAD}~1..${1-HEAD} ; }; diffstat"
-        pat =   "!gitpatchsha() { git format-patch -M -C ${1-HEAD}~1..${1-HEAD} ; }; gitpatchsha"
+        sh  =  !git show --no-patch
+        shf =  !git show --name-only --format=""
+        sho =  !git show --name-only
+        shs =  "!diffstat()    { git diff --stat ${1-HEAD}~1..${1-HEAD} ; }; diffstat"
+        pat =  "!gitpatchsha() { git format-patch -M -C ${1-HEAD}~1..${1-HEAD} ; }; gitpatchsha"
         since = !git log --pretty=format:\"%aD|%H|%an|%s\" --no-merges HEAD --not
         s = status
         ts = !git tag -l --format=\"%(align:50,left)%(refname:lstrip=2)%(end)  :   %(objectname)   :   %(contents:subject)\" t-*
