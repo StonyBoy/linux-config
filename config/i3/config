@@ -3,8 +3,8 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-set $lock_bkg  "/opt/wallpapers/fortaleza.png"
-set $wallpaper "/opt/wallpapers/majskov.jpg"
+set $lock_bkg  "/opt/wallpapers/i3lock.png"
+set $wallpaper "/opt/wallpapers/i3wallpaper.jpg"
 set $small_monitor "HDMI-0"
 set $large_monitor "DVI-0"
 set $wrkspc1  "1: Editor "

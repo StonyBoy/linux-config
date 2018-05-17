@@ -11,4 +11,11 @@
     "terminal.integrated.fontSize": 13,
     "terminal.integrated.scrollback": 10000,
     "editor.codeLens": false,
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true
+    },
+    "gitlens.defaultDateStyle": "absolute",
+    "gitlens.defaultDateFormat": "DD-MMM-YYYY  HH:MM",
+    "gitlens.historyExplorer.enabled": true,
+    "gitlens.gitExplorer.files.layout": "tree",
 }
