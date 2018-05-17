@@ -206,3 +206,8 @@ function set_gcc()
     export CC=/usr/bin/gcc
     export CXX=/usr/bin/g++
 }
+
+function remotex
+{
+    xprop -root -remove _XKB_RULES_NAMES
+}
