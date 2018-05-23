@@ -18,4 +18,5 @@
     "gitlens.defaultDateFormat": "DD-MMM-YYYY  HH:MM",
     "gitlens.historyExplorer.enabled": true,
     "gitlens.gitExplorer.files.layout": "tree",
+    "gitlens.keymap": "alternate",
 }
