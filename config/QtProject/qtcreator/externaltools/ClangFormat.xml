@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Written on Tue Feb 20 16:28:26 2018 by Qt Creator 4.5.1-->
+<externaltool id="ClangFormat">
+    <description>clang format</description>
+    <displayname>Clang Format</displayname>
+    <category>Text</category>
+    <executable output="showinpane" error="showinpane" modifiesdocument="yes">
+        <path>clang-format</path>
+        <arguments>-style=file -i %{CurrentDocument:FileName}</arguments>
+        <workingdirectory>%{CurrentDocument:Path}</workingdirectory>
+    </executable>
+</externaltool>

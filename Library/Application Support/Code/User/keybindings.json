@@ -1,0 +1,180 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+    {
+        "key": "f2",
+        "command": "-editor.action.rename",
+        "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "f4",
+        "command": "C_Cpp.SwitchHeaderSource",
+        "when": "editorTextFocus && editorLangId == 'c'"
+    },
+    {
+        "key": "alt+o",
+        "command": "-C_Cpp.SwitchHeaderSource",
+        "when": "editorTextFocus && editorLangId == 'c'"
+    },
+    {
+        "key": "f4",
+        "command": "C_Cpp.SwitchHeaderSource",
+        "when": "editorTextFocus && editorLangId == 'cpp'"
+    },
+    {
+        "key": "alt+o",
+        "command": "-C_Cpp.SwitchHeaderSource",
+        "when": "editorTextFocus && editorLangId == 'cpp'"
+    },
+    {
+        "key": "f7",
+        "command": "workbench.action.debug.stepOver",
+        "when": "inDebugMode"
+    },
+    {
+        "key": "f10",
+        "command": "-workbench.action.debug.stepOver",
+        "when": "inDebugMode"
+    },
+    {
+        "key": "f8",
+        "command": "workbench.action.debug.stepInto",
+        "when": "inDebugMode"
+    },
+    {
+        "key": "f11",
+        "command": "-workbench.action.debug.stepInto",
+        "when": "inDebugMode"
+    },
+    {
+        "key": "shift+f8",
+        "command": "workbench.action.debug.stepOut",
+        "when": "inDebugMode"
+    },
+    {
+        "key": "shift+f11",
+        "command": "-workbench.action.debug.stepOut",
+        "when": "inDebugMode"
+    },
+    {
+        "key": "ctrl+f10",
+        "command": "editor.debug.action.runToCursor"
+    },
+    {
+        "key": "ctrl+shift+o",
+        "command": "-workbench.action.gotoSymbol"
+    },
+    {
+        "key": "alt+u",
+        "command": "editor.action.transformToLowercase"
+    },
+    {
+        "key": "shift+alt+u",
+        "command": "editor.action.transformToUppercase"
+    },
+    {
+        "key": "shift+alt+s",
+        "command": "editor.action.sortLinesAscending"
+    },
+    {
+        "key": "ctrl+r",
+        "command": "workbench.action.tasks.runTask"
+    },
+    {
+        "key": "ctrl+g",
+        "command": "editor.action.nextMatchFindAction",
+        "when": "editorFocus"
+    },
+    {
+        "key": "f3",
+        "command": "-editor.action.nextMatchFindAction",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+shift+g",
+        "command": "editor.action.previousMatchFindAction",
+        "when": "editorFocus"
+    },
+    {
+        "key": "shift+f3",
+        "command": "-editor.action.previousMatchFindAction",
+        "when": "editorFocus"
+    },
+    {
+        "key": "alt+left",
+        "command": "workbench.action.navigateBack"
+    },
+    {
+        "key": "ctrl+alt+-",
+        "command": "-workbench.action.navigateBack"
+    },
+    {
+        "key": "f2",
+        "command": "editor.action.goToDeclaration",
+        "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+    },
+    {
+        "key": "f12",
+        "command": "-editor.action.goToDeclaration",
+        "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+    },
+    {
+        "key": "shift+f2",
+        "command": "C_Cpp.GoToDeclaration",
+        "when": "editorTextFocus && editorLangId == 'cpp'"
+    },
+    {
+        "key": "ctrl+f12",
+        "command": "-C_Cpp.GoToDeclaration",
+        "when": "editorTextFocus && editorLangId == 'cpp'"
+    },
+    {
+        "key": "shift+f2",
+        "command": "C_Cpp.GoToDeclaration",
+        "when": "editorTextFocus && editorLangId == 'c'"
+    },
+    {
+        "key": "ctrl+f12",
+        "command": "-C_Cpp.GoToDeclaration",
+        "when": "editorTextFocus && editorLangId == 'c'"
+    },
+    {
+        "key": "ctrl+shift+[Period]",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "ctrl+shift+[Equal]",
+        "command": "-workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.gotoLine"
+    },
+    {
+        "key": "ctrl+g",
+        "command": "-workbench.action.gotoLine"
+    },
+    {
+        "key": "alt+right",
+        "command": "workbench.action.navigateForward"
+    },
+    {
+        "key": "ctrl+shift+-",
+        "command": "-workbench.action.navigateForward"
+    },
+    {
+        "key": "ctrl+shift+t",
+        "command": "extension.toggleCodelens"
+    },
+    {
+        "key": "alt+down",
+        "command": "workbench.action.compareEditor.nextChange"
+    },
+    {
+        "key": "alt+up",
+        "command": "workbench.action.compareEditor.previousChange"
+    },
+    {
+        "key": "ctrl+shift+t",
+        "command": "-workbench.action.reopenClosedEditor"
+    }
+]

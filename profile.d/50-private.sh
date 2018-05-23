@@ -1,7 +1,7 @@
 #! /bin/bash
 # -*-sh-*-
 # .bash_profile
-# Time-stamp: <20-jan-18 21:09>
+# Time-stamp: <23-may-18 21:24>
 # Settings for all interactive shells
 
 # Debugging
@@ -25,23 +25,18 @@ export XDG_CONFIG_HOME=~/.config
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
+# Avoid rvmsudo complaints
+export rvmsudo_secure_path=1
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# Add Rusts Cargo to path if present
+if [[ -d ~/.cargo/bin ]]; then
+    export PATH="$PATH:$HOME/.cargo/bin"
+fi
 
 # Set core file size limit
 ulimit -c unlimited
-
-# Disable Capslock
-# /usr/bin/setxkbmap -option "ctrl:nocaps"
-
-# Capslock as Ctrl
-# /usr/bin/setxkbmap -option "caps:ctrl_modifier"
-
-# Keyboard mapping for keyboards without multimedia keys (PrintScreen, ScrollLock, Pause, F11, F12)
-# xmodmap -e "keycode 107 = XF86AudioLowerVolume XF86AudioLowerVolume XF86AudioLowerVolume XF86AudioLowerVolume"
-# xmodmap -e "keycode 78  = XF86AudioRaiseVolume XF86AudioRaiseVolume XF86AudioRaiseVolume XF86AudioRaiseVolume"
-# xmodmap -e "keycode 127 = XF86AudioPlay XF86AudioPlay XF86AudioPlay XF86AudioPlay"
-# xmodmap -e "keycode 95  = XF86AudioPrev XF86AudioPrev XF86AudioPrev XF86AudioPrev"
-# xmodmap -e "keycode 96  = XF86AudioNext XF86AudioNext XF86AudioNext XF86AudioNext"
 
 # Global Command aliases
 
@@ -120,3 +115,46 @@ function leavetime()
     echo Leave: $NOW  >> ~/.worklog/log.txt
 }
 
+function title()
+{
+    PROMPT_COMMAND="echo -ne \"\e]0;$*\a\""
+}
+
+function multimedia_keys()
+{
+    # Keyboard mapping for keyboards without multimedia keys (PrintScreen, ScrollLock, Pause, F11, F12)
+    xmodmap -e "keycode 107 = XF86AudioLowerVolume XF86AudioLowerVolume XF86AudioLowerVolume XF86AudioLowerVolume"
+    xmodmap -e "keycode 78  = XF86AudioRaiseVolume XF86AudioRaiseVolume XF86AudioRaiseVolume XF86AudioRaiseVolume"
+    xmodmap -e "keycode 127 = XF86AudioPlay XF86AudioPlay XF86AudioPlay XF86AudioPlay"
+    xmodmap -e "keycode 95  = XF86AudioPrev XF86AudioPrev XF86AudioPrev XF86AudioPrev"
+    xmodmap -e "keycode 96  = XF86AudioNext XF86AudioNext XF86AudioNext XF86AudioNext"
+}
+
+function setdk_default()
+{
+    # Keymaps are handled in /etc/X11/xorg.conf.d/00-keyboard.conf via localectl
+    local RULES=${1:-evdev}
+    local LEVEL=${2:-0}
+    # Values? check: man xkeyboard-config
+    setxkbmap -rules $RULES -model pc105 -layout dk -variant "nodeadkeys" -option "caps:ctrl_modifier" -verbose $LEVEL
+    multimedia_keys
+}
+
+function setdk_xorg()
+{
+    setdk_default xorg
+}
+
+# setdk_default
+
+function set_clang()
+{
+    export CC=/usr/bin/clang
+    export CXX=/usr/bin/clang++
+}
+
+function set_gcc()
+{
+    export CC=/usr/bin/gcc
+    export CXX=/usr/bin/g++
+}
