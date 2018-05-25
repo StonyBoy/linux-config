@@ -176,5 +176,9 @@
     {
         "key": "ctrl+shift+t",
         "command": "-workbench.action.reopenClosedEditor"
+    },
+    {
+        "key": "ctrl+k t",
+        "command": "workbench.action.terminal.clear"
     }
 ]

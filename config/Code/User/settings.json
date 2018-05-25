@@ -1,6 +1,5 @@
 {
     "workbench.colorTheme": "Default Light+",
-    "workbench.iconTheme": "vscode-icons",
     "[cpp]": {},
     "terminal.external.linuxExec": "urxvt",
     "files.autoSave": "afterDelay",
@@ -18,4 +17,15 @@
     "gitlens.defaultDateFormat": "DD-MMM-YYYY  HH:MM",
     "gitlens.historyExplorer.enabled": true,
     "gitlens.gitExplorer.files.layout": "tree",
+    "C_Cpp.clang_format_path": "/usr/bin/clang-format",
+    "C_Cpp.errorSquiggles": "Disabled",
+    "C_Cpp.loggingLevel": "None",
+    "C_Cpp.intelliSenseEngineFallback": "Disabled",
+    "cquery.completion.include.whitelistLiteralEnding": [
+        ".h",
+        ".hpp",
+        ".hh",
+        ".hxx"
+    ],
+    "cquery.misc.indexerCount": 7,
 }
