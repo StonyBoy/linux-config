@@ -101,7 +101,10 @@ class Installer:
         dst_dir = os.path.dirname(self.dst_path)
         if not os.path.exists(dst_dir):
             os.makedirs(dst_dir)
-        os.symlink(self.src_path, self.dst_path)
+        try:
+            os.symlink(self.src_path, self.dst_path)
+        except FileExistsError:
+            pass
 
     def wants_installation(self):
         return self.file_status != FileStatus.Hidden and (self.user_choice == UserChoice.OverWriteFile or self.user_choice == UserChoice.InstallFile)
@@ -197,7 +200,7 @@ class Folder(Group):
 
     def get_destination(self, item):
         path = pathlib.Path(item.get_fullpath())
-        relative_path = path.relative_to(*path.parts[:1])
+        relative_path = str(path.relative_to(*path.parts[:1]))
         return os.path.join(self.destination, relative_path)
 
     def get_group(self):
