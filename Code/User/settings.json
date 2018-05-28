@@ -19,4 +19,5 @@
     "gitlens.historyExplorer.enabled": true,
     "gitlens.gitExplorer.files.layout": "tree",
     "gitlens.keymap": "alternate",
+    "python.pythonPath": "/usr/local/bin/python",
 }
