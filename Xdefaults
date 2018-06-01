@@ -28,7 +28,7 @@ URxvt.letterSpace: -1
 
 ! URxvt.scrollbar_right: true
 
-URxvt.underlineColor:   yellow
+URxvt.underlineColor:   blue
 URxvt.saveLines:        100000
 
 URxvt.visualBell:       true

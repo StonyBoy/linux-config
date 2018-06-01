@@ -16,7 +16,7 @@
     "gitlens.defaultDateStyle": "absolute",
     "gitlens.defaultDateFormat": "DD-MMM-YYYY  HH:MM",
     "gitlens.historyExplorer.enabled": true,
-    "gitlens.gitExplorer.files.layout": "tree",
+    "gitlens.gitExplorer.files.layout": "list",
     "C_Cpp.clang_format_path": "/usr/bin/clang-format",
     "C_Cpp.errorSquiggles": "Disabled",
     "C_Cpp.loggingLevel": "None",
@@ -28,4 +28,5 @@
         ".hxx"
     ],
     "cquery.misc.indexerCount": 7,
+    "explorer.confirmDelete": false,
 }

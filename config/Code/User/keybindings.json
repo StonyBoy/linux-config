@@ -180,5 +180,14 @@
     {
         "key": "ctrl+k t",
         "command": "workbench.action.terminal.clear"
+    },
+    {
+        "key": "ctrl+k w",
+        "command": "workbench.action.openWorkspace"
+    },
+    {
+        "key": "ctrl+w",
+        "command": "-workbench.action.closeWindow",
+        "when": "!editorIsOpen"
     }
 ]
