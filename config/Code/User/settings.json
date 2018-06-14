@@ -29,4 +29,7 @@
     ],
     "cquery.misc.indexerCount": 7,
     "explorer.confirmDelete": false,
+    "solargraph.commandPath": "/home/shegelun/.rvm/gems/ruby-2.4.1/wrappers/solargraph",
+    "rust-client.channel": "stable",
+    "rust-client.logToFile": true,
 }
