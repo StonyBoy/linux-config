@@ -227,7 +227,7 @@ bindsym $mod+Mod1+Up    move workspace to output up
 bindsym $mod+Mod1+Right move workspace to output right
 
 # Move workspace to output mode
-set $mode_move Move workspace: (L)eft, (Right)
+set $mode_move Move workspace: (L)eft, (R)ight
 mode "$mode_move" {
         bindsym l move workspace to output left
         bindsym r move workspace to output right
