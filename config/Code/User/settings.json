@@ -32,4 +32,9 @@
     "solargraph.commandPath": "/home/shegelun/.rvm/gems/ruby-2.4.1/wrappers/solargraph",
     "rust-client.channel": "stable",
     "rust-client.logToFile": true,
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        ".vscode/": true
+    },
 }
