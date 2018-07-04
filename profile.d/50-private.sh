@@ -15,13 +15,13 @@ export PAGER='less -s'
 # Install with pip install powerline-status
 # and pip install powerline-gitstatus
 export XDG_CONFIG_HOME=~/.config
-# if [[ -e ~/.local/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh ]]; then
-#     if [[ "${TERM}" == "xterm" || "${TERM}" == "xterm-256color" ]]; then
-#         export POWERLINE_BASH_CONTINUATION=1
-#         export POWERLINE_BASH_SELECT=1
-#         source ~/.local/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
-#     fi
-# fi
+if [[ -e ~/scripts/powerline.sh ]]; then
+    if [[ "${TERM}" == "xterm" || "${TERM}" == "xterm-256color" || "${TERM}" == "rxvt-unicode-256color" ]]; then
+        export POWERLINE_BASH_CONTINUATION=1
+        export POWERLINE_BASH_SELECT=1
+        source ~/scripts/powerline.sh
+    fi
+fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
@@ -35,6 +35,8 @@ export rvmsudo_secure_path=1
 if [[ -d ~/.cargo/bin ]]; then
     export PATH="$PATH:$HOME/.cargo/bin"
 fi
+
+export PROMPT_COMMAND=prompt_command
 
 # Set core file size limit
 ulimit -c unlimited
@@ -166,6 +168,32 @@ function leavetime()
 function title()
 {
     PROMPT_COMMAND="echo -ne \"\e]0;$*\a\""
+}
+
+function prompt_command()
+{
+    CUR_NAME=$PWD
+    TITLE_NAME=$CUR_NAME
+    if [[ $CUR_NAME == $HOME ]]; then
+        TITLE_NAME="Home"
+    else
+        elems=($(echo "${CUR_NAME}" | tr '/' '\n'))
+        if [[ ${elems[2]} == "src" ]]; then
+            TITLE_NAME=${elems[2]}
+            if [[ ${elems[3]} != "" ]]; then
+                TITLE_NAME=${elems[3]}
+                WEBSTAX_NAME=${TITLE_NAME##webstax2_}
+                if [[ ${WEBSTAX_NAME} != "" ]]; then
+                    if [[ ${elems[3]} != ${elems[-1]} ]]; then
+                        TITLE_NAME="${WEBSTAX_NAME} ${elems[-1]}"
+                    else
+                        TITLE_NAME=${WEBSTAX_NAME}
+                    fi
+                fi
+            fi
+        fi
+    fi
+    echo -ne "\e]0;$TITLE_NAME\a"
 }
 
 function multimedia_keys()

@@ -32,3 +32,6 @@
 
 [include]
         path = .gitconfig.private
+
+[hub]
+        host = git-ent.microsemi.net
