@@ -251,7 +251,7 @@ bindsym XF86AudioPrev exec  --no-startup-id playerctl previous
 # Menu
 
 # Use the rofi menu
-bindsym $mod+space exec rofi -show run -lines 15 -eh 2 -width 100 -padding 500 -opacity "60" -bw 0 -columns 2 -font "Inconsolata 12"
+bindsym $mod+space exec rofi -modi drun#run -show drun -lines 15 -eh 2 -width 100 -padding 500 -opacity "60" -bw 0 -columns 2 -font "Inconsolata 12"
 
 # Exit Menu
 
