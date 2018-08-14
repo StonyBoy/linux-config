@@ -28,7 +28,8 @@
         unstage = !git reset HEAD --
         v = !git --version
         w = rev-parse --abbrev-ref HEAD
-        prune-branches = !git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -d
+        prune-branches =  "!gitprunebranches() { ~/scripts/git_branches.py -d ; }; gitprunebranches"
+        update-branches =  "!gitupdatebranches() { ~/scripts/git_branches.py -m ; }; gitupdatebranches"
 
 [color]
         ui = true

@@ -6,13 +6,6 @@
 				"priority": 20
 			},
 			{
-				"function": "powerline.segments.common.env.environment",
-				"priority": 30,
-				"args": {
-					"variable": "LEGO_PRODUCT"
-				}
-			},
-			{
 				"function": "powerline.segments.shell.cwd",
 				"priority": 10
 			}

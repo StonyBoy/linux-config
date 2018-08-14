@@ -44,6 +44,9 @@ class Installer:
                     self.file_status = FileStatus.SameContent
                 else:
                     self.file_status = FileStatus.DifferentContent
+        else:
+            if os.path.islink(self.dst_path):
+                self.file_status = FileStatus.Linked
 
     def status(self):
         return '{:2s} {:60s} : {}'.format(self.file_status.value, os.path.relpath(self.src_path), self.dst_path)
