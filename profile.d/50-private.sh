@@ -180,6 +180,7 @@ function setdk_xorg()
 
 if [[ $DISPLAY != "" ]]; then
 #    setdk_default
+    echo "No X"
 fi
 
 function set_clang()
