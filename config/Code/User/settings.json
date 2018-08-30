@@ -6,7 +6,7 @@
     "editor.fontSize": 13,
     "editor.fontFamily": "'Inconsolata', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.renderWhitespace": "all",
-    "editor.minimap.enabled": false,
+    "editor.minimap.enabled": true,
     "terminal.integrated.fontSize": 13,
     "terminal.integrated.scrollback": 10000,
     "editor.codeLens": false,
@@ -27,7 +27,6 @@
         ".hh",
         ".hxx"
     ],
-    "cquery.misc.indexerCount": 7,
     "explorer.confirmDelete": false,
     "solargraph.commandPath": "/home/shegelun/.rvm/gems/ruby-2.4.1/wrappers/solargraph",
     "rust-client.channel": "stable",
@@ -41,4 +40,7 @@
     "files.associations": {
         "*.in": "makefile"
     },
+    "breadcrumbs.enabled": true,
+    "cmake.configureOnOpen": true,
+    "editor.minimap.showSlider": "always",
 }
