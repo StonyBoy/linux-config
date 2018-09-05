@@ -43,4 +43,6 @@
     "breadcrumbs.enabled": true,
     "cmake.configureOnOpen": true,
     "editor.minimap.showSlider": "always",
+    "editor.wordBasedSuggestions": false,
+    "editor.acceptSuggestionOnEnter": "off",
 }
