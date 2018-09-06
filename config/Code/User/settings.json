@@ -45,4 +45,9 @@
     "editor.minimap.showSlider": "always",
     "editor.wordBasedSuggestions": false,
     "editor.acceptSuggestionOnEnter": "off",
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "workbench.colorCustomizations": {"editorRuler.foreground": "#ff408067"},
 }
