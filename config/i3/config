@@ -19,7 +19,7 @@ set $wrkspc9  "9: Private "
 set $wrkspc10 "10: VPN "
 
 # Setting up monitors
-exec --no-startup-id xrandr -d :0 --output VGA-0 --off --output $main_monitor --mode 2560x1440 --primary --output $extra_monitor --mode 2560x1440 --left-of $main_monitor
+exec --no-startup-id xrandr -d :0 --output $main_monitor --mode 2560x1440 --primary --output $extra_monitor --mode 2560x1440 --left-of $main_monitor
 
 # Bind the workspaces for the large monitor
 workspace $wrkspc1 output $main_monitor
@@ -215,7 +215,7 @@ for_window [class="Spotify"] move to workspace $wrkspc8
 
 # No particular workspace
 exec $terminal
-exec --no-startup-id chromium
+exec --no-startup-id google-chrome-stable
 
 
 # Move workspace to outputs

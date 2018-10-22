@@ -139,14 +139,16 @@ function _complete_displaymode()
 
 function displaymode()
 {
-    local small_monitor=HDMI-0
-    local large_monitor=DVI-0
+    local main_monitor=DP-3
+    local extra_monitor=DP-2
     if [[ "$1" == "dual" ]]; then
-        xrandr -d :0 --fb 3840x1200 --output VGA-0 --off --output $large_monitor --mode 1920x1200 --primary --output $small_monitor --mode 1920x1080 --left-of $large_monitor
-    elif [[ "$1" == "large" ]]; then
-        xrandr -d :0 --fb 1920x1200 --output VGA-0 --off --output $large_monitor --mode 1920x1200 --primary --output $small_monitor --off
-    elif [[ "$1" == "small" ]]; then
-        xrandr -d :0 --fb 1920x1080 --output VGA-0 --off --output $large_monitor --off --output $small_monitor --mode 1920x1080 --primary
+        xrandr -d :0 --fb 5120x1440 --output $main_monitor --mode 2560x1440 --primary --right-of $extra_monitor --output $extra_monitor --mode 2560x1440
+    elif [[ "$1" == "main" ]]; then
+        xrandr -d :0 --fb 2560x1440 --output $main_monitor --mode 2560x1440 --primary --output $extra_monitor --off
+    elif [[ "$1" == "extra" ]]; then
+        xrandr -d :0 --fb 2560x1440 --output $extra_monitor --mode 2560x1440 --primary --output $main_monitor --off
+    elif [[ "$1" == "vnc" ]]; then
+        xrandr -d :0 --fb 1920x1200 --output $main_monitor --mode 1920x1200 --primary --output $extra_monitor --off
     elif [[ "$1" == "show" ]]; then
         xrandr --display :0 | grep " connected" | cut -d" " -f1 
     else
