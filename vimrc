@@ -10,7 +10,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-scripts/tlib'            " Utility library
 Plug 'tpope/vim-sensible'          " Basic vim settings
 Plug 'godlygeek/csapprox'          " Fixes color schema
-Plug 'SirVer/ultisnips'            " Snippet engine
+" Plug 'SirVer/ultisnips'            " Snippet engine
 Plug 'honza/vim-snippets'
 
 Plug 'vim-ruby/vim-ruby'           " Better ruby support
@@ -168,19 +168,6 @@ au! BufEnter */vtss_appl/*/*.cxx let b:fswitchdst = 'hxx' | let b:fswitchlocs = 
 map <F12> :FSHere<CR>
 imap <F12> <ESC>:FSHere<CR>
 
-
-set diffexpr=MyDiff()
-function MyDiff()
-   let opt = ""
-   if &diffopt =~ "icase"
-     let opt = opt . "-i "
-   endif
-   if &diffopt =~ "iwhite"
-     let opt = opt . "-b "
-   endif
-   silent execute "!diff -d -a --binary " . opt . v:fname_in . " " . v:fname_new .
-        \  " > " . v:fname_out
-endfunction
 
 let g:tex_conceal = ""
 

@@ -25,7 +25,7 @@
         stat = status
 
 [core]
-        excludesfile = ~/.gitignore
+	excludesfile = ~/.gitignore
 
 [push]
         default = simple
@@ -33,3 +33,10 @@
 [include]
         path = .gitconfig.private
 
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+
+[mergetool "sourcetree"]
+	cmd = /Users/steen/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
