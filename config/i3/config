@@ -19,7 +19,7 @@ set $wrkspc9  "9: Private "
 set $wrkspc10 "10: VPN "
 
 # Setting up monitors
-exec --no-startup-id xrandr -d :0 --output $main_monitor --mode 2560x1440 --primary --output $extra_monitor --mode 2560x1440 --left-of $main_monitor
+exec --no-startup-id xrandr -d :0 --output $main_monitor --mode 2560x1440 --primary --right-of $extra_monitor --output $extra_monitor --mode 2560x1440
 
 # Bind the workspaces for the large monitor
 workspace $wrkspc1 output $main_monitor
