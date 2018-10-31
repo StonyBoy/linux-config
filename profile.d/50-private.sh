@@ -133,7 +133,7 @@ function show_ip()
 
 function _complete_displaymode()
 {
-    COMPREPLY=( $( compgen -W "dual large small show" -- ${COMP_WORDS[COMP_CWORD]} ) )
+    COMPREPLY=( $( compgen -W "dual main extra vnc show" -- ${COMP_WORDS[COMP_CWORD]} ) )
     return 0
 }
 
@@ -142,13 +142,15 @@ function displaymode()
     local main_monitor=DP-3
     local extra_monitor=DP-2
     if [[ "$1" == "dual" ]]; then
-        xrandr -d :0 --fb 5120x1440 --output $main_monitor --mode 2560x1440 --primary --right-of $extra_monitor --output $extra_monitor --mode 2560x1440
+        xrandr -d :0 --output $main_monitor  --mode 2560x1440
+        xrandr -d :0 --output $extra_monitor --mode 2560x1440
+        xrandr -d :0 --output $main_monitor  --mode 2560x1440 --primary --right-of $extra_monitor --output $extra_monitor --mode 2560x1440
     elif [[ "$1" == "main" ]]; then
-        xrandr -d :0 --fb 2560x1440 --output $main_monitor --mode 2560x1440 --primary --output $extra_monitor --off
+        xrandr -d :0 --output $main_monitor --mode 2560x1440 --primary --output $extra_monitor --off
     elif [[ "$1" == "extra" ]]; then
-        xrandr -d :0 --fb 2560x1440 --output $extra_monitor --mode 2560x1440 --primary --output $main_monitor --off
+        xrandr -d :0 --output $extra_monitor --mode 2560x1440 --primary --output $main_monitor --off
     elif [[ "$1" == "vnc" ]]; then
-        xrandr -d :0 --fb 1920x1200 --output $main_monitor --mode 1920x1200 --primary --output $extra_monitor --off
+        xrandr -d :0 --output $main_monitor --mode 1920x1200 --primary --output $extra_monitor --off
     elif [[ "$1" == "show" ]]; then
         xrandr --display :0 | grep " connected" | cut -d" " -f1 
     else
