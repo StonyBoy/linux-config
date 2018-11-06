@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "Visual Studio Light",
+    "workbench.colorTheme": "Atom One Light",
     "[cpp]": {},
     "terminal.external.linuxExec": "urxvt",
     "files.autoSave": "afterDelay",
@@ -49,5 +49,8 @@
         80,
         120
     ],
-    "workbench.colorCustomizations": {"editorRuler.foreground": "#ff408067"},
+    "workbench.colorCustomizations": {
+        "editorRuler.foreground": "#ff408067"
+    },
+    "editor.multiCursorModifier": "alt",
 }
