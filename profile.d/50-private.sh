@@ -56,7 +56,6 @@ alias pse='ps -o pid,user,args -eH'
 alias psu='ps -o pid,user,args -u $USER -H'
 alias psc='ps -o pid,user,args -H -C'
 
-alias dm='displaymode'
 alias bc='bcompare'
 alias cf='clang-format -i'
 
@@ -90,6 +89,11 @@ function wsproj()
 {
     make clang_complete
     python3 ~/src/python/qtcreator_project/qtcreator_webstax_project.py $(basename $(dirname $PWD))
+}
+
+function vsproj()
+{
+    python3 ~/src/python/vscode_workspace/vscode_workspace.py
 }
 
 function filtertext()
@@ -153,35 +157,6 @@ function prompt_command()
     echo -ne "\e]0;$TITLE_NAME\a"
 }
 
-function multimedia_keys()
-{
-    # Keyboard mapping for keyboards without multimedia keys (PrintScreen, ScrollLock, Pause, F11, F12)
-    xmodmap -e "keycode 107 = XF86AudioLowerVolume XF86AudioLowerVolume XF86AudioLowerVolume XF86AudioLowerVolume"
-    xmodmap -e "keycode 78  = XF86AudioRaiseVolume XF86AudioRaiseVolume XF86AudioRaiseVolume XF86AudioRaiseVolume"
-    xmodmap -e "keycode 127 = XF86AudioPlay XF86AudioPlay XF86AudioPlay XF86AudioPlay"
-    xmodmap -e "keycode 95  = XF86AudioPrev XF86AudioPrev XF86AudioPrev XF86AudioPrev"
-    xmodmap -e "keycode 96  = XF86AudioNext XF86AudioNext XF86AudioNext XF86AudioNext"
-}
-
-function setdk_default()
-{
-    # Keymaps are handled in /etc/X11/xorg.conf.d/00-keyboard.conf via localectl
-    local RULES=${1:-evdev}
-    local LEVEL=${2:-0}
-    # Values? check: man xkeyboard-config
-    setxkbmap -rules $RULES -model pc105 -layout dk -variant "nodeadkeys" -option "caps:ctrl_modifier" -verbose $LEVEL
-    multimedia_keys
-}
-
-function setdk_xorg()
-{
-    setdk_default xorg
-}
-
-if [[ $DISPLAY != "" ]]; then
-#    setdk_default
-    echo "No X"
-fi
 
 function set_clang()
 {
@@ -195,7 +170,3 @@ function set_gcc()
     export CXX=/usr/bin/g++
 }
 
-function remotex
-{
-    xprop -root -remove _XKB_RULES_NAMES
-}
