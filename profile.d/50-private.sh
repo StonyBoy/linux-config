@@ -94,6 +94,11 @@ function wsproj()
     python3 ~/src/python/qtcreator_project/qtcreator_webstax_project.py $(basename $(dirname $PWD))
 }
 
+function vsproj()
+{
+    python3 ~/src/python/vscode_workspace/vscode_workspace.py
+}
+
 function filtertext()
 {
     if [[ $# > 0 ]]; then
