@@ -47,6 +47,8 @@ floating_modifier $mod
 # set $terminal xfce4-terminal
 set $terminal urxvt
 bindsym $mod+Return exec $terminal
+# Use the fish shell instead of bash
+bindsym $mod+Shift+Return exec $terminal -e fish
 
 # kill focused window
 bindsym $mod+Shift+q kill
