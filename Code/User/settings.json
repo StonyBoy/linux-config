@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "Atom One Light",
+    "workbench.colorTheme": "Quiet Light",
     "[cpp]": {},
     "terminal.external.linuxExec": "urxvt",
     "files.autoSave": "afterDelay",
@@ -58,4 +58,7 @@
     "cSpell.userWords": [
         "bootlin"
     ],
+    "gitlens.views.repositories.files.layout": "list",
+    "gitlens.views.fileHistory.enabled": true,
+    "gitlens.views.lineHistory.enabled": true,
 }
