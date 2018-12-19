@@ -1,12 +1,12 @@
 {
-    "workbench.colorTheme": "Quiet Light",
+    "workbench.colorTheme": "Atom One Light",
     "[cpp]": {},
     "terminal.external.linuxExec": "urxvt",
     "files.autoSave": "afterDelay",
     "editor.fontSize": 13,
     "editor.fontFamily": "'Inconsolata', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.renderWhitespace": "all",
-    "editor.minimap.enabled": false,
+    "editor.minimap.enabled": true,
     "terminal.integrated.fontSize": 13,
     "terminal.integrated.scrollback": 10000,
     "editor.codeLens": false,
@@ -29,7 +29,6 @@
         ".hh",
         ".hxx"
     ],
-    "cquery.misc.indexerCount": 7,
     "explorer.confirmDelete": false,
     "rust-client.channel": "stable",
     "rust-client.logToFile": true,
@@ -42,5 +41,21 @@
     "files.associations": {
         "*.in": "makefile"
     },
-    "window.zoomLevel": 0,
+    "breadcrumbs.enabled": true,
+    "cmake.configureOnOpen": true,
+    "editor.minimap.showSlider": "always",
+    "editor.wordBasedSuggestions": false,
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "workbench.colorCustomizations": {
+        "editorRuler.foreground": "#ff408067"
+    },
+    "cquery.misc.indexerCount": 2,
+    "editor.multiCursorModifier": "alt",
+    "cSpell.userWords": [
+        "bootlin"
+    ],
 }
