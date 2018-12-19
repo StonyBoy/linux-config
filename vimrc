@@ -10,7 +10,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-scripts/tlib'            " Utility library
 Plug 'tpope/vim-sensible'          " Basic vim settings
 Plug 'godlygeek/csapprox'          " Fixes color schema
-Plug 'SirVer/ultisnips'            " Snippet engine
+"Plug 'SirVer/ultisnips'            " Snippet engine
 Plug 'honza/vim-snippets'
 
 Plug 'vim-ruby/vim-ruby'           " Better ruby support

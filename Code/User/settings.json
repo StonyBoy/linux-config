@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "Visual Studio Light",
+    "workbench.colorTheme": "Quiet Light",
     "[cpp]": {},
     "terminal.external.linuxExec": "urxvt",
     "files.autoSave": "afterDelay",
@@ -42,4 +42,5 @@
     "files.associations": {
         "*.in": "makefile"
     },
+    "window.zoomLevel": 0,
 }
