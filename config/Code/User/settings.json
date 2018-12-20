@@ -57,4 +57,7 @@
     "cSpell.userWords": [
         "bootlin"
     ],
+    "gitlens.views.repositories.files.layout": "list",
+    "gitlens.views.fileHistory.enabled": true,
+    "gitlens.views.lineHistory.enabled": true,
 }
