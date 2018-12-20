@@ -104,7 +104,10 @@ class Installer:
         dst_dir = os.path.dirname(self.dst_path)
         if not os.path.exists(dst_dir):
             os.makedirs(dst_dir)
-        os.symlink(self.src_path, self.dst_path)
+        try:
+            os.symlink(self.src_path, self.dst_path)
+        except FileExistsError:
+            pass
 
     def wants_installation(self):
         return self.file_status != FileStatus.Hidden and (self.user_choice == UserChoice.OverWriteFile or self.user_choice == UserChoice.InstallFile)
@@ -264,6 +267,7 @@ elements = [
         'Xmodmap',
         'tmux.conf'),
     Folder('profile.d', '~/.profile.d'),
+    Folder('vim', '~/.vim'),
     Folder('scripts', '~/scripts'),
     Folder('config', '~/.config'),
     Folder('PyCharm', '~/.PyCharmCE2017.3'),
