@@ -212,8 +212,8 @@ for_window [class="[Bb]compare"] move to workspace $wrkspc5
 # Workspace 7
 
 # Workspace 8
-exec --no-startup-id spotify
-for_window [class="Spotify"] move to workspace $wrkspc8
+exec --no-startup-id clementine -o
+for_window [class="Clementine"] move to workspace $wrkspc8
 
 # No particular workspace
 exec $terminal
@@ -229,13 +229,24 @@ bindsym $mod+Mod1+Right move workspace to output right
 # Move workspace to output mode
 set $mode_move Move workspace: (L)eft, (Right)
 mode "$mode_move" {
-        bindsym l move workspace to output left
-        bindsym r move workspace to output right
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    bindsym l move workspace to output left
+    bindsym r move workspace to output right
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 bindsym $mod+m mode "$mode_move"
+
+# Handle floating windows
+set $mode_floatmove Move floating windows (arrow keys and escape)
+mode "$mode_floatmove" {
+    bindsym Up move up 20px
+    bindsym Left move left 20px
+    bindsym Down move down 20px
+    bindsym Right move right 20px
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+m focus floating; mode "$mode_floatmove"
 
 # Audio controls
 bindsym XF86AudioMute exec --no-startup-id /home/shegelun/scripts/volume 5% pulse "USB-Audio - Jabra EVOLVE LINK" 3
