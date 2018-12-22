@@ -12,10 +12,8 @@ set lazyredraw      " Do not redraw while running macros (much faster)
 set scrolloff=5     " Scroll before the curser reaches top or buttom
 set sidescrolloff=2 " Scroll before the curser reaches left or right side
 set textwidth=80    " Set the line width to 80 characters
-autocmd FileType c,cpp setlocal colorcolumn=80  " Setting highlight long lines
 set hidden          " Allow edit buffers to be hidden
 set guioptions=     " Remove menus
-colorscheme morning " This is a nice color scheame
 
 if has("multi_byte")
     set fillchars=stl:\ ,stlnc:\ ,vert:┆,fold:-,diff:-    " Displaying symbols to separate windows
@@ -24,6 +22,8 @@ if has("multi_byte")
     set list        " Turn on the display of whitespace
 endif
 
+
+autocmd FileType c,cpp   setlocal colorcolumn=80  " Setting highlight long lines
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual Cues
@@ -68,10 +68,28 @@ set wildmenu
 " Plugin Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Lightline
+
 set laststatus=2
-" let g:lightline = {
-"   \     'active': {
-"   \         'left': [['mode', 'paste' ], ['readonly', 'filename', 'modified']],
-"   \         'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding']]
-"   \     }
-"   \ }
+set noshowmode
+let g:lightline = {
+  \ 'colorscheme': 'solarized',
+  \     'active': {
+  \         'left': [['mode', 'paste' ], ['readonly', 'filename', 'modified', 'gitbranch']],
+  \         'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding'], ['session']]
+  \     },
+  \     'component_function': {
+  \       'session': 'obsession#ObsessionStatus',
+  \       'gitbranch': 'fugitive#head'
+  \     },
+  \ }
+
+
+" Colorscheme
+syntax enable
+set background=light
+let g:solarized_termcolors=256
+colorscheme solarized
+
+" Resume session
+source ~/.vim/steen.vim
+
