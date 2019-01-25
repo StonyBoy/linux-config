@@ -5,8 +5,8 @@
 set $mod Mod4
 set $lock_bkg  "/opt/wallpapers/i3lock.png"
 set $wallpaper "/opt/wallpapers/i3wallpaper.jpg"
-set $main_monitor "DP-2"
-set $extra_monitor "DP-3"
+set $main_monitor "DP-3"
+set $extra_monitor "DP-2"
 set $wrkspc1  "1: Editor "
 set $wrkspc2  "2: Builds "
 set $wrkspc3  "3: Internet "
@@ -44,11 +44,11 @@ font pango:SFNS Display 12
 floating_modifier $mod
 
 # start a terminal
-# set $terminal xfce4-terminal
-set $terminal urxvt
+# Possible options: urxvt, terminator, xfce4-terminal
+set $terminal terminator
 bindsym $mod+Return exec $terminal
-# Use the fish shell instead of bash
-bindsym $mod+Shift+Return exec $terminal -e fish
+# Use urxvt instead
+bindsym $mod+Shift+Return exec urxvt
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -214,6 +214,7 @@ for_window [class="[Bb]compare"] move to workspace $wrkspc5
 # Workspace 8
 exec --no-startup-id clementine -o
 for_window [class="Clementine"] move to workspace $wrkspc8
+for_window [class="Spotify"] move to workspace $wrkspc8
 
 # No particular workspace
 exec $terminal
@@ -244,6 +245,8 @@ mode "$mode_floatmove" {
     bindsym Left move left 20px
     bindsym Down move down 20px
     bindsym Right move right 20px
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 bindsym $mod+Shift+m focus floating; mode "$mode_floatmove"
