@@ -91,5 +91,5 @@ let g:solarized_termcolors=256
 colorscheme solarized
 
 " Resume session
-source ~/.vim/steen.vim
+" source ~/.vim/steen.vim
 
