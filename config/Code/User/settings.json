@@ -52,5 +52,15 @@
     "workbench.colorCustomizations": {
         "editorRuler.foreground": "#ff408067"
     },
+    "cquery.misc.indexerCount": 2,
     "editor.multiCursorModifier": "alt",
+    "cSpell.userWords": [
+        "bootlin"
+    ],
+    "gitlens.views.repositories.files.layout": "list",
+    "gitlens.views.fileHistory.enabled": true,
+    "gitlens.views.lineHistory.enabled": false,
+    "gitlens.views.search.enabled": false,
+    "gitlens.codeLens.enabled": false,
+    "gitlens.hovers.enabled": false,
 }
