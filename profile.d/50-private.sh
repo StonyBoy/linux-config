@@ -127,7 +127,7 @@ function show_vnc()
 
 function start_vnc()
 {
-    x0vncserver -display :0 -Geometry 1920x1200 -SecurityTypes vncauth,tlsvnc -rfbauth ~/.vnc/passwd -rfbport 5900
+    x0vncserver -display :0 -Geometry 2560x1440 -SecurityTypes vncauth,tlsvnc -rfbauth ~/.vnc/passwd -rfbport 5900
 }
 complete -F _complete_start_vnc start_vnc
 
