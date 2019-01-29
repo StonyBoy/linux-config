@@ -19,21 +19,21 @@ set $wrkspc9  "9: Private "
 set $wrkspc10 "10: VPN "
 
 # Setting up monitors
-# exec --no-startup-id xrandr -d :0 --output $main_monitor --mode 2560x1440 --primary --right-of $extra_monitor --output $extra_monitor --mode 2560x1440
+exec --no-startup-id xrandr -d :0 --output $main_monitor --mode 2560x1440 --primary --right-of $extra_monitor --output $extra_monitor --mode 2560x1440
 
 # Bind the workspaces for the large monitor
-# workspace $wrkspc1 output $main_monitor
-# workspace $wrkspc2 output $main_monitor
-# workspace $wrkspc3 output $main_monitor
-# workspace $wrkspc4 output $main_monitor
-# workspace $wrkspc5 output $main_monitor
+workspace $wrkspc1 output $main_monitor
+workspace $wrkspc2 output $main_monitor
+workspace $wrkspc3 output $main_monitor
+workspace $wrkspc4 output $main_monitor
+workspace $wrkspc5 output $main_monitor
 
 # Bind the workspaces for the small monitor
-# workspace $wrkspc6  output $extra_monitor
-# workspace $wrkspc7  output $extra_monitor
-# workspace $wrkspc8  output $extra_monitor
-# workspace $wrkspc9  output $extra_monitor
-# workspace $wrkspc10 output $extra_monitor
+workspace $wrkspc6  output $extra_monitor
+workspace $wrkspc7  output $extra_monitor
+workspace $wrkspc8  output $extra_monitor
+workspace $wrkspc9  output $extra_monitor
+workspace $wrkspc10 output $extra_monitor
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -164,19 +164,19 @@ exec_always --no-startup-id numlockx on
 
 # Window colors
 # class                 border  backgr. text    indicator child_border
-client.focused          #035b22 #035b22 #ffffff #2e9ef4   #285577
-client.unfocused        #333333 #222222 #888888 #292d2e   #285577
+client.focused          #595959 #003ea5 #ffffff #2e9ef4   #595959
+client.unfocused        #333333 #222222 #888888 #292d2e   #595959
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
     position top
     colors {
-        background #003300
+        background #001230
         statusline #f2f2f2
         # <colorclass> <border> <background> <text>
-        inactive_workspace #4f4f4f #003300 #f2f2f2
-        focused_workspace  #4f4f4f #035b22 #f2f2f2
+        inactive_workspace #595959 #001230 #f2f2f2
+        focused_workspace  #595959 #003ea5 #f2f2f2
     }
     font pango:Inconsolata 9
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
@@ -198,17 +198,21 @@ bindsym $mod+Tab workspace back_and_forth
 # workspace_auto_back_and_forth yes
 
 # Workspace 1
+exec --no-startup-id code
 for_window [class="Code"] move to workspace $wrkspc1
 
 # Workspace 4
+exec --no-startup-id Thunar
 for_window [class="Thunar"] move to workspace $wrkspc4
 
 # Workspace 5
+exec --no-startup-id bcompare
 for_window [class="[Bb]compare"] move to workspace $wrkspc5
 
 # Workspace 7
 
 # Workspace 8
+exec --no-startup-id clementine -o
 for_window [class="Clementine"] move to workspace $wrkspc8
 for_window [class="Spotify"] move to workspace $wrkspc8
 
@@ -248,9 +252,9 @@ mode "$mode_floatmove" {
 bindsym $mod+Shift+m focus floating; mode "$mode_floatmove"
 
 # Audio controls
-bindsym XF86AudioMute exec --no-startup-id /home/steen/scripts/volume 5% pulse "HDA-Intel - HDA Intel PCH" 3
-bindsym XF86AudioRaiseVolume exec --no-startup-id /home/steen/scripts/volume 5% pulse "HDA-Intel - HDA Intel PCH" 4
-bindsym XF86AudioLowerVolume exec --no-startup-id /home/steen/scripts/volume 5% pulse "HDA-Intel - HDA Intel PCH" 5
+bindsym XF86AudioMute exec --no-startup-id /home/shegelun/scripts/volume 5% pulse "USB-Audio - Jabra EVOLVE LINK" 3
+bindsym XF86AudioRaiseVolume exec --no-startup-id /home/shegelun/scripts/volume 5% pulse "USB-Audio - Jabra EVOLVE LINK" 4
+bindsym XF86AudioLowerVolume exec --no-startup-id /home/shegelun/scripts/volume 5% pulse "USB-Audio - Jabra EVOLVE LINK" 5
 
 # Media player controls
 bindsym XF86AudioPlay exec  --no-startup-id playerctl play-pause
