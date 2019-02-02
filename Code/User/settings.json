@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "Quiet Light",
+    "workbench.colorTheme": "Solarized Light",
     "[cpp]": {},
     "terminal.external.linuxExec": "urxvt",
     "files.autoSave": "afterDelay",
