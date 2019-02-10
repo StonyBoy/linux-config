@@ -86,7 +86,7 @@ let g:lightline = {
 
 " Colorscheme
 syntax enable
-" set background=light
+set background=light
 let g:solarized_termcolors=256
 colorscheme solarized
 

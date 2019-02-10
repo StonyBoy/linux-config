@@ -1,7 +1,7 @@
 #! /bin/bash
 # -*-sh-*-
 # .bash_profile
-# Time-stamp: <23-may-18 21:24>
+# Time-stamp: <10-jan-19 14:15>
 # Settings for all interactive shells
 
 # Debugging
