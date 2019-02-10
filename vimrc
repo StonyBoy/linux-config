@@ -48,6 +48,8 @@ set linebreak       " Insert automatic line breaks while typing
 set nowrap          " No wrap while displaying long lines
 set cinoptions=h2,l2,g2,t0,i8,+8,(0,w1,W8,N-s
 
+autocmd VimResized * :wincmd =    " Auto resize all VIM windows when VIM is resized
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Storage
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
