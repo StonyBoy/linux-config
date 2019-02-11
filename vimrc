@@ -65,6 +65,16 @@ set undoreload=65538       " The maximum number of lines that can be saved in th
 set wildmode=longest,list,full
 set wildmenu
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Using tabs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <C-t><up> :tabr<cr>
+map <C-t><down> :tabl<cr>
+map <C-t><left> :tabp<cr>
+map <C-t><right> :tabn<cr>
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -89,6 +99,7 @@ syntax enable
 set background=light
 let g:solarized_termcolors=256
 colorscheme solarized
+highlight SpecialKey ctermbg=NONE guibg=NONE " Do not set special background
 
 " Resume session
 " source ~/.vim/steen.vim
