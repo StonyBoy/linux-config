@@ -46,9 +46,11 @@ floating_modifier $mod
 # start a terminal
 # Possible options: urxvt, terminator, xfce4-terminal
 set $terminal terminator
-bindsym $mod+Return exec $terminal
-# Use urxvt instead
-bindsym $mod+Shift+Return exec urxvt
+
+# Use Terminator
+bindsym $mod+Return exec terminator
+# Use an XFCE4 Terminal with Tmux
+bindsym $mod+Shift+Return exec xfce4-terminal -e ~/scripts/tat
 
 # kill focused window
 bindsym $mod+Shift+q kill

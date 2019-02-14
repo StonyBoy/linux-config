@@ -1,6 +1,7 @@
 " Steen Hegelund 18-dec-2018
 source ~/.vim/packages.vim
 
+map <C-R> :so $MYVIMRC<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Basic Settings
@@ -65,6 +66,16 @@ set undoreload=65538       " The maximum number of lines that can be saved in th
 set wildmode=longest,list,full
 set wildmenu
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Using tabs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <C-t><up> :tabr<cr>
+map <C-t><down> :tabl<cr>
+map <C-t><left> :tabp<cr>
+map <C-t><right> :tabn<cr>
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -87,8 +98,12 @@ let g:lightline = {
 " Colorscheme
 syntax enable
 set background=light
-let g:solarized_termcolors=256
+if $COLORTERM!="truecolor"
+  let g:solarized_termcolors=256
+endif
 colorscheme solarized
+highlight SpecialKey ctermbg=NONE guibg=NONE " Do not set special background
+
 
 " Resume session
 " source ~/.vim/steen.vim

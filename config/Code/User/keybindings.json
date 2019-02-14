@@ -191,6 +191,14 @@
         "when": "!editorIsOpen"
     },
     {
+        "key": "ctrl+right",
+        "command": "cursorWordRight"
+    },
+    {
+        "key": "ctrl+left",
+        "command": "cursorWordLeft"
+    },
+    {
         "key": "ctrl+f2",
         "command": "editor.action.previewDeclaration",
         "when": "editorHasDefinitionProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
