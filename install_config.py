@@ -270,7 +270,6 @@ elements = [
     Folder('vim', '~/.vim'),
     Folder('scripts', '~/scripts'),
     Folder('config', '~/.config'),
-    Folder('PyCharm', '~/.PyCharmCE2017.3'),
 ]
 
 

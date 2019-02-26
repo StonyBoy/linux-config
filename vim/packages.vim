@@ -4,6 +4,11 @@
 command! PackUpdate packadd minpac | source $MYVIMRC | redraw | call minpac#update()
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
+if empty(glob('~/.vim/pack/minpac/opt/minpac/plugin/minpac.vim'))
+  silent !git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
+  PackUpdate
+endif
+
 if !exists('*minpac#init')
   finish
 endif
@@ -24,6 +29,10 @@ call minpac#add('vim-ruby/vim-ruby')                    " Ruby support
 call minpac#add('tpope/vim-fugitive')                   " GIT support
 call minpac#add('tpope/vim-obsession')                  " Automatic editing sessions
 call minpac#add('tpope/vim-sleuth')                     " Automatic indentation based of file content
+<<<<<<< HEAD
+=======
+call minpac#add('christoomey/vim-tmux-navigator')       " Go between panes in both vim and tmux
+>>>>>>> linux
 " call minpac#add('thaerkh/vim-indentguides')           " Indentation lines - looks weird with black and white blocks
 " call minpac#add('python-mode/python-mode')            " Python support - not working with python3
 

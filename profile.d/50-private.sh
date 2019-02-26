@@ -1,13 +1,12 @@
 #! /bin/bash
 # -*-sh-*-
 # .bash_profile
-# Time-stamp: <28-dec-17 21:09>
+# Time-stamp: <10-jan-19 14:15>
 # Settings for all interactive shells
 
 # Debugging
 # set -x
 
-# export PATH=~/scripts:~/.local/bin:~/bin:/usr/local/bin:$PATH
 export PATH=~/scripts:~/.local/bin:~/bin:$PATH
 export PAGER='less -s'
 

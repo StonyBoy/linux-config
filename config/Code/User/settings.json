@@ -1,7 +1,7 @@
 {
-    "workbench.colorTheme": "Atom One Light",
+    "workbench.colorTheme": "Solarized Light",
     "[cpp]": {},
-    "terminal.external.linuxExec": "urxvt",
+    "terminal.external.linuxExec": "terminator",
     "files.autoSave": "afterDelay",
     "editor.fontSize": 13,
     "editor.fontFamily": "'Inconsolata', 'monospace', monospace, 'Droid Sans Fallback'",
