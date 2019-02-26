@@ -49,8 +49,8 @@ set $terminal terminator
 
 # Use Terminator
 bindsym $mod+Return exec terminator
-# Use an urxvt Terminal with Tmux
-bindsym $mod+Shift+Return exec urxvt -e ~/scripts/tat
+# Use an XFCE4 Terminal with Tmux
+bindsym $mod+Shift+Return exec xfce4-terminal -e ~/scripts/tat
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -169,7 +169,7 @@ exec_always --no-startup-id numlockx on
 
 # Window colors
 # class                 border  backgr. text    indicator child_border
-client.focused          #595959 #003ea5 #ffffff #2e9ef4   #595959
+client.focused          #595959 #95BACC #27343B #2e9ef4   #595959
 client.unfocused        #333333 #222222 #888888 #292d2e   #595959
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -181,7 +181,7 @@ bar {
         statusline #f2f2f2
         # <colorclass> <border> <background> <text>
         inactive_workspace #595959 #001230 #f2f2f2
-        focused_workspace  #595959 #003ea5 #f2f2f2
+        focused_workspace  #595959 #95BACC #27343B
     }
     font pango:Inconsolata 9
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
