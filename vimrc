@@ -1,7 +1,7 @@
 " Steen Hegelund 18-dec-2018
 source ~/.vim/packages.vim
 
-map <C-R> :so $MYVIMRC<cr>
+" map <C-R> :so $MYVIMRC<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Basic Settings
@@ -70,10 +70,10 @@ set wildmenu
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Using tabs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <C-t><up> :tabr<cr>
-map <C-t><down> :tabl<cr>
-map <C-t><left> :tabp<cr>
-map <C-t><right> :tabn<cr>
+" map <C-t><up> :tabr<cr>
+" map <C-t><down> :tabl<cr>
+" map <C-t><left> :tabp<cr>
+" map <C-t><right> :tabn<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -103,7 +103,6 @@ if $COLORTERM!="truecolor"
 endif
 colorscheme solarized
 highlight SpecialKey ctermbg=NONE guibg=NONE " Do not set special background
-
 
 " Resume session
 " source ~/.vim/steen.vim
