@@ -1,7 +1,7 @@
 " Steen Hegelund 18-dec-2018
 source ~/.vim/packages.vim
 
-map <C-R> :so $MYVIMRC<cr>
+" map <C-R> :so $MYVIMRC<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Basic Settings
@@ -70,10 +70,10 @@ set wildmenu
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Using tabs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <C-t><up> :tabr<cr>
-map <C-t><down> :tabl<cr>
-map <C-t><left> :tabp<cr>
-map <C-t><right> :tabn<cr>
+" map <C-t><up> :tabr<cr>
+" map <C-t><down> :tabl<cr>
+" map <C-t><left> :tabp<cr>
+" map <C-t><right> :tabn<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -98,13 +98,11 @@ let g:lightline = {
 " Colorscheme
 syntax enable
 set background=light
-if has('unix') && !has('macunix')
-  " unix but not rot macos
+if $COLORTERM!="truecolor"
   let g:solarized_termcolors=256
 endif
 colorscheme solarized
 highlight SpecialKey ctermbg=NONE guibg=NONE " Do not set special background
-
 
 " Resume session
 " source ~/.vim/steen.vim
