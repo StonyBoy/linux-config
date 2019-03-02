@@ -1,7 +1,7 @@
 " Steen Hegelund 18-dec-2018
 source ~/.vim/packages.vim
 
-" map <C-R> :so $MYVIMRC<cr>
+let mapleader = ","
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Basic Settings
@@ -70,11 +70,43 @@ set wildmenu
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Using tabs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" map <C-t><up> :tabr<cr>
-" map <C-t><down> :tabl<cr>
-" map <C-t><left> :tabp<cr>
-" map <C-t><right> :tabn<cr>
+nmap <silent> <leader>t<up> :tabr<cr>
+nmap <silent> <leader>t<down> :tabl<cr>
+nmap <silent> <leader>t<left> :tabp<cr>
+nmap <silent> <leader>t<right> :tabn<cr>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Reload VIMRC
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nmap <silent> <leader>rv   :source $MYVIMRC<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Yank and Paste Buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+fu! PasteWindow(direction) "{{{
+    if exists("g:yanked_buffer")
+        if a:direction == 'edit'
+            let temp_buffer = bufnr('%')
+        endif
+
+        exec a:direction . " +buffer" . g:yanked_buffer
+
+        if a:direction == 'edit'
+            let g:yanked_buffer = temp_buffer
+        endif
+    endif
+endf "}}}
+
+"yank/paste buffers
+nmap <silent> <leader>wy  :let g:yanked_buffer=bufnr('%')<cr>
+nmap <silent> <leader>wd  :let g:yanked_buffer=bufnr('%')<cr>:q<cr>
+nmap <silent> <leader>wp :call PasteWindow('edit')<cr>
+nmap <silent> <leader>ws :call PasteWindow('split')<cr>
+nmap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
+nmap <silent> <leader>wt :call PasteWindow('tabnew')<cr>
+nmap <silent> <leader>wP :top split
+nmap <silent> <leader>wV :set nosplitright \| call PasteWindow('vsplit') \| set splitright<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Configuration
