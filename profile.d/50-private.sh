@@ -10,7 +10,7 @@
 export PATH=~/scripts:~/.local/bin:~/bin:$PATH
 export PAGER='less -s'
 
-# Powerline provides avanced shell and GIT status
+# Powerline provides advanced shell and GIT status
 # Install with pip install powerline-status
 # and pip install powerline-gitstatus
 export XDG_CONFIG_HOME=~/.config
