@@ -158,6 +158,9 @@ bindsym $mod+r mode "resize"
 # Steen
 # ============================================================================
 
+# Take Screenshots with MOD+P
+bindsym $mod+P exec deepin-screenshot
+
 # NumLock is ON
 exec_always --no-startup-id numlockx on
 
