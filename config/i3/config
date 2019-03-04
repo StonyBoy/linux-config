@@ -5,35 +5,35 @@
 set $mod Mod4
 set $lock_bkg  "/opt/wallpapers/i3lock.png"
 set $wallpaper "/opt/wallpapers/i3wallpaper.jpg"
-set $small_monitor "HDMI-0"
-set $large_monitor "DVI-0"
+set $main_monitor "DP-3"
+set $extra_monitor "DP-2"
 set $wrkspc1  "1: Editor "
 set $wrkspc2  "2: Builds "
 set $wrkspc3  "3: Internet "
 set $wrkspc4  "4: Files "
 set $wrkspc5  "5: Compare "
 set $wrkspc6  "6: Term "
-set $wrkspc7  "7: Skype "
+set $wrkspc7  "7: Mail "
 set $wrkspc8  "8: Music "
 set $wrkspc9  "9: Private "
 set $wrkspc10 "10: VPN "
 
 # Setting up monitors
-exec --no-startup-id xrandr -d :0 --output VGA-0 --off --output $large_monitor --mode 1920x1200 --primary --output $small_monitor --mode 1920x1080 --left-of $large_monitor
+exec --no-startup-id xrandr -d :0 --output $main_monitor --mode 2560x1440 --primary --right-of $extra_monitor --output $extra_monitor --mode 2560x1440
 
 # Bind the workspaces for the large monitor
-workspace $wrkspc1 output $large_monitor
-workspace $wrkspc2 output $large_monitor
-workspace $wrkspc3 output $large_monitor
-workspace $wrkspc4 output $large_monitor
-workspace $wrkspc5 output $large_monitor
+workspace $wrkspc1 output $main_monitor
+workspace $wrkspc2 output $main_monitor
+workspace $wrkspc3 output $main_monitor
+workspace $wrkspc4 output $main_monitor
+workspace $wrkspc5 output $main_monitor
 
 # Bind the workspaces for the small monitor
-workspace $wrkspc6  output $small_monitor
-workspace $wrkspc7  output $small_monitor
-workspace $wrkspc8  output $small_monitor
-workspace $wrkspc9  output $small_monitor
-workspace $wrkspc10 output $small_monitor
+workspace $wrkspc6  output $extra_monitor
+workspace $wrkspc7  output $extra_monitor
+workspace $wrkspc8  output $extra_monitor
+workspace $wrkspc9  output $extra_monitor
+workspace $wrkspc10 output $extra_monitor
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -44,9 +44,13 @@ font pango:SFNS Display 12
 floating_modifier $mod
 
 # start a terminal
-# set $terminal xfce4-terminal
-set $terminal urxvt
-bindsym $mod+Return exec $terminal
+# Possible options: urxvt, terminator, xfce4-terminal
+set $terminal terminator
+
+# Use Terminator
+bindsym $mod+Return exec terminator
+# Use an XFCE4 Terminal with Tmux
+bindsym $mod+Shift+Return exec xfce4-terminal -e ~/scripts/tat
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -154,6 +158,9 @@ bindsym $mod+r mode "resize"
 # Steen
 # ============================================================================
 
+# Take Screenshots with MOD+P
+bindsym $mod+P exec deepin-screenshot
+
 # NumLock is ON
 exec_always --no-startup-id numlockx on
 
@@ -208,16 +215,15 @@ exec --no-startup-id bcompare
 for_window [class="[Bb]compare"] move to workspace $wrkspc5
 
 # Workspace 7
-exec --no-startup-id skypeforlinux
-for_window [class="Skype"] move to workspace $wrkspc7
 
 # Workspace 8
-exec --no-startup-id spotify
+exec --no-startup-id clementine -o
+for_window [class="Clementine"] move to workspace $wrkspc8
 for_window [class="Spotify"] move to workspace $wrkspc8
 
 # No particular workspace
 exec $terminal
-exec --no-startup-id chromium
+exec --no-startup-id google-chrome-stable
 
 
 # Move workspace to outputs
@@ -227,20 +233,33 @@ bindsym $mod+Mod1+Up    move workspace to output up
 bindsym $mod+Mod1+Right move workspace to output right
 
 # Move workspace to output mode
-set $mode_move Move workspace: (L)eft, (Right)
+set $mode_move Move workspace: (L)eft, (R)ight
 mode "$mode_move" {
-        bindsym l move workspace to output left
-        bindsym r move workspace to output right
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    bindsym l move workspace to output left
+    bindsym r move workspace to output right
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 bindsym $mod+m mode "$mode_move"
 
+# Handle floating windows
+set $mode_floatmove Move floating windows (arrow keys and escape)
+mode "$mode_floatmove" {
+    bindsym Up move up 20px
+    bindsym Left move left 20px
+    bindsym Down move down 20px
+    bindsym Right move right 20px
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+m focus floating; mode "$mode_floatmove"
+
 # Audio controls
-bindsym XF86AudioMute exec --no-startup-id /home/shegelun/scripts/volume 5 pulse "USB-Audio - Jabra EVOLVE LINK" 3
-bindsym XF86AudioRaiseVolume exec --no-startup-id /home/shegelun/scripts/volume 5 pulse "USB-Audio - Jabra EVOLVE LINK" 4
-bindsym XF86AudioLowerVolume exec --no-startup-id /home/shegelun/scripts/volume 5 pulse "USB-Audio - Jabra EVOLVE LINK" 5
+bindsym XF86AudioMute exec --no-startup-id /home/shegelun/scripts/volume 5% pulse "USB-Audio - Jabra EVOLVE LINK" 3
+bindsym XF86AudioRaiseVolume exec --no-startup-id /home/shegelun/scripts/volume 5% pulse "USB-Audio - Jabra EVOLVE LINK" 4
+bindsym XF86AudioLowerVolume exec --no-startup-id /home/shegelun/scripts/volume 5% pulse "USB-Audio - Jabra EVOLVE LINK" 5
 
 # Media player controls
 bindsym XF86AudioPlay exec  --no-startup-id playerctl play-pause
@@ -251,7 +270,7 @@ bindsym XF86AudioPrev exec  --no-startup-id playerctl previous
 # Menu
 
 # Use the rofi menu
-bindsym $mod+space exec rofi -show run -lines 5 -eh 2 -width 100 -padding 500 -opacity "80" -bw 0 -columns 2 -font "System San Francisco Display 12"
+bindsym $mod+space exec rofi -modi drun#run -show drun -lines 15 -eh 2 -width 100 -padding 500 -opacity "60" -bw 0 -columns 2 -font "Inconsolata 12"
 
 # Exit Menu
 

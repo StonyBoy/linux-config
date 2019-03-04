@@ -1,13 +1,12 @@
 {
-    "workbench.colorTheme": "Default Light+",
-    "workbench.iconTheme": "vscode-icons",
+    "workbench.colorTheme": "Solarized Light",
     "[cpp]": {},
-    "terminal.external.linuxExec": "urxvt",
+    "terminal.external.linuxExec": "terminator",
     "files.autoSave": "afterDelay",
     "editor.fontSize": 13,
     "editor.fontFamily": "'Inconsolata', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.renderWhitespace": "all",
-    "editor.minimap.enabled": false,
+    "editor.minimap.enabled": true,
     "terminal.integrated.fontSize": 13,
     "terminal.integrated.scrollback": 10000,
     "editor.codeLens": false,
@@ -17,5 +16,51 @@
     "gitlens.defaultDateStyle": "absolute",
     "gitlens.defaultDateFormat": "DD-MMM-YYYY  HH:MM",
     "gitlens.historyExplorer.enabled": true,
-    "gitlens.gitExplorer.files.layout": "tree",
+    "gitlens.gitExplorer.files.layout": "list",
+    "C_Cpp.clang_format_path": "/usr/bin/clang-format",
+    "C_Cpp.errorSquiggles": "Disabled",
+    "C_Cpp.loggingLevel": "None",
+    "C_Cpp.intelliSenseEngineFallback": "Disabled",
+    "cquery.completion.include.whitelistLiteralEnding": [
+        ".h",
+        ".hpp",
+        ".hh",
+        ".hxx"
+    ],
+    "explorer.confirmDelete": false,
+    "solargraph.commandPath": "/home/shegelun/.rvm/gems/ruby-2.4.1/wrappers/solargraph",
+    "rust-client.channel": "stable",
+    "rust-client.logToFile": true,
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        ".vscode/": true,
+        ".git/": true
+    },
+    "files.associations": {
+        "*.in": "makefile"
+    },
+    "breadcrumbs.enabled": true,
+    "cmake.configureOnOpen": true,
+    "editor.minimap.showSlider": "always",
+    "editor.wordBasedSuggestions": false,
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "workbench.colorCustomizations": {
+        "editorRuler.foreground": "#ff408067"
+    },
+    "cquery.misc.indexerCount": 2,
+    "editor.multiCursorModifier": "alt",
+    "cSpell.userWords": [
+        "bootlin"
+    ],
+    "gitlens.views.repositories.files.layout": "list",
+    "gitlens.views.fileHistory.enabled": true,
+    "gitlens.views.lineHistory.enabled": false,
+    "gitlens.views.search.enabled": false,
+    "gitlens.codeLens.enabled": false,
+    "gitlens.hovers.enabled": false,
 }

@@ -1,10 +1,10 @@
 ! Steen Hegelund
-! 14-dec-2017
+! 24-may-2018
 
-URxvt.font:            xft:Droid Sans Mono:antialias=true:size=10
-URxvt.boldFont:        xft:Droid Sans Mono:bold:antialias=true:size=10
-URxvt.italicFont:      xft:Droid Sans Mono:italic:antialias=true:size=10
-URxvt.boldItalicFont:  xft:Droid Sans Mono:bold:italic:antialias=true:size=10
+URxvt.font:            xft:Inconsolata:antialias=true:size=10
+URxvt.boldFont:        xft:Inconsolata:bold:antialias=true:size=10
+URxvt.italicFont:      xft:Inconsolata:italic:antialias=true:size=10
+URxvt.boldItalicFont:  xft:Inconsolata:bold:italic:antialias=true:size=10
 
 ! Perl Extensions to urxvt
 URxvt.perl-ext-common:      default,clipboard,font-size
@@ -28,7 +28,7 @@ URxvt.letterSpace: -1
 
 ! URxvt.scrollbar_right: true
 
-URxvt.underlineColor:   yellow
+URxvt.underlineColor:   blue
 URxvt.saveLines:        100000
 
 URxvt.visualBell:       true

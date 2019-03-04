@@ -1,27 +1,26 @@
 #! /bin/bash
 # -*-sh-*-
 # .bash_profile
-# Time-stamp: <28-dec-17 21:09>
+# Time-stamp: <10-jan-19 14:15>
 # Settings for all interactive shells
 
 # Debugging
 # set -x
 
-# export PATH=~/scripts:~/.local/bin:~/bin:/usr/local/bin:$PATH
 export PATH=~/scripts:~/.local/bin:~/bin:$PATH
 export PAGER='less -s'
 
-# Powerline provides avanced shell and GIT status
+# Powerline provides advanced shell and GIT status
 # Install with pip install powerline-status
 # and pip install powerline-gitstatus
 export XDG_CONFIG_HOME=~/.config
-# if [[ -e ~/.local/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh ]]; then
-#     if [[ "${TERM}" == "xterm" || "${TERM}" == "xterm-256color" ]]; then
-#         export POWERLINE_BASH_CONTINUATION=1
-#         export POWERLINE_BASH_SELECT=1
-#         source ~/.local/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
-#     fi
-# fi
+if [[ -e ~/scripts/powerline.sh ]]; then
+    if [[ "${TERM}" == "xterm" || "${TERM}" == "xterm-256color" || "${TERM}" == "rxvt-unicode-256color" ]]; then
+        export POWERLINE_BASH_CONTINUATION=1
+        export POWERLINE_BASH_SELECT=1
+        source ~/scripts/powerline.sh
+    fi
+fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
@@ -34,6 +33,10 @@ export rvmsudo_secure_path=1
 # Add Rusts Cargo to path if present
 if [[ -d ~/.cargo/bin ]]; then
     export PATH="$PATH:$HOME/.cargo/bin"
+fi
+
+if [[ $DISPLAY != "" ]]; then
+    export PROMPT_COMMAND=prompt_command
 fi
 
 # Set core file size limit
@@ -90,6 +93,11 @@ function wsproj()
     python3 ~/src/python/qtcreator_project/qtcreator_webstax_project.py $(basename $(dirname $PWD))
 }
 
+function vsproj()
+{
+    python3 ~/src/python/vscode_workspace/vscode_workspace.py
+}
+
 function filtertext()
 {
     if [[ $# > 0 ]]; then
@@ -118,7 +126,7 @@ function show_vnc()
 
 function start_vnc()
 {
-    x0vncserver -display :0 -Geometry 1920x1200 -SecurityTypes vncauth,tlsvnc -rfbauth ~/.vnc/passwd -rfbport 5900
+    x0vncserver -display :0 -Geometry 2560x1440 -SecurityTypes vncauth,tlsvnc -rfbauth ~/.vnc/passwd -rfbport 5900
 }
 complete -F _complete_start_vnc start_vnc
 
@@ -129,20 +137,24 @@ function show_ip()
 
 function _complete_displaymode()
 {
-    COMPREPLY=( $( compgen -W "wide single small show" -- ${COMP_WORDS[COMP_CWORD]} ) )
+    COMPREPLY=( $( compgen -W "dual main extra vnc show" -- ${COMP_WORDS[COMP_CWORD]} ) )
     return 0
 }
 
 function displaymode()
 {
-    local small_monitor=HDMI-0
-    local large_monitor=DVI-0
-    if [[ "$1" == "wide" ]]; then
-        xrandr -d :0 --fb 3840x1200 --output VGA-0 --off --output $large_monitor --mode 1920x1200 --primary --output $small_monitor --mode 1920x1080 --left-of $large_monitor
-    elif [[ "$1" == "single" ]]; then
-        xrandr -d :0 --fb 1920x1200 --output VGA-0 --off --output $large_monitor --mode 1920x1200 --primary --output $small_monitor --off
-    elif [[ "$1" == "small" ]]; then
-        xrandr -d :0 --fb 1920x1080 --output VGA-0 --off --output $large_monitor --off --output $small_monitor --mode 1920x1080 --primary
+    local main_monitor=DP-3
+    local extra_monitor=DP-2
+    if [[ "$1" == "dual" ]]; then
+        xrandr -d :0 --output $main_monitor  --mode 2560x1440
+        xrandr -d :0 --output $extra_monitor --mode 2560x1440
+        xrandr -d :0 --output $main_monitor  --mode 2560x1440 --primary --right-of $extra_monitor --output $extra_monitor --mode 2560x1440
+    elif [[ "$1" == "main" ]]; then
+        xrandr -d :0 --output $main_monitor --mode 2560x1440 --primary --output $extra_monitor --off
+    elif [[ "$1" == "extra" ]]; then
+        xrandr -d :0 --output $extra_monitor --mode 2560x1440 --primary --output $main_monitor --off
+    elif [[ "$1" == "vnc" ]]; then
+        xrandr -d :0 --output $main_monitor --mode 1920x1200 --primary --output $extra_monitor --off
     elif [[ "$1" == "show" ]]; then
         xrandr --display :0 | grep " connected" | cut -d" " -f1 
     else
@@ -166,6 +178,36 @@ function leavetime()
 function title()
 {
     PROMPT_COMMAND="echo -ne \"\e]0;$*\a\""
+}
+
+function prompt_command()
+{
+    CUR_NAME=$PWD
+    TITLE_NAME=$CUR_NAME
+    if [[ $CUR_NAME == $HOME ]]; then
+        TITLE_NAME="Home"
+    else
+        elems=($(echo "${CUR_NAME}" | tr '/' '\n'))
+        if [[ ${elems[1]} == $USER ]]; then
+            if [[ ${elems[2]} == "src" ]]; then
+                TITLE_NAME=${elems[2]}
+                if [[ ${elems[3]} != "" ]]; then
+                    TITLE_NAME=${elems[3]}
+                    WEBSTAX_NAME=${TITLE_NAME##webstax2_}
+                    if [[ ${WEBSTAX_NAME} != "" ]]; then
+                        if [[ ${elems[3]} != ${elems[-1]} ]]; then
+                            TITLE_NAME="${WEBSTAX_NAME} ${elems[-1]}"
+                        else
+                            TITLE_NAME=${WEBSTAX_NAME}
+                        fi
+                    fi
+                fi
+            else
+                TITLE_NAME=${elems[-1]}
+            fi
+        fi
+    fi
+    echo -ne "\e]0;$TITLE_NAME\a"
 }
 
 function multimedia_keys()
@@ -193,7 +235,9 @@ function setdk_xorg()
     setdk_default xorg
 }
 
-setdk_default
+if [[ $DISPLAY != "" ]]; then
+    setdk_default
+fi
 
 function set_clang()
 {
@@ -205,4 +249,9 @@ function set_gcc()
 {
     export CC=/usr/bin/gcc
     export CXX=/usr/bin/g++
+}
+
+function remotex
+{
+    xprop -root -remove _XKB_RULES_NAMES
 }
