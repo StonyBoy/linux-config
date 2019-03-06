@@ -68,12 +68,3 @@
         branch = blue
         tag = green
 
-# [difftool "bcompare"]
-#         cmd = "/usr/bin/bcompare" -solo "$LOCAL" "$REMOTE"
-# 
-# [mergetool "bcompare"]
-#         cmd = "/usr/bin/bcompare" -solo "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
-
-[include]
-        path = .gitconfig.private.user
-

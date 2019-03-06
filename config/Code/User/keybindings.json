@@ -207,5 +207,10 @@
         "key": "ctrl+shift+f10",
         "command": "-editor.action.previewDeclaration",
         "when": "editorHasDefinitionProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+    },
+    {
+        "key": "shift+alt+7",
+        "command": "-gitlens.showCommitSearch",
+        "when": "gitlens:enabled && config.gitlens.keymap == 'alternate'"
     }
 ]

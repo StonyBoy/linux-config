@@ -31,7 +31,9 @@
         default = simple
 
 [include]
-        path = .gitconfig.private
+        path = ~/.gitconfig.d/10-work.gitconfig
+        path = ~/.gitconfig.d/20-user.gitconfig
+        path = ~/.gitconfig.d/30-home-user.gitconfig
+        path = ~/.gitconfig.d/30-work-user.gitconfig
+        path = ~/.gitconfig.d/40-macos.gitconfig
 
-[hub]
-        host = git-ent.microsemi.net

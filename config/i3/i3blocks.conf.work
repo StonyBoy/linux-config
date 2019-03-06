@@ -34,7 +34,7 @@ markup=none
 # Supported players are: spotify, vlc, audacious, xmms2, mplayer, and others.
 [mediaplayer]
 label=♪
-instance=
+instance=spotify
 interval=5
 signal=10
 
@@ -45,12 +45,10 @@ signal=10
 # See the script for details.
 [volume]
 label=
-#instance=Master
-#instance=PCM
 instance=Speaker
 interval=1
 signal=10
-command=/home/shegelun/scripts/volume 5 pulse 'USB-Audio - Jabra EVOLVE LINK'
+command=~/scripts/volume 5 pulse 'USB-Audio - Jabra EVOLVE LINK'
 
 # Memory usage
 #
@@ -95,7 +93,7 @@ min_width=CPU: 100.00%
 # Uptime
 #
 [uptime]
-command=/home/shegelun/bin/strict_uptime
+command=~/bin/strict_uptime
 interval=60
 
 # Date Time

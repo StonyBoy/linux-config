@@ -5,8 +5,7 @@
 set $mod Mod4
 set $lock_bkg  "/opt/wallpapers/i3lock.png"
 set $wallpaper "/opt/wallpapers/i3wallpaper.jpg"
-set $main_monitor "DP-3"
-set $extra_monitor "DP-2"
+
 set $wrkspc1  "1: Editor "
 set $wrkspc2  "2: Builds "
 set $wrkspc3  "3: Internet "
@@ -17,23 +16,6 @@ set $wrkspc7  "7: Mail "
 set $wrkspc8  "8: Music "
 set $wrkspc9  "9: Private "
 set $wrkspc10 "10: VPN "
-
-# Setting up monitors
-exec --no-startup-id xrandr -d :0 --output $main_monitor --mode 2560x1440 --primary --right-of $extra_monitor --output $extra_monitor --mode 2560x1440
-
-# Bind the workspaces for the large monitor
-workspace $wrkspc1 output $main_monitor
-workspace $wrkspc2 output $main_monitor
-workspace $wrkspc3 output $main_monitor
-workspace $wrkspc4 output $main_monitor
-workspace $wrkspc5 output $main_monitor
-
-# Bind the workspaces for the small monitor
-workspace $wrkspc6  output $extra_monitor
-workspace $wrkspc7  output $extra_monitor
-workspace $wrkspc8  output $extra_monitor
-workspace $wrkspc9  output $extra_monitor
-workspace $wrkspc10 output $extra_monitor
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -164,32 +146,6 @@ bindsym $mod+P exec deepin-screenshot
 # NumLock is ON
 exec_always --no-startup-id numlockx on
 
-# Start a composite manager for window transition effects
-# exec --no-startup-id compton -b
-
-# Window colors
-# class                 border  backgr. text    indicator child_border
-client.focused          #595959 #003ea5 #ffffff #2e9ef4   #595959
-client.unfocused        #333333 #222222 #888888 #292d2e   #595959
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-    position top
-    colors {
-        background #001230
-        statusline #f2f2f2
-        # <colorclass> <border> <background> <text>
-        inactive_workspace #595959 #001230 #f2f2f2
-        focused_workspace  #595959 #003ea5 #f2f2f2
-    }
-    font pango:Inconsolata 9
-    status_command i3blocks -c ~/.config/i3/i3blocks.conf
-    # Avoid accidental workspace switching when scrolling the wheel (up/down) in the bar
-    bindsym button4 nop
-    bindsym button5 nop
-}
-
 exec feh --bg-fill $wallpaper
 bindsym $mod+ctrl+l exec i3lock -ti $lock_bkg
 bindsym $mod+ctrl+w exec feh --bg-fill $wallpaper
@@ -203,28 +159,19 @@ bindsym $mod+Tab workspace back_and_forth
 # workspace_auto_back_and_forth yes
 
 # Workspace 1
-exec --no-startup-id code
 for_window [class="Code"] move to workspace $wrkspc1
 
 # Workspace 4
-exec --no-startup-id Thunar
 for_window [class="Thunar"] move to workspace $wrkspc4
 
 # Workspace 5
-exec --no-startup-id bcompare
 for_window [class="[Bb]compare"] move to workspace $wrkspc5
 
 # Workspace 7
 
 # Workspace 8
-exec --no-startup-id clementine -o
 for_window [class="Clementine"] move to workspace $wrkspc8
 for_window [class="Spotify"] move to workspace $wrkspc8
-
-# No particular workspace
-exec $terminal
-exec --no-startup-id google-chrome-stable
-
 
 # Move workspace to outputs
 bindsym $mod+Mod1+Left  move workspace to output left
@@ -256,11 +203,6 @@ mode "$mode_floatmove" {
 }
 bindsym $mod+Shift+m focus floating; mode "$mode_floatmove"
 
-# Audio controls
-bindsym XF86AudioMute exec --no-startup-id /home/shegelun/scripts/volume 5% pulse "USB-Audio - Jabra EVOLVE LINK" 3
-bindsym XF86AudioRaiseVolume exec --no-startup-id /home/shegelun/scripts/volume 5% pulse "USB-Audio - Jabra EVOLVE LINK" 4
-bindsym XF86AudioLowerVolume exec --no-startup-id /home/shegelun/scripts/volume 5% pulse "USB-Audio - Jabra EVOLVE LINK" 5
-
 # Media player controls
 bindsym XF86AudioPlay exec  --no-startup-id playerctl play-pause
 bindsym XF86AudioPause exec --no-startup-id playerctl pause
@@ -290,3 +232,37 @@ mode "$mode_system" {
 
 bindsym $mod+Shift+e mode "$mode_system"
 
+# Window colors
+# class                 border  backgr. text    indicator child_border
+client.focused          #595959 #95BACC #27343B #2e9ef4   #595959
+client.unfocused        #333333 #222222 #888888 #292d2e   #595959
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+    position top
+    colors {
+        background #001230
+        statusline #f2f2f2
+        # <colorclass> <border> <background> <text>
+        inactive_workspace #595959 #001230 #f2f2f2
+        focused_workspace  #595959 #95BACC #27343B
+    }
+    font pango:Inconsolata 9
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    # Avoid accidental workspace switching when scrolling the wheel (up/down) in the bar
+    bindsym button4 nop
+    bindsym button5 nop
+}
+
+exec --no-startup-id Thunar
+exec --no-startup-id bcompare
+exec --no-startup-id clementine -o
+exec --no-startup-id google-chrome-stable
+exec --no-startup-id $terminal
+
+
+# change volume or toggle mute
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks 
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks

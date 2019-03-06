@@ -24,6 +24,7 @@ class FileStatus(enum.Enum):
     DifferentContent = '-+'
     SameContent = '=='
     Linked = ' >'
+    OtherLink = ' ~'
     CorrectLink = 'OK'
 
 
@@ -119,6 +120,47 @@ class Installer:
         return self.file_status == FileStatus.Hidden
 
 
+class SelectionInstaller(Installer):
+    def __init__(self, src_path, dst_path, selected_link):
+        super().__init__(src_path, dst_path)
+        self.selected_link = self.src_path
+        if selected_link:
+            self.selected_link = os.path.abspath(os.path.expanduser(selected_link))
+            print(self.selected_link)
+            if os.path.exists(self.dst_path):
+                if os.path.islink(self.dst_path):
+                    if os.readlink(self.dst_path) == self.selected_link:
+                        self.file_status = FileStatus.CorrectLink
+                    else:
+                        self.file_status = FileStatus.OtherLink
+                else:
+                    if self.compare_contents():
+                        self.file_status = FileStatus.SameContent
+                    else:
+                        self.file_status = FileStatus.DifferentContent
+            else:
+                if os.path.islink(self.dst_path):
+                    self.file_status = FileStatus.Linked
+
+    def missing_file_prompt(self):
+        prompt = 'File {} is missing, Do you want to install {}: (N/y) > '.format(
+                os.path.basename(self.dst_path), self.src_path)
+        response = input(prompt)
+        return response.lower()
+
+    def overwrite_existing_prompt(self):
+        if self.file_status == FileStatus.Linked:
+            prompt = '{} is linked to {}, Do you want to replace the link: (N/y) > '.format(self.dst_path, self.selected_link)
+        elif self.file_status == FileStatus.OtherLink:
+            prompt = '{} is linked to {}, Do you want to replace the link with {}: (N/y) > '.format(self.dst_path, pathlib.Path(self.dst_path).resolve(), self.src_path)
+        elif self.file_status == FileStatus.SameContent:
+            prompt = '{} already exists with the same content - Do you want to replace it with a link: (N/y) > '.format(self.dst_path)
+        else:
+            prompt = '{} already exists - Do you want to replace it: (N/y) > '.format(self.dst_path)
+        response = input(prompt)
+        return response.lower()
+
+
 class File:
     def __init__(self, path, name):
         self.path = path
@@ -129,6 +171,11 @@ class File:
 
     def __str__(self):
         return '{}/{}'.format(self.path, self.name)
+
+
+class FullFile(File):
+    def __init__(self, pathname):
+        self.path, self.name = os.path.split(pathname)
 
 
 class Group:
@@ -210,6 +257,24 @@ class Folder(Group):
         return '{}/ -> {}'.format(self.source, os.path.abspath(os.path.expanduser(self.destination)))
 
 
+class SelectionFolder(Folder):
+    # Choose between alternative versions of the same file in a folder
+    def __init__(self, src, dst, choices):
+        self.choices = choices
+        super().__init__(src, dst)
+
+    def create_installers(self):
+        for item in self.elements:
+            dst_path = self.get_destination(item)
+            selected_link = None
+            for key, value in self.choices.items():
+                if key == item.get_fullpath():
+                    dst_path = self.get_destination(FullFile(value))
+                    selected_link = key
+            self.installers.append(SelectionInstaller(item.get_fullpath(),
+                dst_path, selected_link))
+
+
 def filter_items(items, args):
     def hide_this(item, options):
         if options.nolinked and item.file_status == FileStatus.Linked:
@@ -251,26 +316,50 @@ def do_installation_of(items, args):
         sys.exit(1)
 
 
-elements = [
-    FileList('.',
-        'bash_logout',
-        'bash_profile',
-        'bashrc',
-        'clang-format',
-        'gitconfig',
-        'gitconfig.private',
-        'gitignore',
-        'inputrc',
-        'profile',
-        'vimrc',
-        'Xdefaults',
-        'Xmodmap',
-        'tmux.conf'),
-    Folder('profile.d', '~/.profile.d'),
-    Folder('vim', '~/.vim'),
-    Folder('scripts', '~/scripts'),
-    Folder('config', '~/.config'),
-]
+if os.uname().sysname == 'Darwin':
+    elements = [
+        FileList('.',
+            'bash_logout',
+            'bash_profile',
+            'bashrc',
+            'gitconfig',
+            'gitignore',
+            'inputrc',
+            'profile',
+            'vimrc',
+            'tmux.conf'),
+        Folder('profile.d', '~/.profile.d'),
+        Folder('gitconfig.d', '~/.gitconfig.d'),
+        Folder('vim', '~/.vim'),
+        Folder('scripts', '~/scripts'),
+    ]
+else:
+    elements = [
+        FileList('.',
+            'bash_logout',
+            'bash_profile',
+            'bashrc',
+            'clang-format',
+            'gitconfig',
+            'gitignore',
+            'inputrc',
+            'profile',
+            'vimrc',
+            'Xdefaults',
+            'Xmodmap',
+            'tmux.conf'),
+        Folder('profile.d', '~/.profile.d'),
+        Folder('gitconfig.d', '~/.gitconfig.d'),
+        Folder('vim', '~/.vim'),
+        Folder('scripts', '~/scripts'),
+        SelectionFolder('config', '~/.config', {
+            'config/i3/config.work': 'config/i3/config',
+            'config/i3/config.home': 'config/i3/config',
+            'config/i3/config.work.laptop': 'config/i3/config',
+            'config/i3/i3blocks.conf.work': 'config/i3/i3blocks.conf',
+            'config/i3/i3blocks.conf.home': 'config/i3/i3blocks.conf',
+            'config/i3/i3blocks.conf.work.laptop': 'config/i3/i3blocks.conf'}),
+    ]
 
 
 if __name__ == '__main__':
@@ -280,4 +369,5 @@ if __name__ == '__main__':
     parser.add_argument('--omit-ok', '-k', action='store_true', dest='nook', help='Do not include files that are OK', default=False)
     args = parser.parse_args()
     do_installation_of(elements, args)
+
 

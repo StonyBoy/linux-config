@@ -3,6 +3,13 @@ if [[ $- != *i* ]] ; then
   return
 fi
 
+# If brew exists
+if [ -x /usr/local/bin/brew ]; then
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+      . $(brew --prefix)/etc/bash_completion
+  fi
+fi
+
 HAVE_TTY=1
 # SSH connection without a tty (scp, sftp)
 test -n "$SSH_CONNECTION" -a -z "$SSH_TTY" && HAVA_TTY=0
