@@ -41,7 +41,7 @@ set autoindent      " Auto indent, nice for coding
 set smartindent     " Do smart autoindenting when starting a new line.
 autocmd FileType c,cpp setlocal cindent
 set copyindent      " Mirroring offset with automatic indentation
-set shiftwidth=4    " Number of spaces to use for each insertion of (auto)indent.
+set shiftwidth=8    " Number of spaces to use for each insertion of (auto)indent.
 set tabstop=8       " Number of spaces that a <Tab> in the file counts for
 set expandtab       " Expand Tabs (use spaces)?.
 set formatoptions=tcrqnj " See Help (complex)
@@ -66,6 +66,12 @@ set undoreload=65538       " The maximum number of lines that can be saved in th
 set wildmode=longest,list,full
 set wildmenu
 
+" Go to buffer number 1-20 (1-20gb)
+let c = 1
+while c <= 20
+    execute "nnoremap " . c . "gb :" . c . "b\<CR>"
+    let c += 1
+endwhile
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Using tabs
@@ -126,8 +132,14 @@ let g:lightline = {
   \     },
   \ }
 
+" YouCompleteMe configuration
+let g:ycm_confirm_extra_conf = 0
+nmap <silent> <leader>g :YcmCompleter GoTo<cr>
 
-" Colorscheme
+" CtrlP configuration
+let g:ctrlp_working_path_mode = 'ca'
+
+" Colorscheme configuration
 syntax enable
 set background=light
 if $COLORTERM!="truecolor"
@@ -136,5 +148,3 @@ endif
 colorscheme solarized
 highlight SpecialKey ctermbg=NONE guibg=NONE " Do not set special background
 
-" Resume session
-" source ~/.vim/steen.vim
