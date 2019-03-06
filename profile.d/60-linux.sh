@@ -83,7 +83,9 @@ HOSTNAME=$(uname -n)
 HOSTNAME=${HOSTNAME%%.*}
 
 if [[ $HOSTNAME == "soft-dev13" ]]; then
-    multimedia_keys
+    if [[ "$DISPLAY" != "" ]]; then
+        multimedia_keys
+    fi
 fi
 
 function remotex
