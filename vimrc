@@ -114,6 +114,7 @@ nmap <silent> <leader>wt :call PasteWindow('tabnew')<cr>
 nmap <silent> <leader>wP :top split
 nmap <silent> <leader>wV :set nosplitright \| call PasteWindow('vsplit') \| set splitright<cr>
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -147,4 +148,7 @@ if $COLORTERM!="truecolor"
 endif
 colorscheme solarized
 highlight SpecialKey ctermbg=NONE guibg=NONE " Do not set special background
+
+nmap <silent> <leader>hh  :highlight SpecialKey ctermbg=NONE guibg=NONE<cr>
+nmap <silent> <leader>lw  :set nowrap<cr>
 

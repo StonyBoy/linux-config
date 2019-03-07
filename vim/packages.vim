@@ -29,7 +29,9 @@ call minpac#add('tpope/vim-obsession')                  " Automatic editing sess
 call minpac#add('tpope/vim-sleuth')                     " Automatic indentation based of file content
 call minpac#add('christoomey/vim-tmux-navigator')       " Go between panes in both vim and tmux
 call minpac#add('Valloric/YouCompleteMe')               " Completion support for SW dev
+call minpac#add('jremmen/vim-ripgrep')                  " Provide ripgrep using :Rg <string|pattern>
 
+" call minpac#add('tpope/vim-dispatch')                 " Run build commands in the background
 " call minpac#add('scrooloose/nerdtree')                " Filesystem Explorer
 " call minpac#add('junegunn/fzf.vim')                   " Fuzzy File Finder
 " call minpac#add('thaerkh/vim-indentguides')           " Indentation lines - looks weird with black and white blocks
