@@ -72,7 +72,14 @@ interval=30
 [iface]
 label= wan:
 instance=wan
-color=#00FF00
+color=#00FF7F
+interval=10
+separator=false
+
+[iface]
+label=tun:
+instance=tun0
+color=#98FB98
 interval=10
 separator=false
 
