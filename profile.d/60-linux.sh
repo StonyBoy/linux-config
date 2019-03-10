@@ -18,7 +18,12 @@ function show_vnc()
 
 function start_vnc()
 {
-    x0vncserver -display :0 -Geometry 2560x1440 -SecurityTypes vncauth,tlsvnc -rfbauth ~/.vnc/passwd -rfbport 5900
+    if [[ $HOSTNAME == "soft-dev13" ]]; then
+        x0vncserver -display :0 -Geometry 2560x1440 -SecurityTypes vncauth,tlsvnc -rfbauth ~/.vnc/passwd -rfbport 5900
+    fi
+    if [[ $HOSTNAME == "soft-dev99" ]]; then
+        x0vncserver -display :0 -Geometry 1920x1080 -SecurityTypes vncauth,tlsvnc -rfbauth ~/.vnc/passwd -rfbport 5900
+    fi
 }
 complete -F _complete_start_vnc start_vnc
 
