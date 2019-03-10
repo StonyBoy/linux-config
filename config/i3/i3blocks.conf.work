@@ -24,7 +24,7 @@
 #
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
-command=/usr/lib/i3blocks/$BLOCK_NAME
+command=~/scripts/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
@@ -37,18 +37,13 @@ label=♪
 instance=spotify
 interval=5
 signal=10
+color=#FAFAD2
 
 # Volume indicator
-#
-# The first parameter sets the step (and units to display)
-# The second parameter overrides the mixer selection
-# See the script for details.
-[volume]
-label=
-instance=Speaker
+[volume-pulseaudio]
 interval=1
 signal=10
-command=~/scripts/volume 5 pulse 'USB-Audio - Jabra EVOLVE LINK'
+USE_ALSA_NAME=1
 
 # Memory usage
 #
@@ -57,6 +52,7 @@ command=~/scripts/volume 5 pulse 'USB-Audio - Jabra EVOLVE LINK'
 label=
 separator=false
 interval=30
+color=#FFE8E8
 
 # Disk usage
 #
@@ -74,11 +70,12 @@ interval=30
 # If the instance is not specified, use the interface used for default route.
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
 [iface]
-label=
-#instance=wlan0
+label= wan:
+instance=wan
 color=#00FF00
 interval=10
 separator=false
+
 
 # CPU usage
 #
@@ -92,9 +89,10 @@ min_width=CPU: 100.00%
 
 # Uptime
 #
-[uptime]
-command=~/bin/strict_uptime
+[strict_uptime]
+full_text=Strict Uptime
 interval=60
+color=#B0E0E6
 
 # Date Time
 #
