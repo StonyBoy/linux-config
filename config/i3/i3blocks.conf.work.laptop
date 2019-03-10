@@ -61,7 +61,6 @@ color=#FFE8E8
 # (defaults to 10 for 10%).
 [disk]
 label=
-#instance=/mnt/data
 separator=false
 interval=30
 
@@ -70,8 +69,16 @@ interval=30
 # If the instance is not specified, use the interface used for default route.
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
 [iface]
-label= 
-color=#00FF00
+label= wan:
+instance=wan
+color=#7FFFD4
+interval=10
+separator=false
+
+[iface]
+label=tun:
+instance=tun0
+color=#98FB98
 interval=10
 separator=false
 

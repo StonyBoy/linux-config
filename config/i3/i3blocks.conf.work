@@ -61,7 +61,6 @@ color=#FFE8E8
 # (defaults to 10 for 10%).
 [disk]
 label=
-#instance=/mnt/data
 separator=false
 interval=30
 
@@ -72,7 +71,14 @@ interval=30
 [iface]
 label= wan:
 instance=wan
-color=#00FF00
+color=#7FFFD4
+interval=10
+separator=false
+
+[iface]
+label=tun:
+instance=tun0
+color=#98FB98
 interval=10
 separator=false
 
@@ -85,7 +91,12 @@ separator=false
 label=
 interval=10
 min_width=CPU: 100.00%
-#separator=false
+separator=false
+
+[temperature]
+label=TEMP: 
+interval=10
+separator=false
 
 # Uptime
 #
@@ -100,11 +111,3 @@ color=#B0E0E6
 command=date '+%Y-%m-%d %H:%M:%S'
 interval=5
 
-# Temperature
-#
-# Support multiple chips, though lm-sensors.
-# The script may be called with -w and -c switches to specify thresholds,
-# see the script for details.
-#[temperature]
-#label=TEMP
-#interval=10

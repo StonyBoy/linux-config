@@ -248,7 +248,7 @@ bar {
         inactive_workspace #4f4f4f #003300 #f2f2f2
         focused_workspace  #4f4f4f #035b22 #f2f2f2
     }
-    font pango:Inconsolata 9
+    font pango:Inconsolata 10
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
     # Avoid accidental workspace switching when scrolling the wheel (up/down) in the bar
     bindsym button4 nop
