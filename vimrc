@@ -144,7 +144,9 @@ let g:ctrlp_working_path_mode = 'ca'
 syntax enable
 set background=light
 if $COLORTERM!="truecolor"
-  let g:solarized_termcolors=256
+  if $TERM_PROGRAM!="Apple_Terminal"
+    let g:solarized_termcolors=256
+  endif
 endif
 colorscheme solarized
 highlight SpecialKey ctermbg=NONE guibg=NONE " Do not set special background
