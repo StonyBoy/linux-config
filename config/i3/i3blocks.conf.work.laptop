@@ -76,6 +76,13 @@ interval=10
 separator=false
 
 [iface]
+label= wifi:
+instance=wlan0
+color=#7FFFD4
+interval=10
+separator=false
+
+[iface]
 label=tun:
 instance=tun0
 color=#98FB98
