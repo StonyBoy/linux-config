@@ -80,8 +80,6 @@ label=tun:
 instance=tun0
 color=#98FB98
 interval=10
-separator=false
-
 
 # CPU usage
 #
@@ -96,6 +94,12 @@ separator=false
 [temperature]
 label=TEMP: 
 interval=10
+
+[hostname]
+command=uname -n
+full_text=Show hostname
+interval=300
+color=#eee8d5
 separator=false
 
 # Uptime

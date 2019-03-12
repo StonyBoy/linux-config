@@ -122,6 +122,14 @@ instance=0
 markup=pango
 min_width=bat: ■■■■■
 
+
+[hostname]
+command=uname -n
+full_text=Show hostname
+interval=300
+color=#eee8d5
+separator=false
+
 # Uptime
 #
 [strict_uptime]
