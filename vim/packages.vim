@@ -30,6 +30,7 @@ call minpac#add('tpope/vim-sleuth')                     " Automatic indentation 
 call minpac#add('christoomey/vim-tmux-navigator')       " Go between panes in both vim and tmux
 call minpac#add('Valloric/YouCompleteMe')               " Completion support for SW dev
 call minpac#add('jremmen/vim-ripgrep')                  " Provide ripgrep using :Rg <string|pattern>
+call minpac#add('jlanzarotta/bufexplorer')              " Manage Buffers
 
 " call minpac#add('tpope/vim-dispatch')                 " Run build commands in the background
 " call minpac#add('scrooloose/nerdtree')                " Filesystem Explorer
