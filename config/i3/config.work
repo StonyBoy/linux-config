@@ -19,11 +19,13 @@ set $wrkspc10 "10: VPN "
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-# font pango:monospace 8
 font pango:SFNS Display 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+
+# Focus doesn't follow mouse
+focus_follows_mouse no
 
 # start a terminal
 # Possible options: urxvt, terminator, xfce4-terminal
@@ -137,15 +139,13 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 
-# Steen
-# ============================================================================
-
 # Take Screenshots with MOD+P
 bindsym $mod+P exec deepin-screenshot
 
 # NumLock is ON
 exec_always --no-startup-id numlockx on
 
+# Wallpaper and lockscreen setup
 exec feh --bg-fill $wallpaper
 bindsym $mod+ctrl+l exec i3lock -ti $lock_bkg
 bindsym $mod+ctrl+w exec feh --bg-fill $wallpaper
@@ -214,10 +214,54 @@ bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
 
+# Color Scheme
+# ============================================================================
+
+# Colours
+# base02
+set $bg_inactive                #073642
+# base01
+set $bg_active                  #586e75
+# red
+set $bg_urgent                  #dc322f
+
+# base02
+set $border_inactive            #073642
+# base03
+set $border_active              #002b36
+# base03
+set $border_urgent              #002b36
+
+# base03
+set $text_focused               #002b36
+# base3
+set $text_active                #fdf6e3
+# base0
+set $text_inactive              #839496
+# base3
+set $text_urgent                #fdf6e3
+
+# yellow
+set $bg_focused_workspace       #b58900
+# base01
+set $bg_active_workspace        #586e75
+# base03
+set $bg_inactive_workspace      #002b36
+# red
+set $bg_urgent_workspace        #dc322f
+
+# base03
+set $bg_bar                     #002b36
+# base0
+set $text_bar                   #839496
+
+
+
 # Menu
+# ============================================================================
 
 # Use the rofi menu
-bindsym $mod+space exec rofi -modi drun#run -show drun -lines 15 -eh 2 -width 100 -padding 500 -opacity "60" -bw 0 -columns 2 -font "Inconsolata 12"
+bindsym $mod+space exec rofi -modi drun#run -show drun -lines 15 -eh 2 -columns 3 -width 100 -padding 500 -opacity "50" -theme solarized -font "SFNS Display 12"
 
 # Exit Menu
 
@@ -237,7 +281,40 @@ mode "$mode_system" {
 
 bindsym $mod+Shift+e mode "$mode_system"
 
-# Setting up monitors
+
+# Windows and Status Bar
+# ============================================================================
+
+# window colors         border              background          text                 indicator
+client.focused          $border_active      $bg_active          $text_active         $border_active
+client.unfocused        $border_inactive    $bg_inactive        $text_inactive       $border_inactive
+client.focused_inactive $border_inactive    $bg_inactive        $text_inactive       $border_inactive
+client.urgent           $border_urgent      $bg_urgent          $text_urgent         $border_urgent
+
+# Start i3bar to display a workspace bar plus i3status (system info)
+bar {
+    position top
+    colors {
+        statusline          $text_bar
+        background          $bg_bar
+        separator           $bg_active
+
+        # <colorclass>      border                    background              text
+        focused_workspace   $bg_focused_workspace     $bg_focused_workspace   $text_focused
+        active_workspace    $bg_active_workspace      $bg_active_workspace    $text_focused
+        inactive_workspace  $bg_inactive              $bg_inactive_workspace  $text_inactive
+        urgent_workspace    $bg_urgent_workspace      $bg_urgent_workspace    $text_urgent
+    }
+    font pango:Inconsolata 9
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    # Avoid accidental workspace switching when scrolling the wheel (up/down) in the bar
+    bindsym button4 nop
+    bindsym button5 nop
+}
+
+
+# Setting up monitors and workspaces
+# ============================================================================
 set $main_monitor "DP-3"
 set $extra_monitor "DP-2"
 exec --no-startup-id xrandr -d :0 --output $main_monitor --mode 2560x1440 --primary --right-of $extra_monitor --output $extra_monitor --mode 2560x1440
@@ -256,32 +333,13 @@ workspace $wrkspc8  output $extra_monitor
 workspace $wrkspc9  output $extra_monitor
 workspace $wrkspc10 output $extra_monitor
 
-# Window colors
-# class                 border  backgr. text    indicator child_border
-client.focused          #595959 #003ea5 #ffffff #2e9ef4   #595959
-client.unfocused        #333333 #222222 #888888 #292d2e   #595959
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-    position top
-    colors {
-        background #001230
-        statusline #f2f2f2
-        # <colorclass> <border> <background> <text>
-        inactive_workspace #595959 #001230 #f2f2f2
-        focused_workspace  #595959 #003ea5 #f2f2f2
-    }
-    font pango:Inconsolata 10
-    status_command i3blocks -c ~/.config/i3/i3blocks.conf
-    # Avoid accidental workspace switching when scrolling the wheel (up/down) in the bar
-    bindsym button4 nop
-    bindsym button5 nop
-}
+# Start applications
+# ============================================================================
 
 exec --no-startup-id Thunar
 exec --no-startup-id bcompare
-exec --no-startup-id clementine -o
+exec --no-startup-id spotify
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id $terminal
 
