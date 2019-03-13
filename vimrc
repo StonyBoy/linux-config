@@ -85,7 +85,7 @@ nmap <silent> <leader>t<right> :tabn<cr>
 " Reload VIMRC
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nmap <silent> <leader>rv   :source $MYVIMRC<cr>
+nmap <silent> <leader>rv   :source $MYVIMRC<cr>:echom ".vimrc reloaded"<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Yank and Paste Buffers
@@ -149,8 +149,10 @@ if $COLORTERM!="truecolor"
   endif
 endif
 colorscheme solarized
-highlight SpecialKey ctermbg=NONE guibg=NONE " Do not set special background
 
-nmap <silent> <leader>hh  :highlight SpecialKey ctermbg=NONE guibg=NONE<cr>
+" Do not set special background
+highlight SpecialKey ctermbg=NONE guibg=NONE
+
+nmap <silent> <leader>hh  :highlight SpecialKey ctermbg=NONE guibg=NONE<cr>:set shiftwidth=8<cr>
 nmap <silent> <leader>lw  :set nowrap<cr>
 
