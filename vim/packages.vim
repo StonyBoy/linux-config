@@ -32,6 +32,7 @@ call minpac#add('Valloric/YouCompleteMe')               " Completion support for
 call minpac#add('jremmen/vim-ripgrep')                  " Provide ripgrep using :Rg <string|pattern>
 call minpac#add('jlanzarotta/bufexplorer')              " Manage Buffers
 call minpac#add('tpope/vim-markdown')                   " Syntax highlighting for markdown files
+call minpac#add('vim-scripts/cscope.vim')               " C code browser
 
 " call minpac#add('tpope/vim-dispatch')                 " Run build commands in the background
 " call minpac#add('scrooloose/nerdtree')                " Filesystem Explorer
