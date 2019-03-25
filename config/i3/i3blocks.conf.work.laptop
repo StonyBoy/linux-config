@@ -122,6 +122,9 @@ instance=0
 markup=pango
 min_width=bat: ■■■■■
 
+[key_layout]
+label=Kbd: 
+interval=30
 
 [hostname]
 command=uname -n
@@ -140,6 +143,6 @@ color=#B0E0E6
 # Date Time
 #
 [time]
-command=date '+%Y-%m-%d %H:%M:%S'
+label=DK: 
+command=TZ=":Europe/Copenhagen" date '+%Y-%m-%d %H:%M:%S'
 interval=5
-
