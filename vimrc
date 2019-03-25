@@ -151,9 +151,6 @@ let g:lightline = {
 let g:ycm_confirm_extra_conf = 0
 nmap <silent> <leader>g :YcmCompleter GoTo<cr>
 
-" CtrlP configuration
-let g:ctrlp_working_path_mode = 'ca'
-
 " Colorscheme configuration
 syntax enable
 set background=light

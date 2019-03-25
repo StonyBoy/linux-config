@@ -1,44 +1,37 @@
 " VIM packages and the package manager
 " 21-dec-2018 Steen Hegelund
 "
-command! PackUpdate packadd minpac | source $MYVIMRC | redraw | call minpac#update()
-command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
-if empty(glob('~/.vim/pack/minpac/opt/minpac/plugin/minpac.vim'))
-  silent !git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
-  PackUpdate
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-if !exists('*minpac#init')
-  finish
-endif
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-sensible'                   " Sensible VIM settings
+Plug 'itchyny/lightline.vim'                " Nice Status Line
+Plug 'terryma/vim-multiple-cursors'         " Multiple cursors
+Plug 'editorconfig/editorconfig-vim'        " Adapt editor config to current project
+Plug 'airblade/vim-gitgutter'               " Git: Changed lines since last revision
+Plug '/usr/local/opt/fzf'                   " Using the fzf binary
+Plug 'junegunn/fzf.vim'                     " Fuzzy File Finder
+Plug 'altercation/vim-colors-solarized'     " Colorscheme
+Plug 'vim-ruby/vim-ruby'                    " Ruby support
+Plug 'tpope/vim-fugitive'                   " GIT support
+Plug 'tpope/vim-obsession'                  " Automatic editing sessions
+Plug 'tpope/vim-sleuth'                     " Automatic indentation based of file content
+Plug 'christoomey/vim-tmux-navigator'       " Go between panes in both vim and tmux
+Plug 'Valloric/YouCompleteMe'               " Completion support for SW dev
+Plug 'jremmen/vim-ripgrep'                  " Provide ripgrep using :Rg <string|pattern>
+Plug 'jlanzarotta/bufexplorer'              " Manage Buffers
+Plug 'tpope/vim-markdown'                   " Syntax highlighting for markdown files
+Plug 'vim-scripts/cscope.vim'               " C code browser
+call plug#end()
 
-call minpac#init()
 
-call minpac#add('k-takata/minpac', {'type': 'opt'})     " The minpack itself
-call minpac#add('tpope/vim-sensible')                   " Sensible VIM settings
-call minpac#add('itchyny/lightline.vim')                " Nice Status Line
-call minpac#add('terryma/vim-multiple-cursors')         " Multiple cursors
-call minpac#add('editorconfig/editorconfig-vim')        " Adapt editor config to current project
-call minpac#add('airblade/vim-gitgutter')               " Git: Changed lines since last revision
-call minpac#add('ctrlpvim/ctrlp.vim')                   " Find Files
-call minpac#add('altercation/vim-colors-solarized')     " Colorscheme
-call minpac#add('vim-ruby/vim-ruby')                    " Ruby support
-call minpac#add('tpope/vim-fugitive')                   " GIT support
-call minpac#add('tpope/vim-obsession')                  " Automatic editing sessions
-call minpac#add('tpope/vim-sleuth')                     " Automatic indentation based of file content
-call minpac#add('christoomey/vim-tmux-navigator')       " Go between panes in both vim and tmux
-call minpac#add('Valloric/YouCompleteMe')               " Completion support for SW dev
-call minpac#add('jremmen/vim-ripgrep')                  " Provide ripgrep using :Rg <string|pattern>
-call minpac#add('jlanzarotta/bufexplorer')              " Manage Buffers
-call minpac#add('tpope/vim-markdown')                   " Syntax highlighting for markdown files
-call minpac#add('vim-scripts/cscope.vim')               " C code browser
-
-" call minpac#add('tpope/vim-dispatch')                 " Run build commands in the background
-" call minpac#add('scrooloose/nerdtree')                " Filesystem Explorer
-" call minpac#add('junegunn/fzf.vim')                   " Fuzzy File Finder
-" call minpac#add('thaerkh/vim-indentguides')           " Indentation lines - looks weird with black and white blocks
-" call minpac#add('python-mode/python-mode')            " Python support - not working with python3
-
-packloadall
-
+" Plug 'tpope/vim-dispatch'                 " Run build commands in the background
+" Plug 'scrooloose/nerdtree'                " Filesystem Explorer
+" Plug 'thaerkh/vim-indentguides'           " Indentation lines - looks weird with black and white blocks
+" Plug 'python-mode/python-mode'            " Python support - not working with python3
+" Plug 'ctrlpvim/ctrlp.vim'                 " Find Files: too few and incorrect suggestions
