@@ -95,6 +95,10 @@ separator=false
 label=TEMP: 
 interval=10
 
+[key_layout]
+label=Kbd: 
+interval=30
+
 [hostname]
 command=uname -n
 full_text=Show hostname
@@ -112,6 +116,7 @@ color=#B0E0E6
 # Date Time
 #
 [time]
-command=date '+%Y-%m-%d %H:%M:%S'
+label=DK: 
+command=TZ=":Europe/Copenhagen" date '+%Y-%m-%d %H:%M:%S'
 interval=5
 
