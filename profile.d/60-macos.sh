@@ -14,5 +14,5 @@ function brew_update()
 
 export ANDROID_SDK_ROOT=~/android-sdk
 export PATH=~/android-sdk/emulator:~/android-sdk/tools/bin:~/android-sdk/platform-tools:$PATH
-export HOMEBREW_GITHUB_API_TOKEN=c757eb2560512ffb5ba06b12ed52f10df772aeea
+export HOMEBREW_GITHUB_API_TOKEN=ea94f01f5bd90925c1a28976725087b5c193dffa
 
