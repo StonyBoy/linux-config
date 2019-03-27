@@ -91,15 +91,7 @@ nmap <silent> <ESC>[1;5C  <C-right>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Reload VIMRC
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 nmap <silent> <leader>rv   :source $MYVIMRC<cr>:echom ".vimrc reloaded"<cr>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" CScope mappings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <leader>fa :call cscope#findInteractive(expand('<cword>'))<CR>
-nnoremap <leader>fg :call cscope#find('g', expand('<cword>'))<CR>
-nnoremap <leader>l :call ToggleLocationList()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Yank and Paste Buffers

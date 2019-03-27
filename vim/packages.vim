@@ -43,7 +43,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' } " Comp
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'} " Generate a config file for YCM
 Plug 'jlanzarotta/bufexplorer'              " Manage Buffers
 Plug 'tpope/vim-markdown'                   " Syntax highlighting for markdown files
-Plug 'vim-scripts/cscope.vim'               " C code browser
+Plug 'ronakg/quickr-cscope.vim'             " Code browser
 call plug#end()
 
 
@@ -54,3 +54,4 @@ call plug#end()
 " Plug 'ctrlpvim/ctrlp.vim'                 " Find Files: too few and incorrect suggestions
 " Plug 'jremmen/vim-ripgrep'                " Provide ripgrep using :Rg <string|pattern> - FZF supports this
 " Plug 'editorconfig/editorconfig-vim'      " Adapt editor config to current project, use vim-sleuth
+" Plug 'vim-scripts/cscope.vim'             " C code browser : Rather slow and causes windows to be unupdated
