@@ -41,9 +41,6 @@ set autoindent      " Auto indent, nice for coding
 set smartindent     " Do smart autoindenting when starting a new line.
 autocmd FileType c,cpp setlocal cindent
 set copyindent      " Mirroring offset with automatic indentation
-set shiftwidth=8    " Number of spaces to use for each insertion of (auto)indent.
-set tabstop=8       " Number of spaces that a <Tab> in the file counts for
-set expandtab       " Expand Tabs (use spaces)?.
 set formatoptions=tcrqnj " See Help (complex)
 set linebreak       " Insert automatic line breaks while typing
 set nowrap          " No wrap while displaying long lines
@@ -87,6 +84,8 @@ nmap <silent> <leader>t<right> :tabn<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <silent> <ESC>[1;5D  <C-left>
 nmap <silent> <ESC>[1;5C  <C-right>
+cmap <silent> <ESC>[1;5D  <C-left>
+cmap <silent> <ESC>[1;5C  <C-right>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Reload VIMRC
