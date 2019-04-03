@@ -129,8 +129,8 @@ set noshowmode
 let g:lightline = {
   \ 'colorscheme': 'solarized',
   \     'active': {
-  \         'left': [['mode', 'paste' ], ['readonly', 'filename', 'modified', 'gitbranch']],
-  \         'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding'], ['session']]
+  \         'left': [['mode', 'paste' ], ['gitbranch', 'absolutepath']],
+  \         'right': [['lineinfo'], ['percent'], ['readonly'], ['modified'], ['filetype', 'fileformat', 'fileencoding'], ['session']]
   \     },
   \     'component_function': {
   \       'session': 'obsession#ObsessionStatus',
