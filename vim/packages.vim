@@ -26,6 +26,7 @@ let os=GetRunningOS()
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'                   " Sensible VIM settings
+Plug 'tpope/vim-tbone'                      " Tmux commands and yank/put support
 Plug 'itchyny/lightline.vim'                " Nice Status Line
 Plug 'terryma/vim-multiple-cursors'         " Multiple cursors
 Plug 'airblade/vim-gitgutter'               " Git: Changed lines since last revision
