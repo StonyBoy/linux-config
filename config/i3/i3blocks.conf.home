@@ -52,7 +52,7 @@ USE_ALSA_NAME=1
 label=
 separator=false
 interval=30
-color=#FFE8E8
+color=#FDB6B6
 
 # Disk usage
 #
@@ -98,6 +98,7 @@ interval=10
 [key_layout]
 label=Kbd: 
 interval=30
+color=#FFCC92
 
 [hostname]
 command=uname -n
@@ -119,4 +120,5 @@ color=#B0E0E6
 label=DK: 
 command=TZ=":Europe/Copenhagen" date '+%Y-%m-%d %H:%M:%S'
 interval=5
+color=#F9F79A
 
