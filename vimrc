@@ -129,14 +129,25 @@ set noshowmode
 let g:lightline = {
   \ 'colorscheme': 'solarized',
   \     'active': {
-  \         'left': [['mode', 'paste' ], ['gitbranch', 'absolutepath']],
-  \         'right': [['lineinfo'], ['percent'], ['readonly'], ['modified'], ['filetype', 'fileformat', 'fileencoding'], ['session']]
+  \         'left': [['mode', 'paste' ], ['gitbranch', 'absolutepath', 'filemod']],
+  \         'right': [['lineinfo'], ['percent'], ['readonly'], ['filetype', 'fileformat', 'fileencoding'], ['session']]
   \     },
   \     'component_function': {
   \       'session': 'obsession#ObsessionStatus',
-  \       'gitbranch': 'fugitive#head'
+  \       'gitbranch': 'fugitive#head',
+  \       'filemod': 'CustomFilemod'
+  \     },
+  \     'component_type': {
+  \       'session': 'warning',
+  \       'gitbranch': 'warning',
+  \       'filemod': 'error'
   \     },
   \ }
+
+function! CustomFilemod()
+  return &modified ? ' <+>' : ''
+endfunction
+
 
 " YouCompleteMe configuration
 let g:ycm_confirm_extra_conf = 0
