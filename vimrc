@@ -142,6 +142,10 @@ let g:lightline = {
 let g:ycm_confirm_extra_conf = 0
 nmap <silent> <leader>g :YcmCompleter GoTo<cr>
 
+" FZF
+command! -bang -nargs=* Rgu call fzf#vim#grep("rg -u --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, <bang>0)'
+command! -bang -nargs=* Bli call fzf#vim#buffer_lines(<q-args>, <bang>0)'
+
 " Colorscheme configuration
 syntax enable
 set background=light
