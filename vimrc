@@ -129,23 +129,23 @@ set noshowmode
 let g:lightline = {
   \ 'colorscheme': 'solarized',
   \     'active': {
-  \         'left': [['mode', 'paste' ], ['gitbranch', 'absolutepath', 'filemod']],
-  \         'right': [['lineinfo'], ['percent'], ['readonly'], ['filetype', 'fileformat', 'fileencoding'], ['session']]
+  \         'left': [['mode'], ['paste', 'gitbranch', 'absolutepath']],
+  \         'right': [['session', 'fileencoding', 'fileformat', 'filetype', 'readonly', 'percent', 'lineinfo'], ['filemod']]
+  \     },
+  \     'inactive': {
+  \         'left': [['absolutepath']],
+  \         'right': [[], [], ['filemod', 'fileencoding', 'fileformat', 'filetype', 'readonly', 'percent', 'lineinfo']]
   \     },
   \     'component_function': {
   \       'session': 'obsession#ObsessionStatus',
   \       'gitbranch': 'fugitive#head',
   \       'filemod': 'CustomFilemod'
   \     },
-  \     'component_type': {
-  \       'session': 'warning',
-  \       'gitbranch': 'warning',
-  \       'filemod': 'error'
-  \     },
   \ }
 
+
 function! CustomFilemod()
-  return &modified ? ' <+>' : ''
+  return &modified ? ' {+}' : ''
 endfunction
 
 
