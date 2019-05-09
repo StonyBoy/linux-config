@@ -317,7 +317,6 @@ bar {
 # ============================================================================
 
 exec --no-startup-id Thunar
-exec --no-startup-id bcompare
 exec --no-startup-id spotify
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id $terminal
