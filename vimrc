@@ -92,6 +92,9 @@ cmap <silent> <ESC>[1;5C  <C-right>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <silent> <leader>rv   :source $MYVIMRC<cr>:echom ".vimrc reloaded"<cr>
 
+" Search visual selection by //
+vnoremap // y/<C-r>"<cr>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Yank and Paste Buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
