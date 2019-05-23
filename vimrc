@@ -44,7 +44,7 @@ set copyindent      " Mirroring offset with automatic indentation
 set formatoptions=tcrqnj " See Help (complex)
 set linebreak       " Insert automatic line breaks while typing
 set nowrap          " No wrap while displaying long lines
-set cinoptions=h2,l2,g2,t0,i8,+8,(0,w1,W8,N-s
+set cinoptions=h2,g2,i8,N-s,(0,w1,Ws,t0,+s,:0,=s,l1,b0
 
 autocmd VimResized * :wincmd =    " Auto resize all VIM windows when VIM is resized
 
@@ -92,8 +92,16 @@ cmap <silent> <ESC>[1;5C  <C-right>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <silent> <leader>rv   :source $MYVIMRC<cr>:echom ".vimrc reloaded"<cr>
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Useful VIM shortcuts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Search visual selection by //
 vnoremap // y/<C-r>"<cr>
+
+" Open file in the same folder as the current file using %%/
+cabbr <expr> %% expand('%:p:h')
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Yank and Paste Buffers
