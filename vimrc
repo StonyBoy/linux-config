@@ -1,4 +1,7 @@
-" Steen Hegelund 18-dec-2018
+" VIM settings
+" Steen Hegelund
+" Time-Stamp: 2019-May-24 16:40
+
 source ~/.vim/packages.vim
 
 let mapleader = ","
@@ -102,6 +105,12 @@ vnoremap // y/<C-r>"<cr>
 " Open file in the same folder as the current file using %%/
 cabbr <expr> %% expand('%:p:h')
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Timestamps
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:update_time_time_stamp_leader = 'Time-Stamp: '
+let g:update_time_time_format = '%Y-%b-%d %H:%M'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Yank and Paste Buffers

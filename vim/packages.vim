@@ -1,5 +1,6 @@
 " VIM packages and the package manager
-" 21-dec-2018 Steen Hegelund
+" Steen Hegelund
+" Time-Stamp: 2019-May-24 16:40
 "
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -45,10 +46,11 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'} " Generate a config file for
 Plug 'jlanzarotta/bufexplorer'              " Manage Buffers
 Plug 'tpope/vim-markdown'                   " Syntax highlighting for markdown files
 Plug 'ronakg/quickr-cscope.vim'             " Code browser
+Plug 'tpope/vim-dispatch'                   " Run build commands in the background and parse the result
+Plug 'vim-scripts/update-time'              " Insert/Update timestamps in files
 call plug#end()
 
 
-" Plug 'tpope/vim-dispatch'                 " Run build commands in the background
 " Plug 'scrooloose/nerdtree'                " Filesystem Explorer
 " Plug 'thaerkh/vim-indentguides'           " Indentation lines - looks weird with black and white blocks
 " Plug 'python-mode/python-mode'            " Python support - not working with python3
