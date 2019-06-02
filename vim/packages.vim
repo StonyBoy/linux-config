@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2019-May-24 16:40
+" Time-Stamp: 2019-Jun-02 19:44
 "
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -9,21 +9,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-function! GetRunningOS()
-  if has("win32")
-    return "win"
-  endif
-  if has("unix")
-    if system('uname')=~'Darwin'
-      return "mac"
-    else
-      return "linux"
-    endif
-  endif
-endfunction
-
-let os=GetRunningOS()
-
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'                   " Sensible VIM settings
@@ -31,9 +16,7 @@ Plug 'tpope/vim-tbone'                      " Tmux commands and yank/put support
 Plug 'itchyny/lightline.vim'                " Nice Status Line
 Plug 'terryma/vim-multiple-cursors'         " Multiple cursors
 Plug 'airblade/vim-gitgutter'               " Git: Changed lines since last revision
-if GetRunningOS() == "mac"
-  Plug '/usr/local/opt/fzf'                 " Using the fzf binary (only on MacOS/Brew)
-endif
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy File Finder binary
 Plug 'junegunn/fzf.vim'                     " Fuzzy File Finder
 Plug 'altercation/vim-colors-solarized'     " Colorscheme
 Plug 'vim-ruby/vim-ruby'                    " Ruby support
