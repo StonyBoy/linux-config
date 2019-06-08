@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2019-May-24 16:40
+" Time-Stamp: 2019-Jun-08 18:15
 
 source ~/.vim/packages.vim
 
@@ -193,3 +193,11 @@ highlight SpecialKey ctermbg=NONE guibg=NONE
 nmap <silent> <leader>hh  :highlight SpecialKey ctermbg=NONE guibg=NONE<cr>:set shiftwidth=8<cr>
 nmap <silent> <leader>lw  :set nowrap<cr>
 
+" Window resizing
+nmap <F2> :vertical resize -1<cr>
+nmap <F3> :resize -1<cr>
+nmap <F4> :resize +1<cr>
+nmap <F5> :vertical resize +1<cr>
+
+" Help shortcut
+nmap <F6> <C-]>
