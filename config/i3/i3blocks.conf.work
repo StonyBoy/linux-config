@@ -43,7 +43,6 @@ color=#FAFAD2
 [volume-pulseaudio]
 interval=1
 signal=10
-USE_ALSA_NAME=1
 
 # Memory usage
 #

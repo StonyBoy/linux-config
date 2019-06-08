@@ -315,7 +315,7 @@ bar {
 
 # Setting up monitors and workspaces
 # ============================================================================
-set $main_monitor "DP-2"
+set $main_monitor "DP-1"
 set $extra_monitor "DP-3"
 exec --no-startup-id xrandr -d :0 --output $main_monitor --mode 2560x1440 --primary --left-of $extra_monitor --output $extra_monitor --mode 2560x1440
 
