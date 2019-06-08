@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2019-Jun-02 19:44
+" Time-Stamp: 2019-Jun-07 15:55
 "
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -41,3 +41,4 @@ call plug#end()
 " Plug 'jremmen/vim-ripgrep'                " Provide ripgrep using :Rg <string|pattern> - FZF supports this
 " Plug 'editorconfig/editorconfig-vim'      " Adapt editor config to current project, use vim-sleuth
 " Plug 'vim-scripts/cscope.vim'             " C code browser : Rather slow and causes windows to be unupdated
+" Plug 'vim-scripts/highlight.vim'          " Highlight lines
