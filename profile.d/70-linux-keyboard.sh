@@ -16,7 +16,7 @@ function optional_multimedia_keys()
     local HOSTNAME=$(uname -n)
     local HOSTNAME=${HOSTNAME%%.*}
 
-    if [[ $HOSTNAME == "soft-dev13" ]]; then
+    if [[ $HOSTNAME == "soft-dev13" || $HOSTNAME == "mchp-dev-shegelun" ]]; then
         if [[ "$DISPLAY" != "" ]]; then
             multimedia_keys
         fi
@@ -30,7 +30,9 @@ function set_us_kbd() {
     # Keymaps are handled in /etc/X11/xorg.conf.d/00-keyboard.conf via localectl
     # Values? check: man xkeyboard-config
 
-    setxkbmap -layout us -model pc104 -option "caps:ctrl_modifier" -rules $RULES -verbose $LEVEL
+    if [[ ! -z $DISPLAY ]]; then
+        setxkbmap -layout us -model pc104 -option "caps:ctrl_modifier" -rules $RULES -verbose $LEVEL
+    fi
     optional_multimedia_keys
 }
 
@@ -41,7 +43,9 @@ function set_dk_kbd() {
     # Keymaps are handled in /etc/X11/xorg.conf.d/00-keyboard.conf via localectl
     # Values? check: man xkeyboard-config
 
-    setxkbmap -layout dk -model pc105 -option "caps:ctrl_modifier" -variant "nodeadkeys" -rules $RULES -verbose $LEVEL
+    if [[ ! -z $DISPLAY ]]; then
+        setxkbmap -layout dk -model pc105 -option "caps:ctrl_modifier" -variant "nodeadkeys" -rules $RULES -verbose $LEVEL
+    fi
     optional_multimedia_keys
 }
 
