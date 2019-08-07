@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2019-Aug-07 20:43
+" Time-Stamp: 2019-Aug-07 20:56
 
 source ~/.vim/packages.vim
 
@@ -199,6 +199,6 @@ nmap <F5> :vertical resize +1<cr>
 nmap <F6> <C-]>
 
 " Build helpers
-nmap <silent> <leader>bv :Make -C ~/src/veloce/buildroot O=veloce/ linux-rebuild all && cp -v ~/src/veloce/buildroot/veloce/images/* /home/shegelun/mnt/vel05/bootup && echo "Build:" $(date +"\%Y-\%b-\%d \%R")<cr>
-nmap <silent> <leader>bf :Make -C ~/work/fireant/buildroot O=../pcb134/ linux-rebuild all && echo "Build:" $(date +"\%Y-\%b-\%d \%R")<cr>
+nmap <silent> <leader>vb :Make -C ~/src/veloce/buildroot O=veloce/ linux-rebuild all && cp -v ~/src/veloce/buildroot/veloce/images/* /home/shegelun/mnt/vel05/bootup && echo "Build:" $(date +"\%Y-\%b-\%d \%R")<cr>
+nmap <silent> <leader>fb :Make -C ~/work/fireant/buildroot O=../pcb134/ linux-rebuild all && echo "Build:" $(date +"\%Y-\%b-\%d \%R")<cr>
 
