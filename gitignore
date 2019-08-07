@@ -11,3 +11,4 @@ compile_commands.json
 ID
 *.code-workspace
 .solargraph.yml
+Session.vim
