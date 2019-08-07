@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2019-Jun-07 15:55
+" Time-Stamp: 2019-Aug-07 17:57
 "
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -28,7 +28,6 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' } " Comp
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'} " Generate a config file for YCM
 Plug 'jlanzarotta/bufexplorer'              " Manage Buffers
 Plug 'tpope/vim-markdown'                   " Syntax highlighting for markdown files
-Plug 'ronakg/quickr-cscope.vim'             " Code browser
 Plug 'tpope/vim-dispatch'                   " Run build commands in the background and parse the result
 Plug 'vim-scripts/update-time'              " Insert/Update timestamps in files
 call plug#end()
@@ -42,3 +41,4 @@ call plug#end()
 " Plug 'editorconfig/editorconfig-vim'      " Adapt editor config to current project, use vim-sleuth
 " Plug 'vim-scripts/cscope.vim'             " C code browser : Rather slow and causes windows to be unupdated
 " Plug 'vim-scripts/highlight.vim'          " Highlight lines
+" Plug 'ronakg/quickr-cscope.vim'           " Code browser - use ctags instead - this also works for C++
