@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2019-Aug-07 20:56
+" Time-Stamp: 2019-Aug-14 20:34
 
 source ~/.vim/packages.vim
 
@@ -27,6 +27,7 @@ if has("multi_byte")
 endif
 
 autocmd FileType c,cpp   setlocal colorcolumn=80  " Setting highlight long lines
+au BufNewFile,BufRead *.in setf make
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual Cues
