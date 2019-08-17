@@ -94,10 +94,12 @@ separator=false
 label=TEMP: 
 interval=10
 
-[key_layout]
-label=Kbd: 
-interval=30
-color=#FFCC92
+[kb_layout_ctrl]
+label= 
+full_text=Click to show keyboard
+command=ruby -n ~/scripts/i3blocks/kb_layout_ctrl.rb
+format=json
+interval=persist
 
 [hostname]
 command=uname -n
