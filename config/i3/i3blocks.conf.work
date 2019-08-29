@@ -94,13 +94,6 @@ separator=false
 label=TEMP: 
 interval=10
 
-[kb_layout_ctrl]
-label= 
-full_text=Click to show keyboard
-command=ruby -n ~/scripts/i3blocks/kb_layout_ctrl.rb
-format=json
-interval=persist
-
 [hostname]
 command=uname -n
 full_text=Show hostname
@@ -114,6 +107,12 @@ separator=false
 full_text=Strict Uptime
 interval=60
 color=#B0E0E6
+
+[key_layout]
+label= 
+min_width=50
+interval=10
+color=#ffcc92
 
 # Date Time
 #
