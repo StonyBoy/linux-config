@@ -1,0 +1,32 @@
+set from = "steen.hegelund@microchip.com"
+set sendmail = "msmtp -a microchip"
+
+# Set folders
+set spoolfile = "+microchip/INBOX"
+set mbox = "+microchip/Archive"
+set postponed = "+microchip/Drafts"
+set record = "+microchip/Sent Items"
+set trash = "+microchip/Deleted Items"
+
+# Alternate email addresses.
+
+# custom signature
+set signature = ~/.mutt/signatures/work
+
+color status red default
+
+macro index o "<shell-escape>mbsync microchip<enter>" "run mbsync to sync mail for this account"
+
+macro index,pager J \
+  "<enter-command>set my_old_resolve=\$resolve noresolve<enter>\
+  <tag-prefix><clear-flag>n<enter-command>set resolve=\$my_old_resolve<enter>\
+  <save-message>+microchip/Junk Email<enter>" \
+  "mark as read and move to junk folder"
+
+macro index,pager A \
+  "<save-message>+microchip/Archive<enter>"  \
+  "move message to the archive"
+
+macro index,pager I \
+  "<save-message>+microchip/INBOX<enter>"  \
+  "move message to the inbox"

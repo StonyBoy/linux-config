@@ -1,0 +1,32 @@
+set from = "steen@hegelund-hansen.dk"
+set sendmail = "msmtp -a one"
+
+# Set folders
+set spoolfile = "+one/INBOX"
+set mbox = "+one/Archived"
+set postponed = "+one/Drafts"
+set record = "+one/Sent"
+set trash = "+one/Trash"
+
+# Alternate email addresses.
+
+# custom signature
+set signature = ~/.mutt/signatures/home
+
+color status green default
+
+macro index o "<shell-escape>mbsync one<enter>" "run mbsync to sync mail for this account"
+
+macro index,pager J \
+  "<enter-command>set my_old_resolve=\$resolve noresolve<enter>\
+  <tag-prefix><clear-flag>n<enter-command>set resolve=\$my_old_resolve<enter>\
+  <save-message>+one/Spam<enter>" \
+  "mark as read and move to spam folder"
+
+macro index,pager A \
+  "<save-message>+one/Archived<enter>"  \
+  "move message to the archive"
+
+macro index,pager I \
+  "<save-message>+one/INBOX<enter>"  \
+  "move message to the inbox"
