@@ -13,7 +13,9 @@ set trash = "+microchip/Deleted Items"
 # custom signature
 set signature = ~/.mutt/signatures/work
 
-color status red default
+# Colors "item      foreground      background     params"
+color    status      red            default
+color    sidebar_new white          red
 
 macro index o "<shell-escape>mbsync microchip<enter>" "run mbsync to sync mail for this account"
 

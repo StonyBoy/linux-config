@@ -13,7 +13,9 @@ set trash = "+one/Trash"
 # custom signature
 set signature = ~/.mutt/signatures/home
 
-color status green default
+# Colors "item      foreground      background     params"
+color    status      green          default
+color    sidebar_new white          green
 
 macro index o "<shell-escape>mbsync one<enter>" "run mbsync to sync mail for this account"
 

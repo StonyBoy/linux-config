@@ -11,9 +11,6 @@ color search        brightmagenta   default
 color indicator     white           yellow
 color tree          green           default
 
-# sidebar
-color sidebar_new   white           blue
-
 # index ----------------------------------------------------------------
 
 color index         red             default         "~A"    # all messages
