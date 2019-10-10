@@ -33,7 +33,6 @@ function set_us_kbd() {
     if [[ ! -z $DISPLAY ]]; then
         setxkbmap -layout us -model pc104 -option "caps:ctrl_modifier" -rules $RULES -verbose $LEVEL
     fi
-    optional_multimedia_keys
 }
 
 function set_dk_kbd() {
@@ -46,7 +45,6 @@ function set_dk_kbd() {
     if [[ ! -z $DISPLAY ]]; then
         setxkbmap -layout dk -model pc105 -option "caps:ctrl_modifier" -variant "nodeadkeys" -rules $RULES -verbose $LEVEL
     fi
-    optional_multimedia_keys
 }
 
 function set_dk_xorg()
@@ -60,5 +58,9 @@ function remotex
     xprop -root -remove _XKB_RULES_NAMES
 }
 
-set_dk_kbd
+if [[ $HOSTNAME == "mchp-dev-shegelun" ]]; then
+    set_us_kbd
+else
+    set_dk_kbd
+fi
 
