@@ -9,7 +9,7 @@ import shutil
 import enum
 import subprocess
 import pathlib
-import argparse
+import yaml
 
 
 class UserChoice(enum.Enum):
@@ -126,7 +126,6 @@ class SelectionInstaller(Installer):
         self.selected_link = self.src_path
         if selected_link:
             self.selected_link = os.path.abspath(os.path.expanduser(selected_link))
-            print(self.selected_link)
             if os.path.exists(self.dst_path):
                 if os.path.islink(self.dst_path):
                     if os.readlink(self.dst_path) == self.selected_link:
@@ -316,64 +315,53 @@ def do_installation_of(items, args):
         sys.exit(1)
 
 
-if os.uname().sysname == 'Darwin':
-    elements = [
-        FileList('.',
-            'bash_logout',
-            'bash_profile',
-            'bashrc',
-            'gitconfig',
-            'gitignore',
-            'inputrc',
-            'mbsyncrc',
-            'msmtprc',
-            'profile',
-            'vimrc',
-            'tmux.conf'),
-        Folder('mutt', '~/.mutt'),
-        Folder('profile.d', '~/.profile.d'),
-        Folder('gitconfig.d', '~/.gitconfig.d'),
-        Folder('vim', '~/.vim'),
-        Folder('scripts', '~/scripts'),
-    ]
-else:
-    elements = [
-        FileList('.',
-            'bash_logout',
-            'bash_profile',
-            'bashrc',
-            'clang-format',
-            'gitconfig',
-            'gitignore',
-            'inputrc',
-            'mbsyncrc',
-            'msmtprc',
-            'profile',
-            'vimrc',
-            'Xdefaults',
-            'Xmodmap',
-            'tmux.conf'),
-        Folder('mutt', '~/.mutt'),
-        Folder('profile.d', '~/.profile.d'),
-        Folder('gitconfig.d', '~/.gitconfig.d'),
-        Folder('vim', '~/.vim'),
-        Folder('scripts', '~/scripts'),
-        SelectionFolder('config', '~/.config', {
-            'config/i3/config.work': 'config/i3/config',
-            'config/i3/config.home': 'config/i3/config',
-            'config/i3/config.work.laptop': 'config/i3/config',
-            'config/i3/i3blocks.conf.work': 'config/i3/i3blocks.conf',
-            'config/i3/i3blocks.conf.home': 'config/i3/i3blocks.conf',
-            'config/i3/i3blocks.conf.work.laptop': 'config/i3/i3blocks.conf'}),
-    ]
+
+class FeatureChoice:
+    def __init__(self, name, value):
+        self.name = name
+        self.value = value
+
+    def __str__(self):
+        result = '{}: {}\n'.format(self.name, self.value)
+        return result
+
+
+class Feature:
+    def __init__(self, name, value):
+        self.name = name
+        self.default = None
+        self.dot = False
+        self.destination = None
+        self.choices = {}
+        for key, val in value.items():
+            if key == 'default':
+                self.default = FeatureChoice(key, val)
+            elif key == 'dot':
+                self.dot = val
+            elif key == 'dest':
+                self.destination = val
+            elif len(key):
+                self.choices[key] = FeatureChoice(key, val)
+
+    def __str__(self):
+        result = '{}:\n'.format(self.name)
+        result += '  {}\n'.format(self.default)
+        for value in self.choices.values():
+            result += '  {}\n'.format(value)
+        return result
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('--omit-linked', '-l', action='store_true', dest='nolinked', help='Do not include linked files that are linked elsewhere', default=False)
-    parser.add_argument('--omit-missing', '-m', action='store_true', dest='nomissing', help='Do not include files that are missing', default=False)
-    parser.add_argument('--omit-ok', '-k', action='store_true', dest='nook', help='Do not include files that are OK', default=False)
-    args = parser.parse_args()
-    do_installation_of(elements, args)
+    features = []
+    with open('install.yaml', 'r') as stream:
+        try:
+            conf = yaml.safe_load(stream)
+        except yaml.YAMLError as exc:
+            print(exc)
+            sys.exit(-1)
+        for key, value in conf.items():
+            features.append(Feature(key, value))
+    for f in features:
+        print(f)
 
 

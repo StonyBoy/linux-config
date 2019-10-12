@@ -1,0 +1,130 @@
+---
+Shell:
+        dest: ~/
+        dot: true
+        default:
+                - bash_logout
+                - bash_profile
+                - bashrc
+                - clang-format
+                - inputrc
+                - profile
+                - profile.d/01-colors-defines.sh
+                - profile.d/10-git-prompt.sh
+                - profile.d/30-ls-colors.sh
+                - profile.d/20-prompt-color.sh
+                - profile.d/30-gcc-color-output.sh
+                - profile.d/40-alias.sh
+                - profile.d/50-private.sh
+        Light Colors:
+                - profile.d/02-colors-defines-light-background.sh
+        Dark Colors:
+                - profile.d/02-colors-defines-dark-background.sh
+        Work:
+                - profile.d/30-keychain.sh
+                - profile.d/30-misc-env.sh
+                - profile.d/30-work-env.sh
+        MacOS:
+                - profile.d/60-macos.sh
+        Linux:
+                - profile.d/60-linux.sh
+                - profile.d/70-linux-keyboard.sh
+        Home:
+                - profile.d/70-audiobooks.sh
+Beyond Compare:
+        dest: ~/.config
+        default:
+                - bcompare/BCCommands.xml
+Visual Studio Code:
+        dest: ~/.config
+        default:
+                - Code/User
+Fish Shell:
+        dest: ~/.config
+        default:
+                - fish
+I3 Window Manager:
+        dest: ~/.config/i3/config
+        Home:
+                - i3/config.home
+        Work:
+                - i3/config.work
+        Laptop:
+                - i3/config.work.laptop
+I3 Blocks:
+        dest: ~/.config/i3/i3blocks.conf
+        Home:
+                - i3/i3blocks.conf.home
+        Work:
+                - i3/i3blocks.conf.work
+        Laptop:
+                - i3/i3blocks.conf.work.laptop
+Powerline:
+        dest: ~/.config/powerline
+        default:
+                - config/powerline
+QT Creator:
+        dest: ~/.config/QtProject
+        default:
+                - config/QtProject
+Git:
+        dest: ~/
+        dot: true
+        default:
+                - gitconfig
+                - gitignore
+                - gitconfig.d/20-user.gitconfig
+        Work:
+                - gitconfig.d/10-work.gitconfig
+                - git-hooks
+        MacOS:
+                - gitconfig.d/40-macos.gitconfig
+
+Mutt Email:
+        dest: ~/.config/QtProject
+        dot: true
+        default:
+                - mbsyncrc
+                - msmtprc
+                - mutt/aliases
+                - mutt/bindings
+                - mutt/colors
+                - mutt/mailcap
+                - mutt/mbsync_folders.py
+                - mutt/muttrc
+        Work:
+                - mutt/accounts/microchip
+                - mutt/microchip.com.gpg
+                - mutt/outlook.office365.com.pem
+                - mutt/signatures/work
+        Home:
+                - mutt/accounts/one
+                - mutt/imap.one.com.pem
+                - mutt/send.one.com.pem
+                - mutt/one.com.gpg
+                - mutt/signatures/home
+PyCharm Editor:
+        dest: ~/PyCharm
+        default:
+                - config
+Scripts:
+        dest: ~/scripts
+        default:
+                - scripts
+Vim Editor:
+        dest: ~/
+        dot: true
+        default:
+                - vim/packages.vim
+                - vimrc
+X Window:
+        dest: ~/
+        dot: true
+        default:
+                - Xdefaults
+                - Xmodmap
+Terminal Mux:
+        dest: ~/
+        dot: true
+        default:
+                - tmux.conf
