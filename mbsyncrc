@@ -43,6 +43,7 @@ SSLType IMAPS
 SSLVersions TLSv1.2
 PassCmd "gpg --quiet --for-your-eyes-only --no-tty --decrypt ~/.mutt/microchip.com.gpg"
 CertificateFile ~/.mutt/outlook.office365.com.pem
+PipelineDepth 3
 
 # Remote storage
 IMAPStore microchip-remote
@@ -61,6 +62,7 @@ Patterns *
 SyncState *
 Create Both
 Expunge Both
+CopyArrivalDate Yes
 
 Group microchip
 Channel microchip-inbox
