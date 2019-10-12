@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2019-Oct-10 21:34
+" Time-Stamp: 2019-Oct-11 14:27
 
 source ~/.vim/packages.vim
 
@@ -206,6 +206,10 @@ nmap <F7> <C-[>
 
 " Toggle BufExplorer
 nmap <F8> :ToggleBufExplorer<cr>
+
+" Go to previous buffer
+nmap <F9> :b#<cr>
+
 
 " Build helpers
 nmap <silent> <leader>vb :Make -C ~/src/veloce/buildroot O=veloce/ linux-rebuild all && cp -v ~/src/veloce/buildroot/veloce/images/* /home/shegelun/mnt/vel05/bootup && echo "Build:" $(date +"\%Y-\%b-\%d \%R")<cr>

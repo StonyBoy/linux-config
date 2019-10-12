@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2019-Aug-07 17:57
+" Time-Stamp: 2019-Oct-11 16:22
 "
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -14,7 +14,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'                   " Sensible VIM settings
 Plug 'tpope/vim-tbone'                      " Tmux commands and yank/put support
 Plug 'itchyny/lightline.vim'                " Nice Status Line
-Plug 'terryma/vim-multiple-cursors'         " Multiple cursors
 Plug 'airblade/vim-gitgutter'               " Git: Changed lines since last revision
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy File Finder binary
 Plug 'junegunn/fzf.vim'                     " Fuzzy File Finder
@@ -42,3 +41,4 @@ call plug#end()
 " Plug 'vim-scripts/cscope.vim'             " C code browser : Rather slow and causes windows to be unupdated
 " Plug 'vim-scripts/highlight.vim'          " Highlight lines
 " Plug 'ronakg/quickr-cscope.vim'           " Code browser - use ctags instead - this also works for C++
+" Plug 'terryma/vim-multiple-cursors'         " Multiple cursors: not intuitive, never really used this
