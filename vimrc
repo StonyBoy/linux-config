@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2019-Oct-11 14:27
+" Time-Stamp: 2019-Oct-12 18:31
 
 source ~/.vim/packages.vim
 
@@ -30,8 +30,8 @@ autocmd FileType c,cpp   setlocal colorcolumn=80 " Setting highlight long lines
 au BufNewFile,BufRead *.in setf make
 au BufNewFile,BufRead *.c,*.h set shiftwidth=8
 
-au FileType py setlocal shiftwidth=4 colorcolumn=150 textwidth=150
-au BufNewFile,BufRead *.py setlocal shiftwidth=4 colorcolumn=150 textwidth=150
+au FileType py setlocal shiftwidth=4 colorcolumn=150 textwidth=150 expandtab tabstop=4 smarttab
+au BufNewFile,BufRead *.py setlocal shiftwidth=4 colorcolumn=150 textwidth=150 expandtab tabstop=4 smarttab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual Cues
