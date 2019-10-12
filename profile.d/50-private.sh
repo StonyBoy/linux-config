@@ -1,7 +1,7 @@
 #! /bin/bash
 # -*-sh-*-
 # .bash_profile
-# Time-stamp: <10-jan-19 14:15>
+# Time-stamp: 2019-Oct-12 14:51
 # Settings for all interactive shells
 
 # Debugging
@@ -56,7 +56,7 @@ alias pse='ps -o pid,user,args -eH'
 alias psu='ps -o pid,user,args -u $USER -H'
 alias psc='ps -o pid,user,args -H -C'
 
-alias bc='bcompare'
+alias bcp='bcompare'
 alias cf='clang-format -i'
 
 # Functions
