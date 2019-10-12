@@ -27,6 +27,7 @@ Patterns *
 SyncState *
 Create Both
 Expunge Both
+CopyArrivalDate Yes
 
 Group one
 Channel one-inbox
