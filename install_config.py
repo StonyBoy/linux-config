@@ -5,35 +5,39 @@ Install links
 import os
 import sys
 import readline
-import shutil
 import enum
 import subprocess
-import pathlib
 import yaml
-
-
-class UserChoice(enum.Enum):
-    SkipFile = '...'
-    OverWriteFile = '=>*'
-    InstallFile = '==>'
+from colorama import Fore, Back, Style
+import time
 
 
 class FileStatus(enum.Enum):
-    Hidden = '##'
-    Missing = ' .'
-    DifferentContent = '-+'
-    SameContent = '=='
-    Linked = ' >'
-    OtherLink = ' ~'
-    CorrectLink = 'OK'
+    CorrectLink = 'Nothing to do'
+    Missing = 'Create link'
+    Linked = 'Delete existing link and create new link'
+    SameContent = 'Delete existing file and create link'
+    DifferentContent = 'Rename file and create link'
+    Folder = 'Rename folder and create link'
 
 
 class Installer:
-    def __init__(self, src_path, dst_path):
-        self.src_path = os.path.abspath(os.path.expanduser(src_path))
+    def __init__(self, dst_path, dot, src_path):
         self.dst_path = os.path.abspath(os.path.expanduser(dst_path))
-        self.user_choice = UserChoice.InstallFile
+        self.dot = '.' if dot else ''
+        self.src_path = os.path.abspath(src_path)
         self.file_status = FileStatus.Missing
+        if os.path.isfile(self.src_path):
+            if os.path.isdir(self.dst_path):
+                self.dst_path = os.path.join(self.dst_path, self.dot + src_path)
+            self.get_file_status()
+        elif os.path.isdir(self.src_path):
+            self.dst_path = os.path.join(self.dst_path, self.dot + src_path)
+            self.get_dir_status()
+        else:
+            raise FileNotFoundError(self.src_path)
+
+    def get_file_status(self):
         if os.path.exists(self.dst_path):
             if os.path.islink(self.dst_path):
                 if os.readlink(self.dst_path) == self.src_path:
@@ -49,281 +53,82 @@ class Installer:
             if os.path.islink(self.dst_path):
                 self.file_status = FileStatus.Linked
 
-    def status(self):
-        return '{:2s} {:60s} : {}'.format(self.file_status.value, os.path.relpath(self.src_path), self.dst_path)
+    def get_dir_status(self):
+        if os.path.exists(self.dst_path):
+            if os.path.islink(self.dst_path):
+                if os.readlink(self.dst_path) == self.src_path:
+                    self.file_status = FileStatus.CorrectLink
+                else:
+                    self.file_status = FileStatus.Linked
+            else:
+                self.file_status = FileStatus.Folder
 
     def compare_contents(self):
         return subprocess.run(['diff', '-q', '-a', self.dst_path, self.src_path], stdout=subprocess.PIPE).returncode == 0
 
-    def missing_file_prompt(self):
-        prompt = 'File is missing, Do you want to install {}: (N/y) > '.format(self.dst_path)
-        response = input(prompt)
-        return response.lower()
+    def create_dst_backup(self):
+        newname = self.dst_path + time.strftime('.backup_%Y_%b_%d_%H_%M_%S')
+        os.rename(self.dst_path, newname)
+        print(f'  Backup as {newname}')
 
-    def overwrite_existing_prompt(self):
-        if self.file_status == FileStatus.Linked:
-            prompt = '{} is linked to another file, Do you want to replace the link: (N/y) > '.format(self.dst_path)
-        elif self.file_status == FileStatus.SameContent:
-            prompt = '{} already exists with the same content - Do you want to replace it with a link: (N/y) > '.format(self.dst_path)
-        else:
-            prompt = '{} already exists - Do you want to replace it: (N/y) > '.format(self.dst_path)
-        response = input(prompt)
-        return response.lower()
-
-    @staticmethod
-    def go_ahead_prompt():
-        prompt = 'Do you want to continue: (N/y) > '
-        response = input(prompt)
-        return response.lower()
-
-    def user_selection(self):
-        if self.file_status == FileStatus.CorrectLink or self.file_status == FileStatus.Hidden:
-            self.user_choice = UserChoice.SkipFile
-        else:
-            if self.file_status == FileStatus.Missing:
-                if self.missing_file_prompt() == 'y':
-                    self.user_choice = UserChoice.InstallFile
-                else:
-                    self.user_choice = UserChoice.SkipFile
-            else:
-                if self.overwrite_existing_prompt() == 'y':
-                    self.user_choice = UserChoice.OverWriteFile
-                else:
-                    self.user_choice = UserChoice.SkipFile
-
-    def show_selection(self):
-        if not self.hidden():
-            print('{:2s} {:60s} {} {}'.format(self.file_status.value, os.path.relpath(self.src_path), self.user_choice.value, self.dst_path))
-
-    def user_action(self):
-        if self.file_status == FileStatus.Hidden:
+    def run(self):
+        print(f'{self.file_status}:\n  {self.src_path} => {self.dst_path}\n  {self.file_status.value}')
+        if self.file_status == FileStatus.CorrectLink:
             return
-        if self.user_choice == UserChoice.SkipFile:
-            return
-        if self.user_choice == UserChoice.OverWriteFile:
-            os.remove(self.dst_path)
-        dst_dir = os.path.dirname(self.dst_path)
-        if not os.path.exists(dst_dir):
-            os.makedirs(dst_dir)
-        try:
+        if self.file_status == FileStatus.Missing:
             os.symlink(self.src_path, self.dst_path)
-        except FileExistsError:
-            pass
-
-    def wants_installation(self):
-        return self.file_status != FileStatus.Hidden and (self.user_choice == UserChoice.OverWriteFile or self.user_choice == UserChoice.InstallFile)
-
-    def hide(self):
-        self.file_status = FileStatus.Hidden
-
-    def hidden(self):
-        return self.file_status == FileStatus.Hidden
-
-
-class SelectionInstaller(Installer):
-    def __init__(self, src_path, dst_path, selected_link):
-        super().__init__(src_path, dst_path)
-        self.selected_link = self.src_path
-        if selected_link:
-            self.selected_link = os.path.abspath(os.path.expanduser(selected_link))
-            if os.path.exists(self.dst_path):
-                if os.path.islink(self.dst_path):
-                    if os.readlink(self.dst_path) == self.selected_link:
-                        self.file_status = FileStatus.CorrectLink
-                    else:
-                        self.file_status = FileStatus.OtherLink
-                else:
-                    if self.compare_contents():
-                        self.file_status = FileStatus.SameContent
-                    else:
-                        self.file_status = FileStatus.DifferentContent
-            else:
-                if os.path.islink(self.dst_path):
-                    self.file_status = FileStatus.Linked
-
-    def missing_file_prompt(self):
-        prompt = 'File {} is missing, Do you want to install {}: (N/y) > '.format(
-                os.path.basename(self.dst_path), self.src_path)
-        response = input(prompt)
-        return response.lower()
-
-    def overwrite_existing_prompt(self):
         if self.file_status == FileStatus.Linked:
-            prompt = '{} is linked to {}, Do you want to replace the link: (N/y) > '.format(self.dst_path, self.selected_link)
-        elif self.file_status == FileStatus.OtherLink:
-            prompt = '{} is linked to {}, Do you want to replace the link with {}: (N/y) > '.format(self.dst_path, pathlib.Path(self.dst_path).resolve(), self.src_path)
-        elif self.file_status == FileStatus.SameContent:
-            prompt = '{} already exists with the same content - Do you want to replace it with a link: (N/y) > '.format(self.dst_path)
-        else:
-            prompt = '{} already exists - Do you want to replace it: (N/y) > '.format(self.dst_path)
-        response = input(prompt)
-        return response.lower()
+            os.remove(self.dst_path)
+            os.symlink(self.src_path, self.dst_path)
+        if self.file_status == FileStatus.SameContent:
+            os.remove(self.dst_path)
+            os.symlink(self.src_path, self.dst_path)
+        if self.file_status == FileStatus.DifferentContent:
+            self.create_dst_backup()
+            os.symlink(self.src_path, self.dst_path)
+        if self.file_status == FileStatus.Folder:
+            self.create_dst_backup()
+            os.symlink(self.src_path, self.dst_path)
 
 
-class File:
-    def __init__(self, path, name):
-        self.path = path
-        self.name = name
-
-    def get_fullpath(self):
-        return os.path.join(self.path, self.name)
-
-    def __str__(self):
-        return '{}/{}'.format(self.path, self.name)
-
-
-class FullFile(File):
-    def __init__(self, pathname):
-        self.path, self.name = os.path.split(pathname)
-
-
-class Group:
-    def __init__(self, src, dst, dotname):
-        self.source = src
-        self.destination = dst
-        self.dot_rename_dst = dotname
-        self.elements = []
-        self.installers = []
-
-    def create_installers(self):
-        for item in self.elements:
-            self.installers.append(Installer(item.get_fullpath(), self.get_destination(item)))
-
-    def get_destination(self, item):
-        pass
-
-    def prepare_install(self):
-        for installer in self.installers:
-            installer.user_selection()
-
-    def show_selection(self):
-        for installer in self.installers:
-            installer.show_selection()
-
-    def install(self):
-        for installer in self.installers:
-            installer.user_action()
-
-    def get_group(self):
-        pass
-
-    def wants_installation(self):
-        result = False
-        for installer in self.installers:
-            result = result or installer.wants_installation()
-        return result
-
-    def __iter__(self):
-        for installer in self.installers:
-            yield installer
-
-    def __str__(self):
-        result = self.get_group()
-        for installer in self.installers:
-            if not installer.hidden():
-                result += '\n    ' + installer.status()
-        return result
-
-
-class FileList(Group):
-    def __init__(self, src, *files, dst='~', dotname=True):
-        super().__init__(src, dst, dotname)
-        for file in files:
-            self.elements.append(File(src, file))
-        self.create_installers()
-
-    def get_destination(self, item):
-        return os.path.join(self.destination, '.' + item.name if self.dot_rename_dst else item.name)
-
-    def get_group(self):
-        return '{}/ -> {}'.format(self.source, os.path.abspath(os.path.expanduser(self.destination)))
-
-
-class Folder(Group):
-    def __init__(self, src, dst):
-        super().__init__(src, dst, False)
-        for root, folders, files in os.walk(src):
-            for file in files:
-                self.elements.append(File(root, file))
-        self.create_installers()
-
-    def get_destination(self, item):
-        path = pathlib.Path(item.get_fullpath())
-        relative_path = str(path.relative_to(*path.parts[:1]))
-        return os.path.join(self.destination, relative_path)
-
-    def get_group(self):
-        return '{}/ -> {}'.format(self.source, os.path.abspath(os.path.expanduser(self.destination)))
-
-
-class SelectionFolder(Folder):
-    # Choose between alternative versions of the same file in a folder
-    def __init__(self, src, dst, choices):
-        self.choices = choices
-        super().__init__(src, dst)
-
-    def create_installers(self):
-        for item in self.elements:
-            dst_path = self.get_destination(item)
-            selected_link = None
-            for key, value in self.choices.items():
-                if key == item.get_fullpath():
-                    dst_path = self.get_destination(FullFile(value))
-                    selected_link = key
-            self.installers.append(SelectionInstaller(item.get_fullpath(),
-                dst_path, selected_link))
-
-
-def filter_items(items, args):
-    def hide_this(item, options):
-        if options.nolinked and item.file_status == FileStatus.Linked:
-            return True
-        if options.nomissing and item.file_status == FileStatus.Missing:
-            return True
-        if options.nook and item.file_status == FileStatus.CorrectLink:
-            return True
-        return False
-    for group in items:
-        for installer in group:
-            if hide_this(installer, args):
-                installer.hide()
-
-
-def do_installation_of(items, args):
-    filter_items(items, args)
-    try:
-        for item in items:
-            print(item)
-        print()
-        for legend in FileStatus:
-            print('  {} means {}'.format(legend.value, legend.name))
-        print()
-        for item in items:
-            item.prepare_install()
-        installation_needed = False
-        for item in items:
-            installation_needed = installation_needed or item.wants_installation()
-        if installation_needed:
-            for item in items:
-                item.show_selection()
-            print()
-            if Installer.go_ahead_prompt() == 'y':
-                for item in items:
-                    item.install()
-    except KeyboardInterrupt:
-        print('\n\n *** Installation Aborted ***')
-        sys.exit(1)
-
-
-
-class FeatureChoice:
-    def __init__(self, name, value):
+class FeatureVariant:
+    def __init__(self, parent, name, value):
+        self.parent = parent
         self.name = name
         self.value = value
+        self.installers = []
+
+    def query_user(self, destination, dot):
+        if self.name.lower() == 'default':
+            for val in self.value:
+                self.installers.append(Installer(destination, dot, val))
+        else:
+            self.show()
+            prompt = f'    Do you want to install {Fore.GREEN}{self.parent}/{self.name}{Style.RESET_ALL}: (N/y) > '
+            if input(prompt).lower() == 'y':
+                for val in self.value:
+                    self.installers.append(Installer(destination, dot, val))
+
+    def add_installer(self, destination, dot):
+        for item in self.value:
+            self.installers.append(Installer(destination, dot, item))
 
     def __str__(self):
-        result = '{}: {}\n'.format(self.name, self.value)
+        result = '\n    {}/{}:'.format(self.parent, self.name)
+        for value in self.value:
+            result += '\n      {}'.format(value)
         return result
+
+    def show(self):
+        print(self)
+
+    def install(self):
+        if len(self.installers):
+            for installer in self.installers:
+                installer.run()
+
+    def installation_needed(self):
+        return len(self.installers) > 0
 
 
 class Feature:
@@ -332,36 +137,86 @@ class Feature:
         self.default = None
         self.dot = False
         self.destination = None
-        self.choices = {}
+        self.variants = {}
         for key, val in value.items():
             if key == 'default':
-                self.default = FeatureChoice(key, val)
+                self.default = FeatureVariant(name, key, val)
             elif key == 'dot':
                 self.dot = val
             elif key == 'dest':
                 self.destination = val
             elif len(key):
-                self.choices[key] = FeatureChoice(key, val)
+                self.variants[key] = FeatureVariant(name, key, val)
 
     def __str__(self):
-        result = '{}:\n'.format(self.name)
-        result += '  {}\n'.format(self.default)
-        for value in self.choices.values():
-            result += '  {}\n'.format(value)
+        result = f'\n* {Fore.BLUE}{self.name}{Style.RESET_ALL}:'
+        if self.default:
+            result += str(self.default)
+        for value in self.variants.values():
+            result += str(value)
+        return result
+
+    def show(self):
+        print(self)
+
+    def query_user(self):
+        self.show()
+        prompt = f'  Do you want to install {Fore.BLUE}{self.name}{Style.RESET_ALL}: (N/y) > '
+        if input(prompt).lower() == 'y':
+            if self.default:
+                self.default.add_installer(self.destination, self.dot)
+            for var in self.variants.values():
+                var.query_user(self.destination, self.dot)
+            return True
+        return False
+
+    def install(self):
+        if self.default:
+            self.default.install()
+        for value in self.variants.values():
+            value.install()
+
+    def installation_needed(self):
+        result = False
+        if self.default:
+            result = result or self.default.installation_needed()
+        for value in self.variants.values():
+            result = result or value.installation_needed()
         return result
 
 
-if __name__ == '__main__':
+def install_items():
     features = []
     with open('install.yaml', 'r') as stream:
         try:
-            conf = yaml.safe_load(stream)
+            docs = yaml.safe_load_all(stream)
         except yaml.YAMLError as exc:
             print(exc)
             sys.exit(-1)
-        for key, value in conf.items():
-            features.append(Feature(key, value))
+        for doc in docs:
+            for key, value in doc.items():
+                features.append(Feature(key, value))
+            break
     for f in features:
-        print(f)
+        f.query_user()
+    changes = False
+    for f in features:
+        changes = changes or f.installation_needed()
+    if changes:
+        prompt = f'\n\n{Fore.MAGENTA}Begin installation{Style.RESET_ALL}: (N/y) > '
+        if input(prompt).lower() == 'y':
+            for f in features:
+                f.install()
 
+
+if __name__ == '__main__':
+    try:
+        install_items()
+    except KeyboardInterrupt:
+        print(f'\n\n{Fore.RED}*** Installation Aborted ***{Style.RESET_ALL}')
+        sys.exit(1)
+    except FileNotFoundError as exc:
+        print(f'\n\n{Fore.RED}*** Installation Aborted ***{Style.RESET_ALL}')
+        print(f'File not found: {exc}')
+        sys.exit(1)
 

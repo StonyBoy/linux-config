@@ -1,5 +1,5 @@
 ---
-Shell:
+Bash Shell:
         dest: ~/
         dot: true
         default:
@@ -32,39 +32,43 @@ Shell:
         Home:
                 - profile.d/70-audiobooks.sh
 Beyond Compare:
-        dest: ~/.config
+        dest: ~/
+        dot: true
         default:
-                - bcompare/BCCommands.xml
+                - config/bcompare/BCCommands.xml
 Visual Studio Code:
-        dest: ~/.config
+        dest: ~/
+        dot: true
         default:
-                - Code/User
+                - config/Code
 Fish Shell:
-        dest: ~/.config
+        dest: ~/
+        dot: true
         default:
-                - fish
+                - config/fish
 I3 Window Manager:
         dest: ~/.config/i3/config
+        dot: true
         Home:
-                - i3/config.home
+                - config/i3/config.home
         Work:
-                - i3/config.work
+                - config/i3/config.work
         Laptop:
-                - i3/config.work.laptop
+                - config/i3/config.work.laptop
 I3 Blocks:
         dest: ~/.config/i3/i3blocks.conf
         Home:
-                - i3/i3blocks.conf.home
+                - config/i3/i3blocks.conf.home
         Work:
-                - i3/i3blocks.conf.work
+                - config/i3/i3blocks.conf.work
         Laptop:
-                - i3/i3blocks.conf.work.laptop
+                - config/i3/i3blocks.conf.work.laptop
 Powerline:
-        dest: ~/.config/powerline
+        dest: ~/.config
         default:
                 - config/powerline
 QT Creator:
-        dest: ~/.config/QtProject
+        dest: ~/.config
         default:
                 - config/QtProject
 Git:
@@ -81,7 +85,7 @@ Git:
                 - gitconfig.d/40-macos.gitconfig
 
 Mutt Email:
-        dest: ~/.config/QtProject
+        dest: ~/
         dot: true
         default:
                 - mbsyncrc
@@ -104,11 +108,11 @@ Mutt Email:
                 - mutt/one.com.gpg
                 - mutt/signatures/home
 PyCharm Editor:
-        dest: ~/PyCharm
+        dest: ~/
         default:
-                - config
+                - PyCharm
 Scripts:
-        dest: ~/scripts
+        dest: ~/
         default:
                 - scripts
 Vim Editor:
