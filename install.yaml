@@ -64,11 +64,13 @@ I3 Blocks:
         Laptop:
                 - config/i3/i3blocks.conf.work.laptop
 Powerline:
-        dest: ~/.config
+        dest: ~/
+        dot: true
         default:
                 - config/powerline
 QT Creator:
-        dest: ~/.config
+        dest: ~/
+        dot: true
         default:
                 - config/QtProject
 Git:
