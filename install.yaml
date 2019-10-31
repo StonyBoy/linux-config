@@ -127,6 +127,7 @@ X Window:
         dest: ~/
         dot: true
         default:
+                - Xresources
                 - Xdefaults
                 - Xmodmap
 Terminal Mux:
