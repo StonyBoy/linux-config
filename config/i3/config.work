@@ -17,9 +17,13 @@ set $wrkspc8  "8: Music "
 set $wrkspc9  "9: Private "
 set $wrkspc10 "10: VPN "
 
+# No title bars
+new_window 1pixel
+for_window [class="^.*"] border pixel 1
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:SFNS Display 12
+# font pango:SFNS Display 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -31,10 +35,10 @@ focus_follows_mouse no
 # Possible options: urxvt, terminator, xfce4-terminal
 set $terminal terminator
 
+# Use xst (X Resource Simple Terminal)
+bindsym $mod+Return exec xst
 # Use Terminator
-bindsym $mod+Return exec terminator
-# Use an XFCE4 Terminal with Tmux
-bindsym $mod+Shift+Return exec xfce4-terminal -e ~/scripts/tat
+bindsym $mod+Shift+Return exec terminator
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -205,7 +209,7 @@ bindsym $mod+Shift+m focus floating; mode "$mode_floatmove"
 
 # Switch keyboard layout
 bindsym $mod+Mod1+u exec setxkbmap -layout us -model pc104 -option "caps:ctrl_modifier" -rules evdev
-bindsym $mod+Mod1+d exec setxkbmap -layout dk -model pc105 -option "caps:ctrl_modifier" -variant "nodeadkeys" -rules evdev
+bindsym $mod+Mod1+d exec setxkbmap -layout dk -model pc105 -option "caps:ctrl_modifier" -rules evdev
 
 # Media player controls
 bindsym XF86AudioPlay exec  --no-startup-id playerctl play-pause
