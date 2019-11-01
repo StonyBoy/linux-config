@@ -1,21 +1,21 @@
 ! Steen Hegelund
 ! 24-may-2018
 
-URxvt.font:            xft:Inconsolata:antialias=true:size=10
-URxvt.boldFont:        xft:Inconsolata:bold:antialias=true:size=10
-URxvt.italicFont:      xft:Inconsolata:italic:antialias=true:size=10
-URxvt.boldItalicFont:  xft:Inconsolata:bold:italic:antialias=true:size=10
+URxvt.font:            xft:Inconsolata:antialias=true:size=11
+URxvt.boldFont:        xft:Inconsolata:bold:antialias=true:size=11
+URxvt.italicFont:      xft:Inconsolata:italic:antialias=true:size=11
+URxvt.boldItalicFont:  xft:Inconsolata:bold:italic:antialias=true:size=11
 
 ! Perl Extensions to urxvt
-URxvt.perl-ext-common:      default,clipboard,font-size
+! URxvt.perl-ext-common:      default,clipboard,font-size
 
 ! Stay focused on a particular part of scrollback buffer when scrolled up from the bottom
 ! URxvt-unicode terminal: do not scroll with output
-URxvt*scrollTtyOutput: false
+! URxvt*scrollTtyOutput: false
 ! URxvt-unicode terminal: scroll in relation to buffer (with mouse scroll or Shift+Page Up)
-URxvt*scrollWithBuffer: true
+! URxvt*scrollWithBuffer: true
 ! URxvt-unicode terminalscroll back to the bottom on keypress
-URxvt*scrollTtyKeypress: true
+! URxvt*scrollTtyKeypress: true
 URxvt.scrollBar:        false
 
 ! URxvt-unicode terminal: disable the scrollback buffer for the secondary screen
@@ -43,20 +43,19 @@ URxvt.keysym.C-G:        \ echo -ne '\\033c'\n
 
 ! clipboard
 ! update clipboard whenever primary gets updated
-URxvt.clipboard.autocopy: true
+! URxvt.clipboard.autocopy: true
 ! Use ctrl+shift+c and ctrl+shift-v as copy/paste shortcuts
-URxvt.iso14755: false
-URxvt.iso14755_52: false
-URxvt.keysym.C-C: perl:clipboard:copy
-URxvt.keysym.C-V: perl:clipboard:paste
-URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
+! URxvt.iso14755: false
+! URxvt.iso14755_52: false
+! URxvt.keysym.C-C: perl:clipboard:copy
+! URxvt.keysym.C-V: perl:clipboard:paste
+! URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
 
 ! Font size
-URxvt.keysym.C-plus:      font-size:increase
-URxvt.keysym.C-minus:     font-size:decrease
-URxvt.keysym.C-S-plus:    font-size:incglobal
-URxvt.keysym.C-S-minus:   font-size:decglobal
-URxvt.keysym.C-equal:     font-size:reset
-URxvt.keysym.C-question:  font-size:show
-URxvt.font-size.step:     1
-
+! URxvt.keysym.C-plus:      font-size:increase
+! URxvt.keysym.C-minus:     font-size:decrease
+! URxvt.keysym.C-S-plus:    font-size:incglobal
+! URxvt.keysym.C-S-minus:   font-size:decglobal
+! URxvt.keysym.C-equal:     font-size:reset
+! URxvt.keysym.C-question:  font-size:show
+! URxvt.font-size.step:     1

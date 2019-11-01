@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2019-Oct-12 18:31
+" Time-Stamp: 2019-Nov-01 09:16
 
 source ~/.vim/packages.vim
 
@@ -15,7 +15,8 @@ set number          " Turn on line numbers
 set lazyredraw      " Do not redraw while running macros (much faster)
 set scrolloff=5     " Scroll before the curser reaches top or buttom
 set sidescrolloff=2 " Scroll before the curser reaches left or right side
-set textwidth=80    " Set the line width to 80 characters
+set textwidth=150   " Set the line width default value
+set colorcolumn=150 " Set the colour marker
 set hidden          " Allow edit buffers to be hidden
 set guioptions=     " Remove menus
 
@@ -26,12 +27,18 @@ if has("multi_byte")
     set list        " Turn on the display of whitespace
 endif
 
-autocmd FileType c,cpp   setlocal colorcolumn=80 " Setting highlight long lines
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Filetype handling
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au FileType py setlocal shiftwidth=4 expandtab tabstop=4 smarttab
+au FileType rb setlocal shiftwidth=4 expandtab tabstop=4 smarttab
+au FileType c,h setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent
+au FileType cxx,cpp,hxx setlocal shiftwidth=4 expandtab tabstop=4 smarttab
 au BufNewFile,BufRead *.in setf make
-au BufNewFile,BufRead *.c,*.h set shiftwidth=8
-
-au FileType py setlocal shiftwidth=4 colorcolumn=150 textwidth=150 expandtab tabstop=4 smarttab
-au BufNewFile,BufRead *.py setlocal shiftwidth=4 colorcolumn=150 textwidth=150 expandtab tabstop=4 smarttab
+au BufNewFile,BufRead *.c,*.h setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent
+au BufNewFile,BufRead *.cpp,*cxx,*.hxx setlocal shiftwidth=4 expandtab tabstop=4 smarttab
+au BufNewFile,BufRead *.py setlocal shiftwidth=4 expandtab tabstop=4 smarttab
+au BufNewFile,BufRead *.rb setlocal shiftwidth=4 expandtab tabstop=4 smarttab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual Cues
@@ -47,7 +54,6 @@ set showmatch       " showmatch:   Show the matching bracket for the last ')'?
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set autoindent      " Auto indent, nice for coding
 set smartindent     " Do smart autoindenting when starting a new line.
-autocmd FileType c,cpp setlocal cindent
 set copyindent      " Mirroring offset with automatic indentation
 set formatoptions=tcrqnj " See Help (complex)
 set linebreak       " Insert automatic line breaks while typing
@@ -148,6 +154,11 @@ nmap <silent> <leader>wV :set nosplitright \| call PasteWindow('vsplit') \| set 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Colorscheme configuration
+syntax on
+set background=light
+colorscheme solarized
+
 " Lightline
 set laststatus=2
 set noshowmode
@@ -182,11 +193,6 @@ nmap <silent> <leader>g :YcmCompleter GoTo<cr>
 command! -bang -nargs=* Rgu call fzf#vim#grep("rg -u --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, <bang>0)'
 command! -bang -nargs=* Bli call fzf#vim#buffer_lines(<q-args>, <bang>0)'
 
-" Colorscheme configuration
-syntax enable
-set background=light
-colorscheme solarized
-
 " Do not set special background
 highlight SpecialKey ctermbg=NONE guibg=NONE
 
@@ -212,7 +218,6 @@ nmap <F9> :b#<cr>
 
 
 " Build helpers
-nmap <silent> <leader>vb :Make -C ~/src/veloce/buildroot O=veloce/ linux-rebuild all && cp -v ~/src/veloce/buildroot/veloce/images/* /home/shegelun/mnt/vel05/bootup && echo "Build:" $(date +"\%Y-\%b-\%d \%R")<cr>
-nmap <silent> <leader>fb :Make -C ~/work/fireant/buildroot O=~/work/build/buildroot-pcb134 linux-rebuild all && echo "Build:" $(date +"\%Y-\%b-\%d \%R")<cr>
-nmap <silent> <leader>lb :Make -C ~/work/fireant/buildroot O=../ls1046/ linux-rebuild all && echo "Build:" $(date +"\%Y-\%b-\%d \%R")<cr>
-nmap <silent> <leader>mb :Make -C ~/work/mesa/build-arm64 -j 8 && echo "Build:" $(date +"\%Y-\%b-\%d \%R")<cr>
+nmap <silent> <leader>fb :Make -C ~/work/fireant/buildroot O=../../build/buildroot-ls1046-fireant/ linux-rebuild all<cr>
+nmap <silent> <leader>r :e!<cr>
+
