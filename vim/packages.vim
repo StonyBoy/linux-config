@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2019-Oct-11 16:22
+" Time-Stamp: 2019-Nov-05 22:21
 "
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -24,11 +24,11 @@ Plug 'tpope/vim-obsession'                  " Automatic editing sessions
 Plug 'tpope/vim-sleuth'                     " Automatic indentation based of file content
 Plug 'christoomey/vim-tmux-navigator'       " Go between panes in both vim and tmux
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' } " Completion support for SW dev
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'} " Generate a config file for YCM
 Plug 'jlanzarotta/bufexplorer'              " Manage Buffers
 Plug 'tpope/vim-markdown'                   " Syntax highlighting for markdown files
 Plug 'tpope/vim-dispatch'                   " Run build commands in the background and parse the result
 Plug 'vim-scripts/update-time'              " Insert/Update timestamps in files
+Plug 'vim-scripts/highlight.vim'            " Highlight lines
 call plug#end()
 
 
@@ -39,6 +39,6 @@ call plug#end()
 " Plug 'jremmen/vim-ripgrep'                " Provide ripgrep using :Rg <string|pattern> - FZF supports this
 " Plug 'editorconfig/editorconfig-vim'      " Adapt editor config to current project, use vim-sleuth
 " Plug 'vim-scripts/cscope.vim'             " C code browser : Rather slow and causes windows to be unupdated
-" Plug 'vim-scripts/highlight.vim'          " Highlight lines
 " Plug 'ronakg/quickr-cscope.vim'           " Code browser - use ctags instead - this also works for C++
-" Plug 'terryma/vim-multiple-cursors'         " Multiple cursors: not intuitive, never really used this
+" Plug 'terryma/vim-multiple-cursors'       " Multiple cursors: not intuitive, never really used this
+" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'} " Generate a config file for YCM
