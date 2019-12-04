@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2019-Nov-05 22:21
+" Time-Stamp: 2019-Nov-19 11:14
 "
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -28,7 +28,6 @@ Plug 'jlanzarotta/bufexplorer'              " Manage Buffers
 Plug 'tpope/vim-markdown'                   " Syntax highlighting for markdown files
 Plug 'tpope/vim-dispatch'                   " Run build commands in the background and parse the result
 Plug 'vim-scripts/update-time'              " Insert/Update timestamps in files
-Plug 'vim-scripts/highlight.vim'            " Highlight lines
 call plug#end()
 
 
@@ -41,4 +40,5 @@ call plug#end()
 " Plug 'vim-scripts/cscope.vim'             " C code browser : Rather slow and causes windows to be unupdated
 " Plug 'ronakg/quickr-cscope.vim'           " Code browser - use ctags instead - this also works for C++
 " Plug 'terryma/vim-multiple-cursors'       " Multiple cursors: not intuitive, never really used this
-" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'} " Generate a config file for YCM
+" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'} " Generate a config file for YCM, did not really use this
+" Plug 'vim-scripts/highlight.vim'          " Highlight lines: ctrl+h collides with tmux shortcuts

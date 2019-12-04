@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2019-Nov-01 09:16
+" Time-Stamp: 2019-Nov-19 11:11
 
 source ~/.vim/packages.vim
 
@@ -76,6 +76,7 @@ set undoreload=65538       " The maximum number of lines that can be saved in th
 " Bash like tab completion
 set wildmode=longest,list,full
 set wildmenu
+set wildignorecase  " Ignore case when tab-expanding filenames
 
 " Go to buffer number 1-20 (1-20gb)
 let c = 1
@@ -197,7 +198,7 @@ command! -bang -nargs=* Bli call fzf#vim#buffer_lines(<q-args>, <bang>0)'
 highlight SpecialKey ctermbg=NONE guibg=NONE
 
 " Highlight lines
-nmap <silent> <leader>hh  :highlight SpecialKey ctermbg=NONE guibg=NONE<cr>:set shiftwidth=8<cr>
+nmap <silent> <leader>hh  :highlight SpecialKey ctermbg=NONE guibg=NONE<cr>:setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent<cr>
 nmap <silent> <leader>lw  :set nowrap<cr>
 
 " Window resizing
