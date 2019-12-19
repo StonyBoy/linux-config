@@ -116,7 +116,8 @@ PyCharm Editor:
 Scripts:
         dest: ~/
         default:
-                - scripts
+                - scripts/tat
+                - scripts/python.init.py
 Vim Editor:
         dest: ~/
         dot: true

@@ -1,7 +1,7 @@
 #! /bin/bash
 # -*-sh-*-
 # .bash_profile
-# Time-stamp: 2019-Oct-12 14:51
+# Time-stamp: 2019-Dec-19 09:18
 # Settings for all interactive shells
 
 # Debugging
@@ -9,6 +9,7 @@
 
 export PATH=~/scripts:~/.local/bin:~/bin:$PATH
 export PAGER='less -s'
+export PYTHONSTARTUP=~/scripts/python.init.py
 
 # Powerline provides advanced shell and GIT status
 # Install with pip install powerline-status
@@ -33,10 +34,6 @@ export rvmsudo_secure_path=1
 # Add Rusts Cargo to path if present
 if [[ -d ~/.cargo/bin ]]; then
     export PATH="$PATH:$HOME/.cargo/bin"
-fi
-
-if [[ $DISPLAY != "" ]]; then
-    export PROMPT_COMMAND=prompt_command
 fi
 
 # Set core file size limit
@@ -124,39 +121,8 @@ function leavetime()
 
 function title()
 {
-    PROMPT_COMMAND="echo -ne \"\e]0;$*\a\""
+    xdotool set_window --name "$*" $(xdotool getactivewindow)
 }
-
-function prompt_command()
-{
-    CUR_NAME=$PWD
-    TITLE_NAME=$CUR_NAME
-    if [[ $CUR_NAME == $HOME ]]; then
-        TITLE_NAME="Home"
-    else
-        elems=($(echo "${CUR_NAME}" | tr '/' '\n'))
-        if [[ ${elems[1]} == $USER ]]; then
-            if [[ ${elems[2]} == "src" ]]; then
-                TITLE_NAME=${elems[2]}
-                if [[ ${elems[3]} != "" ]]; then
-                    TITLE_NAME=${elems[3]}
-                    WEBSTAX_NAME=${TITLE_NAME##webstax2_}
-                    if [[ ${WEBSTAX_NAME} != "" ]]; then
-                        if [[ ${elems[3]} != ${elems[-1]} ]]; then
-                            TITLE_NAME="${WEBSTAX_NAME} ${elems[-1]}"
-                        else
-                            TITLE_NAME=${WEBSTAX_NAME}
-                        fi
-                    fi
-                fi
-            else
-                TITLE_NAME=${elems[-1]}
-            fi
-        fi
-    fi
-    echo -ne "\e]0;$TITLE_NAME\a"
-}
-
 
 function set_clang()
 {
