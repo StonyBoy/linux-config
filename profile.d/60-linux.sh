@@ -25,3 +25,9 @@ function show_ip()
 {
     ip addr list wan | grep 'inet ' | grep -v '127.0.0.1' | cut -d" " -f6
 }
+
+function tmux_go_vim()
+{
+    tmux switch -t $(tmux list-panes -a -F '#{session_name}:#{window_index}.#{pane_index} #{pane_tty}' | grep $(ps -o tty= -p $(lsof -t $1))$ | awk '{ print $1 }')
+}
+
