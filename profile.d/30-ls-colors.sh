@@ -64,7 +64,7 @@ export LS_COLORS="no=00"                       # no effects as default
 export LS_COLORS=$LS_COLORS:"fi=00"            # no efects on files as default
 if [ -z $TERM_DARK_BACKGROUND ]
 then
-    export LS_COLORS=$LS_COLORS:"di=01;34"         # directory is bold and blue
+    export LS_COLORS=$LS_COLORS:"di=00;30"         # directory is black
 else
     export LS_COLORS=$LS_COLORS:"di=01;33"         # directory is bold and orange
 fi
