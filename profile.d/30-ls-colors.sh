@@ -1,19 +1,31 @@
-#di = directory
-#fi = file
-#ln = symbolic link
-#pi = fifo file
-#so = socket file
-#bd = block (buffered) special file
-#cd = character (unbuffered) special file
-#or = symbolic link pointing to a non-existent file (orphan)
-#mi = non-existent file pointed to by a symbolic link (visible when you type ls -l)
-#ex = file which is executable (ie. has 'x' set in permissions).
+#no = Global default, although everything should be something
+#fi = Normal file
+#di = Directory
+#ln = Symbolic link. If you set this to 'target' instead of a numerical value, the colour is as for the file pointed to.
+#pi = Named pipe
+#do = Door
+#bd = Block device
+#cd = Character device
+#or = Symbolic link pointing to a non-existent file
+#so = Socket
+#su = File that is setuid (u+s)
+#sg = File that is setgid (g+s)
+#tw = Directory that is sticky and other-writable (+t,o+w)
+#ow = Directory that is other-writable (o+w) and not sticky
+#st = Directory with the sticky bit set (+t) and not other-writable
+#ex = Executable file (i.e. has 'x' set in permissions)
+#mi = Non-existent file pointed to by a symbolic link (visible when you type ls -l)
+#lc = Opening terminal code
+#rc = Closing terminal code
+#ec = Non-filename text
+#*.extension   Every file using this extension e.g. *.jpg
 
 #0   = default colour
 #1   = bold
 #4   = underlined
 #5   = flashing text
 #7   = reverse field
+#30  = black
 #31  = red
 #32  = green
 #33  = yellow
@@ -36,6 +48,7 @@
 #94  = light blue
 #95  = light purple
 #96  = turquoise
+#97  = white
 #100 = dark grey background
 #101 = light red background
 #102 = light green background
@@ -43,6 +56,7 @@
 #104 = light blue background
 #105 = light purple background
 #106 = turquoise background
+#106 = white background
 
 
 #ls colors
@@ -57,7 +71,7 @@ fi
 export LS_COLORS=$LS_COLORS:"ln=00;36"         # symlinks  is bold and cyan
 export LS_COLORS=$LS_COLORS:"pi=100;35"        # fifo      is ?    and ?
 export LS_COLORS=$LS_COLORS:"so=100;35"        # socktes   is bold and purple
-export LS_COLORS=$LS_COLORS:"do=100;35"        # ?
+export LS_COLORS=$LS_COLORS:"do=100;35"        # door
 
 if [ -z $TERM_DARK_BACKGROUND ]
 then
@@ -68,11 +82,11 @@ fi
 export LS_COLORS=$LS_COLORS:"cd=100;32;01"     # char  dev is bold, darkgray bg and green
 export LS_COLORS=$LS_COLORS:"or=01;05;37;41"   # symlink pointing to non-existing file
 export LS_COLORS=$LS_COLORS:"mi=01;05;37;41"   # symlink pointing to non-existing file
-export LS_COLORS=$LS_COLORS:"su=37;41"         # ?
-export LS_COLORS=$LS_COLORS:"sg=30;43"         # ?
-export LS_COLORS=$LS_COLORS:"tw=30;42"         # ?
-export LS_COLORS=$LS_COLORS:"ow=34;42"         # ?
-export LS_COLORS=$LS_COLORS:"st=37;44"         # ?
+export LS_COLORS=$LS_COLORS:"su=37;41"         # setuid file
+export LS_COLORS=$LS_COLORS:"sg=30;43"         # setgid file
+export LS_COLORS=$LS_COLORS:"tw=30;42"         # sticky other-writable file
+export LS_COLORS=$LS_COLORS:"ow=97;42"         # other writable file
+export LS_COLORS=$LS_COLORS:"st=37;44"         # sticky dir
 
 if [ -z $TERM_DARK_BACKGROUND ]
 then
