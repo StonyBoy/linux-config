@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Jan-12 17:15
+" Time-Stamp: 2020-Jan-14 11:52
 
 source ~/.vim/packages.vim
 
@@ -30,17 +30,8 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetype handling
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au FileType js setlocal shiftwidth=4 expandtab tabstop=4 smarttab
-au FileType py setlocal shiftwidth=4 expandtab tabstop=4 smarttab
-au FileType rb setlocal shiftwidth=4 expandtab tabstop=4 smarttab
-au FileType c,h setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent
-au FileType cxx,cpp,hxx setlocal shiftwidth=4 expandtab tabstop=4 smarttab
+filetype plugin indent on
 au BufNewFile,BufRead *.in setf make
-au BufNewFile,BufRead *.c,*.h setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent
-au BufNewFile,BufRead *.cpp,*cxx,*.hxx setlocal shiftwidth=4 expandtab tabstop=4 smarttab
-au BufNewFile,BufRead *.py setlocal shiftwidth=4 expandtab tabstop=4 smarttab
-au BufNewFile,BufRead *.rb setlocal shiftwidth=4 expandtab tabstop=4 smarttab
-au BufNewFile,BufRead *.js setlocal shiftwidth=4 expandtab tabstop=4 smarttab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual Cues
