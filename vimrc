@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Jan-14 11:52
+" Time-Stamp: 2020-Jan-19 17:55
 
 source ~/.vim/packages.vim
 
@@ -15,8 +15,6 @@ set number          " Turn on line numbers
 set lazyredraw      " Do not redraw while running macros (much faster)
 set scrolloff=5     " Scroll before the curser reaches top or buttom
 set sidescrolloff=2 " Scroll before the curser reaches left or right side
-set textwidth=150   " Set the line width default value
-set colorcolumn=150 " Set the colour marker
 set hidden          " Allow edit buffers to be hidden
 set guioptions=     " Remove menus
 
@@ -28,10 +26,22 @@ if has("multi_byte")
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Text formatting defaults
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set textwidth=150   " Set the line width default value
+set colorcolumn=150 " Set the colour marker
+set shiftwidth=4    " Default 4 spaces
+set tabstop=4       " 4 spaces per tab
+set expandtab       " Use spaces
+set smarttab        " Indent smart
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetype handling
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on
 au BufNewFile,BufRead *.in setf make
+au FileType c,h setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent noexpandtab
+au BufNewFile,BufRead *.c,*.h setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent noexpandtab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual Cues

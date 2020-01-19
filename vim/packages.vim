@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2019-Nov-19 11:14
+" Time-Stamp: 2020-Jan-15 21:08
 "
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -28,6 +28,7 @@ Plug 'jlanzarotta/bufexplorer'              " Manage Buffers
 Plug 'tpope/vim-markdown'                   " Syntax highlighting for markdown files
 Plug 'tpope/vim-dispatch'                   " Run build commands in the background and parse the result
 Plug 'vim-scripts/update-time'              " Insert/Update timestamps in files
+Plug 'pangloss/vim-javascript'              " Better Javascript indenting support
 call plug#end()
 
 
