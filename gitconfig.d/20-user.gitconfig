@@ -58,7 +58,7 @@
         patternType = perl
 
 [rerere]
-        enabled = true
+        enabled = false
 
 [log]
         decorate = short
