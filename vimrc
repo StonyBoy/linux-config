@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Jan-19 17:55
+" Time-Stamp: 2020-Jan-27 15:00
 
 source ~/.vim/packages.vim
 
@@ -40,8 +40,8 @@ set smarttab        " Indent smart
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on
 au BufNewFile,BufRead *.in setf make
-au FileType c,h setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent noexpandtab
-au BufNewFile,BufRead *.c,*.h setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent noexpandtab
+au FileType c,h,S setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent noexpandtab
+au BufNewFile,BufRead *.c,*.h,*.S setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent noexpandtab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual Cues
