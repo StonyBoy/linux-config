@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2020-Jan-15 21:08
+" Time-Stamp: 2020-Feb-12 22:33
 "
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -17,7 +17,7 @@ Plug 'itchyny/lightline.vim'                " Nice Status Line
 Plug 'airblade/vim-gitgutter'               " Git: Changed lines since last revision
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy File Finder binary
 Plug 'junegunn/fzf.vim'                     " Fuzzy File Finder
-Plug 'altercation/vim-colors-solarized'     " Colorscheme
+Plug 'lifepillar/vim-solarized8'            " Modern SolarlizedColorscheme
 Plug 'vim-ruby/vim-ruby'                    " Ruby support
 Plug 'tpope/vim-fugitive'                   " GIT support
 Plug 'tpope/vim-obsession'                  " Automatic editing sessions
@@ -43,3 +43,4 @@ call plug#end()
 " Plug 'terryma/vim-multiple-cursors'       " Multiple cursors: not intuitive, never really used this
 " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'} " Generate a config file for YCM, did not really use this
 " Plug 'vim-scripts/highlight.vim'          " Highlight lines: ctrl+h collides with tmux shortcuts
+" Plug 'altercation/vim-colors-solarized'   " Colorscheme

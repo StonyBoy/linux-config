@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Jan-27 15:00
+" Time-Stamp: 2020-Feb-12 23:02
 
 source ~/.vim/packages.vim
 
@@ -17,6 +17,7 @@ set scrolloff=5     " Scroll before the curser reaches top or buttom
 set sidescrolloff=2 " Scroll before the curser reaches left or right side
 set hidden          " Allow edit buffers to be hidden
 set guioptions=     " Remove menus
+set termguicolors   " True color support in terminal
 
 if has("multi_byte")
     set fillchars=stl:\ ,stlnc:\ ,vert:┆,fold:-,diff:-    " Displaying symbols to separate windows
@@ -161,7 +162,7 @@ nmap <silent> <leader>wV :set nosplitright \| call PasteWindow('vsplit') \| set 
 " Colorscheme configuration
 syntax on
 set background=light
-colorscheme solarized
+colorscheme solarized8_flat
 
 " Lightline
 set laststatus=2
