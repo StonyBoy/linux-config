@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Feb-12 23:02
+" Time-Stamp: 2020-Feb-13 13:13
 
 source ~/.vim/packages.vim
 
@@ -17,7 +17,13 @@ set scrolloff=5     " Scroll before the curser reaches top or buttom
 set sidescrolloff=2 " Scroll before the curser reaches left or right side
 set hidden          " Allow edit buffers to be hidden
 set guioptions=     " Remove menus
-set termguicolors   " True color support in terminal
+
+" Enable true color
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 
 if has("multi_byte")
     set fillchars=stl:\ ,stlnc:\ ,vert:┆,fold:-,diff:-    " Displaying symbols to separate windows
