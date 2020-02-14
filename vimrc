@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Feb-13 13:13
+" Time-Stamp: 2020-Feb-14 11:37
 
 source ~/.vim/packages.vim
 
@@ -168,7 +168,7 @@ nmap <silent> <leader>wV :set nosplitright \| call PasteWindow('vsplit') \| set 
 " Colorscheme configuration
 syntax on
 set background=light
-colorscheme solarized8_flat
+colorscheme solarized8
 
 " Lightline
 set laststatus=2
