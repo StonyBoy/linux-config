@@ -1,6 +1,5 @@
-[hub]
-        host = git-ent.microsemi.net
-
 [sendemail]
-        smtpserver = xrelay.vitesse.com
+        smtpserver = mx.microchip.com
         smtpserverport = 25
+        tocover=true
+        cccover=true
