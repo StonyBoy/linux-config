@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Feb-14 11:37
+" Time-Stamp: 2020-Feb-18 13:04
 
 source ~/.vim/packages.vim
 
@@ -47,8 +47,8 @@ set smarttab        " Indent smart
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on
 au BufNewFile,BufRead *.in setf make
-au FileType c,h,S setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent noexpandtab
-au BufNewFile,BufRead *.c,*.h,*.S setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent noexpandtab
+au FileType c,h,S,dts,dtsi setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent noexpandtab
+au BufNewFile,BufRead *.c,*.h,*.S,*.dts,*.dtsi setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent noexpandtab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual Cues
@@ -194,11 +194,6 @@ let g:lightline = {
 function! CustomFilemod()
   return &modified ? ' {+}' : ''
 endfunction
-
-
-" YouCompleteMe configuration
-let g:ycm_confirm_extra_conf = 0
-nmap <silent> <leader>g :YcmCompleter GoTo<cr>
 
 " FZF
 command! -bang -nargs=* Rgu call fzf#vim#grep("rg -u --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, <bang>0)'
