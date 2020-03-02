@@ -7,6 +7,9 @@ set input-meta on
 set convert-meta off
 set output-meta on
 
-# Filename completion/expansion
+# make tab and shift-tab cycle through commands after listing
+TAB: menu-complete
+"\e[Z": menu-complete-backward
+set show-all-if-ambiguous on
 set completion-ignore-case on
-
+set menu-complete-display-prefix on
