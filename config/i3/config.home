@@ -177,6 +177,9 @@ for_window [class="[Bb]compare"] move to workspace $wrkspc5
 for_window [class="Clementine"] move to workspace $wrkspc8
 for_window [class="Spotify"] move to workspace $wrkspc8
 
+# For the I3blocks calender widget
+for_window [class="Yad"] floating enable
+
 # Move workspace to outputs
 bindsym $mod+Mod1+Left  move workspace to output left
 bindsym $mod+Mod1+Down  move workspace to output down
