@@ -172,6 +172,7 @@ for_window [class="Thunar"] move to workspace $wrkspc4
 for_window [class="[Bb]compare"] move to workspace $wrkspc5
 
 # Workspace 7
+for_window [class="Microsoft Teams - Preview"] move to workspace $wrkspc7
 
 # Workspace 8
 for_window [class="Clementine"] move to workspace $wrkspc8
@@ -322,6 +323,8 @@ bar {
     # Avoid accidental workspace switching when scrolling the wheel (up/down) in the bar
     bindsym button4 nop
     bindsym button5 nop
+    # Disable the system tray
+    # tray_output none
 }
 
 

@@ -37,12 +37,14 @@ label=♪
 instance=spotify
 interval=5
 signal=10
-color=#FAFAD2
+color=#b0e0e6
 
 # Volume indicator
 [volume-pulseaudio]
-interval=1
-signal=10
+interval=once
+signal=1
+DEFAULT_COLOR="#f8fba0"
+MUTED_COLOR="#a0a0a0"
 
 # Memory usage
 #
@@ -51,7 +53,7 @@ signal=10
 label=
 separator=false
 interval=30
-color=#FDB6B6
+color=#fdb6b6
 
 # Disk usage
 #
@@ -70,14 +72,14 @@ interval=30
 [iface]
 label= wan:
 instance=wan
-color=#7FFFD4
+color=#7fffd4
 interval=10
 separator=false
 
 [iface]
 label=tun:
 instance=tun0
-color=#98FB98
+color=#98fb98
 interval=10
 
 # CPU usage
@@ -87,26 +89,15 @@ interval=10
 [cpu_usage]
 label=
 interval=10
-min_width=CPU: 100.00%
-separator=false
-
-[temperature]
-label=TEMP: 
-interval=10
-
-[hostname]
-command=uname -n
-full_text=Show hostname
-interval=300
-color=#eee8d5
-separator=false
+min_width=100.00%
 
 # Uptime
 #
 [strict_uptime]
-full_text=Strict Uptime
+full_text=Uptime
 interval=60
-color=#B0E0E6
+min_width=00<00<00
+color=#b0e0e6
 
 [key_layout]
 label= 
@@ -116,7 +107,6 @@ color=#ffcc92
 
 [calendar]
 interval=15
-LABEL= 
 DATEFMT=+%Y-%m-%d
 color=#ccf3d1
 
@@ -126,6 +116,6 @@ color=#ccf3d1
 interval=5
 STRFTIME_FORMAT=%H:%M:%S
 TZONES=Europe/Copenhagen,America/New_York,Asia/Calcutta
-TZ_LABELS=Copenhagen,New York,Hyderabad
-color=#F9F79A
+TZ_LABELS=CPH,NY,Hyd
+color=#f9f79a
 
