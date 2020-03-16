@@ -5,12 +5,6 @@
 path_name="$(basename "$PWD" | tr . -)"
 session_name=${1-$path_name}
 
-title() {
-  if [[ -n "$DISPLAY" ]]; then
-    xdotool set_window --name "$*" $(xdotool getactivewindow)
-  fi
-}
-
 not_in_tmux() {
   [ -z "$TMUX" ]
 }
@@ -26,7 +20,7 @@ create_detached_session() {
 create_if_needed_and_attach() {
   if not_in_tmux; then
     if [[ $session_name == "?" ]]; then
-      tmux list-sessions
+      tmux list-sessions | sed -E 's/:/ :/'
     else
       tmux new-session -As "$session_name"
     fi
@@ -36,7 +30,6 @@ create_if_needed_and_attach() {
     fi
     tmux switch-client -t "$session_name"
   fi
-  title $session_name
 }
 
 create_if_needed_and_attach

@@ -57,10 +57,3 @@ function remotex
 {
     xprop -root -remove _XKB_RULES_NAMES
 }
-
-if [[ $HOSTNAME == "mchp-dev-shegelun" ]]; then
-    set_us_kbd
-else
-    set_dk_kbd
-fi
-
