@@ -8,6 +8,11 @@ if [ -x /usr/local/bin/brew ]; then
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
       . $(brew --prefix)/etc/bash_completion
   fi
+  for COMFILE in ${HOME}/.local/share/bash-completion/completions/*; do
+      if [ -f ${COMFILE} ]; then
+          . ${COMFILE}
+      fi
+  done
 fi
 
 HAVE_TTY=1
@@ -32,3 +37,5 @@ echo ""
 
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
