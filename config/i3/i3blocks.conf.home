@@ -91,6 +91,17 @@ label=
 interval=10
 min_width=100.00%
 
+[temperature]
+label=TEMP: 
+interval=10
+
+[hostname]
+command=uname -n
+full_text=Show hostname
+interval=300
+color=#eee8d5
+separator=false
+
 # Uptime
 #
 [strict_uptime]

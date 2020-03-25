@@ -328,6 +328,27 @@ bar {
 }
 
 
+# Setting up monitors and workspaces
+# ============================================================================
+# set $main_monitor "DP2"
+# set $extra_monitor "HDMI3"
+# exec --no-startup-id xrandr -d :0 --output $main_monitor --mode 2560x1440 --primary --right-of $extra_monitor --output $extra_monitor --mode 1920x1200
+# 
+# # Bind the workspaces for the large monitor
+# workspace $wrkspc1 output $main_monitor
+# workspace $wrkspc2 output $main_monitor
+# workspace $wrkspc3 output $main_monitor
+# workspace $wrkspc4 output $main_monitor
+# workspace $wrkspc5 output $main_monitor
+# 
+# # Bind the workspaces for the small monitor
+# workspace $wrkspc6  output $extra_monitor
+# workspace $wrkspc7  output $extra_monitor
+# workspace $wrkspc8  output $extra_monitor
+# workspace $wrkspc9  output $extra_monitor
+# workspace $wrkspc10 output $extra_monitor
+
+
 # Start applications
 # ============================================================================
 

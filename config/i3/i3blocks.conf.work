@@ -72,14 +72,14 @@ interval=30
 [iface]
 label= wan:
 instance=wan
-color=#7FFFD4
+color=#7fffd4
 interval=10
 separator=false
 
 [iface]
 label=tun:
 instance=tun0
-color=#98FB98
+color=#98fb98
 interval=10
 
 # CPU usage
