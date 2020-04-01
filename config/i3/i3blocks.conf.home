@@ -38,6 +38,7 @@ instance=spotify
 interval=5
 signal=10
 color=#b0e0e6
+separator=false
 
 # Volume indicator
 [volume-pulseaudio]
@@ -45,6 +46,7 @@ interval=once
 signal=1
 DEFAULT_COLOR="#f8fba0"
 MUTED_COLOR="#a0a0a0"
+USE_ALSA_NAME=1
 
 # Memory usage
 #
@@ -62,7 +64,6 @@ color=#fdb6b6
 # (defaults to 10 for 10%).
 [disk]
 label=
-separator=false
 interval=30
 
 # Network interface monitoring
@@ -89,11 +90,13 @@ interval=10
 [cpu_usage]
 label=
 interval=10
-min_width=100.00%
+min_width=60
+separator=false
 
 [temperature]
 label=TEMP: 
 interval=10
+min_width=80
 
 [hostname]
 command=uname -n
@@ -107,7 +110,7 @@ separator=false
 [strict_uptime]
 full_text=Uptime
 interval=60
-min_width=00<00<00
+min_width=50
 color=#b0e0e6
 
 [key_layout]
