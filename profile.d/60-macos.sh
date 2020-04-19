@@ -16,3 +16,8 @@ export ANDROID_SDK_ROOT=~/android-sdk
 export PATH=~/android-sdk/emulator:~/android-sdk/tools/bin:~/android-sdk/platform-tools:$PATH
 export PATH=/usr/local/opt/ruby/bin:$PATH
 
+function mount_efi()
+{
+    sudo diskutil mount MACOS_EFI
+}
+
