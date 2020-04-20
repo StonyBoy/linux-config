@@ -126,6 +126,7 @@ Vim Editor:
                 - vimrc
         NVim:
                 - config/nvim
+                - profile.d/80-nvim.sh
 X Window:
         dest: ~/
         dot: true
