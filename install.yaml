@@ -124,6 +124,8 @@ Vim Editor:
         default:
                 - vim/packages.vim
                 - vimrc
+        NVim:
+                - config/nvim
 X Window:
         dest: ~/
         dot: true
