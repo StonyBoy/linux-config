@@ -1,7 +1,7 @@
 #! /bin/bash
 # -*-sh-*-
 # .bash_profile
-# Time-stamp: 2019-Dec-19 09:18
+# Time-stamp: 2020-Apr-23 10:36
 # Settings for all interactive shells
 
 # Debugging
@@ -123,6 +123,23 @@ function title()
 {
     xdotool set_window --name "$*" $(xdotool getactivewindow)
 }
+
+function worktmux()
+{
+    if [[ -n $1 ]]; then
+        title $1 && ssh -t work tmux attach-session -t $1
+    else
+        echo Provide a tmux session name
+    fi
+}
+
+function _complete_worktmux()
+{
+    COMPREPLY=( $(compgen -W "$(ssh work tmux list-sessions | sed -E 's/:.*//')" -- ${COMP_WORDS[COMP_CWORD]}) )
+    return 0
+}
+
+complete -F _complete_worktmux worktmux
 
 function set_clang()
 {
