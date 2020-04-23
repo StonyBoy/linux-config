@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Mar-16 15:07
+" Time-Stamp: 2020-Apr-16 16:58
 
 source ~/.vim/packages.vim
 
@@ -121,8 +121,16 @@ nmap <silent> <leader>rv   :source $MYVIMRC<cr>:echom ".vimrc reloaded"<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Useful VIM shortcuts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Search visual selection by //
-vnoremap // y/<C-r>"<cr>
+" Search visual selection
+xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
+
+function! s:VSetSearch(cmdtype)
+  let temp = @s
+  norm! gv"sy
+  let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+  let @s = temp
+endfunction
 
 " Open file in the same folder as the current file using %%/
 cabbr <expr> %% expand('%:p:h')
