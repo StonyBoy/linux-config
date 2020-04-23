@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2020-Feb-14 13:19
+" Time-Stamp: 2020-Apr-23 20:55
 "
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -15,7 +15,6 @@ Plug 'tpope/vim-sensible'                   " Sensible VIM settings
 Plug 'tpope/vim-tbone'                      " Tmux commands and yank/put support
 Plug 'tpope/vim-fugitive'                   " GIT support
 Plug 'tpope/vim-obsession'                  " Automatic editing sessions
-Plug 'tpope/vim-sleuth'                     " Automatic indentation based of file content
 Plug 'tpope/vim-markdown'                   " Syntax highlighting for markdown files
 Plug 'tpope/vim-dispatch'                   " Run build commands in the background and parse the result
 Plug 'tpope/vim-unimpaired'                 " Pairs of handy bracket mappings
@@ -48,3 +47,5 @@ call plug#end()
 " Plug 'altercation/vim-colors-solarized'   " Colorscheme - replaced by the newer solarized8 using truecolor
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' } " Completion support for SW dev - collides with fugitive
 " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'} " Generate a config file for YCM - did not really use this
+" Plug 'tpope/vim-sleuth'                   " Automatic indentation based of file content - conflicts with filetype plugin on
+" Plug 'vim/killersheep'                    " Game for testing vim 8.2 - not usable in nvim

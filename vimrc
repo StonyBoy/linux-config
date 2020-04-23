@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Apr-16 16:58
+" Time-Stamp: 2020-Apr-23 20:16
 
 source ~/.vim/packages.vim
 
@@ -45,7 +45,7 @@ set smarttab        " Indent smart
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetype handling
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype plugin indent on
+filetype plugin on
 au BufNewFile,BufRead *.in setf make
 au FileType c,h,S,dts,dtsi setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent noexpandtab
 au BufNewFile,BufRead *.c,*.h,*.S,*.dts,*.dtsi setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent noexpandtab
