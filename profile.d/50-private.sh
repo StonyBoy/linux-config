@@ -1,7 +1,7 @@
 #! /bin/bash
 # -*-sh-*-
 # .bash_profile
-# Time-stamp: 2020-Apr-23 10:36
+# Time-stamp: 2020-Apr-23 17:06
 # Settings for all interactive shells
 
 # Debugging
@@ -127,7 +127,7 @@ function title()
 function worktmux()
 {
     if [[ -n $1 ]]; then
-        title $1 && ssh -t work tmux attach-session -t $1
+        title $1 && ssh -t work tmux -u attach-session -t $1
     else
         echo Provide a tmux session name
     fi
