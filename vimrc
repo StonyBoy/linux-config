@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Apr-23 20:16
+" Time-Stamp: 2020-Apr-24 15:13
 
 source ~/.vim/packages.vim
 
@@ -135,6 +135,39 @@ endfunction
 " Open file in the same folder as the current file using %%/
 cabbr <expr> %% expand('%:p:h')
 
+" Window resizing
+if has('nvim')
+    nnoremap <M-S-Left>  :vertical resize -1<cr>
+    nnoremap <M-S-Right> :vertical resize +1<cr>
+    nnoremap <M-S-Down>  :resize -1<cr>
+    nnoremap <M-S-Up>    :resize +1<cr>
+else
+    nnoremap <F2>        :vertical resize -1<cr>
+    nnoremap <F5>        :vertical resize +1<cr>
+    nnoremap <F3>        :resize -1<cr>
+    nnoremap <F4>        :resize +1<cr>
+endif
+
+" Highlight lines
+nmap <silent> <leader>hh  :highlight SpecialKey ctermbg=NONE guibg=NONE<cr>:setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent<cr>
+nmap <silent> <leader>lw  :set nowrap<cr>
+
+" Follow link shortcut
+nmap <F6> <C-]>
+nmap <F7> <C-[>
+
+" Toggle BufExplorer
+nmap <F8> :ToggleBufExplorer<cr>
+
+" Go to previous buffer
+nmap <F9> :b#<cr>
+
+" Build helpers
+nmap <silent> <leader>fb :Make -C ~/work/fireant/buildroot O=../../build/buildroot-ls1046-fireant/ linux-rebuild all<cr>
+nmap <silent> <leader>r :e!<cr>
+
+" Edit helpers
+nmap <silent> <leader>it Opr_info("%s:%d\n", __func__, __LINE__);<esc>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Timestamps
@@ -209,32 +242,4 @@ command! -bang -nargs=* Bli call fzf#vim#buffer_lines(<q-args>, <bang>0)'
 
 " Do not set special background
 highlight SpecialKey ctermbg=NONE guibg=NONE
-
-" Highlight lines
-nmap <silent> <leader>hh  :highlight SpecialKey ctermbg=NONE guibg=NONE<cr>:setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent<cr>
-nmap <silent> <leader>lw  :set nowrap<cr>
-
-" Window resizing
-nmap <F2> :vertical resize -1<cr>
-nmap <F3> :resize -1<cr>
-nmap <F4> :resize +1<cr>
-nmap <F5> :vertical resize +1<cr>
-
-" Follow link shortcut
-nmap <F6> <C-]>
-nmap <F7> <C-[>
-
-" Toggle BufExplorer
-nmap <F8> :ToggleBufExplorer<cr>
-
-" Go to previous buffer
-nmap <F9> :b#<cr>
-
-
-" Build helpers
-nmap <silent> <leader>fb :Make -C ~/work/fireant/buildroot O=../../build/buildroot-ls1046-fireant/ linux-rebuild all<cr>
-nmap <silent> <leader>r :e!<cr>
-
-" Edit helpers
-nmap <silent> <leader>it Opr_info("%s:%d\n", __func__, __LINE__);<esc>
 
