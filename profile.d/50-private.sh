@@ -1,7 +1,7 @@
 #! /bin/bash
 # -*-sh-*-
 # .bash_profile
-# Time-stamp: 2020-Apr-23 17:06
+# Time-stamp: 2020-Apr-25 18:19
 # Settings for all interactive shells
 
 # Debugging
@@ -121,7 +121,11 @@ function leavetime()
 
 function title()
 {
-    xdotool set_window --name "$*" $(xdotool getactivewindow)
+    if [ "$(uname)" == "Darwin" ]; then
+        echo -ne "\033]0;"$1"\007"
+    else
+        xdotool set_window --name "$*" $(xdotool getactivewindow)
+    fi
 }
 
 function worktmux()
