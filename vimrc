@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Apr-24 15:13
+" Time-Stamp: 2020-May-04 17:04
 
 source ~/.vim/packages.vim
 
@@ -168,6 +168,17 @@ nmap <silent> <leader>r :e!<cr>
 
 " Edit helpers
 nmap <silent> <leader>it Opr_info("%s:%d\n", __func__, __LINE__);<esc>
+
+" Append modeline after last line in buffer.
+" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
+" files.
+function! AppendModeline()
+  let l:modeline = printf(" vim: set ts=%d sw=%d sts=%d tw=%d %set :",
+        \ &tabstop, &shiftwidth, &softtabstop, &textwidth, &expandtab ? '' : 'no')
+  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+  call append(line("$"), l:modeline)
+endfunction
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Timestamps
