@@ -1,7 +1,7 @@
 #! /bin/bash
 # -*-sh-*-
 # .bash_profile
-# Time-stamp: 2020-Apr-25 18:19
+# Time-stamp: 2020-May-07 09:32
 # Settings for all interactive shells
 
 # Debugging
@@ -128,7 +128,7 @@ function title()
     fi
 }
 
-function worktmux()
+function rtmux()
 {
     if [[ -n $1 ]]; then
         title $1 && ssh -t work tmux -u attach-session -t $1
@@ -137,13 +137,13 @@ function worktmux()
     fi
 }
 
-function _complete_worktmux()
+function _complete_rtmux()
 {
     COMPREPLY=( $(compgen -W "$(ssh work tmux list-sessions | sed -E 's/:.*//')" -- ${COMP_WORDS[COMP_CWORD]}) )
     return 0
 }
 
-complete -F _complete_worktmux worktmux
+complete -F _complete_rtmux rtmux
 
 function set_clang()
 {
