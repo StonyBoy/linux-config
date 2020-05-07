@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-May-04 17:04
+" Time-Stamp: 2020-May-07 17:08
 
 source ~/.vim/packages.vim
 
@@ -159,12 +159,11 @@ nmap <F7> <C-[>
 " Toggle BufExplorer
 nmap <F8> :ToggleBufExplorer<cr>
 
-" Go to previous buffer
-nmap <F9> :b#<cr>
+" Reload the current buffer
+nnoremap <F9> :e!<cr>
 
 " Build helpers
 nmap <silent> <leader>fb :Make -C ~/work/fireant/buildroot O=../../build/buildroot-ls1046-fireant/ linux-rebuild all<cr>
-nmap <silent> <leader>r :e!<cr>
 
 " Edit helpers
 nmap <silent> <leader>it Opr_info("%s:%d\n", __func__, __LINE__);<esc>
