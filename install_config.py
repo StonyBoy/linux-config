@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#!/usr/bin/env python3
 '''
 Install links
 '''
@@ -69,10 +69,10 @@ class Installer:
     def create_dst_backup(self):
         newname = self.dst_path + time.strftime('.backup_%Y_%b_%d_%H_%M_%S')
         os.rename(self.dst_path, newname)
-        print(f'  Backup as {newname}')
+        print('  Backup as %s' % newname)
 
     def run(self):
-        print(f'{self.file_status}:\n  {self.src_path} => {self.dst_path}\n  {self.file_status.value}')
+        print('%s:\n  %s => %s\n  %s' % (self.file_status, self.src_path, self.dst_path, self.file_status.value))
         if self.file_status == FileStatus.CorrectLink:
             return
         if self.file_status == FileStatus.Missing:
@@ -106,7 +106,7 @@ class FeatureVariant:
                 self.installers.append(Installer(destination, dot, val))
         else:
             self.show()
-            prompt = f'    Do you want to install {Fore.GREEN}{self.parent}/{self.name}{Style.RESET_ALL}: (N/y) > '
+            prompt = '    Do you want to install %s/%s: (N/y) > ' % (self.parent, self.name)
             if input(prompt).lower() == 'y':
                 for val in self.value:
                     self.installers.append(Installer(destination, dot, val))
@@ -151,7 +151,7 @@ class Feature:
                 self.variants[key] = FeatureVariant(name, key, val)
 
     def __str__(self):
-        result = f'\n* {Fore.BLUE}{self.name}{Style.RESET_ALL}:'
+        result = '\n* %s:' % self.name
         if self.default:
             result += str(self.default)
         for value in self.variants.values():
@@ -163,7 +163,7 @@ class Feature:
 
     def query_user(self):
         self.show()
-        prompt = f'  Do you want to install {Fore.BLUE}{self.name}{Style.RESET_ALL}: (N/y) > '
+        prompt = '  Do you want to install %s: (N/y) > ' % self.name
         if input(prompt).lower() == 'y':
             if self.default:
                 self.default.add_installer(self.destination, self.dot)
@@ -205,7 +205,7 @@ def install_items():
     for f in features:
         changes = changes or f.installation_needed()
     if changes:
-        prompt = f'\n\n{Fore.MAGENTA}Begin installation{Style.RESET_ALL}: (N/y) > '
+        prompt = '\n\nBegin installation: (N/y) > '
         if input(prompt).lower() == 'y':
             for f in features:
                 f.install()
@@ -215,10 +215,10 @@ if __name__ == '__main__':
     try:
         install_items()
     except KeyboardInterrupt:
-        print(f'\n\n{Fore.RED}*** Installation Aborted ***{Style.RESET_ALL}')
+        print('\n\n*** Installation Aborted ***')
         sys.exit(1)
     except FileNotFoundError as exc:
-        print(f'\n\n{Fore.RED}*** Installation Aborted ***{Style.RESET_ALL}')
-        print(f'File not found: {exc}')
+        print('\n\n*** Installation Aborted ***')
+        print('File not found: %s' % str(exc))
         sys.exit(1)
 
