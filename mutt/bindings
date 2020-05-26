@@ -21,11 +21,9 @@ bind index,pager D purge-message
 bind index M sync-mailbox
 bind index <space> collapse-thread
 # Save all attachments
-macro index,pager S "<pipe-message>ripmime -i - -d ~/Downloads && rm ~/Downloads/textfile*" "Save all non-text attachments using ripmime"
+macro index,pager S "<pipe-message>rm ~/Downloads/textfile* && ripmime -i - -d ~/Downloads" "Save all non-text attachments using ripmime"
 # opening urls with urlscan
 macro index,pager \cb "<pipe-message>urlscan<enter>" "call urlscan to extract URLs out of a message"
-# Save current message to patch export folder, move to next message
-macro index,pager X "C~/work/patches/export\nj"
 
 # Message navigation
 bind pager <down> next-line
