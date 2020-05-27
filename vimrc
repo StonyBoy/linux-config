@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-May-07 17:08
+" Time-Stamp: 2020-May-27 21:03
 
 source ~/.vim/packages.vim
 
@@ -252,4 +252,13 @@ command! -bang -nargs=* Bli call fzf#vim#buffer_lines(<q-args>, <bang>0)'
 
 " Do not set special background
 highlight SpecialKey ctermbg=NONE guibg=NONE
+
+" ALE linter
+" Do not lint when opening a file
+let g:ale_lint_on_enter = 0
+" Lint on save
+let g:ale_lint_on_save = 1
+" Less obtrusive lint highligting
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
 
