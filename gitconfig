@@ -40,3 +40,5 @@
 [sendemail]
 	aliasesfile = ~/.mutt/aliases
 	aliasfiletype = mutt
+[pull]
+	rebase = true
