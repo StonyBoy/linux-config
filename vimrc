@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-May-27 21:03
+" Time-Stamp: 2020-Jun-10 14:44
 
 source ~/.vim/packages.vim
 
@@ -17,6 +17,7 @@ set scrolloff=5     " Scroll before the curser reaches top or buttom
 set sidescrolloff=2 " Scroll before the curser reaches left or right side
 set hidden          " Allow edit buffers to be hidden
 set guioptions=     " Remove menus
+set noswapfile      " Do not create swapfiles
 
 " Enable true color
 if exists('+termguicolors')
@@ -121,6 +122,9 @@ nmap <silent> <leader>rv   :source $MYVIMRC<cr>:echom ".vimrc reloaded"<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Useful VIM shortcuts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use ripgrep on selected word
+nnoremap ## :Rg \b<C-R><C-W>\b<CR>
+
 " Search visual selection
 xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
@@ -147,10 +151,6 @@ else
     nnoremap <F3>        :resize -1<cr>
     nnoremap <F4>        :resize +1<cr>
 endif
-
-" Highlight lines
-nmap <silent> <leader>hh  :highlight SpecialKey ctermbg=NONE guibg=NONE<cr>:setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent<cr>
-nmap <silent> <leader>lw  :set nowrap<cr>
 
 " Follow link shortcut
 nmap <F6> <C-]>
