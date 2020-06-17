@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Jun-10 14:44
+" Time-Stamp: 2020-Jun-15 11:58
 
 source ~/.vim/packages.vim
 
@@ -40,6 +40,7 @@ set textwidth=150   " Set the line width default value
 set colorcolumn=150 " Set the colour marker
 set shiftwidth=4    " Default 4 spaces
 set tabstop=4       " 4 spaces per tab
+set softtabstop=4   " 4 spaces per tab when unindenting
 set expandtab       " Use spaces
 set smarttab        " Indent smart
 "
@@ -212,6 +213,11 @@ nmap <silent> <leader>wt :call PasteWindow('tabnew')<cr>
 nmap <silent> <leader>wP :top split
 nmap <silent> <leader>wV :set nosplitright \| call PasteWindow('vsplit') \| set splitright<cr>
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Local Project Configuration: Read .vimlocal
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+silent! source .vimlocal
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Configuration
