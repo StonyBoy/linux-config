@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-May-04 17:04
+" Time-Stamp: 2020-Jun-15 11:58
 
 source ~/.vim/packages.vim
 
@@ -17,6 +17,7 @@ set scrolloff=5     " Scroll before the curser reaches top or buttom
 set sidescrolloff=2 " Scroll before the curser reaches left or right side
 set hidden          " Allow edit buffers to be hidden
 set guioptions=     " Remove menus
+set noswapfile      " Do not create swapfiles
 
 " Enable true color
 if exists('+termguicolors')
@@ -39,6 +40,7 @@ set textwidth=150   " Set the line width default value
 set colorcolumn=150 " Set the colour marker
 set shiftwidth=4    " Default 4 spaces
 set tabstop=4       " 4 spaces per tab
+set softtabstop=4   " 4 spaces per tab when unindenting
 set expandtab       " Use spaces
 set smarttab        " Indent smart
 "
@@ -121,6 +123,9 @@ nmap <silent> <leader>rv   :source $MYVIMRC<cr>:echom ".vimrc reloaded"<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Useful VIM shortcuts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use ripgrep on selected word
+nnoremap ## :Rg \b<C-R><C-W>\b<CR>
+
 " Search visual selection
 xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
@@ -148,10 +153,6 @@ else
     nnoremap <F4>        :resize +1<cr>
 endif
 
-" Highlight lines
-nmap <silent> <leader>hh  :highlight SpecialKey ctermbg=NONE guibg=NONE<cr>:setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent<cr>
-nmap <silent> <leader>lw  :set nowrap<cr>
-
 " Follow link shortcut
 nmap <F6> <C-]>
 nmap <F7> <C-[>
@@ -159,12 +160,11 @@ nmap <F7> <C-[>
 " Toggle BufExplorer
 nmap <F8> :ToggleBufExplorer<cr>
 
-" Go to previous buffer
-nmap <F9> :b#<cr>
+" Reload the current buffer
+nnoremap <F9> :e!<cr>
 
 " Build helpers
 nmap <silent> <leader>fb :Make -C ~/work/fireant/buildroot O=../../build/buildroot-ls1046-fireant/ linux-rebuild all<cr>
-nmap <silent> <leader>r :e!<cr>
 
 " Edit helpers
 nmap <silent> <leader>it Opr_info("%s:%d\n", __func__, __LINE__);<esc>
@@ -215,6 +215,11 @@ nmap <silent> <leader>wV :set nosplitright \| call PasteWindow('vsplit') \| set 
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Local Project Configuration: Read .vimlocal
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+silent! source .vimlocal
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme configuration
@@ -253,4 +258,13 @@ command! -bang -nargs=* Bli call fzf#vim#buffer_lines(<q-args>, <bang>0)'
 
 " Do not set special background
 highlight SpecialKey ctermbg=NONE guibg=NONE
+
+" ALE linter
+" Do not lint when opening a file
+let g:ale_lint_on_enter = 0
+" Lint on save
+let g:ale_lint_on_save = 1
+" Less obtrusive lint highligting
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
 

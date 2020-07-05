@@ -325,6 +325,8 @@ bar {
     bindsym button5 nop
     # Disable the system tray
     # tray_output none
+    # Show tray icons on primary monitor
+    tray_output primary
 }
 
 

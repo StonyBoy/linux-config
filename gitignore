@@ -12,3 +12,4 @@ ID
 *.code-workspace
 .solargraph.yml
 Session.vim
+.ctags.d/

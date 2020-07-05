@@ -1,5 +1,5 @@
 # paths
-set folder = ~/Mail
+set folder = ~/Maildir
 set message_cachedir = ~/.mutt/cache/bodies
 set certificate_file = ~/.mutt/imap.one.com.pem
 set mailcap_path = ~/.mutt/mailcap
@@ -80,10 +80,10 @@ set sidebar_format = "%B %* [%?N?%N / ?%S]"
 set sidebar_sort_method = path
 
 # Mailboxes to show in the sidebar.
-mailboxes =one
-mailboxes `~/.mutt/mbsync_folders.py ~/Mail/one`
-mailboxes =microchip
-mailboxes `~/.mutt/mbsync_folders.py ~/Mail/microchip`
+# mailboxes =one
+# mailboxes `~/.mutt/mbsync_folders.py ~/Mail/one`
+# mailboxes =microchip
+mailboxes `~/.mutt/mbsync_folders.py ~/Maildir`
 source $alias_file
 
 # source colors and keybindings
@@ -96,10 +96,10 @@ source ~/.mutt/bindings
 
 # by default, use one
 set realname = "Steen Hegelund"
-set spoolfile = "+one/INBOX"
-source ~/.mutt/accounts/one
+# set spoolfile = "+one/INBOX"
+# source ~/.mutt/accounts/one
 source ~/.mutt/accounts/microchip
 
 # when changing into other mailboxes, use different adresses etc.
-folder-hook one/* source ~/.mutt/accounts/one
+# folder-hook one/* source ~/.mutt/accounts/one
 folder-hook microchip/* source ~/.mutt/accounts/microchip

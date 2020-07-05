@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2020-Apr-23 20:55
+" Time-Stamp: 2020-May-27 20:59
 "
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -28,6 +28,8 @@ Plug 'christoomey/vim-tmux-navigator'       " Go between panes in both vim and t
 Plug 'jlanzarotta/bufexplorer'              " Manage Buffers
 Plug 'vim-scripts/update-time'              " Insert/Update timestamps in files
 Plug 'pangloss/vim-javascript'              " Better Javascript indenting support
+Plug 'rust-lang/rust.vim'                   " Rust, syntax highlighting, formatting, Syntastic integration
+Plug 'dense-analysis/ale'                   " Asynchroneous Syntax checker
 call plug#end()
 
 

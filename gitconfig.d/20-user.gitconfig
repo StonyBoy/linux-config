@@ -26,6 +26,7 @@
         s = status
         ts = !git tag -l --format=\"%(align:50,left)%(refname:lstrip=2)%(end)  :   %(objectname)   :   %(contents:subject)\" t-*
         unstage = !git reset HEAD --
+        upda = !git commit --reset-author --amend
         v = !git --version
         w = rev-parse --abbrev-ref HEAD
         prune-branches =  "!gitprunebranches() { ~/scripts/git_branches.py -d ; }; gitprunebranches"
