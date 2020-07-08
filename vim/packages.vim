@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2020-May-27 20:59
+" Time-Stamp: 2020-Jul-08 11:07
 "
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -30,6 +30,7 @@ Plug 'vim-scripts/update-time'              " Insert/Update timestamps in files
 Plug 'pangloss/vim-javascript'              " Better Javascript indenting support
 Plug 'rust-lang/rust.vim'                   " Rust, syntax highlighting, formatting, Syntastic integration
 Plug 'dense-analysis/ale'                   " Asynchroneous Syntax checker
+Plug 'junegunn/vim-easy-align'              " Align text on specific characters in nice columns
 call plug#end()
 
 

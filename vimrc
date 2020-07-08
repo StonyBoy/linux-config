@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Jun-15 11:58
+" Time-Stamp: 2020-Jul-08 11:09
 
 source ~/.vim/packages.vim
 
@@ -267,4 +267,12 @@ let g:ale_lint_on_save = 1
 " Less obtrusive lint highligting
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
+
+" Provide EasyAlign shortcuts
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
