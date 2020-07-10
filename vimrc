@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Jul-08 11:09
+" Time-Stamp: 2020-Jul-10 13:08
 
 source ~/.vim/packages.vim
 
@@ -162,6 +162,9 @@ nmap <F8> :ToggleBufExplorer<cr>
 
 " Reload the current buffer
 nnoremap <F9> :e!<cr>
+
+" Clear the last search pattern (removes highlight)
+nnoremap <F10> :let @/ = ""<cr>
 
 " Build helpers
 nmap <silent> <leader>fb :Make -C ~/work/fireant/buildroot O=../../build/buildroot-ls1046-fireant/ linux-rebuild all<cr>
