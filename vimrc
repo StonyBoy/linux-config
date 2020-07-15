@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Jul-10 13:08
+" Time-Stamp: 2020-Jul-15 09:00
 
 source ~/.vim/packages.vim
 
@@ -51,6 +51,8 @@ filetype plugin on
 au BufNewFile,BufRead *.in setf make
 au FileType c,h,S,dts,dtsi setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent noexpandtab
 au BufNewFile,BufRead *.c,*.h,*.S,*.dts,*.dtsi setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent noexpandtab
+" Remove trailing whitespace
+au FileType c,h autocmd BufWritePre * :call TrimWhitespace()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual Cues
@@ -278,4 +280,12 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" Remove trailing whitespace and restore search history and position in file
+function! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+command! TrimWhitespace call TrimWhitespace()
 
