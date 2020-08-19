@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Jul-15 09:00
+" Time-Stamp: 2020-Aug-19 17:35
 
 source ~/.vim/packages.vim
 
@@ -48,11 +48,12 @@ set smarttab        " Indent smart
 " Filetype handling
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin on
-au BufNewFile,BufRead *.in setf make
-au FileType c,h,S,dts,dtsi setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent noexpandtab
-au BufNewFile,BufRead *.c,*.h,*.S,*.dts,*.dtsi setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent noexpandtab
-" Remove trailing whitespace
-au FileType c,h autocmd BufWritePre * :call TrimWhitespace()
+augroup filetype_settings
+    autocmd!
+    autocmd BufNewFile,BufRead *.in setf make
+    autocmd BufNewFile,BufRead *.c,*.h,*.S,*.dts,*.dtsi set tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 noexpandtab colorcolumn=80 cindent
+    autocmd FileType c,h autocmd BufWritePre * :call TrimWhitespace()
+augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual Cues
@@ -173,6 +174,7 @@ nmap <silent> <leader>fb :Make -C ~/work/fireant/buildroot O=../../build/buildro
 
 " Edit helpers
 nmap <silent> <leader>it Opr_info("%s:%d\n", __func__, __LINE__);<esc>
+nmap <silent> <leader>id OCFLAGS_*.o := -DDEBUG<CR><esc>
 
 " Append modeline after last line in buffer.
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
@@ -239,7 +241,7 @@ let g:lightline = {
   \ 'colorscheme': 'solarized',
   \     'active': {
   \         'left': [['mode'], ['paste', 'gitbranch', 'absolutepath']],
-  \         'right': [['session', 'fileencoding', 'fileformat', 'filetype', 'readonly', 'percent', 'lineinfo'], ['filemod']]
+  \         'right': [['session', 'fileencoding', 'fileformat', 'filetype', 'readonly', 'percent', 'lineinfo'], ['filemod', 'editcfg']]
   \     },
   \     'inactive': {
   \         'left': [['absolutepath']],
@@ -248,7 +250,8 @@ let g:lightline = {
   \     'component_function': {
   \       'session': 'obsession#ObsessionStatus',
   \       'gitbranch': 'fugitive#head',
-  \       'filemod': 'CustomFilemod'
+  \       'filemod': 'CustomFilemod',
+  \       'editcfg': 'CustomEditConfig'
   \     },
   \ }
 
@@ -256,6 +259,13 @@ let g:lightline = {
 function! CustomFilemod()
   return &modified ? ' {+}' : ''
 endfunction
+
+
+function! CustomEditConfig()
+  let expandtabstr = &expandtab ? ' expandtab' : ''
+  return 'ts:' . &tabstop . ' sw:' . &shiftwidth . ' sts:' . &softtabstop . ' tw:' . &textwidth . expandtabstr
+endfunction
+
 
 " FZF
 command! -bang -nargs=* Rgu call fzf#vim#grep("rg -u --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, <bang>0)'
@@ -289,3 +299,4 @@ function! TrimWhitespace()
 endfun
 command! TrimWhitespace call TrimWhitespace()
 
+" vim: set ts=4 sw=4 sts=4 tw=150 et :
