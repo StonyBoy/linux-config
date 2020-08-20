@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Aug-19 17:35
+" Time-Stamp: 2020-Aug-20 09:35
 
 source ~/.vim/packages.vim
 
@@ -51,7 +51,8 @@ filetype plugin on
 augroup filetype_settings
     autocmd!
     autocmd BufNewFile,BufRead *.in setf make
-    autocmd BufNewFile,BufRead *.c,*.h,*.S,*.dts,*.dtsi set tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 noexpandtab colorcolumn=80 cindent
+    autocmd BufNewFile,BufRead *.c,*.h,*.S,*.dts,*.dtsi setlocal tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 noexpandtab colorcolumn=80 cindent
+    autocmd BufNewFile,BufRead *.cxx,*.hxx              setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=150 expandtab colorcolumn=150 cindent
     autocmd FileType c,h autocmd BufWritePre * :call TrimWhitespace()
 augroup END
 
