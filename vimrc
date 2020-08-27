@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Jun-15 11:58
+" Time-Stamp: 2020-Aug-20 09:35
 
 source ~/.vim/packages.vim
 
@@ -48,9 +48,13 @@ set smarttab        " Indent smart
 " Filetype handling
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin on
-au BufNewFile,BufRead *.in setf make
-au FileType c,h,S,dts,dtsi setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent noexpandtab
-au BufNewFile,BufRead *.c,*.h,*.S,*.dts,*.dtsi setlocal shiftwidth=8 colorcolumn=80 tabstop=8 cindent noexpandtab
+augroup filetype_settings
+    autocmd!
+    autocmd BufNewFile,BufRead *.in setf make
+    autocmd BufNewFile,BufRead *.c,*.h,*.S,*.dts,*.dtsi setlocal tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 noexpandtab colorcolumn=80 cindent
+    autocmd BufNewFile,BufRead *.cxx,*.hxx              setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=150 expandtab colorcolumn=150 cindent
+    autocmd FileType c,h autocmd BufWritePre * :call TrimWhitespace()
+augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual Cues
@@ -163,11 +167,15 @@ nmap <F8> :ToggleBufExplorer<cr>
 " Reload the current buffer
 nnoremap <F9> :e!<cr>
 
+" Clear the last search pattern (removes highlight)
+nnoremap <F10> :let @/ = ""<cr>
+
 " Build helpers
 nmap <silent> <leader>fb :Make -C ~/work/fireant/buildroot O=../../build/buildroot-ls1046-fireant/ linux-rebuild all<cr>
 
 " Edit helpers
 nmap <silent> <leader>it Opr_info("%s:%d\n", __func__, __LINE__);<esc>
+nmap <silent> <leader>id OCFLAGS_*.o := -DDEBUG<CR><esc>
 
 " Append modeline after last line in buffer.
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
@@ -234,7 +242,7 @@ let g:lightline = {
   \ 'colorscheme': 'solarized',
   \     'active': {
   \         'left': [['mode'], ['paste', 'gitbranch', 'absolutepath']],
-  \         'right': [['session', 'fileencoding', 'fileformat', 'filetype', 'readonly', 'percent', 'lineinfo'], ['filemod']]
+  \         'right': [['session', 'fileencoding', 'fileformat', 'filetype', 'readonly', 'percent', 'lineinfo'], ['filemod', 'editcfg']]
   \     },
   \     'inactive': {
   \         'left': [['absolutepath']],
@@ -243,7 +251,8 @@ let g:lightline = {
   \     'component_function': {
   \       'session': 'obsession#ObsessionStatus',
   \       'gitbranch': 'fugitive#head',
-  \       'filemod': 'CustomFilemod'
+  \       'filemod': 'CustomFilemod',
+  \       'editcfg': 'CustomEditConfig'
   \     },
   \ }
 
@@ -251,6 +260,13 @@ let g:lightline = {
 function! CustomFilemod()
   return &modified ? ' {+}' : ''
 endfunction
+
+
+function! CustomEditConfig()
+  let expandtabstr = &expandtab ? ' expandtab' : ''
+  return 'ts:' . &tabstop . ' sw:' . &shiftwidth . ' sts:' . &softtabstop . ' tw:' . &textwidth . expandtabstr
+endfunction
+
 
 " FZF
 command! -bang -nargs=* Rgu call fzf#vim#grep("rg -u --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, <bang>0)'
@@ -268,3 +284,20 @@ let g:ale_lint_on_save = 1
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
 
+" Provide EasyAlign shortcuts
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Remove trailing whitespace and restore search history and position in file
+function! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+command! TrimWhitespace call TrimWhitespace()
+
+" vim: set ts=4 sw=4 sts=4 tw=150 et :
