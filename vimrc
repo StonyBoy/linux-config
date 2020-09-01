@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Aug-20 09:35
+" Time-Stamp: 2020-Aug-28 09:17
 
 source ~/.vim/packages.vim
 
@@ -54,6 +54,7 @@ augroup filetype_settings
     autocmd BufNewFile,BufRead *.c,*.h,*.S,*.dts,*.dtsi setlocal tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 noexpandtab colorcolumn=80 cindent
     autocmd BufNewFile,BufRead *.cxx,*.hxx              setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=150 expandtab colorcolumn=150 cindent
     autocmd FileType c,h autocmd BufWritePre * :call TrimWhitespace()
+    autocmd FileType bash                               setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=150 expandtab colorcolumn=150 cindent
 augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -158,8 +159,8 @@ else
 endif
 
 " Follow link shortcut
-nmap <F6> <C-]>
-nmap <F7> <C-[>
+nnoremap <F6> g<c-]>
+vnoremap <F6> g<c-]>
 
 " Toggle BufExplorer
 nmap <F8> :ToggleBufExplorer<cr>
@@ -170,12 +171,21 @@ nnoremap <F9> :e!<cr>
 " Clear the last search pattern (removes highlight)
 nnoremap <F10> :let @/ = ""<cr>
 
+" Clear old part of logfile
+nnoremap <F11> G?Starting Kernelkdgg
+
 " Build helpers
 nmap <silent> <leader>fb :Make -C ~/work/fireant/buildroot O=../../build/buildroot-ls1046-fireant/ linux-rebuild all<cr>
 
 " Edit helpers
 nmap <silent> <leader>it Opr_info("%s:%d\n", __func__, __LINE__);<esc>
 nmap <silent> <leader>id OCFLAGS_*.o := -DDEBUG<CR><esc>
+
+" Super Macros
+" :let @n = @n + 10/phy3ldw"nP/@ldw"nPj0/<ldw"nPjj:let @/ = ""
+" /reg =f<ldw:let @o = @" - @n"oP
+" 0/port4ldw"nP/port5ldw"nPa /reg =f<ldw"nP/phys =4wdt "oPwdw"nP/sfp =/eth3ldw"nPjj:let @n = @n + 1:let @o = @o + 1
+" 0/sfp_eth7ldw"nP/sfp-eth7ldw"nPa /&i2c4ldw"oP2j:let @n = @n + 1:let @o = @o + 1
 
 " Append modeline after last line in buffer.
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
