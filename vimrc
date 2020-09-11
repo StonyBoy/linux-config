@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Aug-28 09:17
+" Time-Stamp: 2020-Sep-11 09:29
 
 source ~/.vim/packages.vim
 
@@ -130,6 +130,10 @@ nmap <silent> <leader>rv   :source $MYVIMRC<cr>:echom ".vimrc reloaded"<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use ripgrep on selected word
 nnoremap ## :Rg \b<C-R><C-W>\b<CR>
+
+" Terminal mode
+tnoremap <Esc> <C-\><C-n>
+tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 
 " Search visual selection
 xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
