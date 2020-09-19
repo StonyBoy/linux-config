@@ -1,7 +1,7 @@
 #! /bin/bash
 # -*-sh-*-
 # .bash_profile
-# Time-stamp: 2020-May-07 09:32
+# Time-stamp: 2020-Sep-19 17:01
 # Settings for all interactive shells
 
 # Debugging
@@ -121,10 +121,10 @@ function leavetime()
 
 function title()
 {
-    if [ "$(uname)" == "Darwin" ]; then
-        echo -ne "\033]0;"$1"\007"
-    else
+    if [ -e /usr/bin/xdotool ];  then
         xdotool set_window --name "$*" $(xdotool getactivewindow)
+    else
+        echo -ne "\033]0;"$1"\007"
     fi
 }
 
