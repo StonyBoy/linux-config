@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Sep-11 09:29
+" Time-Stamp: 2020-Sep-24 15:14
 
 source ~/.vim/packages.vim
 
@@ -195,8 +195,8 @@ nmap <silent> <leader>id OCFLAGS_*.o := -DDEBUG<CR><esc>
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
 " files.
 function! AppendModeline()
-  let l:modeline = printf(" vim: set ts=%d sw=%d sts=%d tw=%d %set :",
-        \ &tabstop, &shiftwidth, &softtabstop, &textwidth, &expandtab ? '' : 'no')
+  let l:modeline = printf(" vim: set ts=%d sw=%d sts=%d tw=%d %set cc=%d :",
+        \ &tabstop, &shiftwidth, &softtabstop, &textwidth, &expandtab ? '' : 'no', &colorcolumn)
   let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
   call append(line("$"), l:modeline)
 endfunction
@@ -314,4 +314,4 @@ function! TrimWhitespace()
 endfun
 command! TrimWhitespace call TrimWhitespace()
 
-" vim: set ts=4 sw=4 sts=4 tw=150 et :
+" vim: set ts=4 sw=4 sts=4 tw=150 et cc=150 :
