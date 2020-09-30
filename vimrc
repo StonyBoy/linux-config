@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Sep-24 15:14
+" Time-Stamp: 2020-Sep-29 13:52
 
 source ~/.vim/packages.vim
 
@@ -176,7 +176,7 @@ nnoremap <F9> :e!<cr>
 nnoremap <F10> :let @/ = ""<cr>
 
 " Clear old part of logfile
-nnoremap <F11> G?Starting Kernelkdgg
+nnoremap <F11> G?Starting kernelkdgg
 
 " Build helpers
 nmap <silent> <leader>fb :Make -C ~/work/fireant/buildroot O=../../build/buildroot-ls1046-fireant/ linux-rebuild all<cr>
