@@ -1,6 +1,7 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2020-Jul-09 10:28
+" Time-Stamp: 2020-Oct-03 11:13
+" vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 "
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -32,6 +33,7 @@ Plug 'rust-lang/rust.vim'                                         " Rust, syntax
 Plug 'dense-analysis/ale'                                         " Asynchroneous Syntax checker
 Plug 'junegunn/vim-easy-align'                                    " Align text on specific characters in nice columns
 Plug 'tpope/vim-commentary'                                       " Comment in/out lines of text in various languages
+Plug 'wsdjeg/vim-fetch'                                           " Use line and column jumps in file paths as found in stack traces and similar output
 call plug#end()
 
 

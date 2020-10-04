@@ -1,6 +1,7 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Sep-29 13:52
+" Time-Stamp: 2020-Oct-03 11:14
+" vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
 
@@ -36,8 +37,8 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text formatting defaults
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set textwidth=150   " Set the line width default value
-set colorcolumn=150 " Set the colour marker
+set textwidth=120   " Set the line width default value
+set colorcolumn=120 " Set the colour marker
 set shiftwidth=4    " Default 4 spaces
 set tabstop=4       " 4 spaces per tab
 set softtabstop=4   " 4 spaces per tab when unindenting
@@ -52,9 +53,9 @@ augroup filetype_settings
     autocmd!
     autocmd BufNewFile,BufRead *.in setf make
     autocmd BufNewFile,BufRead *.c,*.h,*.S,*.dts,*.dtsi setlocal tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 noexpandtab colorcolumn=80 cindent
-    autocmd BufNewFile,BufRead *.cxx,*.hxx              setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=150 expandtab colorcolumn=150 cindent
+    autocmd BufNewFile,BufRead *.cxx,*.hxx              setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120 expandtab colorcolumn=120 cindent
     autocmd FileType c,h autocmd BufWritePre * :call TrimWhitespace()
-    autocmd FileType bash                               setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=150 expandtab colorcolumn=150 cindent
+    autocmd FileType bash                               setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120 expandtab colorcolumn=120 cindent
 augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -313,5 +314,3 @@ function! TrimWhitespace()
     call winrestview(l:save)
 endfun
 command! TrimWhitespace call TrimWhitespace()
-
-" vim: set ts=4 sw=4 sts=4 tw=150 et cc=150 :
