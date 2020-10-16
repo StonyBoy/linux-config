@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Oct-03 11:14
+" Time-Stamp: 2020-Oct-16 09:33
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -152,10 +152,10 @@ cabbr <expr> %% expand('%:p:h')
 
 " Window resizing
 if has('nvim')
-    nnoremap <M-S-Left>  :vertical resize -1<cr>
-    nnoremap <M-S-Right> :vertical resize +1<cr>
-    nnoremap <M-S-Down>  :resize -1<cr>
-    nnoremap <M-S-Up>    :resize +1<cr>
+    nnoremap <C-M-S-Left>  :vertical resize -1<cr>
+    nnoremap <C-M-S-Right> :vertical resize +1<cr>
+    nnoremap <C-M-S-Down>  :resize -1<cr>
+    nnoremap <C-M-S-Up>    :resize +1<cr>
 else
     nnoremap <F2>        :vertical resize -1<cr>
     nnoremap <F5>        :vertical resize +1<cr>
