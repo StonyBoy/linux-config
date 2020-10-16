@@ -1,5 +1,5 @@
 # paths
-set folder = ~/Maildir
+set folder = ~/Mail
 set message_cachedir = ~/.mutt/cache/bodies
 set certificate_file = ~/.mutt/imap.one.com.pem
 set mailcap_path = ~/.mutt/mailcap
@@ -83,7 +83,7 @@ set sidebar_sort_method = path
 # mailboxes =one
 # mailboxes `~/.mutt/mbsync_folders.py ~/Mail/one`
 # mailboxes =microchip
-mailboxes `~/.mutt/mbsync_folders.py ~/Maildir`
+mailboxes `~/.mutt/mbsync_folders.py ~/Mail`
 source $alias_file
 
 # source colors and keybindings
