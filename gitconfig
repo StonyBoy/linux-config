@@ -1,44 +1,48 @@
+;  vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 [color]
-        diff = auto
-        status = auto
-        branch = auto
-        interactive = auto
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
 
 [diff]
-        renames = copy
+    renames = copy
 
 [clean]
-        requireForce = true
+    requireForce = true
 
 [gc]
-        auto = 0
-        autopacklimit = 0
-        packrefs = false
+    auto = 0
+    autopacklimit = 0
+    packrefs = false
 
 [apply]
-        whitespace = strip
+    whitespace = strip
 
 [alias]
-        ci = commit
-        co = checkout
-        st = status
-        stat = status
+    ci = commit
+    co = checkout
+    st = status
+    stat = status
 
 [core]
-        excludesfile = ~/.gitignore
+    excludesfile = ~/.gitignore
+    compression = 9
 
 [push]
-        default = simple
+    default = simple
 
 [include]
-        path = ~/.gitconfig.d/10-work.gitconfig
-        path = ~/.gitconfig.d/20-user.gitconfig
-        path = ~/.gitconfig.d/30-home-user.gitconfig
-        path = ~/.gitconfig.d/30-work-user.gitconfig
-        path = ~/.gitconfig.d/40-macos.gitconfig
+    path = ~/.gitconfig.d/10-work.gitconfig
+    path = ~/.gitconfig.d/20-user.gitconfig
+    path = ~/.gitconfig.d/30-home-user.gitconfig
+    path = ~/.gitconfig.d/30-work-user.gitconfig
+    path = ~/.gitconfig.d/40-macos.gitconfig
 
 [sendemail]
-	aliasesfile = ~/.mutt/aliases
-	aliasfiletype = mutt
+    aliasesfile = ~/.mutt/aliases
+    aliasfiletype = mutt
+
 [pull]
-	rebase = true
+    rebase = true
+
