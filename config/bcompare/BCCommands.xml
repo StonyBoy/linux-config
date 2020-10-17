@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Produced by Beyond Compare 4 from Scooter Software -->
 <BCCommands Version="1" MinVersion="1">
+	<TDirCompareCommands>
+		<Items>
+			<UpdateLeftAction Value=";;True"/>
+			<UpdateRightAction Value=";;True"/>
+			<MirrorLeftAction Value=";;True"/>
+			<MirrorRightAction Value=";;True"/>
+		</Items>
+	</TDirCompareCommands>
 	<TTextCompareCommands>
 		<Items>
 			<DiffSectionNextAction Value="Alt+Down"/>
