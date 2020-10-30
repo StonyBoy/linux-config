@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2020-Oct-22 10:13
+" Time-Stamp: 2020-Oct-29 11:58
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 "
 
@@ -35,6 +35,8 @@ Plug 'junegunn/vim-easy-align'                                    " Align text o
 Plug 'tpope/vim-commentary'                                       " Comment in/out lines of text in various languages
 Plug 'wsdjeg/vim-fetch'                                           " Use line and column jumps in file paths as found in stack traces and similar output
 Plug 'aklt/plantuml-syntax'                                       " PlantUML Syntax/Plugin/FTDetect
+Plug 'AndrewRadev/linediff.vim'                                   " Diff two separate blocks of text
+Plug 'AndrewRadev/splitjoin.vim'                                  " Switching between a single-line statement and a multi-line one
 call plug#end()
 
 

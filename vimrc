@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Oct-16 09:33
+" Time-Stamp: 2020-Oct-29 11:31
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -56,6 +56,7 @@ augroup filetype_settings
     autocmd BufNewFile,BufRead *.cxx,*.hxx              setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120 expandtab colorcolumn=120 cindent
     autocmd FileType c,h autocmd BufWritePre * :call TrimWhitespace()
     autocmd FileType bash                               setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120 expandtab colorcolumn=120 cindent
+    autocmd FileType gitsendemail                       setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=80 expandtab colorcolumn=80 cindent
 augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -185,6 +186,7 @@ nmap <silent> <leader>fb :Make -C ~/work/fireant/buildroot O=../../build/buildro
 " Edit helpers
 nmap <silent> <leader>it Opr_info("%s:%d\n", __func__, __LINE__);<esc>
 nmap <silent> <leader>id OCFLAGS_*.o := -DDEBUG<CR><esc>
+nmap <silent> <leader>fm :setlocal foldmethod=syntax<CR>
 
 " Super Macros
 " :let @n = @n + 10/phy3ldw"nP/@ldw"nPj0/<ldw"nPjj:let @/ = ""
