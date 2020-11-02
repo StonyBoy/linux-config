@@ -31,48 +31,29 @@ Bash Shell:
                 - profile.d/70-linux-keyboard.sh
         Home:
                 - profile.d/70-audiobooks.sh
-Beyond Compare:
+
+Scripts:
+        dest: ~/
+        default:
+                - scripts/tat
+                - scripts/python.init.py
+
+Vim Editor:
         dest: ~/
         dot: true
         default:
-                - config/bcompare/BCCommands.xml
-Visual Studio Code:
+                - vim/packages.vim
+                - vimrc
+        NVim:
+                - config/nvim
+                - profile.d/80-nvim.sh
+
+Terminal Mux:
         dest: ~/
         dot: true
         default:
-                - config/Code
-Fish Shell:
-        dest: ~/
-        dot: true
-        default:
-                - config/fish
-I3 Window Manager:
-        dest: ~/.config/i3/config
-        dot: true
-        Home:
-                - config/i3/config.home
-        Work:
-                - config/i3/config.work
-        Laptop:
-                - config/i3/config.work.laptop
-I3 Blocks:
-        dest: ~/.config/i3/i3blocks.conf
-        Home:
-                - config/i3/i3blocks.conf.home
-        Work:
-                - config/i3/i3blocks.conf.work
-        Laptop:
-                - config/i3/i3blocks.conf.work.laptop
-Powerline:
-        dest: ~/
-        dot: true
-        default:
-                - config/powerline
-QT Creator:
-        dest: ~/
-        dot: true
-        default:
-                - config/QtProject
+                - tmux.conf
+
 Git:
         dest: ~/
         dot: true
@@ -109,24 +90,7 @@ Mutt Email:
                 - mutt/send.one.com.pem
                 - mutt/one.com.gpg
                 - mutt/signatures/home
-PyCharm Editor:
-        dest: ~/
-        default:
-                - PyCharm
-Scripts:
-        dest: ~/
-        default:
-                - scripts/tat
-                - scripts/python.init.py
-Vim Editor:
-        dest: ~/
-        dot: true
-        default:
-                - vim/packages.vim
-                - vimrc
-        NVim:
-                - config/nvim
-                - profile.d/80-nvim.sh
+
 X Window:
         dest: ~/
         dot: true
@@ -134,8 +98,57 @@ X Window:
                 - Xresources
                 - Xdefaults
                 - Xmodmap
-Terminal Mux:
+
+I3 Window Manager:
+        dest: ~/.config/i3/config
+        dot: true
+        Home:
+                - config/i3/config.home
+        Work:
+                - config/i3/config.work
+        Laptop:
+                - config/i3/config.work.laptop
+
+I3 Blocks:
+        dest: ~/.config/i3/i3blocks.conf
+        Home:
+                - config/i3/i3blocks.conf.home
+        Work:
+                - config/i3/i3blocks.conf.work
+        Laptop:
+                - config/i3/i3blocks.conf.work.laptop
+
+Powerline:
         dest: ~/
         dot: true
         default:
-                - tmux.conf
+                - config/powerline
+
+QT Creator:
+        dest: ~/
+        dot: true
+        default:
+                - config/QtProject
+
+PyCharm Editor:
+        dest: ~/
+        default:
+                - PyCharm
+
+Beyond Compare:
+        dest: ~/
+        dot: true
+        default:
+                - config/bcompare/BCCommands.xml
+
+Visual Studio Code:
+        dest: ~/
+        dot: true
+        default:
+                - config/Code
+
+Fish Shell:
+        dest: ~/
+        dot: true
+        default:
+                - config/fish
