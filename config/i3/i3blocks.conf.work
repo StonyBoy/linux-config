@@ -63,7 +63,13 @@ color=#fdb6b6
 # The script may be called with a optional argument to set the alert
 # (defaults to 10 for 10%).
 [disk]
-label=
+label=H:
+instance=/dev/sda2
+interval=30
+
+[disk]
+label=W:
+instance=/dev/sdb1
 interval=30
 
 # Network interface monitoring
