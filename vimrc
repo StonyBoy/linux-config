@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Oct-30 11:14
+" Time-Stamp: 2020-Nov-04 14:00
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -130,6 +130,9 @@ nmap <silent> <leader>rv   :source $MYVIMRC<cr>:echom ".vimrc reloaded"<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Useful VIM shortcuts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Getting out quickly
+nnoremap ZA :qa!<CR>
+
 " Use ripgrep on selected word
 nnoremap ## :Rg \b<C-R><C-W>\b<CR>
 
