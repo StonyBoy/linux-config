@@ -1,71 +1,74 @@
+;  vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 [core]
-        editor = nvim
+    editor = nvim
 
 [alias]
-        b = !git branch -vv
-        cp = cherry-pick
-        dn = !git diff --name-only
-        dc = !git diff --cached
-        dtc = !git difftool --cached
-        dt = difftool
-        mt = mergetool
-        dtlast = !git difftool HEAD~1
-        la = !git config -l | grep alias | cut -c 7-
-        l = log --decorate
-        ls = !git log --pretty=format:\"%C(yellow)%h%Cred%d | %Creset%s%Cblue | [%cn]\" --decorate
-        ll = !git log --decorate --stat
-        mt = mergetool
-        r = reset
-        rh = !git reset --hard
-        sh  =  !git show --no-patch
-        shf =  !git show --name-only --format=""
-        sho =  !git show --name-only
-        shs =  "!diffstat()    { git diff --stat ${1-HEAD}~1..${1-HEAD} ; }; diffstat"
-        pat =  "!gitpatchsha() { git format-patch -M -C ${1-HEAD}~1..${1-HEAD} ; }; gitpatchsha"
-        since = !git log --pretty=format:\"%aD|%H|%an|%s\" --no-merges HEAD --not
-        s = status
-        ts = !git tag -l --format=\"%(align:50,left)%(refname:lstrip=2)%(end)  :   %(objectname)   :   %(contents:subject)\" t-*
-        unstage = !git reset HEAD --
-        upda = !git commit --reset-author --amend
-        v = !git --version
-        w = rev-parse --abbrev-ref HEAD
-        prune-branches =  "!gitprunebranches() { ~/scripts/git_branches.py -d ; }; gitprunebranches"
-        update-branches =  "!gitupdatebranches() { ~/scripts/git_branches.py -m ; }; gitupdatebranches"
+    b = !git branch -vv
+    cp = cherry-pick
+    dn = !git diff --name-only
+    dc = !git diff --cached
+    dtc = !git difftool --cached
+    dt = difftool
+    mt = mergetool
+    dtlast = !git difftool HEAD~1
+    la = !git config -l | grep alias | cut -c 7-
+    l = log --decorate
+    ls = !git log --pretty=format:\"%C(yellow)%h%Cred%d | %Creset%s%Cblue | [%cn]\" --decorate
+    ll = !git log --decorate --stat
+    mt = mergetool
+    r = reset
+    rh = !git reset --hard
+    sh  =  !git show --no-patch
+    shf =  !git show --name-only --format=""
+    sho =  !git show --name-only
+    shs =  "!diffstat()    { git diff --stat ${1-HEAD}~1..${1-HEAD} ; }; diffstat"
+    pat =  "!gitpatchsha() { git format-patch -M -C ${1-HEAD}~1..${1-HEAD} ; }; gitpatchsha"
+    since = !git log --pretty=format:\"%aD|%H|%an|%s\" --no-merges HEAD --not
+    s = status
+    ts = !git tag -l --format=\"%(align:50,left)%(refname:lstrip=2)%(end)  :   %(objectname)   :   %(contents:subject)\" t-*
+    unstage = !git reset HEAD --
+    upda = !git commit --reset-author --amend
+    v = !git --version
+    w = rev-parse --abbrev-ref HEAD
+    prune-branches =  "!gitprunebranches() { ~/scripts/git_branches.py -d ; }; gitprunebranches"
+    update-branches =  "!gitupdatebranches() { ~/scripts/git_branches.py -m ; }; gitupdatebranches"
 
 [color]
-        ui = true
+    ui = true
 
 [diff]
-        tool = bc3
+    tool = vimdiff3
+    guitool = bc3
 
 [merge]
-        tool = bc3
+    tool = vimdiff3
+    guitool = bc3
 
 [difftool]
-        prompt = false
+    prompt = false
 
 [mergetool]
-        prompt = false
+    prompt = false
 
 [difftool "bc3"]
-        trustExitCode = true
+    trustExitCode = true
 
 [mergetool "bc3"]
-        trustExitCode = true
+    trustExitCode = true
 
 [grep]
-        extendRegexp = true
-        lineNumber = true
-        patternType = perl
+    extendRegexp = true
+    lineNumber = true
+    patternType = perl
 
 [rerere]
-        enabled = false
+    enabled = false
 
 [log]
-        decorate = short
+    decorate = short
 
 [color.decorate]
-        head = blue reverse
-        branch = blue
-        tag = green
+    head = blue reverse
+    branch = blue
+    tag = green
 
