@@ -13,8 +13,9 @@
     dtlast = !git difftool HEAD~1
     la = !git config -l | grep alias | cut -c 7-
     l = log --decorate
-    ls = !git log --pretty=format:\"%C(yellow)%h%Cred%d | %Creset%s%Cblue | [%cn]\" --decorate
-    ll = !git log --decorate --stat
+    lf = log --format='Fixes: %h ("%s")'
+    ls = log --pretty=format:\"%C(yellow)%h%Cred%d | %Creset%s%Cblue | [%cn]\" --decorate
+    ll = log --decorate --stat
     mt = mergetool
     r = reset
     rh = !git reset --hard
