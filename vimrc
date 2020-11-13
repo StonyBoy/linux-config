@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Nov-04 14:00
+" Time-Stamp: 2020-Nov-13 10:05
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -103,6 +103,9 @@ while c <= 20
     execute "nnoremap " . c . "gb :" . c . "b\<CR>"
     let c += 1
 endwhile
+
+" Empty the search register
+let @/ = ""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Using tabs
