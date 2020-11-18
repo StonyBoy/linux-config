@@ -48,6 +48,12 @@ Vim Editor:
                 - config/nvim
                 - profile.d/80-nvim.sh
 
+Alacritty:
+        dest: ~/
+        dot: true
+        default:
+                - config/alacritty/alacritty.yml
+
 Terminal Mux:
         dest: ~/
         dot: true

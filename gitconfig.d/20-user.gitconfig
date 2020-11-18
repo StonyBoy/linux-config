@@ -1,4 +1,4 @@
-;  vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
+;  vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 ft=gitconfig:
 [core]
     editor = nvim
 
@@ -38,11 +38,11 @@
     ui = true
 
 [diff]
-    tool = vimdiff3
+    tool = nvimdiff
     guitool = bc3
 
 [merge]
-    tool = vimdiff3
+    tool = nvimdiff
     guitool = bc3
 
 [difftool]
@@ -73,3 +73,15 @@
     branch = blue
     tag = green
 
+[core]
+    pager = delta
+
+[delta]
+    plus-color = "#012800"
+    minus-color = "#340001"
+    syntax-theme = Solarized (light)
+    line-numbers = true
+    side-by-side = true
+
+[interactive]
+    diffFilter = delta --color-only

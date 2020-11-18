@@ -32,11 +32,11 @@ floating_modifier $mod
 focus_follows_mouse no
 
 # start a terminal
-# Possible options: urxvt, terminator, xfce4-terminal, xst
-set $terminal xst
+# Possible options: urxvt, terminator, xfce4-terminal, xst, alacritty
+set $terminal alacritty
 
-# Use xst (X Resource Simple Terminal)
-bindsym $mod+Return exec xst
+# Use defined terminal
+bindsym $mod+Return exec $terminal
 # Use Terminator
 bindsym $mod+Shift+Return exec terminator
 
