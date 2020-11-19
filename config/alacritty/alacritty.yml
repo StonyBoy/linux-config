@@ -1,5 +1,5 @@
 # Steen Hegelund
-# Time-Stamp: 2020-Nov-18 21:06
+# Time-Stamp: 2020-Nov-19 09:58
 
 
 # Colors (Solarized Light)
@@ -61,7 +61,9 @@ window:
   dynamic_title: true
 
 bell:
-  animation: EaseOutExpo
+  animation: Ease
+  duration: 10
+  color: '#cb4b16' # orange
 
 background_opacity: 1.0
 

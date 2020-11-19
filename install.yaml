@@ -54,6 +54,12 @@ Alacritty:
         default:
                 - config/alacritty/alacritty.yml
 
+Bat:
+        dest: ~/
+        dot: true
+        default:
+                - config/bat/config
+
 Terminal Mux:
         dest: ~/
         dot: true
