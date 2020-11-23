@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Nov-13 10:05
+" Time-Stamp: 2020-Nov-23 21:59
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -264,18 +264,19 @@ set noshowmode
 let g:lightline = {
   \ 'colorscheme': 'solarized',
   \     'active': {
-  \         'left': [['mode'], ['paste', 'gitbranch', 'absolutepath']],
+  \         'left': [['mode'], ['paste', 'gitbranch', 'afilepath']],
   \         'right': [['session', 'fileencoding', 'fileformat', 'filetype', 'readonly', 'percent', 'lineinfo'], ['filemod', 'editcfg']]
   \     },
   \     'inactive': {
-  \         'left': [['absolutepath']],
+  \         'left': [['afilepath']],
   \         'right': [[], [], ['filemod', 'fileencoding', 'fileformat', 'filetype', 'readonly', 'percent', 'lineinfo']]
   \     },
   \     'component_function': {
   \       'session': 'obsession#ObsessionStatus',
   \       'gitbranch': 'fugitive#head',
   \       'filemod': 'CustomFilemod',
-  \       'editcfg': 'CustomEditConfig'
+  \       'editcfg': 'CustomEditConfig',
+  \       'afilepath': 'AdaptiveFilepath'
   \     },
   \ }
 
@@ -290,6 +291,15 @@ function! CustomEditConfig()
   return 'ts:' . &tabstop . ' sw:' . &shiftwidth . ' sts:' . &softtabstop . ' tw:' . &textwidth . expandtabstr
 endfunction
 
+function! AdaptiveFilepath()
+    let fpath = fnamemodify(expand('%:f'), ':p:~')
+    if strlen(fpath) > 40
+        let ret = pathshorten(fpath)
+    else
+        let ret = fpath
+    end
+    return ret
+endfunction
 
 " FZF
 command! -bang -nargs=* Rgu call fzf#vim#grep("rg -u --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, <bang>0)'
