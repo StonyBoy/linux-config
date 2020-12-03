@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2020-Oct-29 11:58
+" Time-Stamp: 2020-Dec-02 15:04
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 "
 
@@ -19,6 +19,7 @@ Plug 'tpope/vim-obsession'                                        " Automatic ed
 Plug 'tpope/vim-markdown'                                         " Syntax highlighting for markdown files
 Plug 'tpope/vim-dispatch'                                         " Run build commands in the background and parse the result
 Plug 'tpope/vim-unimpaired'                                       " Pairs of handy bracket mappings
+Plug 'tpope/vim-surround'                                         " Mappings to easily delete, change and add such surroundings in pairs
 Plug 'itchyny/lightline.vim'                                      " Nice Status Line
 Plug 'airblade/vim-gitgutter'                                     " Git: Changed lines since last revision
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy File Finder binary

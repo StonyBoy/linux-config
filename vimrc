@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Nov-23 21:59
+" Time-Stamp: 2020-Nov-24 11:35
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -300,6 +300,9 @@ function! AdaptiveFilepath()
     end
     return ret
 endfunction
+
+" Show full path and optionally referring to $HOME
+nnoremap #% :echo expand('%:p:~')<CR>
 
 " FZF
 command! -bang -nargs=* Rgu call fzf#vim#grep("rg -u --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, <bang>0)'
