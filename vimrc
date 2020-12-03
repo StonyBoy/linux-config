@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Nov-24 11:35
+" Time-Stamp: 2020-Dec-03 16:45
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -57,6 +57,7 @@ augroup filetype_settings
     autocmd FileType c,h autocmd BufWritePre * :call TrimWhitespace()
     autocmd FileType bash                               setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120 expandtab colorcolumn=120 cindent
     autocmd FileType gitsendemail,mail                  setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=80 expandtab colorcolumn=80 cindent
+    autocmd FileType md,markdown,asciidoc,text          setlocal spell spelllang=en_us
 augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -129,6 +130,11 @@ cmap <silent> <ESC>[1;5C  <C-right>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <silent> <leader>rv   :source $MYVIMRC<cr>:echom ".vimrc reloaded"<cr>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Setup Spell Checking - also in autocommands
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set spellfile=~/.vim/spell/en.utf-8.add
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Useful VIM shortcuts
