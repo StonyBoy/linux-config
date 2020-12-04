@@ -123,6 +123,7 @@ I3 Window Manager:
 
 I3 Blocks:
         dest: ~/.config/i3/i3blocks.conf
+        dot: true
         Home:
                 - config/i3/i3blocks.conf.home
         Work:
@@ -130,6 +131,17 @@ I3 Blocks:
         Laptop:
                 - config/i3/i3blocks.conf.work.laptop
 
+Sway:
+        dest: ~/.config/sway/config
+        dot: true
+        Home:
+                - config/sway/config.home
+
+Sway I3 Blocks:
+        dest: ~/.config/sway/i3blocks.conf
+        dot: true
+        Home:
+                - config/sway/i3blocks.conf.home
 Powerline:
         dest: ~/
         dot: true
