@@ -6,7 +6,7 @@
 #### Input configuration
 
 input * {
-    xkb_layout "dk"
+    xkb_layout "dk,us"
     xkb_variant nodeadkeys
     xkb_options caps:escape
     xkb_model "pc-105"
@@ -154,8 +154,11 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 
-# Take Screenshots with MOD+P
-bindsym $mod+P exec xfce4-screenshooter
+# Screenshot and screenclip
+set $screenshot grim ~/Pictures/screenshots/screenshot-$(date +"%Y-%m-%d-%H-%M-%S").png
+set $screenclip slurp | grim -g - ~/Pictures/screenshots/screenshot-$(date +"%Y-%m-%d-%H-%M-%S").png
+bindsym $mod+Print exec $screenshot
+bindsym $mod+Shift+Print exec $screenclip
 
 # NumLock is ON
 exec_always --no-startup-id numlockx on
@@ -224,9 +227,8 @@ mode "$mode_floatmove" {
 bindsym $mod+Shift+m focus floating; mode "$mode_floatmove"
 
 # Switch keyboard layout
-bindsym $mod+Mod1+u exec setxkbmap -layout us -model pc104 -option "caps:escape" -rules evdev
-bindsym $mod+Mod1+d exec setxkbmap -layout dk -model pc105 -option "caps:escape" -rules evdev
-bindsym $mod+Mod1+n exec setxkbmap -layout dk -model pc105 -option "caps:escape" -variant "nodeadkeys" -rules evdev
+bindsym $mod+Mod1+u exec swaymsg "input type:keyboard xkb_switch_layout 1"
+bindsym $mod+Mod1+d exec swaymsg "input type:keyboard xkb_switch_layout 0"
 
 # Media player controls
 bindsym XF86AudioPlay exec  --no-startup-id playerctl play-pause
