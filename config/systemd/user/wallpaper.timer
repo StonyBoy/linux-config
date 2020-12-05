@@ -1,0 +1,11 @@
+[Unit]
+Description=Wallpaper Change Timer
+
+[Timer]
+OnBootSec=2m
+OnUnitActiveSec=2h
+Unit=wallpaper.service
+
+[Install]
+WantedBy=timers.target
+
