@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Dec-03 16:45
+" Time-Stamp: 2020-Dec-05 14:27
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -261,7 +261,9 @@ silent! source .vimlocal
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme configuration
 syntax on
-set background=light
+if $TERM == "alacritty"
+    set background=light
+endif
 colorscheme solarized8
 
 " Lightline
