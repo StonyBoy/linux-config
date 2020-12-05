@@ -5,13 +5,12 @@
 
 #### Input configuration
 
-input * {
-    xkb_layout "dk,us"
+input type:keyboard {
+    xkb_layout "dk"
     xkb_variant nodeadkeys
     xkb_options caps:escape
     xkb_model "pc-105"
 }
-
 
 set $mod Mod4
 set $lock_bkg  "/opt/wallpapers/i3lock.png"
