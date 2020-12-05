@@ -37,6 +37,7 @@ Scripts:
         default:
                 - scripts/tat
                 - scripts/python.init.py
+                - scripts/update_wallpaper.sh
 
 Vim Editor:
         dest: ~/
@@ -176,3 +177,9 @@ Fish Shell:
         dot: true
         default:
                 - config/fish
+
+Systemd User Timers:
+        dest: ~/
+        dot: true
+        default:
+                - config/systemd/user
