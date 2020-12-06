@@ -1,0 +1,12 @@
+[Unit]
+Description=Perforce Synchronization Timer
+
+[Timer]
+# Run 15 minutes after startup and then every week
+OnBootSec=15m
+OnUnitActiveSec=1w
+Unit=perforce.service
+
+[Install]
+WantedBy=timers.target
+

@@ -1,0 +1,11 @@
+[Unit]
+Description=Router Reboot Timer
+Requires=router_reboot.service
+
+[Timer]
+Unit=router_reboot.service
+OnCalendar=Mon,Fri 03:55:00
+
+[Install]
+WantedBy=timers.target
+

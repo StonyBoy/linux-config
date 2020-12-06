@@ -1,9 +1,42 @@
-alias Janne 	Marianne Hansen		<marianne@hegelund-hansen.dk>
-alias fas	Marianne Hansen (FAS)	<mha.fas@dadl.dk>
-alias anders Anders Krarup-Hansen <akrarup@dadlnet.dk>
-alias birthe Birthe Riishede <birthe@riishede.dk>
-alias allanjuhl Allan Juhl Kristensen <allanjuhl1@googlemail.com>
-alias frederik.kh frederik krarup-hansen <frederik.kh@hotmail.com>
-alias michael Michael Fricke <michael@e22.dk>
-alias leifc Leif Christoffersen <l.christoffersen@privat.dk>
-alias jannie_klasen Jannie Klasén <jannie_klasen@hotmail.com>
+alias alex Alexandre Belloni <alexandre.belloni@bootlin.com>
+alias allan Allan Nielsen <Allan.Nielsen@microchip.com>
+alias alunn Andrew Lunn <andrew@lunn.ch>
+alias antoine Antoine Tenart <antoine.tenart@bootlin.com>
+alias atenart Antoine Tenart <atenart@kernel.org>
+alias bjarni Bjarni Jonasson <Bjarni.Jonasson@microchip.com>
+alias bryan Bryan Whitehead <Bryan.Whitehead@microchip.com>
+alias christian.helveg Christian Helveg <Christian.Helveg@microchip.com>
+alias devicetree Device Tree List <devicetree@vger.kernel.org>
+alias dmiller "David S. Miller" <davem@davemloft.net>
+alias gregory.clement Gregory <gregory.clement@bootlin.com>
+alias hkallweit Heiner Kallweit <hkallweit1@gmail.com>
+alias horatiu Horatiu Vultur <Horatiu.Vultur@microchip.com>
+alias ioannis Ioannis Kotleas <Ioannis.Kotleas@microchip.com>
+alias jkicinski Jakub Kicinski <kuba@kernel.org>
+alias joergena Joergen Andreasen <Joergen.Andreasen@microchip.com>
+alias john.haechten John Haechten <John.Haechten@microchip.com>
+alias kishonv Kishon Vijay Abraham I <kishon@ti.com>
+alias lars.ellegaard Lars Ellegaard <Lars.Ellegaard@microchip.com>
+alias larsp Lars Povlsen <Lars.Povlsen@microchip.com>
+alias linux-arm Linux ARM List <linux-arm-kernel@lists.infradead.org>
+alias linuxkernel Linux Kernel List <linux-kernel@vger.kernel.org>
+alias martin.bak Martin Bak <Martin.Bak@microchip.com>
+alias microchip Microchip UNG Driver List <UNGLinuxDriver@microchip.com>
+alias microsemi Bootlin Microsemi List <microsemi@lists.bootlin.com>
+alias miquel Miquel Raynal <miquel.raynal@bootlin.com>
+alias morten.terstrup Morten Terstrup <Morten.Terstrup@microchip.com>
+alias netdev Netdev List <netdev@vger.kernel.org>
+alias palle Palle Christensen <Palle.Christensen@microchip.com>
+alias qschultz Quentin Schulz <quentin.schulz@bootlin.com>
+alias rene Rene Nielsen <Rene.Nielsen@microchip.com>
+alias rking Russell King <linux@armlinux.org.uk>
+alias robh Rob Herring <robh+dt@kernel.org>
+alias ron.huff Ron Huff <Ron.Huff@microchip.com>
+alias steen Steen Hegelund <steen.hegelund@microchip.com>
+alias stony steen Hegelund <steen@hegelund-hansen.dk>
+alias thomasaa Thomas <Thomas.Aakjer@microchip.com>
+alias thomasp Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+alias torkil Torkil Oelgaard <Torkil.Oelgaard@microchip.com>
+alias vinodk Vinod Koul <vkoul@kernel.org>
+alias vlad Vladimir Lyalikov <Vlad.Lyalikov@microchip.com>
+alias younes Younes Leroul <Younes.Leroul@microchip.com>

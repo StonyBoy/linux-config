@@ -1,5 +1,5 @@
 # paths
-set folder = ~/Maildir
+set folder = ~/Mail
 set message_cachedir = ~/.mutt/cache/bodies
 set certificate_file = ~/.mutt/imap.one.com.pem
 set mailcap_path = ~/.mutt/mailcap
@@ -33,7 +33,7 @@ set reply_to                         # reply to Reply to: field
 set reverse_name                     # reply as whomever it was to
 set include                          # include message in replies
 set forward_quote                    # include message in forwards
-set editor='vim + -c "set textwidth=72" -c "set wrap" -c "set nocp" -c "?^$"'
+set editor='nvim + -c "set textwidth=72" -c "set wrap" -c "set nocp" -c "?^$"'
 set text_flowed
 unset sig_dashes                     # no dashes before sig
 unset mime_forward                   # forward attachments as part of body
@@ -83,7 +83,7 @@ set sidebar_sort_method = path
 # mailboxes =one
 # mailboxes `~/.mutt/mbsync_folders.py ~/Mail/one`
 # mailboxes =microchip
-mailboxes `~/.mutt/mbsync_folders.py ~/Maildir`
+mailboxes `~/.mutt/mbsync_folders.py ~/Mail`
 source $alias_file
 
 # source colors and keybindings

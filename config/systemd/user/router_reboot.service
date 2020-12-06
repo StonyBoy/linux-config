@@ -1,0 +1,15 @@
+# Get some YouSee Router status information and reboot the router
+# Steen Hegelund
+# Time-Stamp: 2020-Nov-01 15:57
+#
+# Install in ~/.config/systemd/user/ to keep it a user service, or
+# in /etc/systemd/system to make it a system service
+
+[Unit]
+Description=Router Reboot Service
+
+[Service]
+Type=oneshot
+ExecStart=/home/steen/src/proj/router_restart/router.py
+Wants=router_reboot.timer
+

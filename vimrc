@@ -1,6 +1,7 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Aug-20 09:35
+" Time-Stamp: 2020-Dec-05 14:27
+" vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
 
@@ -36,8 +37,8 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text formatting defaults
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set textwidth=150   " Set the line width default value
-set colorcolumn=150 " Set the colour marker
+set textwidth=120   " Set the line width default value
+set colorcolumn=120 " Set the colour marker
 set shiftwidth=4    " Default 4 spaces
 set tabstop=4       " 4 spaces per tab
 set softtabstop=4   " 4 spaces per tab when unindenting
@@ -52,8 +53,11 @@ augroup filetype_settings
     autocmd!
     autocmd BufNewFile,BufRead *.in setf make
     autocmd BufNewFile,BufRead *.c,*.h,*.S,*.dts,*.dtsi setlocal tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 noexpandtab colorcolumn=80 cindent
-    autocmd BufNewFile,BufRead *.cxx,*.hxx              setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=150 expandtab colorcolumn=150 cindent
+    autocmd BufNewFile,BufRead *.cxx,*.hxx              setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120 expandtab colorcolumn=120 cindent
     autocmd FileType c,h autocmd BufWritePre * :call TrimWhitespace()
+    autocmd FileType bash                               setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120 expandtab colorcolumn=120 cindent
+    autocmd FileType gitsendemail,mail                  setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=80 expandtab colorcolumn=80 cindent
+    autocmd FileType md,markdown,asciidoc,text          setlocal spell spelllang=en_us
 augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -101,6 +105,9 @@ while c <= 20
     let c += 1
 endwhile
 
+" Empty the search register
+let @/ = ""
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Using tabs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -123,12 +130,24 @@ cmap <silent> <ESC>[1;5C  <C-right>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <silent> <leader>rv   :source $MYVIMRC<cr>:echom ".vimrc reloaded"<cr>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Setup Spell Checking - also in autocommands
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set spellfile=~/.vim/spell/en.utf-8.add
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Useful VIM shortcuts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Getting out quickly
+nnoremap ZA :qa!<CR>
+
 " Use ripgrep on selected word
 nnoremap ## :Rg \b<C-R><C-W>\b<CR>
+
+" Terminal mode
+tnoremap <Esc> <C-\><C-n>
+tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 
 " Search visual selection
 xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
@@ -146,10 +165,10 @@ cabbr <expr> %% expand('%:p:h')
 
 " Window resizing
 if has('nvim')
-    nnoremap <M-S-Left>  :vertical resize -1<cr>
-    nnoremap <M-S-Right> :vertical resize +1<cr>
-    nnoremap <M-S-Down>  :resize -1<cr>
-    nnoremap <M-S-Up>    :resize +1<cr>
+    nnoremap <C-M-S-Left>  :vertical resize -1<cr>
+    nnoremap <C-M-S-Right> :vertical resize +1<cr>
+    nnoremap <C-M-S-Down>  :resize -1<cr>
+    nnoremap <C-M-S-Up>    :resize +1<cr>
 else
     nnoremap <F2>        :vertical resize -1<cr>
     nnoremap <F5>        :vertical resize +1<cr>
@@ -158,8 +177,8 @@ else
 endif
 
 " Follow link shortcut
-nmap <F6> <C-]>
-nmap <F7> <C-[>
+nnoremap <F6> g<c-]>
+vnoremap <F6> g<c-]>
 
 " Toggle BufExplorer
 nmap <F8> :ToggleBufExplorer<cr>
@@ -170,19 +189,29 @@ nnoremap <F9> :e!<cr>
 " Clear the last search pattern (removes highlight)
 nnoremap <F10> :let @/ = ""<cr>
 
+" Clear old part of logfile
+nnoremap <F11> G?Starting kernelkdgg
+
 " Build helpers
 nmap <silent> <leader>fb :Make -C ~/work/fireant/buildroot O=../../build/buildroot-ls1046-fireant/ linux-rebuild all<cr>
 
 " Edit helpers
 nmap <silent> <leader>it Opr_info("%s:%d\n", __func__, __LINE__);<esc>
 nmap <silent> <leader>id OCFLAGS_*.o := -DDEBUG<CR><esc>
+nmap <silent> <leader>fm :setlocal foldmethod=syntax<CR>
+
+" Super Macros
+" :let @n = @n + 10/phy3ldw"nP/@ldw"nPj0/<ldw"nPjj:let @/ = ""
+" /reg =f<ldw:let @o = @" - @n"oP
+" 0/port4ldw"nP/port5ldw"nPa /reg =f<ldw"nP/phys =4wdt "oPwdw"nP/sfp =/eth3ldw"nPjj:let @n = @n + 1:let @o = @o + 1
+" 0/sfp_eth7ldw"nP/sfp-eth7ldw"nPa /&i2c4ldw"oP2j:let @n = @n + 1:let @o = @o + 1
 
 " Append modeline after last line in buffer.
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
 " files.
 function! AppendModeline()
-  let l:modeline = printf(" vim: set ts=%d sw=%d sts=%d tw=%d %set :",
-        \ &tabstop, &shiftwidth, &softtabstop, &textwidth, &expandtab ? '' : 'no')
+  let l:modeline = printf(" vim: set ts=%d sw=%d sts=%d tw=%d %set cc=%d :",
+        \ &tabstop, &shiftwidth, &softtabstop, &textwidth, &expandtab ? '' : 'no', &colorcolumn)
   let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
   call append(line("$"), l:modeline)
 endfunction
@@ -232,7 +261,9 @@ silent! source .vimlocal
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme configuration
 syntax on
-set background=light
+if $TERM == "alacritty"
+    set background=light
+endif
 colorscheme solarized8
 
 " Lightline
@@ -241,18 +272,19 @@ set noshowmode
 let g:lightline = {
   \ 'colorscheme': 'solarized',
   \     'active': {
-  \         'left': [['mode'], ['paste', 'gitbranch', 'absolutepath']],
+  \         'left': [['mode'], ['paste', 'gitbranch', 'afilepath']],
   \         'right': [['session', 'fileencoding', 'fileformat', 'filetype', 'readonly', 'percent', 'lineinfo'], ['filemod', 'editcfg']]
   \     },
   \     'inactive': {
-  \         'left': [['absolutepath']],
+  \         'left': [['afilepath']],
   \         'right': [[], [], ['filemod', 'fileencoding', 'fileformat', 'filetype', 'readonly', 'percent', 'lineinfo']]
   \     },
   \     'component_function': {
   \       'session': 'obsession#ObsessionStatus',
   \       'gitbranch': 'fugitive#head',
   \       'filemod': 'CustomFilemod',
-  \       'editcfg': 'CustomEditConfig'
+  \       'editcfg': 'CustomEditConfig',
+  \       'afilepath': 'AdaptiveFilepath'
   \     },
   \ }
 
@@ -267,6 +299,18 @@ function! CustomEditConfig()
   return 'ts:' . &tabstop . ' sw:' . &shiftwidth . ' sts:' . &softtabstop . ' tw:' . &textwidth . expandtabstr
 endfunction
 
+function! AdaptiveFilepath()
+    let fpath = fnamemodify(expand('%:f'), ':p:~')
+    if strlen(fpath) > 40
+        let ret = pathshorten(fpath)
+    else
+        let ret = fpath
+    end
+    return ret
+endfunction
+
+" Show full path and optionally referring to $HOME
+nnoremap #% :echo expand('%:p:~')<CR>
 
 " FZF
 command! -bang -nargs=* Rgu call fzf#vim#grep("rg -u --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, <bang>0)'
@@ -299,5 +343,3 @@ function! TrimWhitespace()
     call winrestview(l:save)
 endfun
 command! TrimWhitespace call TrimWhitespace()
-
-" vim: set ts=4 sw=4 sts=4 tw=150 et :

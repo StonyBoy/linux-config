@@ -1,0 +1,11 @@
+[Unit]
+Description=Sway (Wayland) Wayland Wallpaper Change Timer
+
+[Timer]
+OnBootSec=2m
+OnUnitActiveSec=2h
+Unit=sway_wallpaper.service
+
+[Install]
+WantedBy=timers.target
+

@@ -1,6 +1,7 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2020-Jul-09 10:28
+" Time-Stamp: 2020-Dec-02 15:04
+" vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 "
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -18,6 +19,7 @@ Plug 'tpope/vim-obsession'                                        " Automatic ed
 Plug 'tpope/vim-markdown'                                         " Syntax highlighting for markdown files
 Plug 'tpope/vim-dispatch'                                         " Run build commands in the background and parse the result
 Plug 'tpope/vim-unimpaired'                                       " Pairs of handy bracket mappings
+Plug 'tpope/vim-surround'                                         " Mappings to easily delete, change and add such surroundings in pairs
 Plug 'itchyny/lightline.vim'                                      " Nice Status Line
 Plug 'airblade/vim-gitgutter'                                     " Git: Changed lines since last revision
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy File Finder binary
@@ -32,6 +34,10 @@ Plug 'rust-lang/rust.vim'                                         " Rust, syntax
 Plug 'dense-analysis/ale'                                         " Asynchroneous Syntax checker
 Plug 'junegunn/vim-easy-align'                                    " Align text on specific characters in nice columns
 Plug 'tpope/vim-commentary'                                       " Comment in/out lines of text in various languages
+Plug 'wsdjeg/vim-fetch'                                           " Use line and column jumps in file paths as found in stack traces and similar output
+Plug 'aklt/plantuml-syntax'                                       " PlantUML Syntax/Plugin/FTDetect
+Plug 'AndrewRadev/linediff.vim'                                   " Diff two separate blocks of text
+Plug 'AndrewRadev/splitjoin.vim'                                  " Switching between a single-line statement and a multi-line one
 call plug#end()
 
 
