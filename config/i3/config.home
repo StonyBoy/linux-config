@@ -32,12 +32,12 @@ floating_modifier $mod
 focus_follows_mouse no
 
 # start a terminal
-# Possible options: urxvt, terminator, xfce4-terminal, xst, alacritty
+# Possible options: urxvt, terminator, xfce4-terminal, xst, alacritty, kitty
 set $terminal alacritty
 
 # Use defined terminal
 bindsym $mod+Return exec $terminal
-# Use Terminator
+# Use alternative
 bindsym $mod+Shift+Return exec terminator
 
 # kill focused window
