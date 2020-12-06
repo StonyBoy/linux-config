@@ -3,4 +3,5 @@
 *.code-workspace
 .DS_Store
 Session.vim
+config/systemd/user/timers.target.wants/
 
