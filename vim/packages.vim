@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2020-Dec-02 15:04
+" Time-Stamp: 2020-Dec-08 16:24
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 "
 
@@ -24,6 +24,7 @@ Plug 'itchyny/lightline.vim'                                      " Nice Status 
 Plug 'airblade/vim-gitgutter'                                     " Git: Changed lines since last revision
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy File Finder binary
 Plug 'junegunn/fzf.vim'                                           " Fuzzy File Finder
+Plug 'junegunn/gv.vim'                                            " A git commit browser.
 Plug 'lifepillar/vim-solarized8'                                  " Modern SolarlizedColorscheme
 Plug 'vim-ruby/vim-ruby'                                          " Ruby support
 Plug 'christoomey/vim-tmux-navigator'                             " Go between panes in both vim and tmux
