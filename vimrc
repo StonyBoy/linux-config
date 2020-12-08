@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Dec-07 20:15
+" Time-Stamp: 2020-Dec-08 13:55
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -57,6 +57,7 @@ augroup filetype_settings
     autocmd FileType c,h autocmd BufWritePre * :call TrimWhitespace()
     autocmd FileType bash                               setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120 expandtab colorcolumn=120 cindent
     autocmd FileType gitsendemail,mail                  setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=80 expandtab colorcolumn=80 cindent
+    autocmd FileType gitcomment                         setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=75 expandtab colorcolumn=75 cindent
     autocmd FileType md,markdown,asciidoc,text          setlocal spell spelllang=en_us
 augroup END
 
@@ -68,6 +69,9 @@ set hlsearch        " highlight search - show the current search pattern
 set incsearch       " Do the search while typing in a search pattern
 set ignorecase      " Ignore cases while searching
 set showmatch       " showmatch:   Show the matching bracket for the last ')'?
+
+" Do not highlight special key background
+highlight SpecialKey ctermbg=NONE guibg=NONE
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text Formatting/Layout
@@ -106,7 +110,7 @@ while c <= 20
 endwhile
 
 " Empty the search register
-let @/ = ""
+let @/ = "__=#?__"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Using tabs
@@ -210,12 +214,20 @@ nmap <silent> <leader>fm :setlocal foldmethod=syntax<CR>
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
 " files.
 function! AppendModeline()
-  let l:modeline = printf(" vim: set ts=%d sw=%d sts=%d tw=%d %set cc=%d :",
-        \ &tabstop, &shiftwidth, &softtabstop, &textwidth, &expandtab ? '' : 'no', &colorcolumn)
+  let l:modeline = printf(" vim: set ts=%d sw=%d sts=%d tw=%d %set cc=%d ft=%s :",
+        \ &tabstop, &shiftwidth, &softtabstop, &textwidth, &expandtab ? '' : 'no', &colorcolumn, &filetype)
   let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
   call append(line("$"), l:modeline)
 endfunction
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+
+" Add name-timestamp header in the beginning of the file
+function! AddFileHeader()
+  let l:head = " Steen Hegelund,  Time-Stamp: #, "
+  let l:header = split(substitute(&commentstring, "%s", l:head, ""), ",")
+  call append(0, l:header)
+endfunction
+nnoremap <silent> <Leader>fh :call AddFileHeader()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Timestamps
@@ -295,7 +307,7 @@ endfunction
 
 
 function! CustomEditConfig()
-  let expandtabstr = &expandtab ? ' expandtab' : ''
+  let expandtabstr = &expandtab ? ' spc' : ' tab'
   return 'ts:' . &tabstop . ' sw:' . &shiftwidth . ' sts:' . &softtabstop . ' tw:' . &textwidth . expandtabstr
 endfunction
 
@@ -315,9 +327,6 @@ nnoremap #% :echo expand('%:p:~')<CR>
 " FZF
 command! -bang -nargs=* Rgu call fzf#vim#grep("rg -u --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, <bang>0)'
 command! -bang -nargs=* Bli call fzf#vim#buffer_lines(<q-args>, <bang>0)'
-
-" Do not set special background
-highlight SpecialKey ctermbg=NONE guibg=NONE
 
 " ALE linter
 " Do not lint when opening a file
