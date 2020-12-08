@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Dec-08 13:55
+" Time-Stamp: 2020-Dec-08 17:15
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -223,9 +223,8 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 " Add name-timestamp header in the beginning of the file
 function! AddFileHeader()
-  let l:head = " Steen Hegelund,  Time-Stamp: #, "
-  let l:header = split(substitute(&commentstring, "%s", l:head, ""), ",")
-  call append(0, l:header)
+  call append(0, ["Steen Hegelund", "Time-Stamp: #", ""])
+  exec '0,3Commentary'
 endfunction
 nnoremap <silent> <Leader>fh :call AddFileHeader()<CR>
 
