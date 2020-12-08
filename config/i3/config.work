@@ -294,7 +294,7 @@ mode "$mode_system" {
 
 bindsym $mod+Shift+e mode "$mode_system"
 
-bindsym $mod+t exec ofi -show rtmux -modi "rtmux:~/scripts/remote_tmux.sh" -theme gruvbox-light-soft -font "Inconsolata 16"
+bindsym $mod+t exec rofi -show rtmux -modi "rtmux:~/scripts/remote_tmux.sh" -theme gruvbox-light-soft -font "Inconsolata 16"
 
 # Windows and Status Bar
 # ============================================================================
