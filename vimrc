@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Dec-05 14:27
+" Time-Stamp: 2020-Dec-07 20:15
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -261,7 +261,7 @@ silent! source .vimlocal
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme configuration
 syntax on
-if $TERM == "alacritty"
+if $TERM == "alacritty" || $TERM == "tmux-256color"
     set background=light
 endif
 colorscheme solarized8
