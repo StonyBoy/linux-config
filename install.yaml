@@ -39,6 +39,7 @@ Scripts:
                 - scripts/python.init.py
                 - scripts/update_wallpaper.sh
                 - scripts/remote_tmux.sh
+                - scripts/local_tmux.sh
 
 Vim Editor:
         dest: ~/
