@@ -40,6 +40,7 @@ Scripts:
                 - scripts/update_wallpaper.sh
                 - scripts/remote_tmux.sh
                 - scripts/local_tmux.sh
+                - scripts/git_branches.py
 
 Vim Editor:
         dest: ~/
