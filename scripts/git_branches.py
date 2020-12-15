@@ -42,6 +42,18 @@ def delete_branches(unconditionally):
                     run('git branch -D {}'.format(name))
 
 
+def delete_local_branches():
+    run('git remote prune origin')
+    lines = run('git branch -vv')
+    regex = re.compile(r'^[ *+]\s(\S+)\s+\S+\s[^[]\S+[^]].*$')
+    for line in lines:
+        found = regex.findall(line)
+        if len(found):
+            name = found[0]
+            if delete_branch_prompt(name) == 'y':
+                run('git branch -D {}'.format(name))
+
+
 def delete_remote_branches():
     run('git remote prune origin')
     lines = run('git branch -vv')
@@ -53,8 +65,8 @@ def delete_remote_branches():
             name = found[0]
             if delete_branch_prompt(name) == 'y':
                 repo, branch = name.split('/', 1)
-                run('git branch --delete {}'.format(branch))
                 run('git push {} --delete {}'.format(repo, branch))
+                run('git branch -D {}'.format(branch))
 
 
 def move_branches(unconditionally):
@@ -75,14 +87,17 @@ def move_branches(unconditionally):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('-d', '--delete', action='store_true', default=False, help='Delete local branches')
+    parser.add_argument('-d', '--delete', action='store_true', default=False, help='Delete local branches where the remote companion is gone')
     parser.add_argument('-D', '--delete_unconditionally', action='store_true', default=False, help='Delete local branches unconditionally')
     parser.add_argument('-m', '--move', action='store_true', default=False, help='Move local branches')
     parser.add_argument('-M', '--move_unconditionally', action='store_true', default=False, help='Move local branches unconditionally')
     parser.add_argument('-r', '--remotedelete', action='store_true', default=False, help='Delete both local and remote branches')
+    parser.add_argument('-l', '--localdelete', action='store_true', default=False, help='Delete local branches')
     args = parser.parse_args()
     if args.delete or args.delete_unconditionally:
         delete_branches(args.delete_unconditionally)
+    elif args.localdelete:
+        delete_local_branches()
     elif args.remotedelete:
         delete_remote_branches()
     elif args.move or args.move_unconditionally:
