@@ -9,10 +9,10 @@ set $wallpaper "/opt/wallpapers/i3wallpaper.jpg"
 set $wrkspc1  "1: Editor "
 set $wrkspc2  "2: Builds "
 set $wrkspc3  "3: Internet "
-set $wrkspc4  "4: Files "
+set $wrkspc4  "4: Files "
 set $wrkspc5  "5: Compare "
-set $wrkspc6  "6: Term "
-set $wrkspc7  "7: Teams "
+set $wrkspc6  "6: Email "
+set $wrkspc7  "7: Teams "
 set $wrkspc8  "8: Music "
 set $wrkspc9  "9: Private "
 set $wrkspc10 "10: VPN "
@@ -171,6 +171,9 @@ for_window [class="Thunar"] move to workspace $wrkspc4
 # Workspace 5
 for_window [class="[Bb]compare"] move to workspace $wrkspc5
 
+# Workspace 6
+for_window [class="[Ee]volution"] move to workspace $wrkspc6
+
 # Workspace 7
 for_window [class="Microsoft Teams - Preview"] move to workspace $wrkspc7
 
@@ -295,6 +298,7 @@ mode "$mode_system" {
 bindsym $mod+Shift+e mode "$mode_system"
 
 bindsym $mod+t exec rofi -show rtmux -modi "rtmux:~/scripts/remote_tmux.sh" -theme gruvbox-light-soft -font "Inconsolata 16"
+bindsym $mod+y exec rofi -show tmux -modi "tmux:~/scripts/local_tmux.sh" -theme gruvbox-hard-soft -font "Inconsolata 16" 
 
 # Windows and Status Bar
 # ============================================================================
@@ -355,6 +359,8 @@ bar {
 # Start applications
 # ============================================================================
 
+exec --no-startup-id teams
+exec --no-startup-id evolution
 exec --no-startup-id Thunar
 exec --no-startup-id spotify
 exec --no-startup-id google-chrome-stable
