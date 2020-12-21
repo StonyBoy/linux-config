@@ -33,6 +33,7 @@
     w = rev-parse --abbrev-ref HEAD
     prune-branches =  "!gitprunebranches() { ~/scripts/git_branches.py -d ; }; gitprunebranches"
     update-branches =  "!gitupdatebranches() { ~/scripts/git_branches.py -m ; }; gitupdatebranches"
+    del-local =  "!gitdellocals() { ~/scripts/git_branches.py -l ; }; gitdellocals"
 
 [color]
     ui = true
@@ -82,6 +83,7 @@
     syntax-theme = Solarized (light)
     line-numbers = true
     side-by-side = true
+    tabs = 8
 
 [interactive]
     diffFilter = delta --color-only
