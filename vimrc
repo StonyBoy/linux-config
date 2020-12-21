@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Dec-08 17:15
+" Time-Stamp: 2020-Dec-21 09:36
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -56,8 +56,7 @@ augroup filetype_settings
     autocmd BufNewFile,BufRead *.cxx,*.hxx              setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120 expandtab colorcolumn=120 cindent
     autocmd FileType c,h autocmd BufWritePre * :call TrimWhitespace()
     autocmd FileType bash                               setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120 expandtab colorcolumn=120 cindent
-    autocmd FileType gitsendemail,mail                  setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=80 expandtab colorcolumn=80 cindent
-    autocmd FileType gitcomment                         setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=75 expandtab colorcolumn=75 cindent
+    autocmd FileType gitcommit,gitsendemail,mail        setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=75 expandtab colorcolumn=75
     autocmd FileType md,markdown,asciidoc,text          setlocal spell spelllang=en_us
 augroup END
 
