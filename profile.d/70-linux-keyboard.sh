@@ -24,26 +24,21 @@ function optional_multimedia_keys()
 }
 
 function set_us_kbd() {
-    local RULES=${1:-evdev}
-    local LEVEL=${2:-0}
-
     # Keymaps are handled in /etc/X11/xorg.conf.d/00-keyboard.conf via localectl
     # Values? check: man xkeyboard-config
 
     if [[ ! -z $DISPLAY ]]; then
-        setxkbmap -layout us -model pc104 -option "caps:ctrl_modifier" -rules $RULES -verbose $LEVEL
+        # setxkbmap -layout usdk -model pc104 -option "caps:escape" -rules evdev
+        setxkbmap -layout usdk -model pc105 -option "caps:escape" -rules evdev
     fi
 }
 
 function set_dk_kbd() {
-    local RULES=${1:-evdev}
-    local LEVEL=${2:-0}
-
     # Keymaps are handled in /etc/X11/xorg.conf.d/00-keyboard.conf via localectl
     # Values? check: man xkeyboard-config
 
     if [[ ! -z $DISPLAY ]]; then
-        setxkbmap -layout dk -model pc105 -option "caps:ctrl_modifier" -variant "nodeadkeys" -rules $RULES -verbose $LEVEL
+        setxkbmap -layout dk -model pc105 -option "caps:escape" -variant "nodeadkeys" -rules evdev
     fi
 }
 
