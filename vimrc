@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Dec-21 09:36
+" Time-Stamp: 2020-Dec-22 10:10
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -145,6 +145,9 @@ set spellfile=~/.vim/spell/en.utf-8.add
 " Getting out quickly
 nnoremap ZA :qa!<CR>
 
+" Add signed-off-by
+nnoremap <leader>is :r ~/work/patches/signedoffby.txt<CR>
+
 " Use ripgrep on selected word
 nnoremap ## :Rg \b<C-R><C-W>\b<CR>
 
@@ -282,11 +285,11 @@ set noshowmode
 let g:lightline = {
   \ 'colorscheme': 'solarized',
   \     'active': {
-  \         'left': [['mode'], ['paste', 'gitbranch', 'afilepath']],
+  \         'left': [['mode'], ['paste', 'gitbranch', 'fpath']],
   \         'right': [['session', 'fileencoding', 'fileformat', 'filetype', 'readonly', 'percent', 'lineinfo'], ['filemod', 'editcfg']]
   \     },
   \     'inactive': {
-  \         'left': [['afilepath']],
+  \         'left': [['fpath']],
   \         'right': [[], [], ['filemod', 'fileencoding', 'fileformat', 'filetype', 'readonly', 'percent', 'lineinfo']]
   \     },
   \     'component_function': {
@@ -294,7 +297,7 @@ let g:lightline = {
   \       'gitbranch': 'fugitive#head',
   \       'filemod': 'CustomFilemod',
   \       'editcfg': 'CustomEditConfig',
-  \       'afilepath': 'AdaptiveFilepath'
+  \       'fpath': 'CustomFilepath'
   \     },
   \ }
 
@@ -309,12 +312,12 @@ function! CustomEditConfig()
   return 'ts:' . &tabstop . ' sw:' . &shiftwidth . ' sts:' . &softtabstop . ' tw:' . &textwidth . expandtabstr
 endfunction
 
-function! AdaptiveFilepath()
-    let fpath = fnamemodify(expand('%:f'), ':p:~')
-    if strlen(fpath) > 40
-        let ret = pathshorten(fpath)
+function! CustomFilepath()
+    let elems = split(expand('%:f'), ':')
+    if len(elems) > 1
+        let ret = "git:" . expand("%:t")
     else
-        let ret = fpath
+        let ret = expand("%:t")
     end
     return ret
 endfunction
