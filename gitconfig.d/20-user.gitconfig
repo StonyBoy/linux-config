@@ -4,6 +4,7 @@
 
 [alias]
     b = !git branch -vv
+    ca = commit --amend
     cp = cherry-pick
     dn = !git diff --name-only
     dc = !git diff --cached
@@ -33,6 +34,8 @@
     w = rev-parse --abbrev-ref HEAD
     prune-branches =  "!gitprunebranches() { ~/scripts/git_branches.py -d ; }; gitprunebranches"
     update-branches =  "!gitupdatebranches() { ~/scripts/git_branches.py -m ; }; gitupdatebranches"
+    delete-local =  "!gitdellocalbranches() { ~/scripts/git_branches.py -l ; }; gitdellocalbranches"
+    delete-remote =  "!gitdelremotebranches() { ~/scripts/git_branches.py -r ; }; gitdelremotebranches"
     del-local =  "!gitdellocals() { ~/scripts/git_branches.py -l ; }; gitdellocals"
 
 [color]
