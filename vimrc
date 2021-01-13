@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2020-Dec-22 10:10
+" Time-Stamp: 2021-Jan-07 09:56
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -28,7 +28,7 @@ if exists('+termguicolors')
 endif
 
 if has("multi_byte")
-    set fillchars=stl:\ ,stlnc:\ ,vert:┆,fold:-,diff:-    " Displaying symbols to separate windows
+    set fillchars=stl:\ ,stlnc:\ ,vert:┆,fold:―,diff:―    " Displaying symbols to separate windows
     set lcs=tab:\»\ ,trail:•,extends:>,precedes:<,nbsp:¤" " Show white spaces
     let &sbr = nr2char(8618).' '
     set list        " Turn on the display of whitespace
@@ -58,6 +58,8 @@ augroup filetype_settings
     autocmd FileType bash                               setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120 expandtab colorcolumn=120 cindent
     autocmd FileType gitcommit,gitsendemail,mail        setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=75 expandtab colorcolumn=75
     autocmd FileType md,markdown,asciidoc,text          setlocal spell spelllang=en_us
+    autocmd FileType c,cpp,js                           nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+    autocmd FileType c,cpp,js                           vnoremap <buffer><Leader>cf :ClangFormat<CR>
 augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2020-Dec-08 16:24
+" Time-Stamp: 2021-Jan-06 13:52
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 "
 
@@ -20,11 +20,13 @@ Plug 'tpope/vim-markdown'                                         " Syntax highl
 Plug 'tpope/vim-dispatch'                                         " Run build commands in the background and parse the result
 Plug 'tpope/vim-unimpaired'                                       " Pairs of handy bracket mappings
 Plug 'tpope/vim-surround'                                         " Mappings to easily delete, change and add such surroundings in pairs
+Plug 'tpope/vim-commentary'                                       " Comment in/out lines of text in various languages
 Plug 'itchyny/lightline.vim'                                      " Nice Status Line
 Plug 'airblade/vim-gitgutter'                                     " Git: Changed lines since last revision
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy File Finder binary
 Plug 'junegunn/fzf.vim'                                           " Fuzzy File Finder
 Plug 'junegunn/gv.vim'                                            " A git commit browser.
+Plug 'junegunn/vim-easy-align'                                    " Align text on specific characters in nice columns
 Plug 'lifepillar/vim-solarized8'                                  " Modern SolarlizedColorscheme
 Plug 'vim-ruby/vim-ruby'                                          " Ruby support
 Plug 'christoomey/vim-tmux-navigator'                             " Go between panes in both vim and tmux
@@ -33,12 +35,12 @@ Plug 'vim-scripts/update-time'                                    " Insert/Updat
 Plug 'pangloss/vim-javascript'                                    " Better Javascript indenting support
 Plug 'rust-lang/rust.vim'                                         " Rust, syntax highlighting, formatting, Syntastic integration
 Plug 'dense-analysis/ale'                                         " Asynchroneous Syntax checker
-Plug 'junegunn/vim-easy-align'                                    " Align text on specific characters in nice columns
-Plug 'tpope/vim-commentary'                                       " Comment in/out lines of text in various languages
 Plug 'wsdjeg/vim-fetch'                                           " Use line and column jumps in file paths as found in stack traces and similar output
 Plug 'aklt/plantuml-syntax'                                       " PlantUML Syntax/Plugin/FTDetect
 Plug 'AndrewRadev/linediff.vim'                                   " Diff two separate blocks of text
 Plug 'AndrewRadev/splitjoin.vim'                                  " Switching between a single-line statement and a multi-line one
+Plug 'idanarye/vim-merginal'                                      " Provides a nice interface for dealing with Git branches on top of fugitive
+Plug 'rhysd/vim-clang-format'                                     " Format your code with specific coding style using clang-format
 call plug#end()
 
 
