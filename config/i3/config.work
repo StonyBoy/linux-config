@@ -215,7 +215,7 @@ mode "$mode_floatmove" {
 bindsym $mod+Shift+m focus floating; mode "$mode_floatmove"
 
 # Switch keyboard layout
-bindsym $mod+Mod1+u exec setxkbmap -layout us -model pc104 -option "caps:escape" -rules evdev
+bindsym $mod+Mod1+u exec setxkbmap -layout usdk -model pc105 -option "caps:escape" -rules evdev
 bindsym $mod+Mod1+d exec setxkbmap -layout dk -model pc105 -option "caps:escape" -rules evdev
 bindsym $mod+Mod1+n exec setxkbmap -layout dk -model pc105 -option "caps:escape" -variant "nodeadkeys" -rules evdev
 
@@ -297,8 +297,8 @@ mode "$mode_system" {
 
 bindsym $mod+Shift+e mode "$mode_system"
 
-
-bindsym $mod+y exec rofi -show tmux -modi "tmux:~/scripts/local_tmux.sh" -theme gruvbox-hard-soft -font "Inconsolata 16" 
+bindsym $mod+t exec rofi -show rtmux -modi "rtmux:~/scripts/remote_tmux.sh" -theme gruvbox-light-soft -font "Inconsolata 16" -lines 15 -columns 2
+bindsym $mod+y exec rofi -show tmux -modi "tmux:~/scripts/local_tmux.sh" -theme gruvbox-hard-soft -font "Inconsolata 16" -lines 16 -columns 2
 
 # Windows and Status Bar
 # ============================================================================
