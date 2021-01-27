@@ -297,8 +297,8 @@ mode "$mode_system" {
 
 bindsym $mod+Shift+e mode "$mode_system"
 
-bindsym $mod+t exec rofi -show rtmux -modi "rtmux:~/scripts/remote_tmux.sh" -theme gruvbox-light-soft -font "Inconsolata 16" -lines 15 -columns 2
-bindsym $mod+y exec rofi -show tmux -modi "tmux:~/scripts/local_tmux.sh" -theme gruvbox-hard-soft -font "Inconsolata 16" -lines 16 -columns 2
+bindsym $mod+t exec rofi -show rtmux -modi "rtmux:~/scripts/remote_tmux.sh" -theme gruvbox-dark-soft -font "Inconsolata 16" -lines 15 -columns 2
+bindsym $mod+y exec rofi -show tmux -modi "tmux:~/scripts/local_tmux.sh" -theme gruvbox-light-soft -font "Inconsolata 16" -lines 16 -columns 2
 
 # Windows and Status Bar
 # ============================================================================
