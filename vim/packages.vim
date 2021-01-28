@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2021-Jan-06 13:52
+" Time-Stamp: 2021-Jan-28 22:22
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 "
 
@@ -41,6 +41,7 @@ Plug 'AndrewRadev/linediff.vim'                                   " Diff two sep
 Plug 'AndrewRadev/splitjoin.vim'                                  " Switching between a single-line statement and a multi-line one
 Plug 'idanarye/vim-merginal'                                      " Provides a nice interface for dealing with Git branches on top of fugitive
 Plug 'rhysd/vim-clang-format'                                     " Format your code with specific coding style using clang-format
+Plug 'yazgoo/unicodemoji'                                         " fast unicode emojis in terminal and vim with fzf
 call plug#end()
 
 
