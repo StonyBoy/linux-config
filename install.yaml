@@ -47,6 +47,7 @@ Vim Editor:
         dot: true
         default:
                 - vim/packages.vim
+                - vim/config
                 - vimrc
         NVim:
                 - config/nvim
