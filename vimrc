@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2021-Feb-16 10:41
+" Time-Stamp: 2021-Feb-23 15:15
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -207,6 +207,7 @@ nmap <silent> <leader>fb :Make -C ~/work/fireant/buildroot O=../../build/buildro
 nnoremap <silent> <leader>it Opr_info("%s:%d\n", __func__, __LINE__);<esc>
 nnoremap <silent> <leader>id OCFLAGS_*.o := -DDEBUG<CR><esc>
 nnoremap <silent> <leader>fm :setlocal foldmethod=syntax<CR>
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Super Macros
 " :let @n = @n + 10/phy3ldw"nP/@ldw"nPj0/<ldw"nPjj:let @/ = ""
