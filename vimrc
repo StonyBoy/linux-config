@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2021-Feb-15 22:50
+" Time-Stamp: 2021-Feb-16 10:41
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -204,9 +204,9 @@ nnoremap <F11> G?Starting kernelkdgg
 nmap <silent> <leader>fb :Make -C ~/work/fireant/buildroot O=../../build/buildroot-ls1046-fireant/ linux-rebuild all<cr>
 
 " Edit helpers
-nmap <silent> <leader>it Opr_info("%s:%d\n", __func__, __LINE__);<esc>
-nmap <silent> <leader>id OCFLAGS_*.o := -DDEBUG<CR><esc>
-nmap <silent> <leader>fm :setlocal foldmethod=syntax<CR>
+nnoremap <silent> <leader>it Opr_info("%s:%d\n", __func__, __LINE__);<esc>
+nnoremap <silent> <leader>id OCFLAGS_*.o := -DDEBUG<CR><esc>
+nnoremap <silent> <leader>fm :setlocal foldmethod=syntax<CR>
 
 " Super Macros
 " :let @n = @n + 10/phy3ldw"nP/@ldw"nPj0/<ldw"nPjj:let @/ = ""
