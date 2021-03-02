@@ -1,6 +1,10 @@
 #! /usr/bin/env python3
 '''
 Install links
+
+Installation:
+    pip3 install --user colorama
+    pip3 install --user PyYAML
 '''
 import os
 import sys
@@ -13,12 +17,12 @@ import time
 
 
 class FileStatus(enum.Enum):
-    CorrectLink = 'Nothing to do'
-    Missing = 'Create link'
-    Linked = 'Delete existing link and create new link'
-    SameContent = 'Delete existing file and create link'
-    DifferentContent = 'Rename file and create link'
-    Folder = 'Rename folder and create link'
+    CorrectLink = f'{Fore.GREEN}Nothing to do{Style.RESET_ALL}'
+    Missing = f'{Fore.RED}Create link{Style.RESET_ALL}'
+    Linked = f'{Fore.BLUE}Delete existing link and create new link{Style.RESET_ALL}'
+    SameContent = f'{Fore.GREEN}Delete existing file and create link{Style.RESET_ALL}'
+    DifferentContent = f'{Fore.MAGENTA}Rename file and create link{Style.RESET_ALL}'
+    Folder = f'{Fore.CYAN}Rename folder and create link{Style.RESET_ALL}'
 
 
 class Installer:
@@ -72,7 +76,7 @@ class Installer:
         print(f'  Backup as {newname}')
 
     def run(self):
-        print(f'{self.file_status}:\n  {self.src_path} => {self.dst_path}\n  {self.file_status.value}')
+        print(f'{self.file_status.value}:  {self.src_path} => {self.dst_path}')
         if self.file_status == FileStatus.CorrectLink:
             return
         if self.file_status == FileStatus.Missing:
@@ -205,10 +209,13 @@ def install_items():
     for f in features:
         changes = changes or f.installation_needed()
     if changes:
-        prompt = f'\n\n{Fore.MAGENTA}Begin installation{Style.RESET_ALL}: (N/y) > '
-        if input(prompt).lower() == 'y':
-            for f in features:
-                f.install()
+        prompt = f'\n{Fore.MAGENTA}Begin installation{Style.RESET_ALL}: (y/n) > '
+        response = ''
+        while response != 'n' and response != 'y':
+            response = input(prompt).lower()
+            if response == 'y':
+                for f in features:
+                    f.install()
 
 
 if __name__ == '__main__':
