@@ -363,7 +363,7 @@ exec --no-startup-id teams
 exec --no-startup-id evolution
 exec --no-startup-id Thunar
 exec --no-startup-id spotify
-exec --no-startup-id google-chrome-stable
+exec --no-startup-id firefox
 exec --no-startup-id $terminal
 
 # Start a polkit authentication agent (e.g for starting gparted). GNOMEs can also be used
