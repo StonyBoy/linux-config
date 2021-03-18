@@ -41,6 +41,8 @@ Scripts:
                 - scripts/remote_tmux.sh
                 - scripts/local_tmux.sh
                 - scripts/git_branches.py
+                - scripts/config_tunnel.sh
+                - scripts/config_remote_tunnel.sh
 
 Vim Editor:
         dest: ~/
