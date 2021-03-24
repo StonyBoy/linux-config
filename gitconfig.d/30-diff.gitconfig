@@ -1,0 +1,6 @@
+;  vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 ft=gitconfig:
+[core]
+    pager = diff
+
+[interactive]
+    diffFilter = diff --color-always

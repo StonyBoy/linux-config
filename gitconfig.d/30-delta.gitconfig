@@ -1,0 +1,14 @@
+;  vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 ft=gitconfig:
+[core]
+    pager = delta
+
+[delta]
+    plus-color = "#012800"
+    minus-color = "#340001"
+    syntax-theme = Solarized (light)
+    line-numbers = true
+    side-by-side = true
+    tabs = 8
+
+[interactive]
+    diffFilter = delta --color-only

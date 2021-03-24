@@ -1,7 +1,4 @@
 ;  vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 ft=gitconfig:
-[core]
-    editor = nvim
-
 [alias]
     b = !git branch -vv
     ca = commit --amend
@@ -42,11 +39,9 @@
     ui = true
 
 [diff]
-    tool = nvimdiff
     guitool = bc3
 
 [merge]
-    tool = nvimdiff
     guitool = bc3
 
 [difftool]

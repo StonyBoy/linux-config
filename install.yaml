@@ -80,6 +80,14 @@ Git:
                 - gitconfig
                 - gitignore
                 - gitconfig.d/20-user.gitconfig
+        diff:
+                - gitconfig.d/30-diff.gitconfig
+        delta:
+                - gitconfig.d/30-delta.gitconfig
+        editor-vim:
+                - gitconfig.d/30-editor-vim.gitconfig
+        editor-neovim:
+                - gitconfig.d/30-editor-neovim.gitconfig
         Work:
                 - gitconfig.d/10-work.gitconfig
                 - git-hooks
