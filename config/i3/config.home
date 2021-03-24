@@ -8,10 +8,10 @@ set $wallpaper "/opt/wallpapers/i3wallpaper.jpg"
 
 set $wrkspc1  "1: Editor "
 set $wrkspc2  "2: Builds "
-set $wrkspc3  "3: Internet "
+set $wrkspc3  "3: Internet "
 set $wrkspc4  "4: Files "
 set $wrkspc5  "5: Compare "
-set $wrkspc6  "6: Email "
+set $wrkspc6  "6: Email "
 set $wrkspc7  "7: Teams "
 set $wrkspc8  "8: Music "
 set $wrkspc9  "9: Private "
@@ -23,7 +23,7 @@ for_window [class="^.*"] border pixel 1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Droid Sans 11
+font pango:DejaVu Sans Mono 11
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -167,6 +167,7 @@ for_window [class="Code"] move to workspace $wrkspc1
 
 # Workspace 4
 for_window [class="Thunar"] move to workspace $wrkspc4
+for_window [class="Org.gnome.Nautilus"] move to workspace $wrkspc4
 
 # Workspace 5
 for_window [class="[Bb]compare"] move to workspace $wrkspc5
@@ -180,6 +181,7 @@ for_window [class="Microsoft Teams - Preview"] move to workspace $wrkspc7
 # Workspace 8
 for_window [class="Clementine"] move to workspace $wrkspc8
 for_window [class="Spotify"] move to workspace $wrkspc8
+for_window [class="Rhythmbox"] move to workspace $wrkspc8
 
 # For the I3blocks calender widget
 for_window [class="Yad"] floating enable
@@ -323,7 +325,7 @@ bar {
         inactive_workspace  $bg_inactive              $bg_inactive_workspace  $text_inactive
         urgent_workspace    $bg_urgent_workspace      $bg_urgent_workspace    $text_urgent
     }
-    font pango:Inconsolata 9
+    font pango:Inconsolata 10
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
     # Avoid accidental workspace switching when scrolling the wheel (up/down) in the bar
     bindsym button4 nop
@@ -366,7 +368,6 @@ exec --no-startup-id spotify
 exec --no-startup-id firefox
 exec --no-startup-id $terminal
 
-# Start a polkit authentication agent (e.g for starting gparted). GNOMEs can also be used
-# /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+# Start a polkit authentication agent
 exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
 
