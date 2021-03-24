@@ -133,8 +133,8 @@ I3 Window Manager:
                 - config/i3/config.home
         Work:
                 - config/i3/config.work
-        Laptop:
-                - config/i3/config.work.laptop
+        WorkFromHome:
+                - config/i3/config.wfh
 
 I3 Blocks:
         dest: ~/.config/i3/i3blocks.conf
@@ -143,8 +143,8 @@ I3 Blocks:
                 - config/i3/i3blocks.conf.home
         Work:
                 - config/i3/i3blocks.conf.work
-        Laptop:
-                - config/i3/i3blocks.conf.work.laptop
+        WorkFromHome:
+                - config/i3/i3blocks.conf.wfh
 
 Sway:
         dest: ~/.config/sway/config
