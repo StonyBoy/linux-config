@@ -3,8 +3,10 @@ if [[ $- != *i* ]] ; then
   return
 fi
 
-# If brew exists
-if [ -x /usr/local/bin/brew ]; then
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+  . /usr/share/bash-completion/bash_completion
+elif [ -x /usr/local/bin/brew ]; then
+  # If brew exists
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
       . $(brew --prefix)/etc/bash_completion
   fi
