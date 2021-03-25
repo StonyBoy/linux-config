@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2021-Feb-23 15:15
+" Time-Stamp: 2021-Mar-18 19:15
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -103,37 +103,31 @@ set wildmode=longest,list,full
 set wildmenu
 set wildignorecase  " Ignore case when tab-expanding filenames
 
-" Go to buffer number 1-20 (1-20gb)
-let c = 1
-while c <= 20
-    execute "nnoremap " . c . "gb :" . c . "b\<CR>"
-    let c += 1
-endwhile
-
 " Empty the search register
 let @/ = "__=#?__"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Using tabs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <silent> <leader>t<up> :tabr<cr>
-nmap <silent> <leader>t<down> :tabl<cr>
-nmap <silent> <leader>t<left> :tabp<cr>
-nmap <silent> <leader>t<right> :tabn<cr>
+nnoremap <silent> <leader>t<up> :tabr<cr>
+nnoremap <silent> <leader>t<down> :tabl<cr>
+nnoremap <silent> <leader>t<left> :tabp<cr>
+nnoremap <silent> <leader>t<right> :tabn<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remapping XTERM specialities
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <silent> <ESC>[1;5D  <C-left>
-nmap <silent> <ESC>[1;5C  <C-right>
-cmap <silent> <ESC>[1;5D  <C-left>
-cmap <silent> <ESC>[1;5C  <C-right>
+nnoremap <silent> <ESC>[1;5D  <C-left>
+nnoremap <silent> <ESC>[1;5C  <C-right>
+cnoremap <silent> <ESC>[1;5D  <C-left>
+cnoremap <silent> <ESC>[1;5C  <C-right>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Reload VIMRC
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <silent> <leader>rv   :source $MYVIMRC<cr>:echom ".vimrc reloaded"<cr>
+nnoremap <silent> <leader>ev   :vsplit $MYVIMRC<cr>
+nnoremap <silent> <leader>sv   :source $MYVIMRC<cr>:echom ".vimrc reloaded"<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Setup Spell Checking - also in autocommands
@@ -189,7 +183,7 @@ nnoremap <F6> g<c-]>
 vnoremap <F6> g<c-]>
 
 " Toggle BufExplorer
-nmap <F8> :ToggleBufExplorer<cr>
+nnoremap <F8> :ToggleBufExplorer<cr>
 
 " Reload the current buffer
 nnoremap <F9> :e!<cr>
@@ -201,7 +195,7 @@ nnoremap <F10> :let @/ = ""<cr>
 nnoremap <F11> G?Starting kernelkdgg
 
 " Build helpers
-nmap <silent> <leader>fb :Make -C ~/work/fireant/buildroot O=../../build/buildroot-ls1046-fireant/ linux-rebuild all<cr>
+nnoremap <silent> <leader>fb :Make -C ~/work/fireant/buildroot O=../../build/buildroot-ls1046-fireant/ linux-rebuild all<cr>
 
 " Edit helpers
 nnoremap <silent> <leader>it Opr_info("%s:%d\n", __func__, __LINE__);<esc>
@@ -257,14 +251,14 @@ fu! PasteWindow(direction) "{{{
 endf "}}}
 
 "yank/paste buffers
-nmap <silent> <leader>wy  :let g:yanked_buffer=bufnr('%')<cr>
-nmap <silent> <leader>wd  :let g:yanked_buffer=bufnr('%')<cr>:q<cr>
-nmap <silent> <leader>wp :call PasteWindow('edit')<cr>
-nmap <silent> <leader>ws :call PasteWindow('split')<cr>
-nmap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
-nmap <silent> <leader>wt :call PasteWindow('tabnew')<cr>
-nmap <silent> <leader>wP :top split
-nmap <silent> <leader>wV :set nosplitright \| call PasteWindow('vsplit') \| set splitright<cr>
+nnoremap <silent> <leader>wy  :let g:yanked_buffer=bufnr('%')<cr>
+nnoremap <silent> <leader>wd  :let g:yanked_buffer=bufnr('%')<cr>:q<cr>
+nnoremap <silent> <leader>wp :call PasteWindow('edit')<cr>
+nnoremap <silent> <leader>ws :call PasteWindow('split')<cr>
+nnoremap <silent> <leader>wv :call PasteWindow('vsplit')<cr>
+nnoremap <silent> <leader>wt :call PasteWindow('tabnew')<cr>
+nnoremap <silent> <leader>wP :top split
+nnoremap <silent> <leader>wV :set nosplitright \| call PasteWindow('vsplit') \| set splitright<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -344,10 +338,10 @@ let g:ale_sign_warning = '.'
 " Provide EasyAlign shortcuts
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
+xnoremap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+nnoremap ga <Plug>(EasyAlign)
 
 " Remove trailing whitespace and restore search history and position in file
 function! TrimWhitespace()
