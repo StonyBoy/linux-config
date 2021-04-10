@@ -1,7 +1,7 @@
 #! /bin/bash
 # -*-sh-*-
 # .bash_profile
-# Time-stamp: 2020-Sep-19 17:01
+# Time-stamp: 2021-Apr-10 23:43
 # Settings for all interactive shells
 
 # Debugging
@@ -32,9 +32,7 @@ export rvmsudo_secure_path=1
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 # Add Rusts Cargo to path if present
-if [[ -d ~/.cargo/bin ]]; then
-    export PATH="$PATH:$HOME/.cargo/bin"
-fi
+[ -d ~/.cargo/bin ] && export PATH="$PATH:$HOME/.cargo/bin"
 
 # Set core file size limit
 ulimit -c unlimited
