@@ -6,16 +6,16 @@ set $mod Mod4
 set $lock_bkg  "/opt/wallpapers/i3lock.png"
 set $wallpaper "/opt/wallpapers/i3wallpaper.jpg"
 
-set $wrkspc1  "1: Editor "
-set $wrkspc2  "2: Builds "
-set $wrkspc3  "3: Internet "
-set $wrkspc4  "4: Files "
-set $wrkspc5  "5: Compare "
-set $wrkspc6  "6: Email "
-set $wrkspc7  "7: Teams "
-set $wrkspc8  "8: Music "
-set $wrkspc9  "9: Private "
-set $wrkspc10 "10: VPN "
+set $ws1  "1: Editor "
+set $ws2  "2: Builds "
+set $ws3  "3: Internet "
+set $ws4  "4: Files "
+set $ws5  "5: Compare "
+set $ws6  "6: Email "
+set $ws7  "7: Teams "
+set $ws8  "8: Music "
+set $ws9  "9: Private "
+set $ws10 "10: VPN "
 
 # No title bars
 new_window 1pixel
@@ -94,28 +94,28 @@ bindsym $mod+a focus parent
 bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace $wrkspc1
-bindsym $mod+2 workspace $wrkspc2
-bindsym $mod+3 workspace $wrkspc3
-bindsym $mod+4 workspace $wrkspc4
-bindsym $mod+5 workspace $wrkspc5
-bindsym $mod+6 workspace $wrkspc6
-bindsym $mod+7 workspace $wrkspc7
-bindsym $mod+8 workspace $wrkspc8
-bindsym $mod+9 workspace $wrkspc9
-bindsym $mod+0 workspace $wrkspc10
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $wrkspc1
-bindsym $mod+Shift+2 move container to workspace $wrkspc2
-bindsym $mod+Shift+3 move container to workspace $wrkspc3
-bindsym $mod+Shift+4 move container to workspace $wrkspc4
-bindsym $mod+Shift+5 move container to workspace $wrkspc5
-bindsym $mod+Shift+6 move container to workspace $wrkspc6
-bindsym $mod+Shift+7 move container to workspace $wrkspc7
-bindsym $mod+Shift+8 move container to workspace $wrkspc8
-bindsym $mod+Shift+9 move container to workspace $wrkspc9
-bindsym $mod+Shift+0 move container to workspace $wrkspc10
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -163,25 +163,25 @@ bindsym $mod+Tab workspace back_and_forth
 # workspace_auto_back_and_forth yes
 
 # Workspace 1
-for_window [class="Code"] move to workspace $wrkspc1
+for_window [class="Code"] move to workspace $ws1
 
 # Workspace 4
-for_window [class="Thunar"] move to workspace $wrkspc4
-for_window [class="Org.gnome.Nautilus"] move to workspace $wrkspc4
+for_window [class="Thunar"] move to workspace $ws4
+for_window [class="Org.gnome.Nautilus"] move to workspace $ws4
 
 # Workspace 5
-for_window [class="[Bb]compare"] move to workspace $wrkspc5
+for_window [class="[Bb]compare"] move to workspace $ws5
 
 # Workspace 6
-for_window [class="[Ee]volution"] move to workspace $wrkspc6
+for_window [class="[Ee]volution"] move to workspace $ws6
 
 # Workspace 7
-for_window [class="Microsoft Teams - Preview"] move to workspace $wrkspc7
+for_window [class="Microsoft Teams - Preview"] move to workspace $ws7
 
 # Workspace 8
-for_window [class="Clementine"] move to workspace $wrkspc8
-for_window [class="Spotify"] move to workspace $wrkspc8
-for_window [class="Rhythmbox"] move to workspace $wrkspc8
+for_window [class="Clementine"] move to workspace $ws8
+for_window [class="Spotify"] move to workspace $ws8
+for_window [class="Rhythmbox"] move to workspace $ws8
 
 # For the I3blocks calender widget
 for_window [class="Yad"] floating enable
@@ -344,18 +344,18 @@ bar {
 ## exec --no-startup-id xrandr -d :0 --output $main_monitor --mode 2560x1440 --primary --left-of $extra_monitor --output $extra_monitor --mode 2560x1440
 ## 
 ## # Bind the workspaces for the large monitor
-## workspace $wrkspc1 output $main_monitor
-## workspace $wrkspc2 output $main_monitor
-## workspace $wrkspc3 output $main_monitor
-## workspace $wrkspc4 output $main_monitor
-## workspace $wrkspc5 output $main_monitor
+## workspace $ws1 output $main_monitor
+## workspace $ws2 output $main_monitor
+## workspace $ws3 output $main_monitor
+## workspace $ws4 output $main_monitor
+## workspace $ws5 output $main_monitor
 ## 
 ## # Bind the workspaces for the small monitor
-## workspace $wrkspc6  output $extra_monitor
-## workspace $wrkspc7  output $extra_monitor
-## workspace $wrkspc8  output $extra_monitor
-## workspace $wrkspc9  output $extra_monitor
-## workspace $wrkspc10 output $extra_monitor
+## workspace $ws6  output $extra_monitor
+## workspace $ws7  output $extra_monitor
+## workspace $ws8  output $extra_monitor
+## workspace $ws9  output $extra_monitor
+## workspace $ws10 output $extra_monitor
 
 
 # Start applications
