@@ -183,6 +183,9 @@ for_window [class="Clementine"] move to workspace $ws8
 for_window [class="Spotify"] move to workspace $ws8
 for_window [class="Rhythmbox"] move to workspace $ws8
 
+# Workspace 10
+for_window [class="Cisco AnyConnect Secure Mobility Client"] move to workspace $ws10
+
 # For the I3blocks calender widget
 for_window [class="Yad"] floating enable
 
@@ -363,7 +366,7 @@ bar {
 
 exec --no-startup-id teams
 exec --no-startup-id evolution
-exec --no-startup-id nautilus --gapplication-service
+exec --no-startup-id nautilus
 exec --no-startup-id spotify
 exec --no-startup-id firefox
 exec --no-startup-id $terminal
@@ -371,3 +374,8 @@ exec --no-startup-id $terminal
 # Start a polkit authentication agent
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --daemonize --login
 
+# Start VPN client
+exec --no-startup-id /opt/cisco/anyconnect/bin/vpnui
+
+# Mount OneDrive
+exec --no-startup-id rclone --vfs-cache-mode writes mount "onedrive": ~/OneDrive
