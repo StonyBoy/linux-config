@@ -1,9 +1,9 @@
 # Steen Hegelund
-# Time-Stamp: 2021-Feb-08 18:39
+# Time-Stamp: 2021-Apr-07 17:53
 
-WORKIP=10.205.21.32
+WORKIP=10.205.21.59
 REMOTEIP=$(ssh work ip addr show dev gtun | grep 'link/gre' | sed -Ee 's/^\s+\S+\s+\S+\s+\S+\s+(\S+)/\1/g')
-LOCALIP=$(ip addr show dev tun0 | grep 'inet ' | sed -Ee 's/\s+inet\s+(\S+)\/32.*/\1/g')
+LOCALIP=$(ip addr show dev cscotun0 | grep 'inet ' | sed -Ee 's/\s+inet\s+(\S+)\/24.*/\1/g')
 
 echo REMOTE: $REMOTEIP
 echo LOCAL: $LOCALIP
