@@ -24,7 +24,7 @@
     pat =  "!gitpatchsha() { git format-patch -M -C ${1-HEAD}~1..${1-HEAD} ; }; gitpatchsha"
     since = !git log --pretty=format:\"%aD|%H|%an|%s\" --no-merges HEAD --not
     s = status
-    ts = !git tag -l --format=\"%(align:50,left)%(refname:lstrip=2)%(end)  :   %(objectname)   :   %(contents:subject)\" t-*
+    tags = tag -l --color=always --format=\"%(align:50,left)%(refname:short)%(end) : %(taggerdate:iso) : %(objectname:short) : %(contents:subject)\"
     unstage = !git reset HEAD --
     upda = !git commit --reset-author --amend
     v = !git --version
