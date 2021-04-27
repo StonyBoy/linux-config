@@ -10,8 +10,8 @@ set $ws1  "1: Editor "
 set $ws2  "2: Builds "
 set $ws3  "3: Internet "
 set $ws4  "4: Files "
-set $ws5  "5: Compare "
-set $ws6  "6: Email "
+set $ws5  "5: Email "
+set $ws6  "6: Compare "
 set $ws7  "7: Teams "
 set $ws8  "8: Music "
 set $ws9  "9: Private "
@@ -170,10 +170,10 @@ for_window [class="Thunar"] move to workspace $ws4
 for_window [class="Org.gnome.Nautilus"] move to workspace $ws4
 
 # Workspace 5
-for_window [class="[Bb]compare"] move to workspace $ws5
+for_window [class="[Ee]volution"] move to workspace $ws5
 
 # Workspace 6
-for_window [class="[Ee]volution"] move to workspace $ws6
+for_window [class="[Bb]compare"] move to workspace $ws6
 
 # Workspace 7
 for_window [class="Microsoft Teams - Preview"] move to workspace $ws7
@@ -182,6 +182,9 @@ for_window [class="Microsoft Teams - Preview"] move to workspace $ws7
 for_window [class="Clementine"] move to workspace $ws8
 for_window [class="Spotify"] move to workspace $ws8
 for_window [class="Rhythmbox"] move to workspace $ws8
+
+# Workspace 10
+for_window [class="Cisco AnyConnect Secure Mobility Client"] move to workspace $ws10
 
 # For the I3blocks calender widget
 for_window [class="Yad"] floating enable
