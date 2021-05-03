@@ -18,10 +18,10 @@ create_detached_session() {
 }
 
 title() {
-    if [ "$(uname)" == "Darwin" ]; then
-        echo -ne "\033]0;"$1"\007"
-    else
+    if [ -e /usr/bin/xdotool ];  then
         xdotool set_window --name "$*" $(xdotool getactivewindow)
+    else
+        echo -ne "\033]0;"$1"\007"
     fi
 }
 
