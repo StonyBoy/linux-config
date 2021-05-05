@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2021-Jan-28 22:22
+" Time-Stamp: 2021-May-04 18:26
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 "
 
@@ -21,6 +21,7 @@ Plug 'tpope/vim-dispatch'                                         " Run build co
 Plug 'tpope/vim-unimpaired'                                       " Pairs of handy bracket mappings
 Plug 'tpope/vim-surround'                                         " Mappings to easily delete, change and add such surroundings in pairs
 Plug 'tpope/vim-commentary'                                       " Comment in/out lines of text in various languages
+Plug 'tpope/vim-abolish'                                          " Word Case substitution: snake/mixed/camel/upper/
 Plug 'itchyny/lightline.vim'                                      " Nice Status Line
 Plug 'airblade/vim-gitgutter'                                     " Git: Changed lines since last revision
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy File Finder binary
