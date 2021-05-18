@@ -8,4 +8,5 @@ fi
 alias pst="ps -AfH f"
 alias pstl="ps -fH f -u `id -u`"
 alias lsofi="lsof -i -n -P"
+alias sudo='sudo '
 
