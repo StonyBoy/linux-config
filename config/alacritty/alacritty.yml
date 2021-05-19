@@ -1,6 +1,5 @@
 # Steen Hegelund
-# Time-Stamp: 2022-Feb-05 21:49
-
+# Time-Stamp: 2022-Feb-05 21:50
 
 # Colors (Solarized Light)
 colors:
@@ -33,7 +32,7 @@ colors:
     white:   '#fdf6e3' # base3
 
 font:
-  size: 10.0
+  size: 9.5
   normal:
     family: Inconsolata Nerd Font Mono
     style: Regular
