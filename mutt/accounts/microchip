@@ -17,7 +17,7 @@ set signature = ~/.mutt/signatures/work
 color    status      red            default
 color    sidebar_new white          red
 
-macro index o "<shell-escape>mbsync microchip<enter>" "run mbsync to sync mail for this account"
+macro index o "<shell-escape>mailsync<enter>" "run mailsync to sync mail for microchip account"
 
 macro index,pager J \
   "<enter-command>set my_old_resolve=\$resolve noresolve<enter>\
