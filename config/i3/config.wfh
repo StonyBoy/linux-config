@@ -379,3 +379,6 @@ exec --no-startup-id /opt/cisco/anyconnect/bin/vpnui
 
 # Mount OneDrive
 exec --no-startup-id rclone --vfs-cache-mode writes mount "onedrive": ~/OneDrive
+
+# Show network manager icon
+exec --no-startup-id nm-applet --indicator
