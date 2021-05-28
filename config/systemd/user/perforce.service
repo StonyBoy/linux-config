@@ -3,8 +3,7 @@ Description=Perforce Synchronization Service
 
 [Service]
 # P4CLIENT is the name of the workspace to sync
-# Environment=P4USER=M31857 P4PORT=perforce.microchip.com:1666 P4CLIENT=M31857_mchp-dev-shegelun_3159
-Environment=P4USER=M31857 P4PORT=perforce.microchip.com:1666 P4CLIENT=M31857_tyr_5100
+Environment=P4USER=M31857 P4PORT=perforce.microchip.com:1666 P4CLIENT=M31857_den-dk-m31857_3274
 Type=oneshot
 ExecStart=p4 sync -N
 
