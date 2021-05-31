@@ -374,3 +374,6 @@ exec --no-startup-id $terminal
 # Start a polkit authentication agent
 exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
 
+# Mount OneDrive
+exec --no-startup-id rclone --vfs-cache-mode writes mount "onedrive": ~/OneDrive
+
