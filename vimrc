@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2021-May-03 09:09
+" Time-Stamp: 2021-Jun-15 15:20
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -353,5 +353,5 @@ function! TrimWhitespace()
 endfun
 command! TrimWhitespace call TrimWhitespace()
 
-source ~/.vim/config/autoclose.vim
+" source ~/.vim/config/autoclose.vim
 source ~/.vim/config/emacsstyle.vim
