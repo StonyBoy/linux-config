@@ -1,6 +1,6 @@
 " Configuration file for neovim - sharing with vim
 " Steen Hegelund
-" Time-Stamp: 2021-Jul-08 08:19
+" Time-Stamp: 2021-Jul-08 11:27
 
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
@@ -14,13 +14,14 @@ source ~/.vimrc
 " npm install -g typescript typescript-language-server
 
 lua << EOF
-require'lspconfig'.pyright.setup{}
-require'lspconfig'.solargraph.setup{}
-require'lspconfig'.rome.setup{}
-require'lspconfig'.tsserver.setup{}
-EOF
-lua << EOF
-local nvim_lsp = require('lspconfig')
+
+local nvim_lsp = require'lspconfig'
+
+nvim_lsp.ccls.setup{}
+nvim_lsp.pyright.setup{}
+nvim_lsp.solargraph.setup{}
+nvim_lsp.rome.setup{}
+nvim_lsp.tsserver.setup{}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -57,7 +58,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "pyright", "rust_analyzer", "tsserver" }
+local servers = { "pyright", "rust_analyzer", "tsserver", "ccls", "solargraph" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
