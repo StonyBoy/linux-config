@@ -1,6 +1,6 @@
 " Configuration file for neovim - sharing with vim
 " Steen Hegelund
-" Time-Stamp: 2021-Jul-08 11:27
+" Time-Stamp: 2021-Jul-08 22:33
 
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
@@ -9,7 +9,7 @@ source ~/.vimrc
 " Adding Language Server support
 " Plug 'neovim/nvim-lspconfig'
 " npm i -g pyright
-" gem install --user-install solargraph
+" gem install solargraph
 " npm install -g rome
 " npm install -g typescript typescript-language-server
 
