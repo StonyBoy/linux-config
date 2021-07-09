@@ -1,13 +1,13 @@
 #! /bin/bash
 # -*-sh-*-
 # .bash_profile
-# Time-stamp: 2021-Apr-10 23:43
+# Time-stamp: 2021-Jul-08 22:29
 # Settings for all interactive shells
 
 # Debugging
 # set -x
 
-export PATH=~/scripts:~/.local/bin:~/bin:$PATH
+pathappend ~/scripts ~/.local/bin ~/bin
 export PAGER='less -s'
 export PYTHONSTARTUP=~/scripts/python.init.py
 
@@ -23,16 +23,13 @@ if [[ -e ~/scripts/powerline.sh ]]; then
     fi
 fi
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
 # Avoid rvmsudo complaints
 export rvmsudo_secure_path=1
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+[ -s "$HOME/.rvm/scripts/rvm" ] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 # Add Rusts Cargo to path if present
-[ -d ~/.cargo/bin ] && export PATH="$PATH:$HOME/.cargo/bin"
+[ -d ~/.cargo/bin ] && pathappend ~/.cargo/bin
 
 # Set core file size limit
 ulimit -c unlimited

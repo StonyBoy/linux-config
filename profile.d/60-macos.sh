@@ -1,7 +1,7 @@
 #! /bin/bash
 # -*-sh-*-
 
-export PATH=~/scripts:~/.local/bin:~/bin:/usr/local/bin:/usr/local/sbin:$PATH
+pathappend ~/scripts ~/.local/bin ~/bin /usr/local/bin /usr/local/sbin
 
 # set -x
 
@@ -12,7 +12,8 @@ function brew_update()
     brew upgrade $(brew outdated)
 }
 
-export PATH=/usr/local/opt/ruby/bin:$PATH
+[ -d /usr/local/opt/ruby/bin ] && pathappend /usr/local/opt/ruby/bin
+
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 function mount_efi()

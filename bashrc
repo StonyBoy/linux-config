@@ -38,7 +38,7 @@ fi
 echo ""
 
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+[ -d $HOME/.rvm/bin ] && pathappend ~/.rvm/bin
+[ -d $HOME/.rvm/gems/ruby-2.6.3/bin ] && pathappend ~/.rvm/gems/ruby-2.6.3/bin
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-[ -d ~/.cargo/bin ] && source "$HOME/.cargo/env"

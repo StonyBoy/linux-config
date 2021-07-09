@@ -9,6 +9,7 @@ Bash Shell:
                 - clang-format
                 - inputrc
                 - profile
+                - profile.d/00-path-ops.sh
                 - profile.d/01-colors-defines.sh
                 - profile.d/10-git-prompt.sh
                 - profile.d/30-ls-colors.sh

@@ -11,8 +11,5 @@ if [ "$(uname)" == "Darwin" ]; then
 else
 	PROFILE_BASE=$(readlink -f $(dirname $(readlink -f ${BASH_SOURCE[0]}))/..)
 fi
-if [ -e $PROFILE_BASE/scripts ]
-then
-    export PATH=$PATH:$PROFILE_BASE/scripts
-fi
+[ -d $PROFILE_BASE/scripts ] && pathappend $PROFILE_BASE/scripts
 
