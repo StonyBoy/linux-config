@@ -1,6 +1,6 @@
 " Configuration file for neovim - sharing with vim
 " Steen Hegelund
-" Time-Stamp: 2021-Jul-08 22:33
+" Time-Stamp: 2021-Jul-10 16:28
 
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
@@ -12,6 +12,7 @@ source ~/.vimrc
 " gem install solargraph
 " npm install -g rome
 " npm install -g typescript typescript-language-server
+" yay rust-analyser
 
 lua << EOF
 
@@ -22,6 +23,7 @@ nvim_lsp.pyright.setup{}
 nvim_lsp.solargraph.setup{}
 nvim_lsp.rome.setup{}
 nvim_lsp.tsserver.setup{}
+nvim_lsp.rust_analyzer.setup{}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
