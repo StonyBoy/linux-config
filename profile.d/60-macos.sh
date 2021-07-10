@@ -13,6 +13,7 @@ function brew_update()
 }
 
 [ -d /usr/local/opt/ruby/bin ] && pathappend /usr/local/opt/ruby/bin
+[ -d ~/.gem/ruby/2.6.0/bin ] && pathappend ~/.gem/ruby/2.6.0/bin
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
