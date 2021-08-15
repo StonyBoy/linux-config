@@ -1,6 +1,6 @@
 " Configuration file for neovim - sharing with vim
 " Steen Hegelund
-" Time-Stamp: 2021-Jul-10 16:28
+" Time-Stamp: 2021-Aug-15 18:07
 
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
@@ -12,7 +12,7 @@ source ~/.vimrc
 " gem install solargraph
 " npm install -g rome
 " npm install -g typescript typescript-language-server
-" yay rust-analyser
+" yay rust-analyzer
 
 lua << EOF
 
