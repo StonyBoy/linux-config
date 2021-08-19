@@ -8,7 +8,6 @@ Installation:
 '''
 import os
 import sys
-import readline
 import enum
 import subprocess
 import yaml
@@ -27,7 +26,7 @@ class FileStatus(enum.Enum):
 
 class Installer:
     def __init__(self, dst_path, dot, src_path):
-        self.dst_path = os.path.abspath(os.path.expanduser(dst_path))
+        self.dst_path = str(os.path.abspath(os.path.expanduser(dst_path)))
         self.dot = '.' if dot else ''
         self.src_path = os.path.abspath(src_path)
         self.file_status = FileStatus.Missing
