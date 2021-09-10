@@ -1,0 +1,11 @@
+[Unit]
+Description=Net Next Status Timer
+
+[Timer]
+OnBootSec=2m
+OnUnitActiveSec=24h
+Unit=netnextstatus.service
+
+[Install]
+WantedBy=timers.target
+
