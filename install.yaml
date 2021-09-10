@@ -147,6 +147,10 @@ I3 Blocks:
         WorkFromHome:
                 - config/i3/i3blocks.conf.wfh
 
+Rofi Themes:
+        dest: ~/.config/rofi/themes
+        dot: true
+
 Sway:
         dest: ~/.config/sway/config
         dot: true
