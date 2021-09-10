@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2021-Jun-15 15:20
+" Time-Stamp: 2021-Sep-10 13:58
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -203,11 +203,12 @@ nnoremap <silent> <leader>id OCFLAGS_*.o := -DDEBUG<CR><esc>
 nnoremap <silent> <leader>fm :setlocal foldmethod=syntax<CR>
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
-" Super Macros
-" :let @n = @n + 10/phy3ldw"nP/@ldw"nPj0/<ldw"nPjj:let @/ = ""
-" /reg =f<ldw:let @o = @" - @n"oP
-" 0/port4ldw"nP/port5ldw"nPa /reg =f<ldw"nP/phys =4wdt "oPwdw"nP/sfp =/eth3ldw"nPjj:let @n = @n + 1:let @o = @o + 1
-" 0/sfp_eth7ldw"nP/sfp-eth7ldw"nPa /&i2c4ldw"oP2j:let @n = @n + 1:let @o = @o + 1
+function! SplitLineHere()
+    s/^\(\s*\)\(.\{-}\)\(\s*\)\(\%#\)\(\s*\)\(.*\)/\1\2\r\1\4\6
+    call histdel("/", -1)
+endfunction
+
+nnoremap <F7> :<C-u>call SplitLineHere()<CR>
 
 " Append modeline after last line in buffer.
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
@@ -276,7 +277,7 @@ if $USER == "root"
 elseif $TERM == "alacritty" || $TERM == "xterm-256color" || $TERM == "tmux-256color" || $TERM == "linux"
     set background=light
 endif
-colorscheme solarized8
+colorscheme solarized8_high
 
 " Lightline
 set laststatus=2
