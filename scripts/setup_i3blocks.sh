@@ -1,4 +1,4 @@
-SRC=~/src/proj
+SRC=~/src
 DST=~/scripts/i3blocks
 mkdir -p $DST
 ln -sf $SRC/i3blocks-contrib/calendar/calendar $DST
