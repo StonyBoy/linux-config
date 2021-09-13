@@ -150,6 +150,8 @@ I3 Blocks:
 Rofi Themes:
         dest: ~/.config/rofi/themes
         dot: true
+        default:
+                - config/rofi/themes
 
 Sway:
         dest: ~/.config/sway/config
