@@ -148,7 +148,7 @@ I3 Blocks:
                 - config/i3/i3blocks.conf.wfh
 
 Rofi Themes:
-        dest: ~/.config/rofi/themes
+        dest: ~/
         dot: true
         default:
                 - config/rofi/themes
