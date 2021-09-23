@@ -95,6 +95,12 @@ Git:
         MacOS:
                 - gitconfig.d/40-macos.gitconfig
 
+Ruby:
+        dest: ~/
+        dot: true
+        default:
+                - rubocop.yml
+
 Mutt Email:
         dest: ~/
         dot: true
