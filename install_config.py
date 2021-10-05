@@ -11,17 +11,87 @@ import sys
 import enum
 import subprocess
 import yaml
-from colorama import Fore, Back, Style
 import time
-
+try:
+    from colorama import Fore, Style
+except:
+    pass
 
 class FileStatus(enum.Enum):
-    CorrectLink = f'{Fore.GREEN}Nothing to do{Style.RESET_ALL}'
-    Missing = f'{Fore.RED}Create link{Style.RESET_ALL}'
-    Linked = f'{Fore.BLUE}Delete existing link and create new link{Style.RESET_ALL}'
-    SameContent = f'{Fore.GREEN}Delete existing file and create link{Style.RESET_ALL}'
-    DifferentContent = f'{Fore.MAGENTA}Rename file and create link{Style.RESET_ALL}'
-    Folder = f'{Fore.CYAN}Rename folder and create link{Style.RESET_ALL}'
+    if 'Style' in globals():
+        CorrectLink = f'{Fore.GREEN}Nothing to do{Style.RESET_ALL}'
+        Missing = f'{Fore.RED}Create link{Style.RESET_ALL}'
+        Linked = f'{Fore.BLUE}Delete existing link and create new link{Style.RESET_ALL}'
+        SameContent = f'{Fore.GREEN}Delete existing file and create link{Style.RESET_ALL}'
+        DifferentContent = f'{Fore.MAGENTA}Rename file and create link{Style.RESET_ALL}'
+        Folder = f'{Fore.CYAN}Rename folder and create link{Style.RESET_ALL}'
+    else:
+        CorrectLink = 'Nothing to do'
+        Missing = 'Create link'
+        Linked = 'Delete existing link and create new link'
+        SameContent = 'Delete existing file and create link'
+        DifferentContent = 'Rename file and create link'
+        Folder = 'Rename folder and create link'
+
+
+class TermUi:
+    def show(self, prompt):
+        print(prompt)
+
+    def show_arg(self, text, arg):
+        print(text, arg)
+
+    def show_kwargs(self, text, kwargs, nl=True):
+        prefix = '\n' if nl else ''
+        print(prefix + text.format(**kwargs))
+
+    def show_warn(self, text):
+        print('\n\n', text)
+
+    def show_error(self, text):
+        print('\n\n', text)
+
+    def input_yn(self, prompt, nl=True):
+        prefix = '\n' if nl else ''
+        return input(prefix + prompt + ': (y/n) > ').lower()
+
+    def input_arg_yn(self, prompt, arg, nl=True):
+        prefix = '\n' if nl else ''
+        return input(prefix + prompt + arg + ': (y/n) > ').lower()
+
+    def input_args_yn(self, prompt, arg1, arg2, nl=True):
+        prefix = '\n' if nl else ''
+        return input(prefix + prompt + arg1 + '/' + arg2 + ': (y/n) > ').lower()
+
+
+class ColorTermUi(TermUi):
+    def show(self, prompt):
+        print(prompt)
+
+    def show_arg(self, text, arg):
+        print(f'{text}{Fore.CYAN}{arg}{Style.RESET_ALL}')
+
+    def show_kwargs(self, text, kwargs, nl=True):
+        prefix = '\n' if nl else ''
+        print(prefix + text.format(**kwargs))
+
+    def show_warn(self, text):
+        print(f'\n\n{Fore.BLUE}{text}{Style.RESET_ALL}')
+
+    def show_error(self, text):
+        print(f'\n\n{Fore.RED}{text}{Style.RESET_ALL}')
+
+    def input_yn(self, prompt, nl=True):
+        prefix = '\n' if nl else ''
+        return input(f'{prefix}{Fore.MAGENTA}{prompt}{Style.RESET_ALL}: (y/n) > ').lower()
+
+    def input_arg_yn(self, prompt, arg, nl=True):
+        prefix = '\n' if nl else ''
+        return input(f'{prefix}{prompt}{Fore.BLUE}{arg}{Style.RESET_ALL}: (y/n) > ').lower()
+
+    def input_args_yn(self, prompt, arg1, arg2, nl=True):
+        prefix = '\n' if nl else ''
+        return input(f'{prefix}{prompt}{Fore.GREEN}{arg1}/{arg2}{Style.RESET_ALL}: (y/n) > ').lower()
 
 
 class Installer:
@@ -69,13 +139,16 @@ class Installer:
     def compare_contents(self):
         return subprocess.run(['diff', '-q', '-a', self.dst_path, self.src_path], stdout=subprocess.PIPE).returncode == 0
 
-    def create_dst_backup(self):
+    def create_dst_backup(self, tui):
         newname = self.dst_path + time.strftime('.backup_%Y_%b_%d_%H_%M_%S')
         os.rename(self.dst_path, newname)
-        print(f'  Backup as {newname}')
+        tui.show_arg(f'  Backup as ', newname)
 
-    def run(self):
-        print(f'{self.file_status.value}:  {self.src_path} => {self.dst_path}')
+    def run(self, tui):
+        tui.show_kwargs('  {status}:  {src} => {dst}', {
+            'status': self.file_status.value,
+            'src': self.src_path,
+            'dst': self.dst_path}, False)
         if self.file_status == FileStatus.CorrectLink:
             return
         if self.file_status == FileStatus.Missing:
@@ -89,10 +162,10 @@ class Installer:
             os.remove(self.dst_path)
             os.symlink(self.src_path, self.dst_path)
         if self.file_status == FileStatus.DifferentContent:
-            self.create_dst_backup()
+            self.create_dst_backup(tui)
             os.symlink(self.src_path, self.dst_path)
         if self.file_status == FileStatus.Folder:
-            self.create_dst_backup()
+            self.create_dst_backup(tui)
             os.symlink(self.src_path, self.dst_path)
 
 
@@ -108,9 +181,10 @@ class FeatureVariant:
             for val in self.value:
                 self.installers.append(Installer(destination, dot, val))
         else:
-            self.show()
-            prompt = f'    Do you want to install {Fore.GREEN}{self.parent}/{self.name}{Style.RESET_ALL}: (N/y) > '
-            if input(prompt).lower() == 'y':
+            tui.show('\n')
+            for value in self.value:
+                tui.show('  *   {}'.format(value))
+            if tui.input_args_yn('    Do you want to install ', self.parent, self.name, True) == 'y':
                 for val in self.value:
                     self.installers.append(Installer(destination, dot, val))
 
@@ -118,19 +192,15 @@ class FeatureVariant:
         for item in self.value:
             self.installers.append(Installer(destination, dot, item))
 
-    def __str__(self):
-        result = '\n    {}/{}:'.format(self.parent, self.name)
+    def show(self, tui):
+        tui.show('    {}/{}:'.format(self.parent, self.name))
         for value in self.value:
-            result += '\n      {}'.format(value)
-        return result
+            tui.show('      {}'.format(value))
 
-    def show(self):
-        print(self)
-
-    def install(self):
+    def install(self, tui):
         if len(self.installers):
             for installer in self.installers:
-                installer.run()
+                installer.run(tui)
 
     def installation_needed(self):
         return len(self.installers) > 0
@@ -153,21 +223,13 @@ class Feature:
             elif len(key):
                 self.variants[key] = FeatureVariant(name, key, val)
 
-    def __str__(self):
-        result = f'\n* {Fore.BLUE}{self.name}{Style.RESET_ALL}:'
+    def query_user(self, tui):
+        tui.show_arg('\n * ', self.name)
         if self.default:
-            result += str(self.default)
+            self.default.show(tui)
         for value in self.variants.values():
-            result += str(value)
-        return result
-
-    def show(self):
-        print(self)
-
-    def query_user(self):
-        self.show()
-        prompt = f'  Do you want to install {Fore.BLUE}{self.name}{Style.RESET_ALL}: (N/y) > '
-        if input(prompt).lower() == 'y':
+            value.show(tui)
+        if tui.input_arg_yn('  Do you want to install ', self.name) == 'y':
             if self.default:
                 self.default.add_installer(self.destination, self.dot)
             for var in self.variants.values():
@@ -175,11 +237,11 @@ class Feature:
             return True
         return False
 
-    def install(self):
+    def install(self, tui):
         if self.default:
-            self.default.install()
+            self.default.install(tui)
         for value in self.variants.values():
-            value.install()
+            value.install(tui)
 
     def installation_needed(self):
         result = False
@@ -190,41 +252,41 @@ class Feature:
         return result
 
 
-def install_items():
+def install_items(tui):
     features = []
     with open('install.yaml', 'r') as stream:
         try:
             docs = yaml.safe_load_all(stream)
         except yaml.YAMLError as exc:
-            print(exc)
-            sys.exit(-1)
+            tui.show_error(exc)
+            sys.exit(1)
         for doc in docs:
             for key, value in doc.items():
                 features.append(Feature(key, value))
             break
     for f in features:
-        f.query_user()
+        f.query_user(tui)
     changes = False
     for f in features:
         changes = changes or f.installation_needed()
     if changes:
-        prompt = f'\n{Fore.MAGENTA}Begin installation{Style.RESET_ALL}: (y/n) > '
         response = ''
         while response != 'n' and response != 'y':
-            response = input(prompt).lower()
+            response = tui.input_yn('Begin installation')
             if response == 'y':
                 for f in features:
-                    f.install()
+                    f.install(tui)
 
 
 if __name__ == '__main__':
+    tui = ColorTermUi() if 'Style' in globals() else TermUi()
     try:
-        install_items()
+        install_items(tui)
     except KeyboardInterrupt:
-        print(f'\n\n{Fore.RED}*** Installation Aborted ***{Style.RESET_ALL}')
+        tui.show_error('*** Installation Aborted ***')
         sys.exit(1)
     except FileNotFoundError as exc:
-        print(f'\n\n{Fore.RED}*** Installation Aborted ***{Style.RESET_ALL}')
-        print(f'File not found: {exc}')
+        tui.show_warn(f'File not found: {exc}')
+        tui.show_error('*** Installation Aborted ***')
         sys.exit(1)
 
