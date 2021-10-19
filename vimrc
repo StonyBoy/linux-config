@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2021-Sep-23 14:05
+" Time-Stamp: 2021-Oct-19 13:32
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -60,6 +60,7 @@ augroup filetype_settings
     autocmd FileType md,markdown,asciidoc,text,gitcommit,gitsendemail setlocal spell spelllang=en_us
     autocmd FileType c,cpp,js                           nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
     autocmd FileType c,cpp,js                           vnoremap <buffer><Leader>cf :ClangFormat<CR>
+    autocmd FileType make                               setlocal tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 noexpandtab colorcolumn=80
 augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -145,7 +146,7 @@ nnoremap ZA :qa!<CR>
 nnoremap <leader>is :r ~/work/patches/signedoffby.txt<CR>
 
 " Use ripgrep on selected word
-nnoremap ## :Rg \b<C-R><C-W>\b<CR>
+nnoremap ## :Rg \b(<C-R><C-W>)\b<CR>
 
 " Terminal mode
 tnoremap <Esc> <C-\><C-n>

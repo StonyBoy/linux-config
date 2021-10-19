@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2021-Sep-15 21:53
+" Time-Stamp: 2021-Sep-29 10:39
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 "
 
@@ -68,3 +68,4 @@ call plug#end()
 " 'rdnetto/YCM-Generator',           { 'branch': 'stable'}                      " Generate a config file for YCM - did not really use this
 " 'tpope/vim-sleuth'                                                            " Automatic indentation based of file content - conflicts with filetype plugin on
 " 'vim/killersheep'                                                             " Game for testing vim 8.2 - not usable in nvim
+" 'rootkiter/vim-hexedit'                                                       " Activates on plain text files, and then triggers script errors
