@@ -2,6 +2,7 @@
 [alias]
     b = !git branch -vv
     ca = commit --amend
+    cas = commit --amend --signoff
     cp = cherry-pick
     dn = !git diff --name-only
     dc = !git diff --cached
