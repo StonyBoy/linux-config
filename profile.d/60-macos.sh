@@ -12,8 +12,9 @@ function brew_update()
     brew upgrade $(brew outdated)
 }
 
-[ -d /usr/local/opt/ruby/bin ] && pathappend /usr/local/opt/ruby/bin
-[ -d ~/.gem/ruby/2.6.0/bin ] && pathappend ~/.gem/ruby/2.6.0/bin
+export GEMVER=3.0.0
+[ -d /usr/local/opt/ruby/bin ] && pathprepend /usr/local/opt/ruby/bin
+[ -d /usr/local//lib/ruby/gems/${GEMVER}/bin ] && pathprepend /usr/local//lib/ruby/gems/${GEMVER}/bin
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
