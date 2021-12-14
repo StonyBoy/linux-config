@@ -1,6 +1,6 @@
 " VIM packages and the package manager
 " Steen Hegelund
-" Time-Stamp: 2021-Sep-29 10:39
+" Time-Stamp: 2021-Dec-14 08:06
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 "
 
@@ -44,6 +44,7 @@ Plug 'idanarye/vim-merginal'                                      " Provides a n
 Plug 'rhysd/vim-clang-format'                                     " Format your code with specific coding style using clang-format
 Plug 'yazgoo/unicodemoji'                                         " fast unicode emojis in terminal and vim with fzf
 Plug 'nathanalderson/yang.vim'                                    " YANG syntax highlighting and other niceties for VIM
+Plug 'azabiong/vim-highlighter'                                   " Save/Load highlights, finding variables, and customizing colors
 if has('nvim-0.5.0')
     Plug 'neovim/nvim-lspconfig'                                  " A collection of common configurations for Neovim's built-in language server client.
 endif
