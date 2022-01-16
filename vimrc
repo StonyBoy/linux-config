@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2022-Jan-04 11:11
+" Time-Stamp: 2022-Jan-16 14:45
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -327,7 +327,8 @@ endfunction
 nnoremap #% :echo expand('%:p:~')<CR>
 
 " FZF
-command! -bang -nargs=* Rgu call fzf#vim#grep("rg -u --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, <bang>0)'
+command! -bang -nargs=+ Rg call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case -- <args>', 1, fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=+ Rgu call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case -u -- <args>', 1, fzf#vim#with_preview(), <bang>0)
 command! -bang -nargs=* Bli call fzf#vim#buffer_lines(<q-args>, <bang>0)'
 
 " Provide EasyAlign shortcuts
