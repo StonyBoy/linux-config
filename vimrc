@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2022-Jan-16 19:35
+" Time-Stamp: 2022-Jan-16 21:27
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -323,14 +323,33 @@ endfunction
 " Show full path and optionally referring to $HOME
 nnoremap #% :echo expand('%:p:~')<CR>
 
+" ripgrep selected word
+function! WordRipgrep(args)
+    let l:cmd = 'rg --column --line-number --no-heading --color=always --smart-case -- "\b(' . a:args . ')\b"'
+    call fzf#vim#grep(l:cmd, 1, fzf#vim#with_preview())
+endfun
+
+" ripgrep arguments (may include a directory)
+function! DirRipgrep(args)
+    let l:cmd = 'rg --column --line-number --no-heading --color=always --smart-case -- ' . a:args
+    call fzf#vim#grep(l:cmd, 1, fzf#vim#with_preview())
+endfun
+
+" ripgrep universal (all files) arguments (may include a directory)
+function! DirRipgrepUni(args)
+    let l:cmd = 'rg --column --line-number --no-heading --color=always --smart-case -u -- ' . a:args
+    call fzf#vim#grep(l:cmd, 1, fzf#vim#with_preview())
+endfun
+
+
+
 " FZF
-command! -bang -nargs=+ Rg call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case -- <args>', 1, fzf#vim#with_preview(), <bang>0)
-command! -bang -nargs=+ Rgu call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case -u -- <args>', 1, fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=+ Rg call DirRipgrep('<args>')
+command! -bang -nargs=+ Rgu call DirRipgrepUni('<args>')
 command! -bang -nargs=* Bli call fzf#vim#buffer_lines(<q-args>, <bang>0)'
-command! -bang Rgw call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case -- "\b(' . expand('<cword>') . ')\b"', 1, fzf#vim#with_preview(), <bang>0)
 
 " ripgrep selected word
-nnoremap ## :Rgw<CR>
+nnoremap ## :call WordRipgrep(expand('<cword>'))<CR>
 
 " Provide EasyAlign shortcuts
 
