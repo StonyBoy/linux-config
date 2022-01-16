@@ -1,6 +1,6 @@
 " Configuration file for neovim - sharing with vim
 " Steen Hegelund
-" Time-Stamp: 2021-Aug-24 21:04
+" Time-Stamp: 2022-Jan-16 17:52
 
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
@@ -62,7 +62,7 @@ if has('nvim-0.5.0')
 
     -- Use a loop to conveniently call 'setup' on multiple servers and
     -- map buffer local keybindings when the language server attaches
-    local servers = { "pyright", "rust_analyzer", "tsserver", "ccls", "solargraph" }
+    local servers = { "ccls", "pyright", "solargraph", "rome", "tsserver", "rust_analyzer" }
     for _, lsp in ipairs(servers) do
       nvim_lsp[lsp].setup {
         on_attach = on_attach,
