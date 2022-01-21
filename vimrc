@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2022-Jan-16 21:27
+" Time-Stamp: 2022-Jan-21 09:35
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -105,7 +105,7 @@ set wildmenu
 set wildignorecase  " Ignore case when tab-expanding filenames
 
 " Empty the search register
-let @/ = "__=#?__"
+call setreg('/', [])
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Using tabs
@@ -187,7 +187,7 @@ nnoremap <F8> :ToggleBufExplorer<cr>
 nnoremap <F9> :e!<cr>
 
 " Clear the last search pattern (removes highlight)
-nnoremap <F10> :let @/ = ""<cr>
+nnoremap <F10> :call setreg('/', [])<cr>
 
 " Clear old part of logfile
 nnoremap <F11> G?Starting kernelkdgg
@@ -370,3 +370,4 @@ command! TrimWhitespace call TrimWhitespace()
 " source ~/.vim/config/autoclose.vim
 source ~/.vim/config/emacsstyle.vim
 source ~/.vim/config/ale.vim
+source ~/.vim/config/nvim-tree.vim
