@@ -1,5 +1,5 @@
 " Steen Hegelund
-" Time-Stamp: 2022-Jan-23 00:59
+" Time-Stamp: 2022-Jan-23 15:05
 " Lightline Configuration
 
 set laststatus=2
@@ -11,8 +11,8 @@ let g:lightline = {
   \         'right': [['session', 'fileencoding', 'fileformat', 'filetype', 'readonly', 'percent', 'lineinfo'], ['filemod', 'editcfg']]
   \     },
   \     'inactive': {
-  \         'left': [['fpath']],
-  \         'right': [[], [], ['filemod', 'fileencoding', 'fileformat', 'filetype', 'readonly', 'percent', 'lineinfo']]
+  \         'left': [[], [], ['absolutepath']],
+  \         'right': []
   \     },
   \     'component_function': {
   \       'session': 'obsession#ObsessionStatus',
