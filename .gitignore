@@ -4,4 +4,5 @@
 .DS_Store
 Session.vim
 config/systemd/user/timers.target.wants/
+packer_compiled.lua
 
