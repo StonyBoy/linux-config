@@ -1,11 +1,11 @@
 " Steen Hegelund
-" Time-Stamp: 2022-Jan-23 15:05
+" Time-Stamp: 2022-Jan-23 16:05
 " Lightline Configuration
 
 set laststatus=2
 set noshowmode
 let g:lightline = {
-  \ 'colorscheme': 'solarized',
+  \ 'colorscheme': 'selenized_light',
   \     'active': {
   \         'left': [['mode'], ['paste', 'gitbranch', 'fpath']],
   \         'right': [['session', 'fileencoding', 'fileformat', 'filetype', 'readonly', 'percent', 'lineinfo'], ['filemod', 'editcfg']]
