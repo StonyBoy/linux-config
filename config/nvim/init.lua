@@ -1,23 +1,23 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Jan-23 01:02
+-- Time-Stamp: 2022-Jan-23 22:46
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 --
 
--- Global config
-vim.g.mapleader = ' '   -- use space as a the leader key
-vim.g.swapfile = false  -- Do not create swapfiles
+vim.g.mapleader = ' '    -- use space as a the leader key
+vim.opt.swapfile = false -- Do not create swapfiles
 
 -- Install package manager and plugins
 require('plugins')
 
 -- Configure the Language Servers
-package.loaded['lsp_config'] = nil
 require('lsp_config').setup{}
 
 -- Configure the keymappings
-package.loaded['keymaps'] = nil
 require('keymaps').setup{}
+
+-- Create Globale Ex functions
+require('commands')
 
 -- Text formatting defaults
 vim.opt.textwidth = 120     -- Set the line width default value
@@ -82,22 +82,13 @@ vim.cmd [[call setreg('/', [])]]
 
 -- Filetype handling
 vim.cmd [[
-
-" Remove trailing whitespace and restore search history and position in file
-function! TrimWhitespace()
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
-endfun
-
-command! TrimWhitespace call TrimWhitespace()
 filetype plugin on
 augroup filetype_settings
     autocmd!
     autocmd BufNewFile,BufRead *.in setf make
     autocmd BufNewFile,BufRead *.c,*.h,*.S,*.dts,*.dtsi setlocal tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 noexpandtab colorcolumn=80 cindent
     autocmd BufNewFile,BufRead *.cxx,*.hxx              setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120 expandtab colorcolumn=120 cindent
-    autocmd FileType c,h autocmd BufWritePre * :call TrimWhitespace()
+    autocmd FileType c,h autocmd BufWritePre * :TrailspaceTrim
     autocmd FileType bash,ruby                          setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120 expandtab colorcolumn=120 cindent
     autocmd FileType lua                                setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120 expandtab colorcolumn=120 cindent
     autocmd FileType gitcommit,gitsendemail,mail        setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=75 expandtab colorcolumn=75
@@ -106,35 +97,6 @@ augroup filetype_settings
     autocmd FileType c,cpp,js                           vnoremap <buffer><Leader>cf :ClangFormat<CR>
     autocmd FileType make                               setlocal tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 noexpandtab colorcolumn=80
 augroup END
-]]
-
--- Fuzzy file finder
-vim.cmd [[
-" FZF
-command! -bang -nargs=+ Rg call DirRipgrep('<args>')
-command! -bang -nargs=+ Rgu call DirRipgrepUni('<args>')
-command! -bang -nargs=* Bli call fzf#vim#buffer_lines(<q-args>, <bang>0)'
-
-" ripgrep selected word
-nnoremap ## :call WordRipgrep(expand('<cword>'))<CR>
-
-" ripgrep selected word
-function! WordRipgrep(args)
-    let l:cmd = 'rg --column --line-number --no-heading --color=always --smart-case -- "\b(' . a:args . ')\b"'
-    call fzf#vim#grep(l:cmd, 1, fzf#vim#with_preview())
-endfun
-
-" ripgrep arguments (may include a directory)
-function! DirRipgrep(args)
-    let l:cmd = 'rg --column --line-number --no-heading --color=always --smart-case -- ' . a:args
-    call fzf#vim#grep(l:cmd, 1, fzf#vim#with_preview())
-endfun
-
-" ripgrep universal (all files) arguments (may include a directory)
-function! DirRipgrepUni(args)
-    let l:cmd = 'rg --column --line-number --no-heading --color=always --smart-case -u -- ' . a:args
-    call fzf#vim#grep(l:cmd, 1, fzf#vim#with_preview())
-endfun
 ]]
 
 -- Auto resize all VIM windows when VIM is resized
