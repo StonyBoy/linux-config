@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Jan-22 19:21
+-- Time-Stamp: 2022-Jan-24 19:50
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -59,6 +59,7 @@ require('packer').startup(function()
   -- Additional textobjects for treesitter
   use 'nvim-treesitter/nvim-treesitter-textobjects'
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
+  use 'rafcamlet/nvim-luapad'                                      -- Interactive neovim scratchpad for lua
 end)
 
 -- These plugins are not in use due to various problems

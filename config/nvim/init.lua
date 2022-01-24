@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Jan-23 22:46
+-- Time-Stamp: 2022-Jan-24 20:48
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 --
 
@@ -14,7 +14,7 @@ require('plugins')
 require('lsp_config').setup{}
 
 -- Configure the keymappings
-require('keymaps').setup{}
+require('keymaps')
 
 -- Create Globale Ex functions
 require('commands')
