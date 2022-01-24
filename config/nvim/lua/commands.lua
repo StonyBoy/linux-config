@@ -1,4 +1,7 @@
--- Load Global Ex Functions
+-- Neovim create global commands
+-- Steen Hegelund
+-- Time-Stamp: 2022-Jan-24 08:23
+-- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Create Global Ex functions from Lua functions
 vim.cmd([[
