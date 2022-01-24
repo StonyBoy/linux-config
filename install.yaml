@@ -52,7 +52,11 @@ Vim Editor:
                 - vim/packages.vim
                 - vim/config
                 - vimrc
-        NVim:
+
+NeoVim Editor:
+        dest: ~/
+        dot: true
+        default:
                 - config/nvim
                 - profile.d/80-nvim.sh
 
