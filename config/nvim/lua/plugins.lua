@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Jan-24 19:50
+-- Time-Stamp: 2022-Jan-24 22:03
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -34,8 +34,6 @@ require('packer').startup(function()
   use 'tpope/vim-abolish'                                          -- Word Case substitution: snake/mixed/camel/upper/
   use 'itchyny/lightline.vim'                                      -- Nice Status Line
   use 'airblade/vim-gitgutter'                                     -- Git: Changed lines since last revision
-  use {'junegunn/fzf', dir = '~/.fzf', ['do'] = './install --all' } -- Fuzzy File Finder binary
-  use 'junegunn/fzf.vim'                                           -- Fuzzy File Finder
   use 'junegunn/gv.vim'                                            -- A git commit browser.
   use 'junegunn/vim-easy-align'                                    -- Align text on specific characters in nice columns
   use 'lifepillar/vim-solarized8'                                  -- Modern SolarlizedColorscheme
@@ -60,6 +58,9 @@ require('packer').startup(function()
   use 'nvim-treesitter/nvim-treesitter-textobjects'
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use 'rafcamlet/nvim-luapad'                                      -- Interactive neovim scratchpad for lua
+  use {'nvim-telescope/telescope.nvim',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
 end)
 
 -- These plugins are not in use due to various problems
@@ -81,3 +82,5 @@ end)
 -- 'vim/killersheep'                  " Game for testing vim 8.2 - not usable in nvim
 -- 'rootkiter/vim-hexedit'            " Activates on plain text files, and then triggers script errors
 -- 'dense-analysis/ale'               " Asynchroneous Syntax checker, may not be needed anymore...
+  -- use {'junegunn/fzf', dir = '~/.fzf', ['do'] = './install --all' } -- Fuzzy File Finder binary
+  -- use 'junegunn/fzf.vim'                                           -- Fuzzy File Finder

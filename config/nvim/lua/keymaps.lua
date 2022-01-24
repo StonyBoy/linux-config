@@ -1,6 +1,6 @@
 -- Neovim keymap configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Jan-24 20:49
+-- Time-Stamp: 2022-Jan-24 22:45
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
@@ -75,6 +75,15 @@ function dev_usage()
   keymap {'c', 'w!!', 'execute "silent! write !sudo tee % >/dev/null" <bar> edit!'}
 end
 
+function telescope_usage()
+  keymap {'n', '<leader>ff', '<cmd>lua require("telescope.builtin").find_files()<cr>'}
+  keymap {'n', '<leader>fg', '<cmd>lua require("telescope.builtin").live_grep()<cr>'}
+  keymap {'n', '<leader>fb', '<cmd>lua require("telescope.builtin").buffers()<cr>'}
+  keymap {'n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>'}
+  keymap {'n', '##', '<cmd>lua require("telescope.builtin").grep_string()<cr>'}
+  keymap {'v', '##', '<cmd>lua require("telescope.builtin").grep_string()<cr>'}
+end
+
 function assorted_usage()
   keymap {'n', '<Leader>sv', ':source $MYVIMRC<cr>'}
   keymap {'n', '<Leader>ev', ':vs $MYVIMRC<cr>'}
@@ -89,8 +98,6 @@ function assorted_usage()
   keymap {'n', 'ga', '<Plug>(EasyAlign)'} -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
   keymap {'n', '<Leader>ml', ':lua append_modeline()<cr>'}
   keymap {'t', '<Esc>', '<C-\\><C-n>'} -- Terminal mode
-  keymap {'n', '##', ':lua require("functions").selected_word_ripgrep()<cr>' }
-  keymap {'v', '##', ':lua require("functions").visual_selection_ripgrep()<cr>' }
 end
 
 -- Setup all the keymappings
@@ -99,5 +106,6 @@ tab_usage()
 xterm_usage()
 window_resize()
 dev_usage()
+telescope_usage()
 
 return Module
