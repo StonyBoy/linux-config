@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Jan-24 22:03
+-- Time-Stamp: 2022-Jan-24 22:33
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -60,6 +60,13 @@ require('packer').startup(function()
   use 'rafcamlet/nvim-luapad'                                      -- Interactive neovim scratchpad for lua
   use {'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} }
+  }
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icon
+    },
+    config = function() require'nvim-tree'.setup {} end
   }
 end)
 

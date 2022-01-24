@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Jan-24 20:48
+-- Time-Stamp: 2022-Jan-24 22:33
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 --
 
@@ -18,6 +18,12 @@ require('keymaps')
 
 -- Create Globale Ex functions
 require('commands')
+
+-- Get Nvim Tree configured
+vim.cmd [[
+source ~/.config/nvim/nvim-tree-config.vim
+]]
+require'nvim-tree'.setup()
 
 -- Text formatting defaults
 vim.opt.textwidth = 120     -- Set the line width default value
