@@ -1,5 +1,5 @@
 # Steen Hegelund
-# Time-Stamp: 2020-Dec-05 17:50
+# Time-Stamp: 2022-Jan-25 20:53
 
 
 # Colors (Solarized Light)
@@ -65,7 +65,7 @@ bell:
   duration: 10
   color: '#cb4b16' # orange
 
-background_opacity: 1.0
+window.opacity: 1.0
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
