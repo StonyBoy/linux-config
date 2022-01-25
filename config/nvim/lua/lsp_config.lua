@@ -1,15 +1,17 @@
 -- Neovim configuration Adding Language Server support
 -- Steen Hegelund
--- Time-Stamp: 2022-Jan-23 00:58
+-- Time-Stamp: 2022-Jan-25 21:11
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 
 -- use 'neovim/nvim-lspconfig'
+-- yay ccls
 -- npm i -g pyright
 -- gem install solargraph
 -- npm install -g rome
 -- npm install -g typescript typescript-language-server
 -- yay rust-analyzer
+-- yay lua-language-server
 
 local Module = {}
 
@@ -22,6 +24,7 @@ Module.setup = function()
   nvim_lsp.rome.setup{}
   nvim_lsp.tsserver.setup{}
   nvim_lsp.rust_analyzer.setup{}
+  nvim_lsp.sumneko_lua.setup{}
 
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
@@ -57,7 +60,7 @@ Module.setup = function()
 
   -- Use a loop to conveniently call 'setup' on multiple servers and
   -- map buffer local keybindings when the language server attaches
-  local servers = { "ccls", "pyright", "solargraph", "rome", "tsserver", "rust_analyzer" }
+  local servers = { "ccls", "pyright", "sumneko_lua", "solargraph", "rome", "tsserver", "rust_analyzer" }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
       on_attach = on_attach,
