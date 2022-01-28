@@ -3,15 +3,21 @@
 Prune local git branches that do not have remote counterparts either unconditionally or by prompting the user
 '''
 import argparse
-import sys
 import subprocess
 import re
+
+# match values: modifier branchname unused checkoutpath unused remotebranch subject
+branch_regex = re.compile(r'^([ *+])\s(\S+)\s+\S+(\s\((\S+)\)|)(\s\[(\S+)\]|)\s(.*)$')
+gone_branch_regex = re.compile(r'^([ *+])\s(\S+)\s+\S+(\s\((\S+)\)|)(\s\[(\S+: gone)\])\s(.*)$')
+behind_branch_regex = re.compile(r'^([ *+])\s(\S+)\s+\S+(\s\((\S+)\)|)(\s\[(\S+):[^]]+behind \d+\]\s(.*)$)')
 
 def run(cmd):
     cp = subprocess.run(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if cp.returncode == 0:
         return cp.stdout.decode().split('\n')
-    return cp.stderr.decode().split('\n')
+    errormsg = cp.stderr.decode().split('\n')
+    print(cmd, errormsg)
+    return errormsg
 
 
 def delete_branch_prompt(name):
@@ -26,63 +32,76 @@ def move_branch_prompt(name):
     return response.lower()
 
 
-def delete_branches(unconditionally):
-    run('git remote prune origin')
-    lines = run('git branch -vv')
-    regex = re.compile(r'^\s+(\S+)\s+\S+\s\[\S+/\S+: gone\]')
-    for line in lines:
-        found = regex.findall(line)
-        # print(found if len(found) else '---')
-        if len(found):
-            name = found[0]
-            if unconditionally:
-                run('git branch -D {}'.format(name))
-            else:
-                if delete_branch_prompt(name) == 'y':
-                    run('git branch -D {}'.format(name))
+class Branch:
+    def __init__(self, info):
+        self.status, self.name, unused, self.path, unused, self.remote, self.subject = info
+
+    def delete_local(self, force = False):
+        if self.status == '+':  # Cannot delete a branch that is checked out locally
+            return
+        if force or delete_branch_prompt(str(self)) == 'y':
+            run('git branch -D {}'.format(self.name))
+
+    def delete_remote(self, force = False):
+        if len(self.remote) == 0:  # Ignore local-only branches
+            return
+        if force or delete_branch_prompt(str(self)) == 'y':
+            run('git branch -D {}'.format(self.name))
+            repo, branch = self.remote.split('/', 1)
+            run('git push {} --delete {}'.format(repo, branch))
+
+    def move_local(self, force = False):
+        if force or move_branch_prompt(str(self)) == 'y':
+            run('git branch -f {} {}'.format(self.name, self.remote))
+
+    def __str__(self):
+        if self.path and self.remote:
+            fullname = '{} at {} -> {}: {}'.format(self.name, self.path, self.remote, self.subject)
+        elif self.path:
+            fullname = '{} at {}: {}'.format(self.name, self.path, self.subject)
+        elif self.remote:
+            fullname = '{} -> {}: {}'.format(self.name, self.remote, self.subject)
+        else:
+            fullname = '{}: {}'.format(self.name, self.subject)
+        return fullname
 
 
-def delete_local_branches():
-    run('git remote prune origin')
+def delete_gone_branches(force):
     lines = run('git branch -vv')
-    regex = re.compile(r'^[ *+]\s(\S+)\s+\S+\s[^[]\S+[^]].*$')
     for line in lines:
-        found = regex.findall(line)
-        if len(found):
-            name = found[0]
-            if delete_branch_prompt(name) == 'y':
-                run('git branch -D {}'.format(name))
+        found = gone_branch_regex.findall(line)
+        if len(found) and len(found[0]) == 7:
+            branch = Branch(found[0])
+            branch.delete_local(force)
+    run('git remote prune origin')
 
 
 def delete_remote_branches():
+    lines = run('git branch -vv')
+    for line in lines:
+        found = branch_regex.findall(line)
+        if len(found) and len(found[0]) == 7:
+            branch = Branch(found[0])
+            branch.delete_remote()
     run('git remote prune origin')
-    lines = run('git branch -vv')
-    regex = re.compile(r'^[ *+]\s\S+\s+\S+\s\[(\S+)\].*$')
-    for line in lines:
-        found = regex.findall(line)
-        # print(found if len(found) else '--- %s' % line)
-        if len(found):
-            name = found[0]
-            if delete_branch_prompt(name) == 'y':
-                repo, branch = name.split('/', 1)
-                run('git push {} --delete {}'.format(repo, branch))
-                run('git branch -D {}'.format(branch))
 
 
-def move_branches(unconditionally):
+def delete_local_branches():
     lines = run('git branch -vv')
-    regex = re.compile(r'^\s+(\S+)\s+\S+\s\[(\S+/\S+): behind \d+\]')
     for line in lines:
-        found = regex.findall(line)
-        # print(found if len(found) else '---')
-        if len(found):
-            name = found[0][0]
-            remote = found[0][1]
-            if unconditionally:
-                run('git branch -f {} {}'.format(name, remote))
-            else:
-                if move_branch_prompt(name) == 'y':
-                    run('git branch -f {} {}'.format(name, remote))
+        found = branch_regex.findall(line)
+        if len(found) and len(found[0]) == 7:
+            branch = Branch(found[0])
+            branch.delete_local()
+
+
+def move_branches(force):
+    lines = run('git branch -vv')
+    for line in lines:
+        found = behind_branch_regex.findall(line)
+        if len(found) and len(found[0]) == 7:
+            branch = Branch(found[0])
+            branch.move_local(force)
 
 
 if __name__ == '__main__':
@@ -95,7 +114,7 @@ if __name__ == '__main__':
     parser.add_argument('-l', '--localdelete', action='store_true', default=False, help='Delete local branches')
     args = parser.parse_args()
     if args.delete or args.delete_unconditionally:
-        delete_branches(args.delete_unconditionally)
+        delete_gone_branches(args.delete_unconditionally)
     elif args.localdelete:
         delete_local_branches()
     elif args.remotedelete:
