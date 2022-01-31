@@ -1,6 +1,6 @@
 -- Function Library
 -- Steen Hegelund
--- Time-Stamp: 2022-Jan-24 22:45
+-- Time-Stamp: 2022-Jan-31 21:51
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
@@ -25,6 +25,16 @@ Module.get_visual_selection = function()
     lines[1] = string.sub(lines[1], col_start)
     return table.concat(lines, '\n')
   end
+end
+
+Module.ripgrep_args = function(...)
+  local args = { n = select('#', ...), ... }
+  local opts = { vimgrep_arguments = { "rg", "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" }}
+  -- Merge args into opts
+  for i = 1, args.n do
+    table.insert(opts.vimgrep_arguments, args[i])
+  end
+  require("telescope").extensions.live_grep_raw.live_grep_raw(opts)
 end
 
 return Module
