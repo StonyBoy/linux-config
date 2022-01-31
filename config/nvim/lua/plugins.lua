@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Jan-24 22:33
+-- Time-Stamp: 2022-Jan-31 12:44
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -59,7 +59,8 @@ require('packer').startup(function()
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use 'rafcamlet/nvim-luapad'                                      -- Interactive neovim scratchpad for lua
   use {'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    requires = { 'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope-live-grep-raw.nvim' }
   }
   use {
     'kyazdani42/nvim-tree.lua',
