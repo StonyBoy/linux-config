@@ -1,6 +1,6 @@
 -- Function Library
 -- Steen Hegelund
--- Time-Stamp: 2022-Jan-31 21:51
+-- Time-Stamp: 2022-Feb-03 20:58
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
@@ -28,13 +28,22 @@ Module.get_visual_selection = function()
 end
 
 Module.ripgrep_args = function(...)
+  local opts = {}
   local args = { n = select('#', ...), ... }
-  local opts = { vimgrep_arguments = { "rg", "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" }}
-  -- Merge args into opts
-  for i = 1, args.n do
-    table.insert(opts.vimgrep_arguments, args[i])
+  if args.n > 0 then
+    local idx = 1
+    while idx <= args.n do
+      local dir = vim.fn.expand(args[idx])
+      if vim.fn.isdirectory(dir) > 0 then
+        opts['cwd'] = dir
+      else
+        opts['search'] = args[idx]
+      end
+      -- option passing: additional_args = function() return {'-t', 'c'} end
+      idx = idx + 1
+    end
   end
-  require("telescope").extensions.live_grep_raw.live_grep_raw(opts)
+  require("telescope.builtin").grep_string(opts)
 end
 
 return Module
