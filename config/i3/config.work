@@ -391,6 +391,9 @@ exec --no-startup-id spotify
 exec --no-startup-id firefox
 exec --no-startup-id $terminal
 
+# Start notification service
+exec --no-startup-id dunst
+
 # Start a polkit authentication agent
 exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
 
