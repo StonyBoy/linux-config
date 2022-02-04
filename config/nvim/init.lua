@@ -1,8 +1,8 @@
 -- Neovim configuration
 -- Steen Hegelund
 -- Time-Stamp: 2022-Feb-06 16:26
+-- Time-Stamp: 2022-Feb-04 10:53
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
---
 
 vim.g.mapleader = ' '    -- use space as a the leader key
 vim.opt.swapfile = false -- Do not create swapfiles
@@ -14,6 +14,7 @@ require('plugins')
 require('lsp_config').setup{}
 
 -- Configure the keymappings
+-- package.loaded['keymaps'] = nil
 require('keymaps')
 
 -- Create Globale Ex functions

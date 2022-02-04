@@ -1,6 +1,7 @@
-  -- Neovim keymap configuration
+-- Neovim keymap configuration
 -- Steen Hegelund
 -- Time-Stamp: 2022-Feb-05 16:02
+-- Time-Stamp: 2022-Feb-04 10:52
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
@@ -67,11 +68,11 @@ Append_modeline = function()
     vim.call('nvim_buf_set_lines', 0, -1, -1, 0, modeline)
 end
 
-local function dev_usage()
-  keymap {'n', '<leader>is', ':r ~/work/patches/signedoffby.txt<CR>'} -- Add signed-off-by
-  keymap {'n', '<silent>', '<leader>it Opr_info("%s:%d\n", __func__, __LINE__);<esc>'}
-  keymap {'n', '<silent>', '<leader>id OCFLAGS_*.o := -DDEBUG<CR><esc>'}
-  keymap {'n', '<silent>', '<leader>fm :setlocal foldmethod=syntax<CR>'}
+function dev_usage()
+  keymap {'n', '<leader>is', ':r ~/work/patches/signedoffby.txt<CR>', {silent = true}} -- Add signed-off-by
+  keymap {'n', '<leader>it', 'Opr_info("%s:%d\\n", __func__, __LINE__);<esc>', {silent = true}}
+  keymap {'n', '<leader>id', 'OCFLAGS_*.o := -DDEBUG<CR><esc>', {silent = true}}
+  keymap {'n', '<leader>fm', '<cmd>setlocal foldmethod=syntax<CR>', {silent =  true}}
   keymap {'c', 'w!!', 'execute "silent! write !sudo tee % >/dev/null" <bar> edit!'}
 end
 
