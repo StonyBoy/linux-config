@@ -1,6 +1,6 @@
   -- Neovim keymap configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Jan-29 15:06
+-- Time-Stamp: 2022-Feb-05 16:02
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
@@ -24,7 +24,7 @@ local keymap = function(key)
 end
 
 -- Using tabs
-function tab_usage()
+local function tab_usage()
   vim.cmd [[
   nnoremap <silent> <leader>t<up> :tabr<cr>
   nnoremap <silent> <leader>t<down> :tabl<cr>
@@ -35,7 +35,7 @@ end
 
 
 -- Remapping XTERM specialities
-function xterm_usage()
+local function xterm_usage()
   vim.cmd [[
   nnoremap <silent> <ESC>[1;5D  <C-left>
   nnoremap <silent> <ESC>[1;5C  <C-right>
@@ -44,7 +44,7 @@ function xterm_usage()
   ]]
 end
 
-function window_resize()
+local function window_resize()
   keymap {'n', '<C-M-S-Left>', ':vertical resize -1<cr>'}
   keymap {'n', '<C-M-S-Right>', ':vertical resize +1<cr>'}
   keymap {'n', '<C-M-S-Down>', ':resize -1<cr>'}
@@ -52,7 +52,7 @@ function window_resize()
 end
 
 -- Global function for appending a mode line to a buffer
-append_modeline = function()
+Append_modeline = function()
     local modeline = {
         string.format(vim.opt.commentstring:get(),
             string.format(" vim: set ts=%d sw=%d sts=%d tw=%d %s cc=%d ft=%s :",
@@ -67,7 +67,7 @@ append_modeline = function()
     vim.call('nvim_buf_set_lines', 0, -1, -1, 0, modeline)
 end
 
-function dev_usage()
+local function dev_usage()
   keymap {'n', '<leader>is', ':r ~/work/patches/signedoffby.txt<CR>'} -- Add signed-off-by
   keymap {'n', '<silent>', '<leader>it Opr_info("%s:%d\n", __func__, __LINE__);<esc>'}
   keymap {'n', '<silent>', '<leader>id OCFLAGS_*.o := -DDEBUG<CR><esc>'}
@@ -75,7 +75,7 @@ function dev_usage()
   keymap {'c', 'w!!', 'execute "silent! write !sudo tee % >/dev/null" <bar> edit!'}
 end
 
-function telescope_usage()
+local function telescope_usage()
   keymap {'n', '<leader>ff', '<cmd>lua require("telescope.builtin").find_files()<cr>'}
   keymap {'n', '<leader>fg', '<cmd>lua require("telescope.builtin").live_grep()<cr>'}
   keymap {'n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>'}
@@ -85,7 +85,7 @@ function telescope_usage()
   -- The current buffer number is vim.api.nvim_get_current_buf()
 end
 
-function assorted_usage()
+local function assorted_usage()
   keymap {'n', '<Leader>sv', ':source $MYVIMRC<cr>'}
   keymap {'n', '<Leader>ev', ':vs $MYVIMRC<cr>'}
   keymap {'n', '<F6>', 'g<c-]>'} -- Follow link
@@ -97,7 +97,7 @@ function assorted_usage()
   keymap {'n', 'ZA', ':qa!<CR>'} -- Getting out quickly
   keymap {'x', 'ga', '<Plug>(EasyAlign)'} -- Start interactive EasyAlign in visual mode (e.g. vipga)
   keymap {'n', 'ga', '<Plug>(EasyAlign)'} -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
-  keymap {'n', '<Leader>ml', ':lua append_modeline()<cr>'}
+  keymap {'n', '<Leader>ml', ':lua Append_modeline()<cr>'}
   keymap {'t', '<Esc>', '<C-\\><C-n>'} -- Terminal mode
 end
 
