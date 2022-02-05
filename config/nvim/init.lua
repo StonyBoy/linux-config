@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Jan-24 22:33
+-- Time-Stamp: 2022-Feb-05 21:47
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 --
 
@@ -24,6 +24,95 @@ vim.cmd [[
 source ~/.config/nvim/nvim-tree-config.vim
 ]]
 require'nvim-tree'.setup()
+
+local function bufinfo()
+  local tbstat = vim.bo.expandtab and ' spc' or ' tab'
+  return 'ts:' .. vim.bo.tabstop .. ' sw:' .. vim.bo.shiftwidth .. ' sts:' .. vim.bo.softtabstop .. ' tw:' .. vim.bo.textwidth .. tbstat
+end
+
+local function bufstate()
+  return vim.bo.modified and '[+]' or ''
+end
+
+local function fileinfo()
+  return vim.bo.fileformat .. ' ' .. vim.bo.fileencoding .. ' ' .. vim.bo.filetype
+end
+
+local function filepath()
+    local colons = {}
+    for w in string.gmatch(vim.fn.expand('%:f'), ':') do
+       colons[#colons+1] = w
+    end
+    local ret = ''
+    if #colons > 1 then
+        ret = "git:" .. vim.fn.expand("%:t")
+    else
+        ret = vim.fn.expand("%:f")
+    end
+    return ret
+end
+
+
+-- Statusline and bufferline configuration
+package.loaded['staline'] = nil
+require('staline').setup{
+  sections = {
+    left = {
+      'right_sep', '-mode',
+      'right_sep', filepath,
+      'right_sep', 'branch',
+    },
+    mid  = {'cwd'},
+    right= {
+      bufstate,
+      'cool_symbol', 'left_sep',
+      'lsp_name', 'left_sep',
+      bufinfo, 'left_sep',
+      fileinfo, 'left_sep',
+      'line_column', 'left_sep',
+    }
+  },
+  defaults={
+    fg = '#839496',
+    bg = '#eee8d5',
+    inactive_fgcolor = '#002b36',
+    inactive_bgcolor = '#839496',
+    left_separator = ' ',
+    right_separator = ' ',
+    true_colors = true,
+    line_column = '[%03l:%03c] %02p%%',
+    -- font_active = 'bold'
+  },
+  mode_colors = {
+    n  = '#268bd2',
+    i  = '#859900',
+    ic = '#dc322f',
+    c  = '#dc322f',
+    v  = '#d33682',
+    V  = '#d33682',
+    x  = '#d33682',
+    s  = '#986fec',
+    S  = '#986fec',
+  }
+}
+
+package.loaded['stabline'] = nil
+require('stabline').setup {
+  style       = "bubble", -- others: arrow, slant, bubble
+  stab_left   = "",
+  stab_right  = "",
+
+  fg = '#839496',
+  bg = '#eee8d5',
+  inactive_fg = '#002b36',
+  inactive_bg = '#839496',
+  stab_bg     = '#839496',
+
+  font_active = "bold",
+  exclude_fts = { 'NvimTree', 'dashboard', 'lir' },
+  stab_start  = "",   -- The starting of stabline
+  stab_end    = "",
+}
 
 -- Text formatting defaults
 vim.opt.textwidth = 120     -- Set the line width default value
@@ -111,7 +200,7 @@ vim.cmd [[autocmd VimResized * :wincmd = ]]
 -- Open file in the same folder as the current file using %%/
 vim.cmd [[cabbr <expr> %% expand('%:p:h')]]
 
-vim.cmd [[source ~/.config/nvim/lightline.vim]]
+-- vim.cmd [[source ~/.config/nvim/lightline.vim]]
 vim.cmd [[source ~/.config/nvim/timestamp.vim]]
 
 -- Local Project Configuration: Read .vimlocal

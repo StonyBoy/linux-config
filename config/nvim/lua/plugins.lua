@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Jan-31 12:44
+-- Time-Stamp: 2022-Feb-05 16:06
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -32,7 +32,6 @@ require('packer').startup(function()
   use 'tpope/vim-surround'                                         -- Mappings to easily delete, change and add such surroundings in pairs
   use 'tpope/vim-commentary'                                       -- Comment in/out lines of text in various languages
   use 'tpope/vim-abolish'                                          -- Word Case substitution: snake/mixed/camel/upper/
-  use 'itchyny/lightline.vim'                                      -- Nice Status Line
   use 'airblade/vim-gitgutter'                                     -- Git: Changed lines since last revision
   use 'junegunn/gv.vim'                                            -- A git commit browser.
   use 'junegunn/vim-easy-align'                                    -- Align text on specific characters in nice columns
@@ -69,10 +68,12 @@ require('packer').startup(function()
     },
     config = function() require'nvim-tree'.setup {} end
   }
+  use 'tamton-aquib/staline.nvim'                                  -- A simple statusline and bufferline for neovim written in lua.
 end)
 
 -- These plugins are not in use due to various problems
 
+--  use 'itchyny/lightline.vim'                                      -- Nice Status Line
 -- 'scrooloose/nerdtree'              " Filesystem Explorer: use netrx instead
 -- 'thaerkh/vim-indentguides'         " Indentation lines - looks weird with black and white blocks
 -- 'python-mode/python-mode'          " Python support - not working with python3
