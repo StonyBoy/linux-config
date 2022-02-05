@@ -1,5 +1,5 @@
 # Steen Hegelund
-# Time-Stamp: 2022-Jan-25 20:53
+# Time-Stamp: 2022-Feb-05 21:49
 
 
 # Colors (Solarized Light)
@@ -35,19 +35,19 @@ colors:
 font:
   size: 10.0
   normal:
-    family: Inconsolata
+    family: Inconsolata Nerd Font Mono
     style: Regular
 
   bold:
-    family: Inconsolata
+    family: Inconsolata Nerd Font Mono
     style: Bold
 
   italic:
-    family: Inconsolata
+    family: Inconsolata Nerd Font Mono
     style: Italic
 
   bold_italic:
-    family: Inconsolata
+    family: Inconsolata Nerd Font Mono
     style: Bold Italic
 
   offset:
