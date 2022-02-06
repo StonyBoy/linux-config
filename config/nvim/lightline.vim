@@ -1,5 +1,5 @@
 " Steen Hegelund
-" Time-Stamp: 2022-Feb-06 17:45
+" Time-Stamp: 2022-Feb-06 18:12
 " Lightline Configuration
 
 set laststatus=2
@@ -49,11 +49,13 @@ function! LlEditConfig()
 endfunction
 
 function! LlAbbrevPath()
-    let elems = split(expand('%:f'), ':')
+    let fpath = expand('%:f')
+    let margin = winwidth(0) - strchars(fpath) - 90
+    let elems = split(fpath, ':')
     if len(elems) > 1
         let ret = "git:" . expand("%:t")
-    elseif winwidth(0) > 100
-        let ret = expand('%:f')
+    elseif margin > 10
+        let ret = fpath
     else
         let ret = expand("%:t")
     end
