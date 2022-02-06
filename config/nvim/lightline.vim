@@ -1,6 +1,7 @@
 " Steen Hegelund
-" Time-Stamp: 2022-Feb-06 18:12
+" Time-Stamp: 2022-Feb-06 21:04
 " Lightline Configuration
+" vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 ft=vim :
 
 set laststatus=2
 set noshowmode " Do not show 2nd line edit mode information
@@ -25,29 +26,33 @@ let g:lightline = {
   \     },
   \ }
 
+" Show linenumber and virtual column number (when eg tabs are expanded to spaces)
 function! LlFilePosition()
-  return printf('%03d:%02d', line('.'), col('.'))
+    return printf('%03d:%02d', line('.'), virtcol('.'))
 endfunction
 
+" Show if the file has been modified
 function! LlFileState()
-  return &modified ? '[+]' : '   '
+    return &modified ? '[+]' : '   '
 endfunction
 
+" Show file format information: encoding, format, type
 function! LlFileFormat()
-  let sep = ' | '
-  let rostr = &readonly ? 'ro' : 'wr'
-  let result = rostr . sep . &fileencoding . sep . &fileformat . sep . &filetype
-  return winwidth(0) > 100 ? result : &filetype
+    let sep = ' | '
+    let rostr = &readonly ? 'ro' : 'wr'
+    let result = rostr . sep . &fileencoding . sep . &fileformat . sep . &filetype
+    return winwidth(0) > 100 ? result : &filetype
 endfunction
 
-
+" Show editor configuration: tabs/spaces, tabstop, softtabstop, shiftwidth and textwidth (wrapping)
 function! LlEditConfig()
-  let sep = ' | '
-  let tabstr = &expandtab ? 'spc' : 'tab'
-  let result = tabstr . sep . 'ts:' . &tabstop . sep . 'sw:' . &shiftwidth . sep . 'sts:' . &softtabstop . sep . 'tw:' . &textwidth
-  return winwidth(0) > 100 ? result : tabstr
+    let sep = ' | '
+    let tabstr = &expandtab ? 'spc' : 'tab'
+    let result = tabstr . sep . 'ts:' . &tabstop . sep . 'sw:' . &shiftwidth . sep . 'sts:' . &softtabstop . sep . 'tw:' . &textwidth
+    return winwidth(0) > 100 ? result : tabstr
 endfunction
 
+" Show a full path if there is room. For fugitive file only show 'git:filename'
 function! LlAbbrevPath()
     let fpath = expand('%:f')
     let margin = winwidth(0) - strchars(fpath) - 90
