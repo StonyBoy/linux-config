@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Feb-05 16:06
+-- Time-Stamp: 2022-Feb-06 16:25
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -68,28 +68,28 @@ require('packer').startup(function()
     },
     config = function() require'nvim-tree'.setup {} end
   }
-  use 'tamton-aquib/staline.nvim'                                  -- A simple statusline and bufferline for neovim written in lua.
+  use 'itchyny/lightline.vim'                                      -- Nice Status Line
 end)
 
 -- These plugins are not in use due to various problems
 
---  use 'itchyny/lightline.vim'                                      -- Nice Status Line
--- 'scrooloose/nerdtree'              " Filesystem Explorer: use netrx instead
--- 'thaerkh/vim-indentguides'         " Indentation lines - looks weird with black and white blocks
--- 'python-mode/python-mode'          " Python support - not working with python3
--- 'ctrlpvim/ctrlp.vim'               " Find Files: too few and incorrect suggestions
--- 'jremmen/vim-ripgrep'              " Provide ripgrep using :Rg <string|pattern> - FZF supports this
--- 'editorconfig/editorconfig-vim'    " Adapt editor config to current project, use vim-sleuth
--- 'vim-scripts/cscope.vim'           " C code browser : Rather slow and causes windows to be unupdated
--- 'ronakg/quickr-cscope.vim'         " Code browser - use ctags instead - this also works for C++
--- 'terryma/vim-multiple-cursors'     " Multiple cursors: not intuitive, never really used this
--- 'vim-scripts/highlight.vim'        " Highlight lines: ctrl+h collides with tmux shortcuts
--- 'altercation/vim-colors-solarized' " Colorscheme - replaced by the newer solarized8 using truecolor
--- 'Valloric/YouCompleteMe',          { 'do': './install.py --clang-completer' } " Completion support for SW dev - collides with fugitive
--- 'rdnetto/YCM-Generator',           { 'branch': 'stable'}                      " Generate a config file for YCM - did not really use this
--- 'tpope/vim-sleuth'                 " Automatic indentation based of file content - conflicts with filetype plugin on
--- 'vim/killersheep'                  " Game for testing vim 8.2 - not usable in nvim
--- 'rootkiter/vim-hexedit'            " Activates on plain text files, and then triggers script errors
--- 'dense-analysis/ale'               " Asynchroneous Syntax checker, may not be needed anymore...
-  -- use {'junegunn/fzf', dir = '~/.fzf', ['do'] = './install --all' } -- Fuzzy File Finder binary
-  -- use 'junegunn/fzf.vim'                                           -- Fuzzy File Finder
+-- 'tamton-aquib/staline.nvim'         -- A simple statusline and bufferline for neovim written in lua.
+-- 'scrooloose/nerdtree'               -- Filesystem Explorer: use netrx instead
+-- 'thaerkh/vim-indentguides'          -- Indentation lines - looks weird with black and white blocks
+-- 'python-mode/python-mode'           -- Python support - not working with python3
+-- 'ctrlpvim/ctrlp.vim'                -- Find Files: too few and incorrect suggestions
+-- 'jremmen/vim-ripgrep'               -- Provide ripgrep using :Rg <string|pattern> - FZF supports this
+-- 'editorconfig/editorconfig-vim'     -- Adapt editor config to current project, use vim-sleuth
+-- 'vim-scripts/cscope.vim'            -- C code browser : Rather slow and causes windows to be unupdated
+-- 'ronakg/quickr-cscope.vim'          -- Code browser - use ctags instead - this also works for C++
+-- 'terryma/vim-multiple-cursors'      -- Multiple cursors: not intuitive, never really used this
+-- 'vim-scripts/highlight.vim'         -- Highlight lines: ctrl+h collides with tmux shortcuts
+-- 'altercation/vim-colors-solarized'  -- Colorscheme - replaced by the newer solarized8 using truecolor
+-- 'Valloric/YouCompleteMe',          { 'do': './install.py --clang-completer' } -- Completion support for SW dev - collides with fugitive
+-- 'rdnetto/YCM-Generator',           { 'branch': 'stable'}                      -- Generate a config file for YCM - did not really use this
+-- 'tpope/vim-sleuth'                  -- Automatic indentation based of file content - conflicts with filetype plugin on
+-- 'vim/killersheep'                   -- Game for testing vim 8.2 - not usable in nvim
+-- 'rootkiter/vim-hexedit'             -- Activates on plain text files, and then triggers script errors
+-- 'dense-analysis/ale'                -- Asynchroneous Syntax checker, may not be needed anymore...
+-- use {'junegunn/fzf', dir = '~/.fzf', ['do'] = './install --all' } -- Fuzzy File Finder binary
+-- use 'junegunn/fzf.vim'                                           -- Fuzzy File Finder

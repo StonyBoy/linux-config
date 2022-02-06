@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Feb-06 16:18
+-- Time-Stamp: 2022-Feb-06 16:26
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 --
 
@@ -26,7 +26,7 @@ source ~/.config/nvim/nvim-tree-config.vim
 require'nvim-tree'.setup()
 
 -- Configure statusline/bufferline
-require'staline_cfg'
+vim.cmd [[source ~/.config/nvim/lightline.vim]]
 
 -- Text formatting defaults
 vim.opt.textwidth = 120     -- Set the line width default value
