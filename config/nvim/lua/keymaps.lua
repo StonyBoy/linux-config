@@ -1,6 +1,6 @@
 -- Neovim keymap configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Feb-05 16:02
+-- Time-Stamp: 2022-Feb-06 20:34
 -- Time-Stamp: 2022-Feb-04 10:52
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
@@ -82,7 +82,7 @@ local function telescope_usage()
   keymap {'n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>'}
   keymap {'n', '##', '<cmd>lua require("telescope.builtin").grep_string()<cr>'}
   keymap {'v', '##', '<cmd>lua require("telescope.builtin").grep_string()<cr>'}
-  keymap {'n', '<leader>fb', '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find({case_mode = ignore_case})<cr>'}
+  keymap {'n', '<leader>fb', '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find({case_mode = ignore_case, sort = require("telescope.sorters").highlighter_only})<cr>'}
   -- The current buffer number is vim.api.nvim_get_current_buf()
 end
 
