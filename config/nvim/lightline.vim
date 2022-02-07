@@ -1,5 +1,5 @@
 " Steen Hegelund
-" Time-Stamp: 2022-Feb-06 21:04
+" Time-Stamp: 2022-Feb-07 09:57
 " Lightline Configuration
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 ft=vim :
 
@@ -55,8 +55,8 @@ endfunction
 " Show a full path if there is room. For fugitive file only show 'git:filename'
 function! LlAbbrevPath()
     let fpath = expand('%:f')
-    let margin = winwidth(0) - strchars(fpath) - 90
-    let elems = split(fpath, ':')
+    let margin = winwidth(0) - strchars(fpath) - 100
+        let elems = split(fpath, ':')
     if len(elems) > 1
         let ret = "git:" . expand("%:t")
     elseif margin > 10
