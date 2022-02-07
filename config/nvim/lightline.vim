@@ -1,5 +1,5 @@
 " Steen Hegelund
-" Time-Stamp: 2022-Feb-07 09:57
+" Time-Stamp: 2022-Feb-07 10:34
 " Lightline Configuration
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 ft=vim :
 
@@ -49,7 +49,7 @@ function! LlEditConfig()
     let sep = ' | '
     let tabstr = &expandtab ? 'spc' : 'tab'
     let result = tabstr . sep . 'ts:' . &tabstop . sep . 'sw:' . &shiftwidth . sep . 'sts:' . &softtabstop . sep . 'tw:' . &textwidth
-    return winwidth(0) > 100 ? result : tabstr
+    return winwidth(0) > 140 ? result : tabstr
 endfunction
 
 " Show a full path if there is room. For fugitive file only show 'git:filename'
