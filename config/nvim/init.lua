@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Feb-06 16:26
+-- Time-Stamp: 2022-Feb-07 10:05
 -- Time-Stamp: 2022-Feb-04 10:53
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
@@ -24,7 +24,13 @@ require('commands')
 vim.cmd [[
 source ~/.config/nvim/nvim-tree-config.vim
 ]]
-require'nvim-tree'.setup()
+require'nvim-tree'.setup {
+  auto_close = true,
+  view = {
+    side = 'left',
+    width = 40
+  }
+}
 
 -- Configure statusline/bufferline
 vim.cmd [[source ~/.config/nvim/lightline.vim]]

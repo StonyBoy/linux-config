@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Feb-06 16:25
+-- Time-Stamp: 2022-Feb-07 10:04
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -66,7 +66,6 @@ require('packer').startup(function()
     requires = {
       'kyazdani42/nvim-web-devicons', -- optional, for file icon
     },
-    config = function() require'nvim-tree'.setup {} end
   }
   use 'itchyny/lightline.vim'                                      -- Nice Status Line
 end)
