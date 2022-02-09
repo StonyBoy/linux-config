@@ -1,5 +1,5 @@
 " Steen Hegelund
-" Time-Stamp: 2022-Feb-09 22:48
+" Time-Stamp: 2022-Feb-09 23:16
 " Lightline Configuration
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 ft=vim :
 
@@ -54,7 +54,7 @@ endfunction
 
 " Show a full path if there is room. For fugitive file only show 'git:filename'
 function! LlAbbrevPath()
-    let fpath = expand('%:f')
+    let fpath = expand('%:p:~') " Full path optionally using ~ for home
     let margin = winwidth(0) - strchars(fpath) - 100
         let elems = split(fpath, ':')
     if len(elems) > 1
