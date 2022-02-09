@@ -1,5 +1,5 @@
 " Steen Hegelund
-" Time-Stamp: 2022-Feb-07 10:34
+" Time-Stamp: 2022-Feb-09 22:48
 " Lightline Configuration
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 ft=vim :
 
@@ -13,7 +13,7 @@ let g:lightline = {
   \         'right': [['ll_fileformat', 'll_fileposition', 'percent'], ['ll_filestate', 'll_editcfg']]
   \     },
   \     'inactive': {
-  \         'left': [[], [], ['absolutepath']],
+  \         'left': [[], [], ['absolutepath', 'll_filestate']],
   \         'right': []
   \     },
   \     'component_function': {
