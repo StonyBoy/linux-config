@@ -1,6 +1,6 @@
 -- Neovim configuration Adding Language Server support
 -- Steen Hegelund
--- Time-Stamp: 2022-Jan-29 15:09
+-- Time-Stamp: 2022-Feb-09 22:40
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 
@@ -56,20 +56,39 @@ Module.setup = function()
     buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
     buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
     buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   end
 
   -- Use a loop to conveniently call 'setup' on multiple servers and
   -- map buffer local keybindings when the language server attaches
-  local servers = { "ccls", "pyright", "sumneko_lua", "solargraph", "rome", "tsserver", "rust_analyzer" }
+  local servers = { 'ccls', 'pyright', 'solargraph', 'rome', 'tsserver', 'rust_analyzer' }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
       on_attach = on_attach,
       flags = {
         debounce_text_changes = 150,
-      }
+      },
     }
   end
+  nvim_lsp.sumneko_lua.setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    },
+    runtime = {
+      -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+      version = 'LuaJIT',
+      -- Setup your lua path
+      path = vim.split(package.path, ';')
+    },
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { 'vim' }
+        }
+      }
+    },
+  }
 end
 
 return Module

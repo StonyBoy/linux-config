@@ -1,7 +1,6 @@
 -- Neovim keymap configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Feb-06 20:34
--- Time-Stamp: 2022-Feb-04 10:52
+-- Time-Stamp: 2022-Feb-09 22:43
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
