@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Feb-09 21:11
+-- Time-Stamp: 2022-Feb-10 22:41
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -66,6 +66,7 @@ require('packer').startup(function()
   }
   use 'itchyny/lightline.vim'                       -- Nice Status Line
   use 'numToStr/Comment.nvim'                       -- Smart and Powerful commenting plugin for neovim
+  use 'L3MON4D3/LuaSnip'                            -- Snippet engine
 end)
 
 -- These plugins are not in use due to various problems or newer neovim specific plugins
@@ -89,5 +90,5 @@ end)
 -- 'vim/killersheep'                   -- Game for testing vim 8.2 - not usable in nvim
 -- 'rootkiter/vim-hexedit'             -- Activates on plain text files, and then triggers script errors
 -- 'dense-analysis/ale'                -- Asynchroneous Syntax checker, may not be needed anymore...
--- use {'junegunn/fzf', dir = '~/.fzf', ['do'] = './install --all' } -- Fuzzy File Finder binary
--- use 'junegunn/fzf.vim'                                           -- Fuzzy File Finder
+-- 'junegunn/fzf.vim'                  -- Fuzzy File Finder
+-- {'junegunn/fzf', dir = '~/.fzf', ['do'] = './install --all' } -- Fuzzy File Finder binary

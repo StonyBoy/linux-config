@@ -1,13 +1,17 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Feb-09 22:43
+-- Time-Stamp: 2022-Feb-10 22:36
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 vim.g.mapleader = ' '    -- use space as a the leader key
 vim.opt.swapfile = false -- Do not create swapfiles
 
 -- Install package manager and plugins
-require('plugins')
+local _, err = pcall(require('plugins'))
+if err then
+  print('Plugin error:', err)
+end
+
 
 -- Configure the Language Servers
 require('lsp_config').setup()
