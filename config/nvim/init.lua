@@ -1,13 +1,13 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Feb-10 23:15
+-- Time-Stamp: 2022-Feb-11 09:21
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 vim.g.mapleader = ' '    -- use space as a the leader key
 vim.opt.swapfile = false -- Do not create swapfiles
 
 -- Install package manager and plugins
-local ok, ret = pcall(require,' plugins')
+local ok, ret = pcall(require, 'plugins')
 if not ok then
   print('Plugin error:', ret)
 end
