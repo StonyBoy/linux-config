@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Feb-10 22:41
+-- Time-Stamp: 2022-Feb-22 20:10
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -32,7 +32,6 @@ require('packer').startup(function()
   use 'tpope/vim-surround'                          -- Mappings to easily delete, change and add such surroundings in pairs
   use 'tpope/vim-abolish'                           -- Word Case substitution: snake/mixed/camel/upper/
   use 'airblade/vim-gitgutter'                      -- Git: Changed lines since last revision
-  use 'junegunn/gv.vim'                             -- A git commit browser.
   use 'junegunn/vim-easy-align'                     -- Align text on specific characters in nice columns
   use 'lifepillar/vim-solarized8'                   -- Modern SolarlizedColorscheme
   use 'vim-ruby/vim-ruby'                           -- Ruby support
@@ -67,6 +66,7 @@ require('packer').startup(function()
   use 'itchyny/lightline.vim'                       -- Nice Status Line
   use 'numToStr/Comment.nvim'                       -- Smart and Powerful commenting plugin for neovim
   use 'L3MON4D3/LuaSnip'                            -- Snippet engine
+  use '~/src/proj/gitto.nvim'                       -- My own git plugin
 end)
 
 -- These plugins are not in use due to various problems or newer neovim specific plugins

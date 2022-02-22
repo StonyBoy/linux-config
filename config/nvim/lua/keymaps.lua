@@ -1,6 +1,6 @@
 -- Neovim keymap configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Feb-09 22:43
+-- Time-Stamp: 2022-Feb-22 20:27
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
@@ -67,6 +67,13 @@ Append_modeline = function()
     vim.call('nvim_buf_set_lines', 0, -1, -1, 0, modeline)
 end
 
+-- Global function for reloading the Neovim configuration
+ReloadNeovim = function()
+  -- Ensure the plugin listing gets reloaded
+  package.loaded['plugins'] = nil
+  vim.cmd('source $MYVIMRC')
+end
+
 function dev_usage()
   keymap {'n', '<leader>is', ':r ~/work/patches/signedoffby.txt<CR>', {silent = true}} -- Add signed-off-by
   keymap {'n', '<leader>it', 'Opr_info("%s:%d\\n", __func__, __LINE__);<esc>', {silent = true}}
@@ -86,7 +93,7 @@ local function telescope_usage()
 end
 
 local function assorted_usage()
-  keymap {'n', '<Leader>sv', ':source $MYVIMRC<cr>'}
+  keymap {'n', '<Leader>sv', '<cmd>lua ReloadNeovim()<cr>'}
   keymap {'n', '<Leader>ev', ':vs $MYVIMRC<cr>'}
   keymap {'n', '<F6>', 'g<c-]>'} -- Follow link
   keymap {'v', '<F6>', 'g<c-]>'}
@@ -95,10 +102,13 @@ local function assorted_usage()
   keymap {'n', '<F10>', ':call setreg("/", [])<cr>'} -- Clear search highlight
   keymap {'n', '#%', ':echo expand("%:p:~")<CR>'} -- Show full path and optionally referring to $HOME
   keymap {'n', 'ZA', ':qa!<CR>'} -- Getting out quickly
-  keymap {'x', 'ga', '<Plug>(EasyAlign)'} -- Start interactive EasyAlign in visual mode (e.g. vipga)
-  keymap {'n', 'ga', '<Plug>(EasyAlign)'} -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
   keymap {'n', '<Leader>ml', ':lua Append_modeline()<cr>'}
   keymap {'t', '<Esc>', '<C-\\><C-n>'} -- Terminal mode
+  keymap {'n', '<Leader><Leader>x', ':source %<cr>', {silent = true}}
+  vim.cmd [[
+    nmap ga <Plug>(EasyAlign) " {'x', 'ga', '<cmd>EasyAlign<cr>'} -- Start interactive EasyAlign in visual mode (e.g. vipga)
+    xmap ga <Plug>(EasyAlign) " {'n', 'ga', '<cmd>EasyAlign<cr>'} -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
+  ]]
 end
 
 -- Setup all the keymappings
