@@ -2,6 +2,7 @@
 # -*-sh-*-
 
 pathappend ~/scripts ~/.local/bin ~/bin /usr/local/bin /usr/local/sbin
+pathprepend /opt/local/bin /opt/local/sbin
 
 # set -x
 
@@ -13,8 +14,8 @@ function brew_update()
 }
 
 export GEMVER=3.0.0
-[ -d /usr/local/opt/ruby/bin ] && pathprepend /usr/local/opt/ruby/bin
-[ -d /usr/local//lib/ruby/gems/${GEMVER}/bin ] && pathprepend /usr/local//lib/ruby/gems/${GEMVER}/bin
+[ -d /usr/local/opt/ruby/bin ] && pathappend /usr/local/opt/ruby/bin
+[ -d /usr/local//lib/ruby/gems/${GEMVER}/bin ] && pathappend /usr/local//lib/ruby/gems/${GEMVER}/bin
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
