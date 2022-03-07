@@ -382,3 +382,6 @@ exec --no-startup-id rclone --vfs-cache-mode writes mount "onedrive": ~/OneDrive
 
 # Show network manager icon
 exec --no-startup-id nm-applet --indicator
+
+# Mount GoogleDrive
+# exec --no-startup-id rclone --vfs-cache-mode writes mount "GoogleDrive": ~/GoogleDrive
