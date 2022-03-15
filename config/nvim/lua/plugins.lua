@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Feb-22 20:10
+-- Time-Stamp: 2022-Mar-10 10:36
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -31,6 +31,7 @@ require('packer').startup(function()
   use 'tpope/vim-unimpaired'                        -- Pairs of handy bracket mappings
   use 'tpope/vim-surround'                          -- Mappings to easily delete, change and add such surroundings in pairs
   use 'tpope/vim-abolish'                           -- Word Case substitution: snake/mixed/camel/upper/
+  use 'tpope/vim-commentary'                        -- Comment in/out lines of text in various languages
   use 'airblade/vim-gitgutter'                      -- Git: Changed lines since last revision
   use 'junegunn/vim-easy-align'                     -- Align text on specific characters in nice columns
   use 'lifepillar/vim-solarized8'                   -- Modern SolarlizedColorscheme
@@ -57,21 +58,13 @@ require('packer').startup(function()
     requires = { 'nvim-lua/plenary.nvim',           -- All the lua functions I don't want to write twice.
       'nvim-telescope/telescope-live-grep-raw.nvim' } -- Live grep raw picker for telescope.nvim.
   }
-  use {
-    'kyazdani42/nvim-tree.lua',                     -- A File Explorer For Neovim
-    requires = {
-      'kyazdani42/nvim-web-devicons',               -- optional, for file icon
-    },
-  }
   use 'itchyny/lightline.vim'                       -- Nice Status Line
-  use 'numToStr/Comment.nvim'                       -- Smart and Powerful commenting plugin for neovim
   use 'L3MON4D3/LuaSnip'                            -- Snippet engine
   use '~/src/proj/gitto.nvim'                       -- My own git plugin
 end)
 
 -- These plugins are not in use due to various problems or newer neovim specific plugins
 
--- 'tpope/vim-commentary'              -- Comment in/out lines of text in various languages
 -- 'tamton-aquib/staline.nvim'         -- A simple statusline and bufferline for neovim written in lua.
 -- 'scrooloose/nerdtree'               -- Filesystem Explorer: use netrx instead
 -- 'thaerkh/vim-indentguides'          -- Indentation lines - looks weird with black and white blocks
@@ -92,3 +85,28 @@ end)
 -- 'dense-analysis/ale'                -- Asynchroneous Syntax checker, may not be needed anymore...
 -- 'junegunn/fzf.vim'                  -- Fuzzy File Finder
 -- {'junegunn/fzf', dir = '~/.fzf', ['do'] = './install --all' } -- Fuzzy File Finder binary
+-- use {
+--   'kyazdani42/nvim-tree.lua',                     -- A File Explorer For Neovim
+--   requires = {
+--     'kyazdani42/nvim-web-devicons',               -- optional, for file icon
+--   },
+-- }
+-- use 'numToStr/Comment.nvim'                       -- Smart and Powerful commenting plugin for neovim
+
+-- Get Nvim Tree configured
+-- vim.cmd [[
+-- source ~/.config/nvim/nvim-tree-config.vim
+-- ]]
+-- require('nvim-tree').setup {
+--   auto_close = true,
+--   view = {
+--     side = 'left',
+--     width = 40
+--   }
+-- }
+
+-- Setup comment plugin
+-- require('Comment').setup()
+-- local ft = require('Comment.ft')
+-- ft.c = {'/*%s*/', '/*%s*/'}
+

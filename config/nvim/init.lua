@@ -23,25 +23,8 @@ require('keymaps')
 -- Create Globale Ex functions
 require('commands')
 
--- Get Nvim Tree configured
-vim.cmd [[
-source ~/.config/nvim/nvim-tree-config.vim
-]]
-require('nvim-tree').setup {
-  auto_close = true,
-  view = {
-    side = 'left',
-    width = 40
-  }
-}
-
 -- Configure statusline/bufferline
 vim.cmd [[source ~/.config/nvim/lightline.vim]]
-
--- Setup comment plugin
-require('Comment').setup()
-local ft = require('Comment.ft')
-ft.c = {'/*%s*/', '/*%s*/'}
 
 -- Text formatting defaults
 vim.opt.textwidth = 120     -- Set the line width default value
