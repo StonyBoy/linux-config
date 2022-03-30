@@ -1,6 +1,6 @@
 -- Function Library
 -- Steen Hegelund
--- Time-Stamp: 2022-Feb-03 20:58
+-- Time-Stamp: 2022-Mar-30 23:55
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
@@ -44,6 +44,27 @@ Module.ripgrep_args = function(...)
     end
   end
   require("telescope.builtin").grep_string(opts)
+end
+
+-- Debugging lua implementation
+Module.P = function(obj)
+  print(vim.inspect(obj))
+  return obj
+end
+
+-- Function for reloading the Neovim configuration
+Module.reload_neovim = function()
+  -- Ensure the plugin listing gets reloaded
+  package.loaded['plugins'] = nil
+  vim.cmd('source $MYVIMRC')
+end
+
+Module.reload_module = function(name)
+  package.loaded[name] = nil
+end
+
+Module.ls_load = function()
+  vim.cmd('source ~/.config/nvim/lua/config/snippets.lua')
 end
 
 return Module

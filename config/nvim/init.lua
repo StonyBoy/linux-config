@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Mar-30 18:20
+-- Time-Stamp: 2022-Mar-30 22:16
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 vim.g.mapleader = ' '    -- use space as a the leader key
@@ -100,21 +100,6 @@ vim.cmd [[cabbr <expr> %% expand('%:p:h')]]
 
 -- Local Project Configuration: Read .vimlocal
 vim.cmd [[silent! source .vimlocal]]
-
--- Debugging lua implementation
-P = function(obj)
-  print(vim.inspect(obj))
-  return obj
-end
-
-RELOAD = function(...)
-  return require("plenary.reload").reload_module(...)
-end
-
-R = function(name)
-  RELOAD(name)
-  return require(name)
-end
 
 -- Show that this configuration file was loaded
 print('loaded init.lua')

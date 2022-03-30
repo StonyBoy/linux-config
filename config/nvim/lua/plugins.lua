@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Mar-30 18:20
+-- Time-Stamp: 2022-Mar-30 23:52
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -59,7 +59,28 @@ require('packer').startup(function()
       'nvim-telescope/telescope-live-grep-raw.nvim' } -- Live grep raw picker for telescope.nvim.
   }
   use 'itchyny/lightline.vim'                       -- Nice Status Line
-  use 'L3MON4D3/LuaSnip'                            -- Snippet engine
+  use {
+      "L3MON4D3/LuaSnip",                           -- Snippet engine
+      after = "nvim-cmp",
+      config = function()
+        require("config.snippets")
+      end,
+  }
+  -- completion engine
+  use {
+    "hrsh7th/nvim-cmp",
+    event = "BufRead",
+    requires = {
+      { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+      { "hrsh7th/cmp-path", after = "nvim-cmp" },
+      { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
+      { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
+      { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
+    },
+    config = function()
+      require("config.ncmp")
+    end,
+  }
   use '~/src/proj/gitto.nvim'                       -- My own git plugin
 end)
 

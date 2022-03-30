@@ -1,6 +1,6 @@
 -- Neovim keymap configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Feb-22 20:27
+-- Time-Stamp: 2022-Mar-30 21:49
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
@@ -67,13 +67,6 @@ Append_modeline = function()
     vim.call('nvim_buf_set_lines', 0, -1, -1, 0, modeline)
 end
 
--- Global function for reloading the Neovim configuration
-ReloadNeovim = function()
-  -- Ensure the plugin listing gets reloaded
-  package.loaded['plugins'] = nil
-  vim.cmd('source $MYVIMRC')
-end
-
 function dev_usage()
   keymap {'n', '<leader>is', ':r ~/work/patches/signedoffby.txt<CR>', {silent = true}} -- Add signed-off-by
   keymap {'n', '<leader>it', 'Opr_info("%s:%d\\n", __func__, __LINE__);<esc>', {silent = true}}
@@ -93,7 +86,7 @@ local function telescope_usage()
 end
 
 local function assorted_usage()
-  keymap {'n', '<Leader>sv', '<cmd>lua ReloadNeovim()<cr>'}
+  keymap {'n', '<Leader>sv', '<cmd>lua require("functions").reload_neovim()<cr>'}
   keymap {'n', '<Leader>ev', ':vs $MYVIMRC<cr>'}
   keymap {'n', '<F6>', 'g<c-]>'} -- Follow link
   keymap {'v', '<F6>', 'g<c-]>'}
@@ -111,6 +104,10 @@ local function assorted_usage()
   ]]
 end
 
+local function luasnip_usage()
+  keymap {'n', '<Leader><Leader>s', ':lua require("functions").ls_load()<CR>', {silent = true}}
+end
+
 -- Setup all the keymappings
 assorted_usage()
 tab_usage()
@@ -118,5 +115,6 @@ xterm_usage()
 window_resize()
 dev_usage()
 telescope_usage()
+luasnip_usage()
 
 return Module
