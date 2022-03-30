@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Feb-19 16:48
+-- Time-Stamp: 2022-Mar-30 18:20
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 vim.g.mapleader = ' '    -- use space as a the leader key
@@ -11,20 +11,6 @@ local ok, ret = pcall(require, 'plugins')
 if not ok then
   print('Plugin error:', ret)
 end
-
-
--- Configure the Language Servers
-require('lsp_config').setup()
-
--- Configure the keymappings
--- package.loaded['keymaps'] = nil
-require('keymaps')
-
--- Create Globale Ex functions
-require('commands')
-
--- Configure statusline/bufferline
-vim.cmd [[source ~/.config/nvim/lightline.vim]]
 
 -- Text formatting defaults
 vim.opt.textwidth = 120     -- Set the line width default value
@@ -111,9 +97,6 @@ vim.cmd [[autocmd VimResized * :wincmd = ]]
 
 -- Open file in the same folder as the current file using %%/
 vim.cmd [[cabbr <expr> %% expand('%:p:h')]]
-
--- vim.cmd [[source ~/.config/nvim/lightline.vim]]
-vim.cmd [[source ~/.config/nvim/timestamp.vim]]
 
 -- Local Project Configuration: Read .vimlocal
 vim.cmd [[silent! source .vimlocal]]

@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Mar-10 10:36
+-- Time-Stamp: 2022-Mar-30 18:20
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -62,6 +62,22 @@ require('packer').startup(function()
   use 'L3MON4D3/LuaSnip'                            -- Snippet engine
   use '~/src/proj/gitto.nvim'                       -- My own git plugin
 end)
+
+-- Configure the Language Servers
+require('lsp_config').setup()
+
+-- Configure the keymappings
+-- package.loaded['keymaps'] = nil
+require('keymaps')
+
+-- Create Globale Ex functions
+require('commands')
+
+-- Configure statusline/bufferline
+vim.cmd [[source ~/.config/nvim/lightline.vim]]
+
+-- Timestamp format
+vim.cmd [[source ~/.config/nvim/timestamp.vim]]
 
 -- These plugins are not in use due to various problems or newer neovim specific plugins
 
