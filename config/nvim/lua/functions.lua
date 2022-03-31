@@ -1,6 +1,6 @@
 -- Function Library
 -- Steen Hegelund
--- Time-Stamp: 2022-Mar-30 23:55
+-- Time-Stamp: 2022-Mar-31 21:47
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
@@ -64,6 +64,7 @@ Module.reload_module = function(name)
 end
 
 Module.ls_load = function()
+  -- require('luasnip').cleanup()
   vim.cmd('source ~/.config/nvim/lua/config/snippets.lua')
 end
 
