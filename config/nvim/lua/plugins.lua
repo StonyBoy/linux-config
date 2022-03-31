@@ -1,26 +1,23 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Mar-30 23:52
+-- Time-Stamp: 2022-Mar-31 09:30
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
-
+local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+  packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
-vim.cmd [[
-  augroup Packer
+vim.cmd([[
+  augroup packer_user_config
     autocmd!
-    autocmd BufWritePost init.lua PackerCompile
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
   augroup end
-]]
+]])
 
 -- Plugins will be installed in ~/.local/share/nvim/site/pack/packer/start
---
-local use = require('packer').use
-require('packer').startup(function()
+require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
   use 'tpope/vim-sensible'                          -- Sensible VIM settings
   use 'tpope/vim-tbone'                             -- Tmux commands and yank/put support
@@ -82,6 +79,12 @@ require('packer').startup(function()
     end,
   }
   use '~/src/proj/gitto.nvim'                       -- My own git plugin
+
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  if packer_bootstrap then
+    require('packer').sync()
+  end
 end)
 
 -- Configure the Language Servers
