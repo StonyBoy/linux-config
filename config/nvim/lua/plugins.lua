@@ -1,10 +1,12 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Mar-31 09:30
+-- Time-Stamp: 2022-Apr-05 22:38
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
 local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local packer_bootstrap = nil
+
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
@@ -19,6 +21,11 @@ vim.cmd([[
 -- Plugins will be installed in ~/.local/share/nvim/site/pack/packer/start
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
+  use {
+    'itchyny/lightline.vim',                        -- Nice Status Line
+    config = 'vim.cmd[[source ~/.config/nvim/lightline.vim]]',
+  }
+  use '~/src/proj/gitto.nvim'                       -- My own git plugin
   use 'tpope/vim-sensible'                          -- Sensible VIM settings
   use 'tpope/vim-tbone'                             -- Tmux commands and yank/put support
   use 'tpope/vim-fugitive'                          -- GIT support
@@ -35,7 +42,10 @@ require('packer').startup(function(use)
   use 'vim-ruby/vim-ruby'                           -- Ruby support
   use 'christoomey/vim-tmux-navigator'              -- Go between panes in both vim and tmux
   use 'jlanzarotta/bufexplorer'                     -- Manage Buffers
-  use 'vim-scripts/update-time'                     -- Insert/Update timestamps in files
+  use {
+    'vim-scripts/update-time',                      -- Insert/Update timestamps in files
+    config = 'vim.cmd [[source ~/.config/nvim/timestamp.vim]]',
+  }
   use 'pangloss/vim-javascript'                     -- Better Javascript indenting support
   use 'rust-lang/rust.vim'                          -- Rust, syntax highlighting, formatting, Syntastic integration
   use 'wsdjeg/vim-fetch'                            -- Use line and column jumps in file paths as found in stack traces and similar output
@@ -49,23 +59,30 @@ require('packer').startup(function(use)
   use 'azabiong/vim-highlighter'                    -- Save/Load highlights, finding variables, and customizing colors
   use 'nvim-treesitter/nvim-treesitter'             -- Highlight, edit, and navigate code using a fast incremental parsing library
   use 'nvim-treesitter/nvim-treesitter-textobjects' -- Additional textobjects for treesitter
-  use 'neovim/nvim-lspconfig'                       -- Collection of configurations for built-in LSP client
   use 'rafcamlet/nvim-luapad'                       -- Interactive neovim scratchpad for lua
+  use {
+    'neovim/nvim-lspconfig',                        -- Collection of configurations for built-in LSP client
+    config = function()
+      require('config.lsp').setup()
+    end,
+    disable = false,
+  }
   use {'nvim-telescope/telescope.nvim',             -- a highly extendable fuzzy finder over lists
-    requires = { 'nvim-lua/plenary.nvim',           -- All the lua functions I don't want to write twice.
-      'nvim-telescope/telescope-live-grep-raw.nvim' } -- Live grep raw picker for telescope.nvim.
+    requires = {
+      'nvim-lua/plenary.nvim',                      -- Lua library
+      'nvim-telescope/telescope-live-grep-raw.nvim' -- Live grep raw picker for telescope.nvim.
+    }
   }
-  use 'itchyny/lightline.vim'                       -- Nice Status Line
   use {
-      "L3MON4D3/LuaSnip",                           -- Snippet engine
-      after = "nvim-cmp",
-      config = function()
-        require("config.snippets")
-      end,
+    "L3MON4D3/LuaSnip",                             -- Snippet engine
+    after = "nvim-cmp",
+    config = function()
+      require("config.snippets")
+    end,
+    disable = false,
   }
-  -- completion engine
   use {
-    "hrsh7th/nvim-cmp",
+    "hrsh7th/nvim-cmp",                             -- Completion engine
     event = "BufRead",
     requires = {
       { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
@@ -77,8 +94,8 @@ require('packer').startup(function(use)
     config = function()
       require("config.ncmp")
     end,
+    disable = false,
   }
-  use '~/src/proj/gitto.nvim'                       -- My own git plugin
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
@@ -87,25 +104,8 @@ require('packer').startup(function(use)
   end
 end)
 
--- Configure the Language Servers
-require('lsp_config').setup()
-
--- Configure the keymappings
--- package.loaded['keymaps'] = nil
-require('keymaps')
-
--- Create Globale Ex functions
-require('commands')
-
--- Configure statusline/bufferline
-vim.cmd [[source ~/.config/nvim/lightline.vim]]
-
--- Timestamp format
-vim.cmd [[source ~/.config/nvim/timestamp.vim]]
-
 -- These plugins are not in use due to various problems or newer neovim specific plugins
 
--- 'tamton-aquib/staline.nvim'         -- A simple statusline and bufferline for neovim written in lua.
 -- 'scrooloose/nerdtree'               -- Filesystem Explorer: use netrx instead
 -- 'thaerkh/vim-indentguides'          -- Indentation lines - looks weird with black and white blocks
 -- 'python-mode/python-mode'           -- Python support - not working with python3
@@ -117,36 +117,14 @@ vim.cmd [[source ~/.config/nvim/timestamp.vim]]
 -- 'terryma/vim-multiple-cursors'      -- Multiple cursors: not intuitive, never really used this
 -- 'vim-scripts/highlight.vim'         -- Highlight lines: ctrl+h collides with tmux shortcuts
 -- 'altercation/vim-colors-solarized'  -- Colorscheme - replaced by the newer solarized8 using truecolor
--- 'Valloric/YouCompleteMe',          { 'do': './install.py --clang-completer' } -- Completion support for SW dev - collides with fugitive
--- 'rdnetto/YCM-Generator',           { 'branch': 'stable'}                      -- Generate a config file for YCM - did not really use this
+-- 'Valloric/YouCompleteMe'            -- Completion support for SW dev - collides with fugitive
+-- 'rdnetto/YCM-Generator'             -- Generate a config file for YCM - did not really use this
 -- 'tpope/vim-sleuth'                  -- Automatic indentation based of file content - conflicts with filetype plugin on
 -- 'vim/killersheep'                   -- Game for testing vim 8.2 - not usable in nvim
 -- 'rootkiter/vim-hexedit'             -- Activates on plain text files, and then triggers script errors
 -- 'dense-analysis/ale'                -- Asynchroneous Syntax checker, may not be needed anymore...
 -- 'junegunn/fzf.vim'                  -- Fuzzy File Finder
--- {'junegunn/fzf', dir = '~/.fzf', ['do'] = './install --all' } -- Fuzzy File Finder binary
--- use {
---   'kyazdani42/nvim-tree.lua',                     -- A File Explorer For Neovim
---   requires = {
---     'kyazdani42/nvim-web-devicons',               -- optional, for file icon
---   },
--- }
--- use 'numToStr/Comment.nvim'                       -- Smart and Powerful commenting plugin for neovim
-
--- Get Nvim Tree configured
--- vim.cmd [[
--- source ~/.config/nvim/nvim-tree-config.vim
--- ]]
--- require('nvim-tree').setup {
---   auto_close = true,
---   view = {
---     side = 'left',
---     width = 40
---   }
--- }
-
--- Setup comment plugin
--- require('Comment').setup()
--- local ft = require('Comment.ft')
--- ft.c = {'/*%s*/', '/*%s*/'}
-
+-- 'junegunn/fzf'                      -- Fuzzy File Finder binary
+-- 'kyazdani42/nvim-tree.lua',         -- A File Explorer For Neovim
+-- 'numToStr/Comment.nvim'             -- Smart and Powerful commenting plugin for neovim
+-- 'tamton-aquib/staline.nvim'         -- A simple statusline and bufferline for neovim written in lua.
