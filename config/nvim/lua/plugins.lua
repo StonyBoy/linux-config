@@ -25,7 +25,7 @@ require('packer').startup(function(use)
     'itchyny/lightline.vim',                        -- Nice Status Line
     config = 'vim.cmd[[source ~/.config/nvim/lightline.vim]]',
   }
-  use '~/src/proj/gitto.nvim'                       -- My own git plugin
+  use 'StonyBoy/nvim-gitto'                         -- Git log plugin
   use 'tpope/vim-sensible'                          -- Sensible VIM settings
   use 'tpope/vim-tbone'                             -- Tmux commands and yank/put support
   use 'tpope/vim-fugitive'                          -- GIT support
