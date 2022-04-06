@@ -1,6 +1,6 @@
 -- nvim-cmp configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Mar-30 23:37
+-- Time-Stamp: 2022-Apr-06 22:55
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 print('initialize nvim-cmp')
@@ -25,6 +25,12 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
+    ['<C-l>'] = function()
+      local luasnip = require('luasnip')
+      if luasnip.choice_active() then
+        luasnip.change_choice(1)
+      end
+    end,
     ['<Tab>'] = function(fallback)
       local luasnip = require('luasnip')
       if cmp.visible() then
