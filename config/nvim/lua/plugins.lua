@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Apr-05 22:38
+-- Time-Stamp: 2022-Apr-09 11:17
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -55,7 +55,10 @@ require('packer').startup(function(use)
   use 'idanarye/vim-merginal'                       -- Provides a nice interface for dealing with Git branches on top of fugitive
   use 'rhysd/vim-clang-format'                      -- Format your code with specific coding style using clang-format
   use 'yazgoo/unicodemoji'                          -- fast unicode emojis in terminal and vim with fzf
-  use 'nathanalderson/yang.vim'                     -- YANG syntax highlighting and other niceties for VIM
+  use {
+    'nathanalderson/yang.vim',                      -- YANG syntax highlighting and other niceties for VIM
+    branch = 'main',
+  }
   use 'azabiong/vim-highlighter'                    -- Save/Load highlights, finding variables, and customizing colors
   use 'nvim-treesitter/nvim-treesitter'             -- Highlight, edit, and navigate code using a fast incremental parsing library
   use 'nvim-treesitter/nvim-treesitter-textobjects' -- Additional textobjects for treesitter
