@@ -1,6 +1,6 @@
 -- Function Library
 -- Steen Hegelund
--- Time-Stamp: 2022-Apr-05 20:53
+-- Time-Stamp: 2022-Apr-18 22:46
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
@@ -15,14 +15,14 @@ Module.trailspace_trim = function()
 end
 
 Module.get_visual_selection = function()
-  local _, line_start, col_start, _ = unpack(vim.fn.getpos("'<"))
-  local _, line_end, col_end, _ = unpack(vim.fn.getpos("'>"))
-  local lines = vim.fn.getline(line_start, line_end)
+  local first = vim.fn.getpos("v") -- bufno, lnum, col, off
+  local last = vim.fn.getpos(".")
+  local lines = vim.fn.getline(first[2], last[2])
   if #lines == 0 then
     return ''
   else
-    lines[#lines] = string.sub(lines[#lines], 0, col_end)
-    lines[1] = string.sub(lines[1], col_start)
+    lines[#lines] = string.sub(lines[#lines], 0, last[3])
+    lines[1] = string.sub(lines[1], first[3])
     return table.concat(lines, '\n')
   end
 end

@@ -1,5 +1,5 @@
 -- Steen Hegelund
--- Time-Stamp: 2022-Apr-18 19:16
+-- Time-Stamp: 2022-Apr-18 22:37
 
 -- Steen Hegelund
 -- Time-Stamp: #
@@ -50,7 +50,9 @@ vim.api.nvim_set_keymap('n', '##', '', { noremap = true, silent = true,
   callback = require('telescope.builtin').grep_string,
 })
 vim.api.nvim_set_keymap('v', '##', '', { noremap = true, silent = true,
-  callback = require('telescope.builtin').grep_string,
+  callback = function()
+    require('telescope.builtin').grep_string({search = require('functions').get_visual_selection()})
+  end,
 })
 vim.api.nvim_set_keymap('n', '<Leader>fb', '', { noremap = true, silent = true,
   callback = function()
