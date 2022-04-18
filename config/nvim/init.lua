@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Apr-05 22:15
+-- Time-Stamp: 2022-Apr-18 18:53
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 vim.g.mapleader = ' '    -- use space as a the leader key
@@ -74,26 +74,59 @@ vim.opt.wildignorecase = true -- Ignore case when tab-expanding filenames
 vim.cmd [[call setreg('/', [])]]
 
 -- Filetype handling
-vim.cmd [[
-filetype plugin on
-augroup filetype_settings
-    autocmd!
-    autocmd BufNewFile,BufRead *.in setf make
-    autocmd BufNewFile,BufRead *.c,*.h,*.S,*.dts,*.dtsi setlocal tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 noexpandtab colorcolumn=80 cindent
-    autocmd BufNewFile,BufRead *.cxx,*.hxx              setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120 expandtab colorcolumn=120 cindent
-    autocmd FileType c,h autocmd BufWritePre * :TrailspaceTrim
-    autocmd FileType bash,ruby                          setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120 expandtab colorcolumn=120 cindent
-    autocmd FileType lua                                setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120 expandtab colorcolumn=120 cindent
-    autocmd FileType gitcommit,gitsendemail,mail        setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=75 expandtab colorcolumn=75
-    autocmd FileType md,markdown,asciidoc,text,gitcommit,gitsendemail setlocal spell spelllang=en_us
-    autocmd FileType c,cpp,js                           nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
-    autocmd FileType c,cpp,js                           vnoremap <buffer><Leader>cf :ClangFormat<CR>
-    autocmd FileType make                               setlocal tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 noexpandtab colorcolumn=80
-augroup END
-]]
+local grp = vim.api.nvim_create_augroup('filetype_settings', {})
+vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
+  group = grp,
+  pattern =  '*.in',
+  command = 'setf make'
+})
+vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
+  group = grp,
+  pattern =  {'*.c', '*.h', '*.S', '*.dts', '*.dtsi'},
+  command = 'setlocal tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 noexpandtab colorcolumn=80 cindent'
+})
+vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
+  group = grp,
+  pattern = {'*.cxx', '*.hxx'},
+  command = 'setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120 expandtab colorcolumn=120 cindent',
+})
+vim.api.nvim_create_autocmd('BufWritePre', {
+  group = grp,
+  pattern = {'*.c', '*.h'},
+  command = 'TrailspaceTrim',
+})
+vim.api.nvim_create_autocmd('FileType', {
+  group = grp,
+  pattern = {'bash', 'ruby'},
+  command = 'setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=120 expandtab colorcolumn=120 cindent',
+})
+vim.api.nvim_create_autocmd('FileType', {
+  group = grp,
+  pattern = {'lua'},
+  command = 'setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=120 expandtab colorcolumn=120 cindent',
+})
+vim.api.nvim_create_autocmd('FileType', {
+  group = grp,
+  pattern = {'gitcommit', 'gitsendemail', 'mail'},
+  command = 'setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=75 expandtab colorcolumn=75 cindent',
+})
+vim.api.nvim_create_autocmd('FileType', {
+  group = grp,
+  pattern = {'md', 'markdown', 'asciidoc', 'text', 'gitcommit', 'gitsendemail'},
+  command = 'setlocal spell spelllang=en_us',
+})
+vim.api.nvim_create_autocmd('FileType', {
+  group = grp,
+  pattern = {'make'},
+  command = 'setlocal tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 colorcolumn=80',
+})
 
 -- Auto resize all VIM windows when VIM is resized
-vim.cmd [[autocmd VimResized * :wincmd = ]]
+grp = vim.api.nvim_create_augroup('nvim_windows', {})
+vim.api.nvim_create_autocmd({'VimResized'}, {
+  group = grp,
+  command = 'wincmd ='
+})
 
 -- Open file in the same folder as the current file using %%/
 vim.cmd [[cabbr <expr> %% expand('%:p:h')]]
