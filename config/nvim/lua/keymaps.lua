@@ -1,5 +1,5 @@
 -- Steen Hegelund
--- Time-Stamp: 2022-Apr-18 22:37
+-- Time-Stamp: 2022-Apr-19 20:54
 
 -- Steen Hegelund
 -- Time-Stamp: #
@@ -36,30 +36,6 @@ vim.api.nvim_set_keymap('n', '<leader>id', 'OCFLAGS_*.o := -DDEBUG<CR><esc>', { 
 vim.api.nvim_set_keymap('n', '<leader>fm', '<cmd>setlocal foldmethod=syntax<CR>',  { noremap = true, silent = true, })
 vim.api.nvim_set_keymap('c', 'w!!', 'execute "silent! write !sudo tee % >/dev/null" <bar> edit!', { noremap = true, silent = true, })
 
--- Telescope usage
-vim.api.nvim_set_keymap('n', '<Leader>ff', '', { noremap = true, silent = true,
-  callback = require('telescope.builtin').find_files,
-})
-vim.api.nvim_set_keymap('n', '<Leader>fg', '', { noremap = true, silent = true,
-  callback = require('telescope.builtin').live_grep,
-})
-vim.api.nvim_set_keymap('n', '<Leader>fh', '', { noremap = true, silent = true,
-  callback = require('telescope.builtin').help_tags,
-})
-vim.api.nvim_set_keymap('n', '##', '', { noremap = true, silent = true,
-  callback = require('telescope.builtin').grep_string,
-})
-vim.api.nvim_set_keymap('v', '##', '', { noremap = true, silent = true,
-  callback = function()
-    require('telescope.builtin').grep_string({search = require('functions').get_visual_selection()})
-  end,
-})
-vim.api.nvim_set_keymap('n', '<Leader>fb', '', { noremap = true, silent = true,
-  callback = function()
-    require('telescope.builtin').current_buffer_fuzzy_find({ case_mode = 'ignore_case', sort = require('telescope.sorters').highlighter_only })
-  end,
-})
-
 -- Assorted usage
 vim.api.nvim_set_keymap('n', '<Leader><Leader>x', 'source %', { noremap = true, silent = true, })
 vim.api.nvim_set_keymap('n', '<Leader>sv', '', { noremap = true, silent = true,
@@ -84,23 +60,10 @@ vim.api.nvim_set_keymap('n', '<Leader>ml', '', { noremap = true, silent = true,
 })
 vim.api.nvim_set_keymap('n', '<F6>', 'g<c-]>', { noremap = true, silent = true, }) -- Follow link
 vim.api.nvim_set_keymap('v', '<F6>', 'g<c-]>', { noremap = true, silent = true, })
-vim.api.nvim_set_keymap('n', '<F8>', '<cmd>ToggleBufExplorer<cr>', { noremap = true, silent = true, })
 vim.api.nvim_set_keymap('n', '<F9>', '<cmd>e!<cr>', { noremap = true, silent = true, })  -- Reload current buffer
 vim.api.nvim_set_keymap('n', '<F10>', '<cmd>call setreg("/", [])<cr>', { noremap = true, silent = true, }) -- Clear search highlight
 vim.api.nvim_set_keymap('n', '#%', '<cmd>echo expand("%:p:~")<cr>', { noremap = true, silent = true, }) -- Show full path and optionally referring to $HOME
 vim.api.nvim_set_keymap('n', 'ZA', '<cmd>qa!<cr>', { noremap = true, silent = true, }) -- Getting out quickly
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true, }) -- Exit Terminal mode
-vim.api.nvim_set_keymap('n', 'ga', '<cmd>EasyAlign<cr>', { noremap = true, silent = true, }) -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
-vim.api.nvim_set_keymap('x', 'ga', '<cmd>EasyAlign<cr>', { noremap = true, silent = true, }) -- Start interactive EasyAlign in visual mode (e.g. vipga)
-
--- LuaSnip usage
-vim.api.nvim_set_keymap('n', '<Leader><Leader>s', '', { noremap = true, silent = true,
-  callback = require('functions').ls_load,
-})
-
--- gitto usage
-vim.api.nvim_set_keymap('n', '<Leader><Leader>q', '', { noremap = true, silent = true,
-  callback = require('git_session').shutdown,
-})
 
 return Module

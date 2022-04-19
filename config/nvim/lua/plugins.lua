@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Apr-09 11:17
+-- Time-Stamp: 2022-Apr-19 21:07
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -18,6 +18,36 @@ vim.cmd([[
   augroup end
 ]])
 
+local telescope_keymaps = function()
+  vim.api.nvim_set_keymap('n', '<Leader>ff', '', { noremap = true, silent = true,
+    callback = require('telescope.builtin').find_files,
+  })
+  vim.api.nvim_set_keymap('n', '<Leader>fg', '', { noremap = true, silent = true,
+    callback = require('telescope.builtin').live_grep,
+  })
+  vim.api.nvim_set_keymap('n', '<Leader>fh', '', { noremap = true, silent = true,
+    callback = require('telescope.builtin').help_tags,
+  })
+  vim.api.nvim_set_keymap('n', '##', '', { noremap = true, silent = true,
+    callback = require('telescope.builtin').grep_string,
+  })
+  vim.api.nvim_set_keymap('v', '##', '', { noremap = true, silent = true,
+    callback = function()
+      require('telescope.builtin').grep_string({search = require('functions').get_visual_selection()})
+    end,
+  })
+  vim.api.nvim_set_keymap('n', '<Leader>fb', '', { noremap = true, silent = true,
+    callback = function()
+      require('telescope.builtin').current_buffer_fuzzy_find({ case_mode = 'ignore_case', sort = require('telescope.sorters').highlighter_only })
+    end,
+  })
+end
+
+local easyalign_keymaps = function()
+  vim.api.nvim_set_keymap('n', 'ga', '<cmd>EasyAlign<cr>', { noremap = true, silent = true, }) -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
+  vim.api.nvim_set_keymap('x', 'ga', '<cmd>EasyAlign<cr>', { noremap = true, silent = true, }) -- Start interactive EasyAlign in visual mode (e.g. vipga)
+end
+
 -- Plugins will be installed in ~/.local/share/nvim/site/pack/packer/start
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
@@ -25,7 +55,14 @@ require('packer').startup(function(use)
     'itchyny/lightline.vim',                        -- Nice Status Line
     config = 'vim.cmd[[source ~/.config/nvim/lightline.vim]]',
   }
-  use 'StonyBoy/nvim-gitto'                         -- Git log plugin
+  use {
+    'StonyBoy/nvim-gitto',                          -- Git log plugin
+    config = function()
+      vim.api.nvim_set_keymap('n', '<Leader><Leader>q', '', { noremap = true, silent = true,
+        callback = require('git_session').shutdown,
+      })
+    end,
+  }
   use 'tpope/vim-sensible'                          -- Sensible VIM settings
   use 'tpope/vim-tbone'                             -- Tmux commands and yank/put support
   use 'tpope/vim-fugitive'                          -- GIT support
@@ -37,11 +74,19 @@ require('packer').startup(function(use)
   use 'tpope/vim-abolish'                           -- Word Case substitution: snake/mixed/camel/upper/
   use 'tpope/vim-commentary'                        -- Comment in/out lines of text in various languages
   use 'airblade/vim-gitgutter'                      -- Git: Changed lines since last revision
-  use 'junegunn/vim-easy-align'                     -- Align text on specific characters in nice columns
+  use {
+    'junegunn/vim-easy-align',                      -- Align text on specific characters in nice columns
+    config = easyalign_keymaps,
+  }
   use 'lifepillar/vim-solarized8'                   -- Modern SolarlizedColorscheme
   use 'vim-ruby/vim-ruby'                           -- Ruby support
   use 'christoomey/vim-tmux-navigator'              -- Go between panes in both vim and tmux
-  use 'jlanzarotta/bufexplorer'                     -- Manage Buffers
+  use {
+    'jlanzarotta/bufexplorer',                      -- Manage Buffers
+    config = function()
+      vim.api.nvim_set_keymap('n', '<F8>', '<cmd>ToggleBufExplorer<cr>', { noremap = true, silent = true, })
+    end,
+  }
   use {
     'vim-scripts/update-time',                      -- Insert/Update timestamps in files
     config = 'vim.cmd [[source ~/.config/nvim/timestamp.vim]]',
@@ -74,13 +119,17 @@ require('packer').startup(function(use)
     requires = {
       'nvim-lua/plenary.nvim',                      -- Lua library
       'nvim-telescope/telescope-live-grep-raw.nvim' -- Live grep raw picker for telescope.nvim.
-    }
+    },
+    config = telescope_keymaps,
   }
   use {
     "L3MON4D3/LuaSnip",                             -- Snippet engine
     after = "nvim-cmp",
     config = function()
       require("config.snippets")
+      vim.api.nvim_set_keymap('n', '<Leader><Leader>s', '', { noremap = true, silent = true,
+        callback = require('functions').ls_load,
+      })
     end,
     disable = false,
   }
