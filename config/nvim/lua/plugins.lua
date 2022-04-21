@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Apr-19 22:36
+-- Time-Stamp: 2022-Apr-21 21:27
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -11,12 +11,16 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])
+local grp = vim.api.nvim_create_augroup('packer_user_config', {})
+vim.api.nvim_create_autocmd({'BufWritePost'}, {
+  group = grp,
+  pattern =  'plugins.lua',
+  callback = function(args)
+    local cmd = string.format('source %s | PackerCompile', args.match)
+    print('Packer User Config cmd:', cmd)
+    vim.cmd(cmd)
+  end,
+})
 
 local telescope_keymaps = function()
   vim.api.nvim_set_keymap('n', '<Leader>ff', '', { noremap = true, silent = true,
