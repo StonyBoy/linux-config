@@ -1,12 +1,6 @@
--- Steen Hegelund
--- Time-Stamp: 2022-Apr-23 21:35
-
--- Steen Hegelund
--- Time-Stamp: #
-
 -- Neovim keymap configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Apr-18 18:46
+-- Time-Stamp: 2022-Apr-23 21:56
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
