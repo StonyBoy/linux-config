@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Apr-18 18:53
+-- Time-Stamp: 2022-Apr-23 16:13
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 vim.g.mapleader = ' '    -- use space as a the leader key
@@ -41,7 +41,7 @@ vim.opt.copyindent = true        -- Mirroring offset with automatic indentation
 vim.opt.formatoptions = 'tcrqnj' -- See Help (complex)
 vim.opt.linebreak = true         -- Insert automatic line breaks while typing
 vim.opt.wrap = false             -- No wrap while displaying long lines
-vim.opt.cinoptions = 'h2,g2,i8,N-s,(0,w1,Ws,t0,+s,:0,=s,l1,b0'
+vim.opt.cinoptions = '(0,w1,Ws,t0,:0,l1'  -- C indent, Linux Kernel Style
 
 --Save undo history
 vim.opt.undofile = true

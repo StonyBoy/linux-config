@@ -1,5 +1,5 @@
 -- Steen Hegelund
--- Time-Stamp: 2022-Apr-19 20:54
+-- Time-Stamp: 2022-Apr-23 21:35
 
 -- Steen Hegelund
 -- Time-Stamp: #
@@ -10,6 +10,51 @@
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
+
+local locate = function(table, value)
+    for i = 1, #table do
+        if table[i] == value then return true end
+    end
+    return false
+end
+
+local get_modeline = function()
+  local modeline = string.format(' vim: set ts=%d sw=%d sts=%d tw=%d cc=%s %s ft=%s',
+  vim.opt.tabstop:get(),
+  vim.opt.shiftwidth:get(),
+  vim.opt.softtabstop:get(),
+  vim.opt.textwidth:get(),
+  table.concat(vim.opt.colorcolumn:get(), ','),
+  vim.opt.expandtab:get() and 'et' or 'noet',
+  vim.opt.filetype:get())
+  if locate({ 'c', 'h', 'cpp', 'hpp' }, vim.bo.filetype) then
+    modeline = modeline .. string.format(' cino=%s',
+    vim.fn.escape(table.concat(vim.opt.cinoptions:get(), ','), ':'))
+  end
+  modeline = modeline .. ' :'
+  return { string.format(vim.opt.commentstring:get(), modeline) }
+end
+
+local toggle_c_style = function()
+  if vim.bo.expandtab then
+    vim.bo.cinoptions   = '(0,w1,Ws,t0,:0,l1' -- C indent, Kernel style
+    vim.bo.textwidth    = 80                  -- Set the line width default value
+    vim.opt.colorcolumn = '80,100'            -- Set the colour markers
+    vim.bo.shiftwidth   = 8                   -- Default 8 spaces
+    vim.bo.tabstop      = 8                   -- 8 spaces per tab
+    vim.bo.softtabstop  = 8                   -- 8 spaces per tab when unindenting
+    vim.bo.expandtab    = false               -- Use tabs
+  else
+    vim.bo.cinoptions   = '(0,w1,Ws,t0,:s,l1' -- C indent, Userspace style
+    vim.bo.textwidth    = 120                 -- Set the line width default value
+    vim.opt.colorcolumn = '80,120'            -- Set the colour markers
+    vim.bo.shiftwidth   = 4                   -- Default 4 spaces
+    vim.bo.tabstop      = 4                   -- 4 spaces per tab
+    vim.bo.softtabstop  = 4                   -- 4 spaces per tab when unindenting
+    vim.bo.expandtab    = true                -- Use spaces
+  end
+  vim.bo.cindent        = true                -- Indent smart for C
+end
 
 -- Using tabs
 vim.api.nvim_set_keymap('n', '<Leader>t<Up>', '<cmd>tabr<cr>', { noremap = true, silent = true, })
@@ -44,20 +89,15 @@ vim.api.nvim_set_keymap('n', '<Leader>sv', '', { noremap = true, silent = true,
 vim.api.nvim_set_keymap('n', '<Leader>ev', 'vsplit $MYVIMRC', { noremap = true, silent = true, })
 vim.api.nvim_set_keymap('n', '<Leader>ml', '', { noremap = true, silent = true,
   callback = function()
-    local modeline = {
-      string.format(vim.opt.commentstring:get(),
-        string.format(" vim: set ts=%d sw=%d sts=%d tw=%d %s cc=%d ft=%s :",
-          vim.opt.tabstop:get(),
-          vim.opt.shiftwidth:get(),
-          vim.opt.softtabstop:get(),
-          vim.opt.textwidth:get(),
-          vim.opt.expandtab:get() and 'et' or 'noet',
-          vim.opt.colorcolumn:get()[1],
-          vim.opt.filetype:get()))
-    }
-    vim.call('nvim_buf_set_lines', 0, -1, -1, 0, modeline)
+    vim.call('nvim_buf_set_lines', 0, -1, -1, 0, get_modeline())
   end,
 })
+
+-- Toggle C style formatting and indenting between Linux Kernel and Userspace style
+vim.api.nvim_set_keymap('n', '<leader><leader>c', '', { noremap = true, silent = true,
+  callback = toggle_c_style
+})
+
 vim.api.nvim_set_keymap('n', '<F6>', 'g<c-]>', { noremap = true, silent = true, }) -- Follow link
 vim.api.nvim_set_keymap('v', '<F6>', 'g<c-]>', { noremap = true, silent = true, })
 vim.api.nvim_set_keymap('n', '<F9>', '<cmd>e!<cr>', { noremap = true, silent = true, })  -- Reload current buffer
