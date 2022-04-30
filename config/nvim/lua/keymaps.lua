@@ -1,6 +1,6 @@
 -- Neovim keymap configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Apr-23 21:56
+-- Time-Stamp: 2022-Apr-30 12:57
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
@@ -99,5 +99,12 @@ vim.api.nvim_set_keymap('n', '<F10>', '<cmd>call setreg("/", [])<cr>', { noremap
 vim.api.nvim_set_keymap('n', '#%', '<cmd>echo expand("%:p:~")<cr>', { noremap = true, silent = true, }) -- Show full path and optionally referring to $HOME
 vim.api.nvim_set_keymap('n', 'ZA', '<cmd>qa!<cr>', { noremap = true, silent = true, }) -- Getting out quickly
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true, }) -- Exit Terminal mode
+
+-- Load the currently edited lua module
+vim.api.nvim_set_keymap('n', '<leader><leader>l', '', { noremap = true, silent = true,
+  callback = function()
+    require('functions').reload_module(vim.fn.expand('%:t:r'))
+  end,
+})
 
 return Module

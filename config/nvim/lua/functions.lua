@@ -1,6 +1,6 @@
 -- Function Library
 -- Steen Hegelund
--- Time-Stamp: 2022-Apr-19 22:36
+-- Time-Stamp: 2022-Apr-30 13:07
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
@@ -25,6 +25,23 @@ Module.get_visual_selection = function()
     lines[1] = string.sub(lines[1], first[3])
     return table.concat(lines, '\n')
   end
+end
+
+Module.ripgrep_fargs = function(args) -- table of arguments
+  local opts = {}
+  if #args > 0 then
+    local idx = 1
+    while idx <= #args do
+      local dir = vim.fn.expand(args[idx])
+      if vim.fn.isdirectory(dir) > 0 then
+        opts['cwd'] = dir
+      else
+        opts['search'] = args[idx]
+      end
+      idx = idx + 1
+    end
+  end
+  require("telescope.builtin").grep_string(opts)
 end
 
 Module.ripgrep_args = function(...)
@@ -61,6 +78,8 @@ end
 
 Module.reload_module = function(name)
   package.loaded[name] = nil
+  require(name)
+  print('Reloaded', name)
 end
 
 return Module
