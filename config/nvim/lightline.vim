@@ -1,5 +1,5 @@
 " Steen Hegelund
-" Time-Stamp: 2022-Feb-09 23:16
+" Time-Stamp: 2022-May-12 18:09
 " Lightline Configuration
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 ft=vim :
 
@@ -17,7 +17,7 @@ let g:lightline = {
   \         'right': []
   \     },
   \     'component_function': {
-  \       'gitbranch': 'fugitive#head',
+  \       'gitbranch': 'FugitiveHead',
   \       'll_filestate': 'LlFileState',
   \       'll_editcfg': 'LlEditConfig',
   \       'll_abbrevpath': 'LlAbbrevPath',
