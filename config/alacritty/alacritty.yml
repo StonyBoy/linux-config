@@ -1,5 +1,12 @@
 # Steen Hegelund
-# Time-Stamp: 2022-Feb-05 21:50
+# Time-Stamp: 2022-May-02 10:08
+
+# Easier to see cursor
+cursor:
+  style:
+    shape: Block
+    blinking: Always
+  blink_interval: 500
 
 # Colors (Solarized Light)
 colors:
