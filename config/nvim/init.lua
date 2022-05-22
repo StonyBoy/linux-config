@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Apr-23 16:13
+-- Time-Stamp: 2022-May-22 17:20
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 vim.g.mapleader = ' '    -- use space as a the leader key
@@ -22,6 +22,7 @@ vim.opt.expandtab = true    -- Use spaces
 vim.opt.smarttab = true     -- Indent smart
 
 -- Visual Cues
+vim.opt.guicursor = 'n-v-c-sm:block-blinkwait300-blinkon200-blinkoff150,i-ci-ve:ver25-blinkwait300-blinkon200-blinkoff150,r-cr-o:hor200-blinkwait300-blinkon200-blinkoff150'
 vim.opt.hlsearch = true     -- highlight search - show the current search pattern
 vim.opt.incsearch = true    -- Do the search while typing in a search pattern
 vim.opt.ignorecase = true   -- Ignore cases while searching
