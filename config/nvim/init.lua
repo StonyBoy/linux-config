@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-May-22 17:20
+-- Time-Stamp: 2022-May-23 21:55
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 vim.g.mapleader = ' '    -- use space as a the leader key
@@ -127,6 +127,28 @@ grp = vim.api.nvim_create_augroup('nvim_windows', {})
 vim.api.nvim_create_autocmd({'VimResized'}, {
   group = grp,
   command = 'wincmd ='
+})
+
+-- Close the QuickFix buffer when leaving it
+local function close_quickfix(buf)
+  local qfgrp = vim.api.nvim_create_augroup('close_quickfix_leave', {})
+
+  vim.api.nvim_create_autocmd({'BufLeave'}, {
+    group = qfgrp,
+    buffer = buf,
+    callback = function()
+      vim.cmd 'cclose'
+    end,
+  })
+end
+
+grp = vim.api.nvim_create_augroup('quickfixlist', {})
+vim.api.nvim_create_autocmd({'FileType'}, {
+    group = grp,
+    pattern = {'qf'},
+    callback = function(opts)
+      close_quickfix(opts.buf)
+    end,
 })
 
 -- Open file in the same folder as the current file using %%/
