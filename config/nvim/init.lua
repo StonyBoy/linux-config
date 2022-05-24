@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-May-23 21:55
+-- Time-Stamp: 2022-May-24 17:17
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 vim.g.mapleader = ' '    -- use space as a the leader key
@@ -129,25 +129,17 @@ vim.api.nvim_create_autocmd({'VimResized'}, {
   command = 'wincmd ='
 })
 
--- Close the QuickFix buffer when leaving it
-local function close_quickfix(buf)
-  local qfgrp = vim.api.nvim_create_augroup('close_quickfix_leave', {})
-
-  vim.api.nvim_create_autocmd({'BufLeave'}, {
-    group = qfgrp,
-    buffer = buf,
-    callback = function()
-      vim.cmd 'cclose'
-    end,
-  })
-end
-
+-- Close the QuickFix buffer when hitting Enter to leave
 grp = vim.api.nvim_create_augroup('quickfixlist', {})
 vim.api.nvim_create_autocmd({'FileType'}, {
     group = grp,
     pattern = {'qf'},
     callback = function(opts)
-      close_quickfix(opts.buf)
+      vim.api.nvim_buf_set_keymap(opts.buf, 'n', '<cr>', '', { noremap = true, silent = true,
+        callback = function()
+          vim.cmd 'cclose'
+        end,
+      })
     end,
 })
 
