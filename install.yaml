@@ -141,11 +141,14 @@ I3 Window Manager:
         dest: ~/.config/i3/config
         dot: true
         Home:
-                - config/i3/config.home
+                - config/i3/config
+                - config/i3/home.i3.conf
         Work:
-                - config/i3/config.work
+                - config/i3/config
+                - config/i3/work.i3.conf
         WorkFromHome:
-                - config/i3/config.wfh
+                - config/i3/config
+                - config/i3/wfh.i3.conf
 
 I3 Blocks:
         dest: ~/.config/i3/i3blocks.conf

@@ -6,16 +6,21 @@ set $mod Mod4
 set $lock_bkg  "/opt/wallpapers/i3lock.png"
 set $wallpaper "/opt/wallpapers/i3wallpaper.jpg"
 
-set $ws1  "1: Editor "
-set $ws2  "2: Builds "
-set $ws3  "3: Internet "
-set $ws4  "4: Files "
-set $ws5  "5: Email "
-set $ws6  "6: Compare "
-set $ws7  "7: Teams "
-set $ws8  "8: Music "
-set $ws9  "9: Private "
+set $ws1   "1: Editor "
+set $ws2   "2: Builds "
+set $ws3   "3: Internet "
+set $ws4   "4: Files "
+set $ws5   "5: Email "
+set $ws6   "6: Compare "
+set $ws7   "7: Teams "
+set $ws8   "8: Music "
+set $ws9   "9: Private "
 set $ws10 "10: VPN "
+set $ws11 "11: Builds "
+set $ws12 "12: Builds "
+set $ws13 "13: Builds "
+set $ws14 "14: Builds "
+set $ws15 "15: Builds "
 
 # No title bars
 new_window 1pixel
@@ -104,6 +109,11 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
+bindsym $mod+Mod1+1 workspace $ws11
+bindsym $mod+Mod1+2 workspace $ws12
+bindsym $mod+Mod1+3 workspace $ws13
+bindsym $mod+Mod1+4 workspace $ws14
+bindsym $mod+Mod1+5 workspace $ws15
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -116,6 +126,11 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+Mod1+Shift+1 move container to workspace $ws11
+bindsym $mod+Mod1+Shift+2 move container to workspace $ws12
+bindsym $mod+Mod1+Shift+3 move container to workspace $ws13
+bindsym $mod+Mod1+Shift+4 move container to workspace $ws14
+bindsym $mod+Mod1+Shift+5 move container to workspace $ws15
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -276,8 +291,6 @@ set $bg_bar                     #002b36
 # base0
 set $text_bar                   #839496
 
-
-
 # Menu
 # ============================================================================
 
@@ -336,44 +349,7 @@ bar {
     # Disable the system tray
     # tray_output none
     # Show tray icons on primary monitor
-    # tray_output primary
+    tray_output primary
 }
 
-
-# Setting up monitors and workspaces
-# ============================================================================
-## set $main_monitor "DP-1"
-## set $extra_monitor "DP-3"
-## exec --no-startup-id xrandr -d :0 --output $main_monitor --mode 2560x1440 --primary --left-of $extra_monitor --output $extra_monitor --mode 2560x1440
-## 
-## # Bind the workspaces for the large monitor
-## workspace $ws1 output $main_monitor
-## workspace $ws2 output $main_monitor
-## workspace $ws3 output $main_monitor
-## workspace $ws4 output $main_monitor
-## workspace $ws5 output $main_monitor
-## 
-## # Bind the workspaces for the small monitor
-## workspace $ws6  output $extra_monitor
-## workspace $ws7  output $extra_monitor
-## workspace $ws8  output $extra_monitor
-## workspace $ws9  output $extra_monitor
-## workspace $ws10 output $extra_monitor
-
-
-# Start applications
-# ============================================================================
-
-exec --no-startup-id Thunar
-exec --no-startup-id spotify
-exec --no-startup-id firefox
-exec --no-startup-id $terminal
-
-# Start a polkit authentication agent
-exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
-
-# Mount GoogleDrive
-exec --no-startup-id rclone --vfs-cache-mode writes mount "GoogleDrive": ~/GoogleDrive
-
-# Mount Frigg
-exec --no-startup-id ~/scripts/nshares -m
+include ~/.config/i3/*.i3.conf

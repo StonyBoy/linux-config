@@ -44,7 +44,8 @@ separator=false
 [volume-pulseaudio]
 interval=once
 signal=1
-color="#f8fba0"
+DEFAULT_COLOR="#f8fba0"
+MUTED_COLOR="#a0a0a0"
 USE_ALSA_NAME=1
 
 # Memory usage
@@ -124,6 +125,21 @@ label=
 min_width=50
 interval=10
 color=#ffcc92
+
+# Arch Linux update info
+[apt-upgrades]
+markup=pango
+interval=3600
+QUIET=true
+BASE_COLOR=#5fff5f
+UPDATE_COLOR=#FFFF85
+LABEL= 
+
+# Monitoring specific systemctl services
+[systemctl]
+interval=once
+markup=pango
+instance=docker
 
 [calendar]
 interval=15

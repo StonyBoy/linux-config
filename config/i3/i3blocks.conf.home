@@ -77,12 +77,6 @@ color=#7fffd4
 interval=10
 separator=false
 
-[iface]
-label=tun:
-instance=tun0
-color=#98fb98
-interval=10
-
 # CPU usage
 #
 # The script may be called with -w and -c switches to specify thresholds,
@@ -118,6 +112,21 @@ label=
 min_width=50
 interval=10
 color=#ffcc92
+
+# Arch Linux update info
+[arch-update]
+markup=pango
+interval=3600
+QUIET=true
+BASE_COLOR=#5fff5f
+UPDATE_COLOR=#FFFF85
+LABEL= 
+
+# Monitoring specific systemctl services
+[systemctl]
+interval=once
+markup=pango
+instance=docker
 
 [calendar]
 interval=15
