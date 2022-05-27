@@ -7,10 +7,7 @@ vim.g.mapleader = ' '    -- use space as a the leader key
 vim.opt.swapfile = false -- Do not create swapfiles
 
 -- Install package manager and plugins
-local ok, ret = pcall(require, 'plugins')
-if not ok then
-  print('Plugin error:', ret)
-end
+require('plugins')
 
 -- Text formatting defaults
 vim.opt.textwidth = 120     -- Set the line width default value
@@ -61,7 +58,12 @@ vim.opt.background = 'light'
 if vim.env['USER'] == 'root' or vim.env['TERM'] == 'linux' then
   vim.opt.background = 'dark'
 end
-vim.cmd [[colorscheme solarized8_high]]
+vim.cmd [[
+try
+  colorscheme solarized8_high
+catch /^Vim\%((\a\+)\)\=:E185/
+endtry
+]]
 
 -- Set completeopt to have a better completion experience
 vim.opt.completeopt = 'menuone,noselect'

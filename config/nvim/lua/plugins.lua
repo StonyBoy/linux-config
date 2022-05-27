@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-May-27 14:18
+-- Time-Stamp: 2022-May-27 17:31
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -9,6 +9,8 @@ local packer_bootstrap = nil
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+  print "Installing packer: close and reopen Neovim..."
+  vim.cmd [[packadd packer.nvim]]
 end
 
 local grp = vim.api.nvim_create_augroup('packer_user_config', {})
@@ -21,6 +23,12 @@ vim.api.nvim_create_autocmd({'BufWritePost'}, {
     vim.cmd(cmd)
   end,
 })
+
+-- Use a protected call so we don't error out on first use
+local status_ok, packer = pcall(require, "packer")
+if not status_ok then
+  return
+end
 
 local telescope_keymaps = function()
   vim.api.nvim_set_keymap('n', '<Leader>ff', '', { noremap = true, silent = true,
@@ -53,7 +61,7 @@ local easyalign_keymaps = function()
 end
 
 -- Plugins will be installed in ~/.local/share/nvim/site/pack/packer/start
-require('packer').startup(function(use)
+return packer.startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
   use {
     'itchyny/lightline.vim',                        -- Nice Status Line
