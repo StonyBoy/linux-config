@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Apr-21 21:27
+-- Time-Stamp: 2022-May-27 14:18
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -119,7 +119,7 @@ require('packer').startup(function(use)
     end,
     disable = false,
   }
-  use {'nvim-telescope/telescope.nvim',             -- a highly extendable fuzzy finder over lists
+  use {'StonyBoy/telescope.nvim',                   -- a highly extendable fuzzy finder over lists
     requires = {
       'nvim-lua/plenary.nvim',                      -- Lua library
       'nvim-telescope/telescope-live-grep-raw.nvim' -- Live grep raw picker for telescope.nvim.
