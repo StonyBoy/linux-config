@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-May-30 21:33
+-- Time-Stamp: 2022-May-30 21:59
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -33,7 +33,7 @@ end
 -- Plugins will be installed in ~/.local/share/nvim/site/pack/packer/start
 return packer.startup(function(use)
   use 'wbthomason/packer.nvim'                      -- Package manager
-  use 'itchyny/lightline.vim'                       -- Nice Status Line
+  use 'nvim-lualine/lualine.nvim'                   -- Nice Status Line
   use 'StonyBoy/nvim-gitto'                         -- Git log plugin
   use 'tpope/vim-sensible'                          -- Sensible VIM settings
   use 'tpope/vim-tbone'                             -- Tmux commands and yank/put support
