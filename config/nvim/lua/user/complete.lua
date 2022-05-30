@@ -1,11 +1,12 @@
--- nvim-cmp configuration
+-- completion configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-May-20 22:13
+-- Time-Stamp: 2022-May-30 21:37
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
-print('initialize nvim-cmp')
-
-local cmp = require('cmp')
+local cmp_status_ok, cmp = pcall(require, 'cmp')
+if not cmp_status_ok then
+  return
+end
 
 local sel_next = function(fallback)
   local luasnip = require('luasnip')
@@ -39,8 +40,7 @@ end
 cmp.setup {
   snippet = {
     expand = function(args)
-      local luasnip = require('luasnip')
-      luasnip.lsp_expand(args.body)
+      require('luasnip').lsp_expand(args.body)
     end,
   },
   mapping = {
