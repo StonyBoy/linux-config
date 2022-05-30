@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-May-27 17:31
+-- Time-Stamp: 2022-May-30 20:18
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -45,7 +45,7 @@ local telescope_keymaps = function()
   })
   vim.api.nvim_set_keymap('v', '##', '', { noremap = true, silent = true,
     callback = function()
-      require('telescope.builtin').grep_string({search = require('functions').get_visual_selection()})
+      require('telescope.builtin').grep_string({search = require('user.functions').get_visual_selection()})
     end,
   })
   vim.api.nvim_set_keymap('n', '<Leader>fb', '', { noremap = true, silent = true,
@@ -123,7 +123,7 @@ return packer.startup(function(use)
   use {
     'neovim/nvim-lspconfig',                        -- Collection of configurations for built-in LSP client
     config = function()
-      require('config.lsp').setup()
+      require('user.lsp').setup()
     end,
     disable = false,
   }
@@ -138,7 +138,7 @@ return packer.startup(function(use)
     "L3MON4D3/LuaSnip",                             -- Snippet engine
     after = "nvim-cmp",
     config = function()
-      require("config.snippets")
+      require("user.snippets")
       vim.api.nvim_set_keymap('n', '<Leader><Leader>s', '<cmd>source ~/.config/nvim/lua/config/snippets.lua<cr>', { noremap = true, silent = true, })
     end,
     disable = false,
@@ -154,7 +154,7 @@ return packer.startup(function(use)
       { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
     },
     config = function()
-      require("config.ncmp")
+      require("user.ncmp")
     end,
     disable = false,
   }

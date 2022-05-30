@@ -1,6 +1,6 @@
 -- Neovim keymap configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Apr-30 12:57
+-- Time-Stamp: 2022-May-30 20:10
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
@@ -78,7 +78,7 @@ vim.api.nvim_set_keymap('c', 'w!!', 'execute "silent! write !sudo tee % >/dev/nu
 -- Assorted usage
 vim.api.nvim_set_keymap('n', '<Leader><Leader>x', 'source %', { noremap = true, silent = true, })
 vim.api.nvim_set_keymap('n', '<Leader>sv', '', { noremap = true, silent = true,
-  callback = require("functions").reload_neovim,
+  callback = require('user.functions').reload_neovim,
 })
 vim.api.nvim_set_keymap('n', '<Leader>ev', 'vsplit $MYVIMRC', { noremap = true, silent = true, })
 vim.api.nvim_set_keymap('n', '<Leader>ml', '', { noremap = true, silent = true,
@@ -103,7 +103,7 @@ vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = 
 -- Load the currently edited lua module
 vim.api.nvim_set_keymap('n', '<leader><leader>l', '', { noremap = true, silent = true,
   callback = function()
-    require('functions').reload_module(vim.fn.expand('%:t:r'))
+    require('user.functions').reload_module(vim.fn.expand('%:t:r'))
   end,
 })
 
