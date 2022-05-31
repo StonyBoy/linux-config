@@ -12,12 +12,16 @@ function _complete_start_vnc()
 function show_vnc()
 {
     echo "VNC Service: "
-    systemctl status x0vncserver | grep "Active:"
+    systemctl status vncserver@:1
+    # systemctl status x0vncserver | grep "Active:"
 }
 
 function start_vnc()
 {
-    x0vncserver -display :0 -SecurityTypes vncauth,tlsvnc -rfbauth ~/.vnc/passwd -rfbport 5900
+    # Add user in /etc/tigervnc/vncserver.users
+    # Set session in ~/.vnc/config
+    sudo systemctl start vncserver@:1
+    # x0vncserver -display :0 -SecurityTypes vncauth,tlsvnc -rfbauth ~/.vnc/passwd -rfbport 5900
 }
 complete -F _complete_start_vnc start_vnc
 
