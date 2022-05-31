@@ -1,6 +1,6 @@
 -- statusline configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-May-30 23:06
+-- Time-Stamp: 2022-May-31 10:35
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local status_ok, lualine = pcall(require, 'lualine')
@@ -19,6 +19,11 @@ local edit_config = function()
   return vim.api.nvim_win_get_width(0) > 140 and result or tabstr
 end
 
+-- Show linenumber and virtual column number (when eg tabs are expanded to spaces)
+local function file_location()
+  return '%03l:%02v'
+end
+
 lualine.setup({
   options = {
     theme = 'solarized_light',
@@ -32,7 +37,7 @@ lualine.setup({
     lualine_c = {},
     lualine_x = {},
     lualine_y = { edit_config },
-    lualine_z = { 'bo:fileformat', 'location', 'progress' },
+    lualine_z = { 'encoding', 'bo:fileformat', 'filetype', file_location, 'progress' },
   },
   inactive_sections = {
     lualine_a = {},
