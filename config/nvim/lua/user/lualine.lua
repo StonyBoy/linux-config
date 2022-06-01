@@ -1,6 +1,6 @@
 -- statusline configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-May-31 10:35
+-- Time-Stamp: 2022-Jun-01 22:46
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local status_ok, lualine = pcall(require, 'lualine')
@@ -24,6 +24,21 @@ local function file_location()
   return '%03l:%02v'
 end
 
+-- Show a full path if there is room. For fugitive file only show 'git:filename'
+local function abbrev_path()
+    local ret = vim.fn.expand("%:t") -- Tail part of path (name)
+    local fpath = vim.fn.expand('%:p:~') -- Full path optionally using ~ for home
+    local parts = #vim.fn.split(fpath, ':') -- Parts separated by colon
+    local margin = vim.api.nvim_win_get_width(0) - string.len(fpath) - 100
+
+    if parts > 1 then
+        ret = "git:" .. ret
+    elseif margin > 10 then
+        ret = fpath
+    end
+    return ret
+end
+
 lualine.setup({
   options = {
     theme = 'solarized_light',
@@ -33,7 +48,7 @@ lualine.setup({
   },
   sections = {
     lualine_a = { 'mode' },
-    lualine_b = { 'branch', {'filename', path = 3} },
+    lualine_b = { 'branch', { abbrev_path } },
     lualine_c = {},
     lualine_x = {},
     lualine_y = { edit_config },
