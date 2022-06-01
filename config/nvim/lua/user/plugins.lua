@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-May-30 21:59
+-- Time-Stamp: 2022-Jun-01 23:05
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -36,7 +36,7 @@ return packer.startup(function(use)
   use 'nvim-lualine/lualine.nvim'                   -- Nice Status Line
   use 'StonyBoy/nvim-gitto'                         -- Git log plugin
   use 'tpope/vim-sensible'                          -- Sensible VIM settings
-  use 'tpope/vim-tbone'                             -- Tmux commands and yank/put support
+  use 'tpope/vim-eunuch'                            -- Vim sugar for the UNIX shell commands that need it the most
   use 'tpope/vim-fugitive'                          -- GIT support
   use 'tpope/vim-obsession'                         -- Automatic editing sessions
   use 'tpope/vim-markdown'                          -- Syntax highlighting for markdown files
