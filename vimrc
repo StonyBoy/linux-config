@@ -1,6 +1,6 @@
 " VIM settings
 " Steen Hegelund
-" Time-Stamp: 2022-Jan-22 12:13
+" Time-Stamp: 2022-Jun-01 19:51
 " vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 :
 
 source ~/.vim/packages.vim
@@ -270,35 +270,18 @@ silent! source .vimlocal
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme configuration
 syntax on
-if $USER == "root"
+if $USER == "root" || $TERM == "linux"
     set background=dark
-elseif $TERM == "alacritty" || $TERM == "xterm-256color" || $TERM == "tmux-256color" || $TERM == "linux"
+else
     set background=light
 endif
-colorscheme solarized8_high
+try
+  colorscheme solarized8_high
+catch /^Vim\%((\a\+)\)\=:E185/
+endtry
 
 " Lightline
-set laststatus=2
-set noshowmode
-let g:lightline = {
-  \ 'colorscheme': 'solarized',
-  \     'active': {
-  \         'left': [['mode'], ['paste', 'gitbranch', 'fpath']],
-  \         'right': [['session', 'fileencoding', 'fileformat', 'filetype', 'readonly', 'percent', 'lineinfo'], ['filemod', 'editcfg']]
-  \     },
-  \     'inactive': {
-  \         'left': [['fpath']],
-  \         'right': [[], [], ['filemod', 'fileencoding', 'fileformat', 'filetype', 'readonly', 'percent', 'lineinfo']]
-  \     },
-  \     'component_function': {
-  \       'session': 'obsession#ObsessionStatus',
-  \       'gitbranch': 'fugitive#head',
-  \       'filemod': 'CustomFilemod',
-  \       'editcfg': 'CustomEditConfig',
-  \       'fpath': 'CustomFilepath'
-  \     },
-  \ }
-
+source ~/.vim/config/lightline.vim
 
 function! CustomFilemod()
   return &modified ? ' {+}' : ''
@@ -367,6 +350,3 @@ function! TrimWhitespace()
 endfun
 command! TrimWhitespace call TrimWhitespace()
 
-" source ~/.vim/config/autoclose.vim
-source ~/.vim/config/emacsstyle.vim
-source ~/.vim/config/ale.vim
