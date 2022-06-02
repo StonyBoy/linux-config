@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-May-30 20:02
+-- Time-Stamp: 2022-Jun-02 21:59
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Filetype handling
@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
 vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
   group = grp,
   pattern =  {'*.c', '*.h', '*.S', '*.dts', '*.dtsi'},
-  command = 'setlocal tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 noexpandtab colorcolumn=80 cindent'
+  command = 'setlocal tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 noexpandtab colorcolumn=80,100 cindent'
 })
 vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
   group = grp,
