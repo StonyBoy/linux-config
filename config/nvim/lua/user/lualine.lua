@@ -1,6 +1,6 @@
 -- statusline configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Jun-01 22:46
+-- Time-Stamp: 2022-Jun-02 09:45
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local status_ok, lualine = pcall(require, 'lualine')
@@ -11,12 +11,15 @@ end
 vim.opt.laststatus = 2
 vim.opt.showmode = false -- Do not show 2nd line edit mode information
 
+local get_branch = require('lualine.components.branch.git_branch').get_branch
+
 -- Show editor configuration: tabs/spaces, tabstop, softtabstop, shiftwidth and textwidth (wrapping)
 local edit_config = function()
   local tabstr = vim.bo.expandtab and 'spc' or 'tab'
   local result = string.format('%s | ts:%d | sw:%d | sts:%d | tw:%d',
     tabstr, vim.bo.tabstop, vim.bo.shiftwidth, vim.bo.softtabstop, vim.bo.textwidth)
-  return vim.api.nvim_win_get_width(0) > 140 and result or tabstr
+  local margin = vim.api.nvim_win_get_width(0) - string.len(result) - string.len(get_branch()) - 120
+  return margin > 10 and result or tabstr
 end
 
 -- Show linenumber and virtual column number (when eg tabs are expanded to spaces)
