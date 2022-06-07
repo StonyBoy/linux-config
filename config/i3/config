@@ -239,16 +239,6 @@ bindsym $mod+Mod1+u exec setxkbmap -layout usdk -model pc105 -option "caps:escap
 bindsym $mod+Mod1+d exec setxkbmap -layout dk -model pc105 -option "caps:escape" -rules evdev
 bindsym $mod+Mod1+n exec setxkbmap -layout dk -model pc105 -option "caps:escape" -variant "nodeadkeys" -rules evdev
 
-# Media player controls
-bindsym XF86AudioPlay exec  --no-startup-id playerctl play-pause
-bindsym XF86AudioPause exec --no-startup-id playerctl pause
-bindsym XF86AudioNext exec  --no-startup-id playerctl next
-bindsym XF86AudioPrev exec  --no-startup-id playerctl previous
-
-# change volume or toggle mute
-bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
 
 # Color Scheme
 # ============================================================================
@@ -352,4 +342,6 @@ bar {
     tray_output primary
 }
 
-include ~/.config/i3/*.i3.conf
+include ~/.config/i3/work.i3.conf
+include ~/.config/i3/home.i3.conf
+include ~/.config/i3/wfh.i3.conf
