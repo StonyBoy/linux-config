@@ -41,12 +41,11 @@ color=#b0e0e6
 separator=false
 
 # Volume indicator
-[volume-pulseaudio]
+[volume-pipewire]
 interval=once
 signal=1
 DEFAULT_COLOR="#f8fba0"
 MUTED_COLOR="#a0a0a0"
-USE_ALSA_NAME=1
 
 # Memory usage
 #

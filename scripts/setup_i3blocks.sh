@@ -1,4 +1,4 @@
-SRC=~/src
+SRC=~/src/proj
 DST=~/scripts/i3blocks
 mkdir -p $DST
 ln -sf $SRC/i3blocks-contrib/arch-update/arch-update $DST
@@ -14,4 +14,5 @@ ln -sf $SRC/i3blocks-contrib/systemctl/systemctl $DST
 ln -sf $SRC/i3blocks-contrib/temperature/temperature $DST
 ln -sf $SRC/i3blocks-contrib/time/time $DST
 ln -sf $SRC/i3blocks-contrib/volume-pulseaudio/volume-pulseaudio $DST
+ln -sf $SRC/i3blocks-contrib/volume-pipewire/volume-pipewire $DST
 ln -sf $SRC/strict_uptime/target/debug/strict_uptime $DST
