@@ -81,7 +81,8 @@ class Installer:
         if self.file_status == FileStatus.Missing:
             if not os.path.exists(os.path.dirname(self.dst_path)):
                 os.makedirs(os.path.dirname(self.dst_path), exist_ok=True)
-            os.remove(self.dst_path)
+            if os.path.exists(self.dst_path):
+                os.remove(self.dst_path)
             os.symlink(self.src_path, self.dst_path)
         if self.file_status == FileStatus.Linked:
             os.remove(self.dst_path)
