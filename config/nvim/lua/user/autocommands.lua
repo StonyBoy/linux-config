@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Jun-02 21:59
+-- Time-Stamp: 2022-Jun-21 09:20
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Filetype handling
@@ -49,19 +49,6 @@ vim.api.nvim_create_autocmd('FileType', {
   group = grp,
   pattern = {'make'},
   command = 'setlocal tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 colorcolumn=80',
-})
-
--- Close the QuickFix buffer when hitting Enter to leave
-vim.api.nvim_create_autocmd('FileType', {
-    group = grp,
-    pattern = {'qf'},
-    callback = function(opts)
-      vim.api.nvim_buf_set_keymap(opts.buf, 'n', '<cr>', '', { noremap = true, silent = true,
-        callback = function()
-          vim.cmd 'cclose'
-        end,
-      })
-    end,
 })
 
 -- Auto resize all VIM windows when VIM is resized

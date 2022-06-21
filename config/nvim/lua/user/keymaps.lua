@@ -1,6 +1,6 @@
 -- Neovim keymap configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-May-30 20:10
+-- Time-Stamp: 2022-Jun-21 09:21
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
@@ -76,7 +76,7 @@ vim.api.nvim_set_keymap('n', '<leader>fm', '<cmd>setlocal foldmethod=syntax<CR>'
 vim.api.nvim_set_keymap('c', 'w!!', 'execute "silent! write !sudo tee % >/dev/null" <bar> edit!', { noremap = true, silent = true, })
 
 -- Assorted usage
-vim.api.nvim_set_keymap('n', '<Leader><Leader>x', 'source %', { noremap = true, silent = true, })
+vim.api.nvim_set_keymap('n', '<Leader><Leader>x', '<cmd>source %<cr>', { noremap = true, silent = true, })
 vim.api.nvim_set_keymap('n', '<Leader>sv', '', { noremap = true, silent = true,
   callback = require('user.functions').reload_neovim,
 })
@@ -96,6 +96,7 @@ vim.api.nvim_set_keymap('n', '<F6>', 'g<c-]>', { noremap = true, silent = true, 
 vim.api.nvim_set_keymap('v', '<F6>', 'g<c-]>', { noremap = true, silent = true, })
 vim.api.nvim_set_keymap('n', '<F9>', '<cmd>e!<cr>', { noremap = true, silent = true, })  -- Reload current buffer
 vim.api.nvim_set_keymap('n', '<F10>', '<cmd>call setreg("/", [])<cr>', { noremap = true, silent = true, }) -- Clear search highlight
+vim.api.nvim_set_keymap('n', '<F11>', '<cmd>cclose<cr>', { noremap = true, silent = true, }) -- Close the quickfix window
 vim.api.nvim_set_keymap('n', '#%', '<cmd>echo expand("%:p:~")<cr>', { noremap = true, silent = true, }) -- Show full path and optionally referring to $HOME
 vim.api.nvim_set_keymap('n', 'ZA', '<cmd>qa!<cr>', { noremap = true, silent = true, }) -- Getting out quickly
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true, }) -- Exit Terminal mode
