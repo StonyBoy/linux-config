@@ -1,6 +1,6 @@
 -- statusline configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Jun-02 09:45
+-- Time-Stamp: 2022-Jun-28 14:16
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local status_ok, lualine = pcall(require, 'lualine')
@@ -38,6 +38,12 @@ local function abbrev_path()
         ret = "git:" .. ret
     elseif margin > 10 then
         ret = fpath
+    end
+    if vim.bo.modified then
+      ret = ret .. '[+]'
+    end
+    if vim.bo.modifiable == false or vim.bo.readonly == true then
+      ret = ret .. '[-]'
     end
     return ret
 end
