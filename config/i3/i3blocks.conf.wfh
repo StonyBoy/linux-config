@@ -104,6 +104,7 @@ separator=false
 label=TEMP: 
 interval=10
 min_width=80
+SHORTFMT=
 
 [hostname]
 command=uname -n
@@ -144,6 +145,7 @@ instance=docker
 [calendar]
 interval=15
 DATEFMT=+%Y-%m-%d
+SHORTFMT=+%Y-%m-%d
 color=#ccf3d1
 
 # Date Time
