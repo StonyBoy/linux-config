@@ -241,11 +241,11 @@ bindsym $mod+Mod1+n exec setxkbmap -layout dk -model pc105 -option "caps:escape"
 
 
 # Pulseaudio and i3blocks volume/mute control
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMute --release exec pkill -RTMIN+1 i3blocks
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioLowerVolume --release exec pkill -RTMIN+1 i3blocks
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioRaiseVolume --release exec pkill -RTMIN+1 i3blocks
 
 # Media player controls
