@@ -1,6 +1,6 @@
 -- Lua Snippets for all filetypes
 -- Steen Hegelund
--- Time-Stamp: 2022-Apr-01 20:01
+-- Time-Stamp: 2022-Jul-07 20:29
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local ls = require('luasnip')
@@ -31,9 +31,6 @@ local function bash(_, _, command)
   end
   return res
 end
-
-
-print('initialize "all" snippets')
 
 return {
   -- Use a function to execute any shell command and print its text.

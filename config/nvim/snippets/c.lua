@@ -1,6 +1,6 @@
 -- Lua Snippets for c filetype
 -- Steen Hegelund
--- Time-Stamp: 2022-Apr-06 23:01
+-- Time-Stamp: 2022-Jul-07 20:29
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local ls = require('luasnip')
@@ -11,8 +11,6 @@ local fun = ls.function_node
 local cho = ls.choice_node
 local fmt = require('luasnip.extras.fmt').fmt
 local rep = require('luasnip.extras').rep
-
-print('initialize "c" snippets')
 
 return {
   -- Use a function to execute any shell command and print its text.
