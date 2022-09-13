@@ -94,21 +94,18 @@ interval=10
 # see the script for details.
 [cpu_usage]
 label=
+min_width=50
 interval=10
-min_width=60
-separator=false
 
 [temperature]
 label=TEMP: 
 interval=10
-min_width=80
 
 [hostname]
 command=uname -n
 full_text=Show hostname
 interval=300
 color=#eee8d5
-separator=false
 
 # Uptime
 #
@@ -123,6 +120,12 @@ label=
 min_width=50
 interval=10
 color=#ffcc92
+
+# Easytest reservation info
+[easytest]
+label=et: 
+instance=shegelun
+interval=30
 
 # Arch Linux update info
 [arch-update]
