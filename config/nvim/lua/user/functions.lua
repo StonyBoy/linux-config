@@ -1,6 +1,6 @@
 -- Function Library
 -- Steen Hegelund
--- Time-Stamp: 2022-Apr-30 13:07
+-- Time-Stamp: 2022-Sep-13 21:52
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
@@ -27,40 +27,25 @@ Module.get_visual_selection = function()
   end
 end
 
-Module.ripgrep_fargs = function(args) -- table of arguments
-  local opts = {}
-  if #args > 0 then
-    local idx = 1
-    while idx <= #args do
-      local dir = vim.fn.expand(args[idx])
-      if vim.fn.isdirectory(dir) > 0 then
-        opts['cwd'] = dir
-      else
-        opts['search'] = args[idx]
-      end
-      idx = idx + 1
-    end
+Module.ripgrep_args = function(args)
+  local cmd = 'rg --vimgrep ' .. args.args
+  if args.path then
+    cmd = cmd .. ' ' .. args.path
   end
-  require("telescope.builtin").grep_string(opts)
-end
-
-Module.ripgrep_args = function(...)
-  local opts = {}
-  local args = { n = select('#', ...), ... }
-  if args.n > 0 then
-    local idx = 1
-    while idx <= args.n do
-      local dir = vim.fn.expand(args[idx])
-      if vim.fn.isdirectory(dir) > 0 then
-        opts['cwd'] = dir
-      else
-        opts['search'] = args[idx]
+  print('Running:', cmd)
+  local lines = {}
+  vim.fn.jobstart(cmd, {
+    on_stdout = function(_, data, _)
+      for _, line in ipairs(data) do
+        if #line ~= 0 then
+          table.insert(lines, line)
+        end
       end
-      -- option passing: additional_args = function() return {'-t', 'c'} end
-      idx = idx + 1
-    end
-  end
-  require("telescope.builtin").grep_string(opts)
+    end,
+    on_exit = function()
+      vim.fn.setqflist({}, 'r', {lines = lines, title = args.pattern})
+    end,
+  })
 end
 
 -- Debugging lua implementation

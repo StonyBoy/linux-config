@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Jun-22 12:46
+-- Time-Stamp: 2022-Sep-13 21:47
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -58,7 +58,6 @@ return packer.startup(function(use)
   use 'aklt/plantuml-syntax'                        -- PlantUML Syntax/  usein/FTDetect
   use 'AndrewRadev/linediff.vim'                    -- Diff two separate blocks of text
   use 'AndrewRadev/splitjoin.vim'                   -- Switching between a single-line statement and a multi-line one
-  use 'idanarye/vim-merginal'                       -- Provides a nice interface for dealing with Git branches on top of fugitive
   use 'rhysd/vim-clang-format'                      -- Format your code with specific coding style using clang-format
   use 'yazgoo/unicodemoji'                          -- fast unicode emojis in terminal and vim with fzf
   use {
@@ -99,6 +98,7 @@ return packer.startup(function(use)
   }
   use 'triglav/vim-visual-increment'                -- Increment lists in visual mode
 
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
@@ -130,3 +130,5 @@ end)
 -- 'kyazdani42/nvim-tree.lua',         -- A File Explorer For Neovim
 -- 'numToStr/Comment.nvim'             -- Smart and Powerful commenting plugin for neovim
 -- 'tamton-aquib/staline.nvim'         -- A simple statusline and bufferline for neovim written in lua.
+-- 'idanarye/vim-merginal'             -- Never really used this
+-- 'duane9/nvim-rg'                    -- Does not allow folders or specific files
