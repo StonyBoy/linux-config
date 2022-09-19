@@ -1,6 +1,6 @@
 -- Neovim create global commands
 -- Steen Hegelund
--- Time-Stamp: 2022-Sep-13 21:46
+-- Time-Stamp: 2022-Sep-19 20:18
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Create Global Ex functions from Lua functions
@@ -19,6 +19,14 @@ end, {
   nargs = '*',
   complete = 'file',
   desc = 'RipGrep the working directory',
+})
+
+vim.api.nvim_create_user_command('Rgd', function(args)
+  require('user.functions').ripgrep_args(args)
+end, {
+  nargs = '*',
+  complete = 'file',
+  desc = 'RipGrep the provided directory',
 })
 
 vim.api.nvim_create_user_command('Rgw', function(args)
