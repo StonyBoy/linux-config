@@ -75,6 +75,9 @@ window#waybar.chromium {
 #network,
 #pulseaudio,
 #custom-media,
+#custom-hostname,
+#custom-uptime,
+#keyboard-state,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -256,3 +259,14 @@ label:focus {
 #keyboard-state > label.locked {
     background: rgba(0, 0, 0, 0.2);
 }
+
+#custom-hostname {
+    background-color: #a366ff;
+    color: #000000;
+}
+
+#custom-uptime {
+    background-color: #ffd966;
+    color: #000000;
+}
+
