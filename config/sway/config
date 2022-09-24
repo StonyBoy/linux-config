@@ -329,7 +329,7 @@ bar {
     # Workspace 10
     for_window [class="Cisco AnyConnect Secure Mobility Client"] move to workspace $ws10
 
-    # exec --no-startup-id Thunar
+    exec --no-startup-id caja
     exec --no-startup-id spotify
     exec --no-startup-id firefox
     exec --no-startup-id $term
@@ -337,13 +337,19 @@ bar {
     # Start notification service
     exec --no-startup-id mako
 
-# Start a polkit authentication agent
-# exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
+    # Start keyring service
+    exec eval $(gnome-keyring-daemon --start)
+    exec export SSH_AUTH_SOCK
 
-# Mount Frigg
-# exec --no-startup-id ~/scripts/nshares -m
+    # Start a polkit authentication agent
+    exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-# Mount GoogleDrive
-# exec --no-startup-id rclone --vfs-cache-mode writes mount "GoogleDrive": ~/GoogleDrive
+    # For xdg-desktop-portal-wlr (screen sharing in teams)
+    exec export XDG_CURRENT_DESKTOP=sway
+    # Mount Frigg
+    # exec --no-startup-id ~/scripts/nshares -m
+
+    # Mount GoogleDrive
+    # exec --no-startup-id rclone --vfs-cache-mode writes mount "GoogleDrive": ~/GoogleDrive
 
 include /etc/sway/config.d/*
