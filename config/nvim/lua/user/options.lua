@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-May-30 20:02
+-- Time-Stamp: 2022-Oct-03 14:45
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 vim.g.mapleader = ' '    -- use space as a the leader key
@@ -65,3 +65,6 @@ vim.cmd [[cabbr <expr> %% expand('%:p:h')]]
 
 -- Local Project Configuration: Read .vimlocal
 vim.cmd [[silent! source .vimlocal]]
+
+-- Do not use the mouse (makes copy/paste work as before nvim 0.8)
+vim.cmd[[set mouse=]]
