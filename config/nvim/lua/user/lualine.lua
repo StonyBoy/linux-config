@@ -1,6 +1,6 @@
 -- statusline configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Jun-28 14:16
+-- Time-Stamp: 2022-Oct-05 11:14
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local status_ok, lualine = pcall(require, 'lualine')
@@ -71,7 +71,14 @@ lualine.setup({
     lualine_y = {},
     lualine_z = {},
   },
-  tabline = {},
+  tabline = {
+    lualine_a = {
+      { 'tabs',
+        mode = 2,
+        max_length = vim.o.columns,
+      },
+    },
+  },
   extensions = {},
 })
 
