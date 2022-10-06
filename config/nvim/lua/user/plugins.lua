@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Sep-13 21:47
+-- Time-Stamp: 2022-Oct-06 15:36
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -97,6 +97,12 @@ return packer.startup(function(use)
     end,
   }
   use 'triglav/vim-visual-increment'                -- Increment lists in visual mode
+  use {
+    'ten3roberts/qf.nvim',                          -- Quickfix and location list management for Neovim
+    config = function()
+      require('qf').setup{}
+    end
+  }
 
 
   -- Automatically set up your configuration after cloning packer.nvim
