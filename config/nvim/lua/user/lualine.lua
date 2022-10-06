@@ -1,6 +1,6 @@
 -- statusline configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Oct-06 21:33
+-- Time-Stamp: 2022-Oct-06 23:16
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local status_ok, lualine = pcall(require, 'lualine')
@@ -24,6 +24,18 @@ local function file_location()
   return '%03l:%02v'
 end
 
+-- Show the file modification state of the active buffer
+local function filemod_state()
+    local ret = ''
+    if vim.bo.modified then
+      ret = '[+]'
+    end
+    if vim.bo.modifiable == false or vim.bo.readonly == true then
+      ret = '[-]'
+    end
+    return ret
+end
+
 -- Show a full path if there is room. For fugitive file only show 'git:filename'
 local function abbrev_path()
     local ret = vim.fn.expand("%:t") -- Tail part of path (name)
@@ -35,15 +47,10 @@ local function abbrev_path()
     elseif margin > 10 then
         ret = fpath
     end
-    if vim.bo.modified then
-      ret = ret .. '[+]'
-    end
-    if vim.bo.modifiable == false or vim.bo.readonly == true then
-      ret = ret .. '[-]'
-    end
     return ret
 end
 
+-- Show which language server is attatched to the active buffer
 local function language_server()
   local buf_clients = vim.lsp.buf_get_clients()
   local original_bufnr = vim.api.nvim_get_current_buf()
@@ -71,7 +78,7 @@ lualine.setup({
     lualine_b = { 'branch', { abbrev_path } },
     lualine_c = {},
     lualine_x = {},
-    lualine_y = {},
+    lualine_y = { filemod_state },
     lualine_z = { 'encoding', 'bo:fileformat', 'filetype', file_location, 'progress' },
   },
   inactive_sections = {
@@ -79,7 +86,7 @@ lualine.setup({
     lualine_b = {},
     lualine_c = { {'filename', path = 3} },
     lualine_x = { 'progress' },
-    lualine_y = {},
+    lualine_y = { filemod_state },
     lualine_z = {},
   },
   tabline = {
