@@ -1,6 +1,6 @@
 -- statusline configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Oct-05 11:14
+-- Time-Stamp: 2022-Oct-06 21:16
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local status_ok, lualine = pcall(require, 'lualine')
@@ -48,6 +48,21 @@ local function abbrev_path()
     return ret
 end
 
+local function language_server()
+  local buf_clients = vim.lsp.buf_get_clients()
+  local original_bufnr = vim.api.nvim_get_current_buf()
+
+  for _, client in pairs(buf_clients) do
+    local attached_buffers_list = vim.lsp.get_buffers_by_client_id(client.id)
+    for _, bufno in pairs(attached_buffers_list) do
+      if bufno == original_bufnr then
+        return client.name
+      end
+    end
+  end
+  return ''
+end
+
 lualine.setup({
   options = {
     theme = 'solarized_light',
@@ -78,6 +93,7 @@ lualine.setup({
         max_length = vim.o.columns,
       },
     },
+    lualine_x = { language_server },
   },
   extensions = {},
 })
