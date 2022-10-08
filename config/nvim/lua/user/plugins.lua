@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Oct-06 15:36
+-- Time-Stamp: 2022-Oct-08 16:30
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -102,6 +102,31 @@ return packer.startup(function(use)
     config = function()
       require('qf').setup{}
     end
+  }
+  use {
+    'rebelot/kanagawa.nvim',                        -- Colorscheme inspired by the colors of the famous painting by Katsushika Hokusai.
+    config = function()
+      -- Default options:
+      require('kanagawa').setup({
+        undercurl = true,           -- enable undercurls
+        commentStyle = { italic = true },
+        functionStyle = {},
+        keywordStyle = { italic = true},
+        statementStyle = { bold = true },
+        typeStyle = {},
+        variablebuiltinStyle = { italic = true},
+        specialReturn = true,       -- special highlight for the return keyword
+        specialException = true,    -- special highlight for exception handling keywords
+        transparent = false,        -- do not set background color
+        dimInactive = true,         -- dim inactive window `:h hl-NormalNC`
+        globalStatus = false,       -- adjust window separators highlight for laststatus=3
+        terminalColors = true,      -- define vim.g.terminal_color_{0,17}
+        colors = {},
+        overrides = {},
+        theme = "default"           -- Load "default" theme or the experimental "light" theme
+      })
+
+    end,
   }
 
 

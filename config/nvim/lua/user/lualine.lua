@@ -1,15 +1,12 @@
 -- statusline configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Oct-06 23:16
+-- Time-Stamp: 2022-Oct-08 17:05
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local status_ok, lualine = pcall(require, 'lualine')
 if not status_ok then
   return
 end
-
-vim.opt.laststatus = 2
-vim.opt.showmode = false -- Do not show 2nd line edit mode information
 
 -- Show editor configuration: tabs/spaces, tabstop, softtabstop, shiftwidth and textwidth (wrapping)
 local edit_config = function()
@@ -25,7 +22,7 @@ local function file_location()
 end
 
 -- Show the file modification state of the active buffer
-local function filemod_state()
+local filemod_state = function()
     local ret = ''
     if vim.bo.modified then
       ret = '[+]'
@@ -37,21 +34,21 @@ local function filemod_state()
 end
 
 -- Show a full path if there is room. For fugitive file only show 'git:filename'
-local function abbrev_path()
+local abbrev_path = function()
     local ret = vim.fn.expand("%:t") -- Tail part of path (name)
     local fpath = vim.fn.expand('%:p:~') -- Full path optionally using ~ for home
     local margin = vim.api.nvim_win_get_width(0) - string.len(fpath) - 100
 
     if vim.startswith(fpath, 'fugitive') then
         ret = "git:" .. ret
-    elseif margin > 10 then
+    elseif vim.go.laststatus == 3 or margin > 10 then
         ret = fpath
     end
     return ret
 end
 
 -- Show which language server is attatched to the active buffer
-local function language_server()
+local language_server = function()
   local buf_clients = vim.lsp.buf_get_clients()
   local original_bufnr = vim.api.nvim_get_current_buf()
 
@@ -68,7 +65,7 @@ end
 
 lualine.setup({
   options = {
-    theme = 'solarized_light',
+    theme = "auto",
     always_divide_middle = true,
     component_separators = { left = '|', right = '|' },
     section_separators = { left = '|', right = '|' },
