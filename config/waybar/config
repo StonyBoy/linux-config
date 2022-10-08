@@ -93,9 +93,9 @@
     "custom/uptime": {
         "format": "{}",
         "escape": true,
-        "interval": "3600",
+        "interval": "60",
         "exec": "$HOME/scripts/strict_uptime"
     }
 }
 
-// vim: set ts=4 sw=4 sts=4 tw=250 cc=350 et ft=json 
+// vim: set ts=4 sw=4 sts=4 tw=250 cc=350 et ft=json :
