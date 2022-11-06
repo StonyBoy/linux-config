@@ -35,6 +35,7 @@
     delete-local =  "!gitdellocalbranches() { ~/scripts/git_branches.py -l ; }; gitdellocalbranches"
     delete-remote =  "!gitdelremotebranches() { ~/scripts/git_branches.py -r ; }; gitdelremotebranches"
     del-local =  "!gitdellocals() { ~/scripts/git_branches.py -l ; }; gitdellocals"
+    db = "!gitdiffblame() { ~/scripts/git_diff_blame.py $* ; }; gitdiffblame"
 
 [color]
     ui = true

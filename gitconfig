@@ -44,7 +44,7 @@
     path = ~/.gitconfig.d/40-macos.gitconfig
 
 [sendemail]
-    aliasesfile = ~/.mutt/aliases
+    aliasesfile = ~/.config/mutt/aliases
     aliasfiletype = mutt
 
 [pull]
