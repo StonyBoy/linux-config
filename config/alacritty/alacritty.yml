@@ -1,5 +1,5 @@
 # Steen Hegelund
-# Time-Stamp: 2022-May-02 10:08
+# Time-Stamp: 2022-Sep-21 21:43
 
 # Easier to see cursor
 cursor:
@@ -39,7 +39,7 @@ colors:
     white:   '#fdf6e3' # base3
 
 font:
-  size: 9.5
+  size: 11
   normal:
     family: Inconsolata Nerd Font Mono
     style: Regular
