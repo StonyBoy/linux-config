@@ -11,16 +11,13 @@ Bash Shell:
                 - profile
                 - profile.d/00-path-ops.sh
                 - profile.d/01-colors-defines.sh
+                - profile.d/02-colors-defines-background.sh
                 - profile.d/10-git-prompt.sh
                 - profile.d/30-ls-colors.sh
                 - profile.d/20-prompt-color.sh
                 - profile.d/30-gcc-color-output.sh
                 - profile.d/40-alias.sh
                 - profile.d/50-private.sh
-        Light Colors:
-                - profile.d/02-colors-defines-light-background.sh
-        Dark Colors:
-                - profile.d/02-colors-defines-dark-background.sh
         Work:
                 - profile.d/30-keychain.sh
                 - profile.d/30-misc-env.sh
