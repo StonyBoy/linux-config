@@ -1,0 +1,14 @@
+[Unit]
+Description=Net Next Predict Timer
+
+[Timer]
+Unit=netnextpredict.service
+OnCalendar=*-*-* 00:01:00
+OnCalendar=*-*-* 06:01:00
+OnCalendar=*-*-* 12:01:00
+OnCalendar=*-*-* 18:01:00
+Persistent=True
+
+[Install]
+WantedBy=timers.target
+

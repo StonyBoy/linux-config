@@ -1,0 +1,6 @@
+[Unit]
+Description=Net Next Prediction Generation Service
+
+[Service]
+Type=oneshot
+ExecStart=%h/src/proj/pytools/netnextstat/netnextpredict.py -r %h/work/sparx5/upstreaming/net-next %h/.local/share/netnextstatus/status.csv -g -o /tftpboot/netnext
