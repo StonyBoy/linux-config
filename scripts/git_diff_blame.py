@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 # Steen Hegelund
-# Time-Stamp: 2022-Oct-17 15:52
+# Time-Stamp: 2022-Dec-16 10:05
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 '''
@@ -10,6 +10,7 @@ This can be used to find the commit where a change needs to be added in a series
 import subprocess
 import argparse
 import re
+import sys
 
 hunk_regex = re.compile(r'^@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@')
 blame_regex = re.compile(r'^(\^?[0-9a-f]+)\s+((\S+\s+)?\([^\)]+\))\s+(.*)')
@@ -31,6 +32,15 @@ def get_blame(rev, file, first, last):
 
 def show_commit(rev):
     return run(['git', '--no-pager', 'show', '-s', '--format="%h %as %ae %s"', rev])[0]
+
+def non_empty(line):
+    return len(line) > 0
+
+def get_files(oldrev, newrev):
+    return filter(non_empty, run(['git', '--no-pager', 'diff', '--name-only', f'{oldrev}..{newrev}']))
+
+def header(text, arg):
+    print(f'\n\n##### {text}{arg} #####')
 
 class Hunk:
     def __init__(self, file, args, idx, o_ofs, o_cnt, n_ofs, n_cnt):
@@ -87,23 +97,25 @@ def get_hunks(file, args):
         hunks[-1].end(lines, -1)
     return hunks
 
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('-s', '--showcommits', action='store_true', default=False, help='Show commits referred in the diff')
+    parser.add_argument('-t', '--nocommits', action='store_true', default=False, help='Show commits referred in the diff')
     parser.add_argument('-n', '--newrev', default='HEAD', help='lastest revision')
     parser.add_argument('-o', '--oldrev', default='HEAD~1', help='oldest revision')
-    parser.add_argument('files', action='append', help='files to be diffed')
+    parser.add_argument('files', action='append', nargs='*', help='files to be diffed')
     args = parser.parse_args()
-    print('args', args)
 
-    for file in args.files:
+    if len(args.files[0]) == 0:
+        args.files[0] = get_files(args.oldrev, args.newrev)
+
+    for file in args.files[0]:
+        header('File:', file)
         hunks = get_hunks(file, args)
         shamap = {}
         for hunk in hunks:
             hunk.dump()
             shamap.update(hunk.shamap())
-        if args.showcommits:
-            print("Commits referred in diff")
+        if not args.nocommits:
+            header('Commits referred in diff:', '')
             for sha in shamap.keys():
                 print("  ", show_commit(sha))
