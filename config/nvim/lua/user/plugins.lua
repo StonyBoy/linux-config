@@ -1,6 +1,6 @@
 -- NVIM packages and the package manager
 -- Steen Hegelund
--- Time-Stamp: 2022-Oct-08 16:30
+-- Time-Stamp: 2023-Jan-02 11:29
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 :
 
 -- Install packer
@@ -35,7 +35,6 @@ return packer.startup(function(use)
   use 'wbthomason/packer.nvim'                      -- Package manager
   use 'nvim-lualine/lualine.nvim'                   -- Nice Status Line
   use 'StonyBoy/nvim-gitto'                         -- Git log plugin
-  use 'tpope/vim-sensible'                          -- Sensible VIM settings
   use 'tpope/vim-eunuch'                            -- Vim sugar for the UNIX shell commands that need it the most
   use 'tpope/vim-fugitive'                          -- GIT support
   use 'tpope/vim-obsession'                         -- Automatic editing sessions
@@ -163,3 +162,4 @@ end)
 -- 'tamton-aquib/staline.nvim'         -- A simple statusline and bufferline for neovim written in lua.
 -- 'idanarye/vim-merginal'             -- Never really used this
 -- 'duane9/nvim-rg'                    -- Does not allow folders or specific files
+--  'tpope/vim-sensible'               -- Sensible VIM settings: overwrites listchars in neovim 0.8.2
