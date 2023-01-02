@@ -3,11 +3,6 @@
 -- Time-Stamp: 2022-Oct-08 17:52
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
-local status_ok, lualine = pcall(require, 'lualine')
-if not status_ok then
-  return
-end
-
 -- Show editor configuration: tabs/spaces, tabstop, softtabstop, shiftwidth and textwidth (wrapping)
 local edit_config = function()
   local tabstr = vim.bo.expandtab and 'spc' or 'tab'
@@ -71,42 +66,47 @@ local colorscheme = function()
   return cscheme
 end
 
-lualine.setup({
-  options = {
-    theme = colorscheme(),
-    always_divide_middle = true,
-    component_separators = { left = '|', right = '|' },
-    section_separators = { left = '|', right = '|' },
-  },
-  sections = {
-    lualine_a = { 'mode' },
-    lualine_b = { 'branch', { abbrev_path } },
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = { filemod_state },
-    lualine_z = { 'encoding', 'bo:fileformat', 'filetype', file_location, 'progress' },
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = { {'filename', path = 3} },
-    lualine_x = { 'progress' },
-    lualine_y = { filemod_state },
-    lualine_z = {},
-  },
-  tabline = {
-    lualine_a = {
-      { 'tabs',
-        mode = 2,
-        max_length = vim.o.columns,
+return {
+  "nvim-lualine/lualine.nvim",
+  event = "VeryLazy",
+  config = function()
+    require('lualine').setup({
+      options = {
+        theme = colorscheme(),
+        always_divide_middle = true,
+        component_separators = { left = '|', right = '|' },
+        section_separators = { left = '|', right = '|' },
       },
+      sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch', { abbrev_path } },
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = { filemod_state },
+        lualine_z = { 'encoding', 'bo:fileformat', 'filetype', file_location, 'progress' },
+      },
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { {'filename', path = 3} },
+        lualine_x = { 'progress' },
+        lualine_y = { filemod_state },
+        lualine_z = {},
+      },
+      tabline = {
+        lualine_a = {
+          { 'tabs',
+          mode = 2,
+          max_length = vim.o.columns,
+        },
+      },
+      lualine_b = {},
+      lualine_c = {},
+      lualine_x = { language_server },
+      lualine_y = { edit_config },
+      lualine_z = {},
     },
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = { language_server },
-    lualine_y = { edit_config },
-    lualine_z = {},
-  },
-  extensions = {},
-})
-
+    extensions = {},
+  })
+end,
+}

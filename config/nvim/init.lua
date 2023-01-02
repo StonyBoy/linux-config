@@ -3,18 +3,9 @@
 -- Time-Stamp: 2022-May-31 09:11
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
-require('user.options')
-require('user.plugins')
-require('user.colorscheme')
-require('user.lualine')
-require('user.keymaps')
-require('user.commands')
-require('user.functions')
-require('user.autocommands')
-require('user.gitto')
-require('user.easyalign')
-require('user.bufexplorer')
-require('user.updatetime')
-require('user.lsp')
-require('user.telescope')
+require('config.options')
+require('config.lazy')
+require('config.commands')
+require('config.functions')
+require('config.autocommands')
 print('loaded init.lua')

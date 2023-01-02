@@ -6,7 +6,7 @@
 -- Create Global Ex functions from Lua functions
 
 vim.api.nvim_create_user_command('TrailspaceTrim', function()
-  require('user.functions').trailspace_trim()
+  require('config.functions').trailspace_trim()
 end, {
   nargs = '*',
   desc = 'Trim off trailing line whitespace'
@@ -14,7 +14,7 @@ end, {
 
 vim.api.nvim_create_user_command('Rg', function(args)
   args.path = vim.fn.getcwd()
-  require('user.functions').ripgrep_args(args)
+  require('config.functions').ripgrep_args(args)
 end, {
   nargs = '*',
   complete = 'file',
@@ -22,7 +22,7 @@ end, {
 })
 
 vim.api.nvim_create_user_command('Rgd', function(args)
-  require('user.functions').ripgrep_args(args)
+  require('config.functions').ripgrep_args(args)
 end, {
   nargs = '*',
   complete = 'file',
@@ -31,7 +31,7 @@ end, {
 
 vim.api.nvim_create_user_command('Rgw', function(args)
   args.path = vim.fn.expand('%:p:h')
-  require('user.functions').ripgrep_args(args)
+  require('config.functions').ripgrep_args(args)
 end, {
   nargs = '*',
   complete = 'file',
@@ -40,7 +40,7 @@ end, {
 
 vim.api.nvim_create_user_command('Rgf', function(args)
   args.path = vim.fn.expand('%')
-  require('user.functions').ripgrep_args(args)
+  require('config.functions').ripgrep_args(args)
 end, {
   nargs = '*',
   complete = 'file',
@@ -48,7 +48,7 @@ end, {
 })
 
 vim.api.nvim_create_user_command('Rp', function(opts)
-  require('user.functions').reload_module(opts.args)
+  require('config.functions').reload_module(opts.args)
 end, {
   nargs = '*',
   complete = 'file',

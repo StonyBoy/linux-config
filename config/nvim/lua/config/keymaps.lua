@@ -78,7 +78,7 @@ vim.api.nvim_set_keymap('c', 'w!!', 'execute "silent! write !sudo tee % >/dev/nu
 -- Assorted usage
 vim.api.nvim_set_keymap('n', '<Leader><Leader>x', '<cmd>source %<cr>', { noremap = true, silent = true, })
 vim.api.nvim_set_keymap('n', '<Leader>sv', '', { noremap = true, silent = true,
-  callback = require('user.functions').reload_neovim,
+  callback = require('config.functions').reload_neovim,
 })
 vim.api.nvim_set_keymap('n', '<Leader>ev', 'vsplit $MYVIMRC', { noremap = true, silent = true, })
 vim.api.nvim_set_keymap('n', '<Leader>ml', '', { noremap = true, silent = true,
@@ -103,7 +103,7 @@ vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = 
 -- Load the currently edited lua module
 vim.api.nvim_set_keymap('n', '<leader><leader>l', '', { noremap = true, silent = true,
   callback = function()
-    require('user.functions').reload_module(vim.fn.expand('%:t:r'))
+    require('config.functions').reload_module(vim.fn.expand('%:t:r'))
   end,
 })
 
