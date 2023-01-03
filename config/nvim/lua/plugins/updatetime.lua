@@ -1,9 +1,11 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2023-Jan-02 23:11
+-- Time-Stamp: 2023-Jan-03 10:06
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Add name-timestamp header in the beginning of the file
+-- The global variables must be set before the plugin is loaded
+
 vim.cmd [[
   function! AddFileHeader()
     call append(0, ["Steen Hegelund", "Time-Stamp: #", ""])
@@ -16,6 +18,11 @@ vim.cmd [[
 ]]
 
 return {
-  { 'tpope/vim-commentary', lazy = false, },
-  { 'vim-scripts/update-time', lazy = false },
+  {
+    'vim-scripts/update-time',
+    lazy = false,
+    dependencies = {
+      'tpope/vim-commentary', -- Comment in/out lines of text in various languages
+    },
+  },
 }
