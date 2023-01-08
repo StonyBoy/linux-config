@@ -306,36 +306,43 @@ bar {
 # Mouse scrollwheel sensitivity
 #
 input "1133:4123:Logitech_M705" {
-    scroll_factor 0.5
+    scroll_factor 0.3
 }
 
 # Start applications
 # ============================================================================
+#
+# Find apps under Wayland with 'waymsg -p -t get_tree'
 
     # Workspace 1
-    for_window [class="Code"] move to workspace $ws1
+    for_window [class="Code"] move window to workspace $ws1
+
+    # Workspace 3
+    for_window [class="firefox"] move window to workspace $ws3
 
     # Workspace 4
-    for_window [class="Thunar"] move to workspace $ws4
-    for_window [class="Caja"] move to workspace $ws4
-    for_window [class="Org.gnome.Nautilus"] move to workspace $ws4
+    for_window [class="Thunar"] move window to workspace $ws4
+    for_window [class="Caja"] move window to workspace $ws4
+    for_window [class="Org.gnome.Nautilus"] move window to workspace $ws4
 
     # Workspace 5
-    for_window [class="[Ee]volution"] move to workspace $ws5
+    for_window [app_id="evolution"] move window to workspace $ws5
+    for_window [app_id="evolution-alarm-notify"] move window to workspace $ws5
 
     # Workspace 6
-    for_window [class="[Bb]compare"] move to workspace $ws6
+    for_window [class="[Bb]compare"] move window to workspace $ws6
 
     # Workspace 7
-    for_window [class="Microsoft Teams - Preview"] move to workspace $ws7
+    for_window [class="Microsoft Teams - Preview"] move window to workspace $ws7
 
     # Workspace 8
-    for_window [class="Clementine"] move to workspace $ws8
-    for_window [class="Spotify"] move to workspace $ws8
-    for_window [class="Rhythmbox"] move to workspace $ws8
+    for_window [class="Clementine"] move window to workspace $ws8
+    for_window [class="Spotify"] move window to workspace $ws8
+    for_window [class="Rhythmbox"] move window to workspace $ws8
+    for_window [app_id="audacity"] move window to workspace $ws8
 
     # Workspace 10
-    for_window [class="Cisco AnyConnect Secure Mobility Client"] move to workspace $ws10
+    for_window [class="Cisco AnyConnect Secure Mobility Client"] to workspace $ws10
 
     exec --no-startup-id caja
     exec --no-startup-id spotify
