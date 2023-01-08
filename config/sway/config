@@ -306,7 +306,7 @@ bar {
 # Mouse scrollwheel sensitivity
 #
 input "1133:4123:Logitech_M705" {
-    scroll_factor 0.3
+    scroll_factor 0.5
 }
 
 # Start applications
@@ -362,9 +362,9 @@ input "1133:4123:Logitech_M705" {
     # For xdg-desktop-portal-wlr (screen sharing in teams)
     exec export XDG_CURRENT_DESKTOP=sway
     # Mount Frigg
-    # exec --no-startup-id ~/scripts/nshares -m
+    exec --no-startup-id ~/scripts/nshares -o Media
 
     # Mount GoogleDrive
-    # exec --no-startup-id rclone --vfs-cache-mode writes mount "GoogleDrive": ~/GoogleDrive
+    exec --no-startup-id rclone --vfs-cache-mode writes mount "GoogleDrive": ~/GoogleDrive
 
 include /etc/sway/config.d/*
