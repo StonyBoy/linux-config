@@ -302,6 +302,13 @@ bar {
     }
 }
 
+#
+# Mouse scrollwheel sensitivity
+#
+input "1133:4123:Logitech_M705" {
+    scroll_factor 0.5
+}
+
 # Start applications
 # ============================================================================
 
