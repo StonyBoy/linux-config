@@ -36,10 +36,10 @@ bindsym $mod+shift+w exec swaybg --mode fill --image /opt/wallpapers/tokyo-megur
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 900 'swaylock -f -c 000000' \
+         timeout 900 swaylock \
          timeout 900 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          before-sleep 'playerctl -p spotify pause' \
-         before-sleep 'swaylock -f -c 000000'
+         before-sleep swaylock
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
