@@ -3,9 +3,8 @@ Description=Sway (Wayland) User Lockscreen Wallpaper Change Timer
 
 [Timer]
 OnBootSec=2m
-OnUnitActiveSec=24h
+OnUnitActiveSec=2h
 Unit=sway_user_lockscreen.service
 
 [Install]
 WantedBy=timers.target
-

@@ -3,5 +3,4 @@ Description=Sway (Wayland) User Lockscreen Wallpaper Change Service
 
 [Service]
 Type=oneshot
-ExecStart=/home/shegelun/src/proj/devtools/wallpapers/wallpapers.py -x 2560 -y 1440 -p -l -r /opt/wallpapers
-
+ExecStart=%h/src/proj/pytools/wallpapers/wallpapers.py -x 2560 -y 1440 -l -r /opt/wallpapers
