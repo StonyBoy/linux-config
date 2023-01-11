@@ -179,6 +179,9 @@ bindsym $mod+Tab workspace back_and_forth
 # Workspace 1
 for_window [class="Code"] move to workspace $ws1
 
+# Workspace 3
+for_window [class="[Ff]irefox"] move to workspace $ws3
+
 # Workspace 4
 for_window [class="Thunar"] move to workspace $ws4
 for_window [class="Org.gnome.Nautilus"] move to workspace $ws4
