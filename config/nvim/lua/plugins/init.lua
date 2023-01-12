@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2023-Jan-03 10:03
+-- Time-Stamp: 2023-Jan-12 16:06
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 return {
@@ -29,7 +29,6 @@ return {
     'nvim-treesitter/nvim-treesitter',             -- Highlight, edit, and navigate code using a fast incremental parsing library
     'nvim-treesitter/nvim-treesitter-textobjects', -- Additional textobjects for treesitter
     'rafcamlet/nvim-luapad',                       -- Interactive neovim scratchpad for lua
-    'ten3roberts/qf.nvim',                         -- Quickfix and location list management for Neovim
 }
 
 -- These plugins are not in use due to various problems or newer neovim specific plugins
