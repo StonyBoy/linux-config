@@ -2,3 +2,5 @@ show-failed-attempts
 image=/opt/wallpapers/lockscreen.jpg
 scaling=fill
 indicator-idle-visible
+indicator-radius=90
+show-keyboard-layout
