@@ -18,6 +18,7 @@ Bash Shell:
                 - profile.d/30-gcc-color-output.sh
                 - profile.d/40-alias.sh
                 - profile.d/50-private.sh
+                - profile.d/60-tmux.sh
         Work:
                 - profile.d/30-keychain.sh
                 - profile.d/30-misc-env.sh
