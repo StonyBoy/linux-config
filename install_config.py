@@ -14,6 +14,8 @@ import yaml
 from colorama import Fore, Back, Style
 import time
 
+global root
+root = '~/testing'
 
 class FileStatus(enum.Enum):
     CorrectLink = f'{Fore.GREEN}Nothing to do{Style.RESET_ALL}'
@@ -25,25 +27,18 @@ class FileStatus(enum.Enum):
 
 
 class Installer:
-    def __init__(self, dst_path, dot, src_path):
-        self.dst_path = str(os.path.abspath(os.path.expanduser(dst_path)))
+    def __init__(self, src, dot, dst, level):
+        self.srcpath = os.path.abspath(src)
         self.dot = '.' if dot else ''
-        self.src_path = os.path.abspath(src_path)
-        self.file_status = FileStatus.Missing
-        if os.path.isfile(self.src_path):
-            if os.path.isdir(self.dst_path):
-                self.dst_path = os.path.join(self.dst_path, self.dot + src_path)
-            self.get_file_status()
-        elif os.path.isdir(self.src_path):
-            self.dst_path = os.path.join(self.dst_path, self.dot + src_path)
-            self.get_dir_status()
+        dstroot = os.path.abspath(os.path.expanduser(root))
+        if dst:
+            self.dstpath = os.path.join(dstroot, self.dot + dst)
         else:
-            raise FileNotFoundError(self.src_path)
-
-    def get_file_status(self):
-        if os.path.exists(self.dst_path):
-            if os.path.islink(self.dst_path):
-                if os.readlink(self.dst_path) == self.src_path:
+            self.dstpath = os.path.join(dstroot, self.dot + src)
+        self.level = level
+        if os.path.exists(self.dstpath):
+            if os.path.islink(self.dstpath):
+                if os.readlink(self.dstpath) == self.srcpath:
                     self.file_status = FileStatus.CorrectLink
                 else:
                     self.file_status = FileStatus.Linked
@@ -53,143 +48,213 @@ class Installer:
                 else:
                     self.file_status = FileStatus.DifferentContent
         else:
-            if os.path.islink(self.dst_path):
+            if os.path.islink(self.dstpath):
                 self.file_status = FileStatus.Linked
-
-    def get_dir_status(self):
-        if os.path.exists(self.dst_path):
-            if os.path.islink(self.dst_path):
-                if os.readlink(self.dst_path) == self.src_path:
-                    self.file_status = FileStatus.CorrectLink
-                else:
-                    self.file_status = FileStatus.Linked
             else:
-                self.file_status = FileStatus.Folder
+                self.file_status = FileStatus.Missing
 
     def compare_contents(self):
-        return subprocess.run(['diff', '-q', '-a', self.dst_path, self.src_path], stdout=subprocess.PIPE).returncode == 0
+        return subprocess.run(['diff', '-q', '-a', self.dstpath, self.srcpath], stdout=subprocess.PIPE).returncode == 0
 
     def create_dst_backup(self):
-        newname = self.dst_path + time.strftime('.backup_%Y_%b_%d_%H_%M_%S')
-        os.rename(self.dst_path, newname)
+        newname = self.dstpath + time.strftime('.backup_%Y_%b_%d_%H_%M_%S')
+        os.rename(self.dstpath, newname)
         print(f'  Backup as {newname}')
 
-    def run(self):
-        print(f'{self.file_status.value}:  {self.src_path} => {self.dst_path}')
-        if self.file_status == FileStatus.CorrectLink:
-            return
-        if self.file_status == FileStatus.Missing:
-            if not os.path.exists(os.path.dirname(self.dst_path)):
-                os.makedirs(os.path.dirname(self.dst_path), exist_ok=True)
-            if os.path.exists(self.dst_path):
-                os.remove(self.dst_path)
-            os.symlink(self.src_path, self.dst_path)
-        if self.file_status == FileStatus.Linked:
-            os.remove(self.dst_path)
-            os.symlink(self.src_path, self.dst_path)
-        if self.file_status == FileStatus.SameContent:
-            os.remove(self.dst_path)
-            os.symlink(self.src_path, self.dst_path)
-        if self.file_status == FileStatus.DifferentContent:
-            self.create_dst_backup()
-            os.symlink(self.src_path, self.dst_path)
-        if self.file_status == FileStatus.Folder:
-            self.create_dst_backup()
-            os.symlink(self.src_path, self.dst_path)
+    def execute(self):
+        indent = '  ' * (self.level + 1)
+        print(f'{indent}{self.file_status.value}:  {self.srcpath} => {self.dstpath}')
+        match self.file_status:
+            case FileStatus.Missing:
+                newdir = os.path.dirname(self.dstpath)
+                if not os.path.exists(newdir):
+                    os.makedirs(newdir, exist_ok=True)
+                if os.path.exists(self.dstpath):
+                    os.remove(self.dstpath)
+                os.symlink(self.srcpath, self.dstpath)
+            case FileStatus.CorrectLink:
+                return
+            case FileStatus.Linked:
+                os.remove(self.dstpath)
+                os.symlink(self.srcpath, self.dstpath)
+            case FileStatus.SameContent:
+                os.remove(self.dstpath)
+                os.symlink(self.srcpath, self.dstpath)
+            case FileStatus.DifferentContent:
+                self.create_dst_backup()
+                os.symlink(self.srcpath, self.dstpath)
+            case FileStatus.Folder:
+                self.create_dst_backup()
+                os.symlink(self.srcpath, self.dstpath)
 
 
-class FeatureVariant:
-    def __init__(self, parent, name, value):
+class InstallBase:
+    def __init__(self, parent, level, name):
         self.parent = parent
+        self.level = level
         self.name = name
-        self.value = value
-        self.installers = []
-
-    def query_user(self, destination, dot):
-        if self.name.lower() == 'default':
-            for val in self.value:
-                self.installers.append(Installer(destination, dot, val))
-        else:
-            self.show()
-            prompt = f'    Do you want to install {Fore.GREEN}{self.parent}/{self.name}{Style.RESET_ALL}: (N/y) > '
-            if input(prompt).lower() == 'y':
-                for val in self.value:
-                    self.installers.append(Installer(destination, dot, val))
-
-    def add_installer(self, destination, dot):
-        for item in self.value:
-            self.installers.append(Installer(destination, dot, item))
-
-    def __str__(self):
-        result = '\n    {}/{}:'.format(self.parent, self.name)
-        for value in self.value:
-            result += '\n      {}'.format(value)
-        return result
-
-    def show(self):
-        print(self)
-
-    def install(self):
-        if len(self.installers):
-            for installer in self.installers:
-                installer.run()
-
-    def installation_needed(self):
-        return len(self.installers) > 0
-
-
-class Feature:
-    def __init__(self, name, value):
-        self.name = name
-        self.default = None
-        self.dot = False
         self.destination = None
-        self.variants = {}
-        for key, val in value.items():
-            if key == 'default':
-                self.default = FeatureVariant(name, key, val)
-            elif key == 'dot':
-                self.dot = val
-            elif key == 'dest':
-                self.destination = val
-            elif len(key):
-                self.variants[key] = FeatureVariant(name, key, val)
-
-    def __str__(self):
-        result = f'\n* {Fore.BLUE}{self.name}{Style.RESET_ALL}:'
-        if self.default:
-            result += str(self.default)
-        for value in self.variants.values():
-            result += str(value)
-        return result
-
-    def show(self):
-        print(self)
+        self.dot = True
+        self.do_install = False
+        self.children = []
 
     def query_user(self):
+        if self.name == 'default':
+            self.do_install = True
+            return self.do_install
         self.show()
-        prompt = f'  Do you want to install {Fore.BLUE}{self.name}{Style.RESET_ALL}: (N/y) > '
+        indent = '  ' * self.level
+        prompt = f'{indent}Do you want to install {Fore.BLUE}{self.name}{Style.RESET_ALL}: (N/y) > '
         if input(prompt).lower() == 'y':
-            if self.default:
-                self.default.add_installer(self.destination, self.dot)
-            for var in self.variants.values():
-                var.query_user(self.destination, self.dot)
-            return True
-        return False
-
-    def install(self):
-        if self.default:
-            self.default.install()
-        for value in self.variants.values():
-            value.install()
+            self.do_install = True
+        return self.do_install
 
     def installation_needed(self):
-        result = False
-        if self.default:
-            result = result or self.default.installation_needed()
-        for value in self.variants.values():
-            result = result or value.installation_needed()
+        return self.do_install
+
+    def append(self, child):
+        self.children.append(child)
+
+    def show(self):
+        pass
+
+
+class InstallGroup(InstallBase):
+    def __init__(self, parent, level, name, value):
+        super().__init__(parent, level, name)
+        self.src = value['src']
+        if 'dest' in value:
+            self.destination = value['dest']
+        else:
+            self.destination = self.get_destination()
+        if 'dot' in value:
+            self.dot = value['dot']
+        else:
+            self.dot = self.get_dot()
+
+    def install(self):
+        if self.do_install:
+            indent = '  ' * self.level
+            print(f'{indent}Installing {Fore.BLUE}{self.name}{Style.RESET_ALL}')
+            for name in self.src:
+                inst = Installer(name, self.dot, self.destination, self.level + 1)
+                inst.execute()
+
+    def get_destination(self):
+        try:
+            return self.parent.get_destination()
+        except AttributeError:
+            pass
+        return None
+
+    def get_dot(self):
+        try:
+            return self.parent.get_dot()
+        except AttributeError:
+            pass
+        return True
+
+    def show(self):
+        indent = '  ' * self.level
+        cindent = '  ' * (self.level + 1)
+        print(f'{indent}{Fore.GREEN}{self.name}{Style.RESET_ALL}:')
+        for name in self.src:
+            print(f'{cindent}{name}:')
+
+    def __str__(self):
+        return f'InstallItem: {self.name}: {self.src}'
+
+
+class Feature(InstallBase):
+    def __init__(self, parent, level, name, value):
+        super().__init__(parent, level, name)
+        if 'dest' in value:
+            self.destination = value['dest']
+        if 'dot' in value:
+            self.dot = value['dot']
+
+    def query_user(self):
+        if super().query_user():
+            for child in self.children:
+                child.query_user()
+        return self.do_install
+
+    def installation_needed(self):
+        result = super().installation_needed()
+        for child in self.children:
+            result = result or child.installation_needed()
         return result
+
+    def install(self):
+        if self.do_install:
+            indent = '  ' * self.level
+            print(f'{indent}Installing {Fore.BLUE}{self.name}{Style.RESET_ALL}')
+            for child in self.children:
+                child.install()
+
+    def get_destination(self):
+        if self.destination:
+            return self.destination
+        if self.parent:
+            try:
+                return self.parent.get_destination()
+            except AttributeError:
+                pass
+        return None
+
+    def get_dot(self):
+        if self.destination:
+            return self.dot
+        if self.parent:
+            try:
+                return self.parent.get_dot()
+            except AttributeError:
+                pass
+        return True
+
+    def show(self):
+        indent = '  ' * self.level
+        print(f'{indent}{Fore.BLUE}{self.name}{Style.RESET_ALL}:')
+        for child in self.children:
+            child.show()
+
+    def __str__(self):
+        return f'Feature: {self.name}: {[str(child) for child in self.children]}'
+
+
+def add_feature(parent, name, value, level):
+    # print('YAML Error', f'name: "{name}"', yaml.dump(value, allow_unicode=True, default_flow_style=False))
+    if 'src' in value:
+        ft = InstallGroup(parent, level, name, value)
+        parent.append(ft)
+    else:
+        ft = Feature(parent, level, name, value)
+        parent.append(ft)
+        if isinstance(value, dict):
+            for ckey, cval in value.items():
+                match ckey:
+                    case 'dest':
+                        # ignore
+                        pass
+                    case _:
+                        add_feature(ft, ckey, cval, level + 1)
+
+
+def setup_test(features):
+    features[0].do_install = True
+    features[0].children[0].do_install = True
+    features[1].do_install = True
+    features[2].do_install = True
+    features[2].children[1].do_install = True
+    features[4].do_install = True
+    features[4].children[2].do_install = True
+    features[4].children[2].children[1].do_install = True
+    features[6].do_install = True
+    features[6].children[1].do_install = True
+    features[6].children[1].children[2].do_install = True
+    for f in features:
+        f.install()
+    sys.exit(0)
 
 
 def install_items():
@@ -202,15 +267,16 @@ def install_items():
             sys.exit(-1)
         for doc in docs:
             for key, value in doc.items():
-                features.append(Feature(key, value))
+                add_feature(features, key, value, 1)
             break
     for f in features:
         f.query_user()
+    # setup_test(features)
     changes = False
     for f in features:
         changes = changes or f.installation_needed()
     if changes:
-        prompt = f'\n{Fore.MAGENTA}Begin installation{Style.RESET_ALL}: (y/n) > '
+        prompt = f'{Fore.MAGENTA}Begin installation{Style.RESET_ALL}: (y/n) > '
         response = ''
         while response != 'n' and response != 'y':
             response = input(prompt).lower()

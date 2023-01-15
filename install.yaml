@@ -1,217 +1,223 @@
+#  vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=yaml :
 ---
 Bash Shell:
-        dest: ~/
-        dot: true
-        default:
-                - bash_logout
-                - bash_profile
-                - bashrc
-                - clang-format
-                - inputrc
-                - profile
-                - profile.d/00-path-ops.sh
-                - profile.d/01-colors-defines.sh
-                - profile.d/02-colors-defines-background.sh
-                - profile.d/10-git-prompt.sh
-                - profile.d/30-ls-colors.sh
-                - profile.d/20-prompt-color.sh
-                - profile.d/30-gcc-color-output.sh
-                - profile.d/40-alias.sh
-                - profile.d/50-private.sh
-                - profile.d/60-tmux.sh
-        Work:
-                - profile.d/30-keychain.sh
-                - profile.d/30-misc-env.sh
-                - profile.d/30-work-env.sh
-        MacOS:
-                - profile.d/60-macos.sh
-        Linux:
-                - profile.d/60-linux.sh
-                - profile.d/70-linux-keyboard.sh
-        Home:
-                - profile.d/70-audiobooks.sh
+    default:
+        src:
+            - bash_logout
+            - bash_profile
+            - bashrc
+            - clang-format
+            - inputrc
+            - profile
+            - profile.d/00-path-ops.sh
+            - profile.d/01-colors-defines.sh
+            - profile.d/02-colors-defines-background.sh
+            - profile.d/10-git-prompt.sh
+            - profile.d/30-ls-colors.sh
+            - profile.d/20-prompt-color.sh
+            - profile.d/30-gcc-color-output.sh
+            - profile.d/40-alias.sh
+            - profile.d/50-private.sh
+            - profile.d/60-tmux.sh
+    Work:
+        src:
+            - profile.d/30-keychain.sh
+            - profile.d/30-misc-env.sh
+            - profile.d/30-work-env.sh
+    MacOS:
+        src:
+            - profile.d/60-macos.sh
+    Linux:
+        src:
+            - profile.d/60-linux.sh
+            - profile.d/70-linux-keyboard.sh
+    Home:
+        src:
+            - profile.d/70-audiobooks.sh
 
 Scripts:
-        dest: ~/
-        default:
-                - scripts/tat
-                - scripts/python.init.py
-                - scripts/update_wallpaper.sh
-                - scripts/remote_tmux.sh
-                - scripts/local_tmux.sh
-                - scripts/git_branches.py
-                - scripts/config_tunnel.sh
-                - scripts/config_remote_tunnel.sh
+    dot: false
+    src:
+        - scripts/tat
+        - scripts/python.init.py
+        - scripts/update_wallpaper.sh
+        - scripts/remote_tmux.sh
+        - scripts/local_tmux.sh
+        - scripts/git_branches.py
+        - scripts/config_tunnel.sh
+        - scripts/config_remote_tunnel.sh
 
-Vim Editor:
-        dest: ~/
-        dot: true
-        default:
-                - vim/packages.vim
-                - vim/config
-                - vimrc
+Editor:
+    Classic Vim:
+        src:
+            - vim/packages.vim
+            - vimrc
+            - vim/config
 
-NeoVim Editor:
-        dest: ~/
-        dot: true
-        default:
-                - config/nvim
-                - profile.d/80-nvim.sh
+    NeoVim Editor:
+        src:
+            - profile.d/80-nvim.sh
+            - config/nvim
 
-Alacritty:
-        dest: ~/
-        dot: true
-        default:
-                - config/alacritty/alacritty.yml
+Console:
+    Alacritty:
+        src:
+            - config/alacritty/alacritty.yml
 
-Bat:
-        dest: ~/
-        dot: true
-        default:
-                - config/bat/config
+    Bat:
+        src:
+            - config/bat/config
 
-Terminal Mux:
-        dest: ~/
-        dot: true
-        default:
-                - tmux.conf
+    Terminal Mux:
+        src:
+            - tmux.conf
 
 Git:
-        dest: ~/
-        dot: true
-        default:
-                - gitconfig
-                - gitignore
-                - gitconfig.d/20-user.gitconfig
-        diff:
+    default:
+        src:
+            - gitconfig
+            - gitignore
+            - gitconfig.d/20-user.gitconfig
+    Diff tool:
+        Classic diff:
+            src:
                 - gitconfig.d/30-diff.gitconfig
-        delta:
+        git-delta:
+            src:
                 - gitconfig.d/30-delta.gitconfig
-        editor-vim:
+    Editor:
+        Classic Vim:
+            src:
                 - gitconfig.d/30-editor-vim.gitconfig
-        editor-neovim:
+        Neovim:
+            src:
                 - gitconfig.d/30-editor-neovim.gitconfig
-        Work:
-                - gitconfig.d/10-work.gitconfig
-                - git-hooks
-        MacOS:
-                - gitconfig.d/40-macos.gitconfig
+    Work:
+        src:
+            - gitconfig.d/10-work.gitconfig
+            - git-hooks
+    MacOS:
+        src:
+            - gitconfig.d/40-macos.gitconfig
 
 Ruby:
-        dest: ~/
-        dot: true
-        default:
-                - rubocop.yml
+    src:
+        - rubocop.yml
 
-Mutt Email:
-        dest: ~/
-        dot: true
-        default:
-                - mbsyncrc
-                - msmtprc
-                - mutt/aliases
-                - mutt/bindings
-                - mutt/colors
-                - mutt/mailcap
-                - mutt/mbsync_folders.py
-                - mutt/muttrc
-        Work:
-                - mutt/accounts/microchip
-                - mutt/microchip.com.gpg
-                - mutt/outlook.office365.com.pem
-                - mutt/signatures/work
+I3:
+    default:
         Home:
-                - mutt/accounts/one
-                - mutt/imap.one.com.pem
-                - mutt/send.one.com.pem
-                - mutt/one.com.gpg
-                - mutt/signatures/home
-
-X Window:
-        dest: ~/
-        dot: true
-        default:
-                - Xresources
-                - Xdefaults
-                - Xmodmap
-
-I3 Window Manager:
-        dest: ~/
-        dot: true
-        Home:
+            src:
                 - config/i3/config
                 - config/i3/home.i3.conf
         Work:
+            src:
                 - config/i3/config
                 - config/i3/work.i3.conf
         WorkFromHome:
+            src:
                 - config/i3/config
                 - config/i3/wfh.i3.conf
 
-I3 Blocks:
-        dest: ~/.config/i3/i3blocks.conf
-        dot: true
+    Blocks:
+        dest: config/i3/i3blocks.conf
         Home:
+            src:
                 - config/i3/i3blocks.conf.home
         Work:
+            src:
                 - config/i3/i3blocks.conf.work
         WorkFromHome:
+            src:
                 - config/i3/i3blocks.conf.wfh
 
-Rofi Themes:
-        dest: ~/
-        dot: true
-        default:
-                - config/rofi/themes
-
 Sway:
-        dest: ~/.config/sway/config
-        dot: true
-        Home:
-                - config/sway/config.home
+    default:
+        dest: config/sway/config
+        src:
+            - config/sway/config.home
+    Waybar:
+        src:
+            - config/waybar
+    Sway Swaylock:
+        src:
+            - config/swaylock
 
-Sway I3 Blocks:
-        dest: ~/.config/sway/i3blocks.conf
-        dot: true
-        Home:
-                - config/sway/i3blocks.conf.home
-Powerline:
-        dest: ~/
-        dot: true
-        default:
-                - config/powerline
+Rofi Themes:
+    default:
+        src:
+            - config/rofi/themes
 
-QT Creator:
-        dest: ~/
-        dot: true
-        default:
-                - config/QtProject
+# Systemd User Timers:
+#         dest: ~/
+#         dot: true
+#         default:
+#                 - config/systemd/user
 
-PyCharm Editor:
-        dest: ~/
-        default:
-                - PyCharm
+# Mutt Email:
+#         dest: ~/
+#         dot: true
+#         default:
+#                 - mbsyncrc
+#                 - msmtprc
+#                 - mutt/aliases
+#                 - mutt/bindings
+#                 - mutt/colors
+#                 - mutt/mailcap
+#                 - mutt/mbsync_folders.py
+#                 - mutt/muttrc
+#         Work:
+#                 - mutt/accounts/microchip
+#                 - mutt/microchip.com.gpg
+#                 - mutt/outlook.office365.com.pem
+#                 - mutt/signatures/work
+#         Home:
+#                 - mutt/accounts/one
+#                 - mutt/imap.one.com.pem
+#                 - mutt/send.one.com.pem
+#                 - mutt/one.com.gpg
+#                 - mutt/signatures/home
 
-Beyond Compare:
-        dest: ~/
-        dot: true
-        default:
-                - config/bcompare/BCCommands.xml
+# X Window:
+#         dest: ~/
+#         dot: true
+#         default:
+#                 - Xresources
+#                 - Xdefaults
+#                 - Xmodmap
 
-Visual Studio Code:
-        dest: ~/
-        dot: true
-        default:
-                - config/Code
+# Powerline:
+#         dest: ~/
+#         dot: true
+#         default:
+#                 - config/powerline
 
-Fish Shell:
-        dest: ~/
-        dot: true
-        default:
-                - config/fish
+# QT Creator:
+#         dest: ~/
+#         dot: true
+#         default:
+#                 - config/QtProject
 
-Systemd User Timers:
-        dest: ~/
-        dot: true
-        default:
-                - config/systemd/user
+# PyCharm Editor:
+#         dest: ~/
+#         default:
+#                 - PyCharm
+
+# Beyond Compare:
+#         dest: ~/
+#         dot: true
+#         default:
+#                 - config/bcompare/BCCommands.xml
+
+# Visual Studio Code:
+#         dest: ~/
+#         dot: true
+#         default:
+#                 - config/Code
+
+# Fish Shell:
+#         dest: ~/
+#         dot: true
+#         default:
+#                 - config/fish
+
