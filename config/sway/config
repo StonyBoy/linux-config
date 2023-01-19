@@ -110,6 +110,12 @@ input "type:keyboard" {
     bindsym $mod+Shift+e mode "$mode_system"
 
 #
+# TMUX session menus
+#
+    bindsym $mod+t exec rofi -show rtmux -modi "rtmux:~/scripts/remote_tmux.sh" -theme remote_tmux
+    bindsym $mod+y exec rofi -show tmux -modi "tmux:~/scripts/local_tmux.sh" -theme local_tmux
+
+#
 # Moving around:
 #
     # Move your focus around
