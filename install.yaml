@@ -67,8 +67,16 @@ Editor:
 
 Console:
     Alacritty:
-        src:
-            - config/alacritty/alacritty.yml
+        dest: config/alacritty/alacritty.yml
+        Home:
+            src:
+                - config/alacritty/home.yml
+        Work:
+            src:
+                - config/alacritty/work.yml
+        WorkFromHome:
+            src:
+                - config/alacritty/wfh.yml
 
     Bat:
         src:

@@ -15,7 +15,7 @@ from colorama import Fore, Back, Style
 import time
 
 global root
-root = '~/testing'
+root = '~/'
 
 class FileStatus(enum.Enum):
     CorrectLink = f'{Fore.GREEN}Nothing to do{Style.RESET_ALL}'
