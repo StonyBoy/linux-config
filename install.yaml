@@ -1,51 +1,57 @@
 #  vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=yaml :
 ---
-Bash Shell:
-    default:
+Shells:
+    Fish Shell:
         src:
-            - bash_logout
-            - bash_profile
-            - bashrc
-            - clang-format
-            - inputrc
-            - profile
-            - profile.d/00-path-ops.sh
-            - profile.d/01-colors-defines.sh
-            - profile.d/02-colors-defines-background.sh
-            - profile.d/10-git-prompt.sh
-            - profile.d/30-ls-colors.sh
-            - profile.d/20-prompt-color.sh
-            - profile.d/30-gcc-color-output.sh
-            - profile.d/40-alias.sh
-            - profile.d/50-private.sh
-            - profile.d/60-tmux.sh
-    Work:
-        src:
-            - profile.d/30-keychain.sh
-            - profile.d/30-misc-env.sh
-            - profile.d/30-work-env.sh
-    MacOS:
-        src:
-            - profile.d/60-macos.sh
-    Linux:
-        src:
-            - profile.d/60-linux.sh
-            - profile.d/70-linux-keyboard.sh
-    Home:
-        src:
-            - profile.d/70-audiobooks.sh
+            - config/fish
+
+    Bash Shell:
+        default:
+            src:
+                - bash_logout
+                - bash_profile
+                - bashrc
+                - clang-format
+                - inputrc
+                - profile
+                - profile.d/00-path-ops.sh
+                - profile.d/01-colors-defines.sh
+                - profile.d/02-colors-defines-background.sh
+                - profile.d/10-git-prompt.sh
+                - profile.d/30-ls-colors.sh
+                - profile.d/20-prompt-color.sh
+                - profile.d/30-gcc-color-output.sh
+                - profile.d/40-alias.sh
+                - profile.d/50-private.sh
+                - profile.d/60-tmux.sh
+        Work:
+            src:
+                - profile.d/30-keychain.sh
+                - profile.d/30-misc-env.sh
+                - profile.d/30-work-env.sh
+        MacOS:
+            src:
+                - profile.d/60-macos.sh
+        Linux:
+            src:
+                - profile.d/60-linux.sh
+                - profile.d/70-linux-keyboard.sh
+        Home:
+            src:
+                - profile.d/70-audiobooks.sh
 
 Scripts:
-    dot: false
-    src:
-        - scripts/tat
-        - scripts/python.init.py
-        - scripts/update_wallpaper.sh
-        - scripts/remote_tmux.sh
-        - scripts/local_tmux.sh
-        - scripts/git_branches.py
-        - scripts/config_tunnel.sh
-        - scripts/config_remote_tunnel.sh
+    default:
+        dot: false
+        src:
+            - scripts/tat
+            - scripts/python.init.py
+            - scripts/update_wallpaper.sh
+            - scripts/remote_tmux.sh
+            - scripts/local_tmux.sh
+            - scripts/git_branches.py
+            - scripts/config_tunnel.sh
+            - scripts/config_remote_tunnel.sh
 
 Editor:
     Classic Vim:
@@ -71,6 +77,10 @@ Console:
     Terminal Mux:
         src:
             - tmux.conf
+
+    Powerline:
+        src:
+            - config/powerline
 
 Git:
     default:
@@ -101,8 +111,9 @@ Git:
             - gitconfig.d/40-macos.gitconfig
 
 Ruby:
-    src:
-        - rubocop.yml
+    default:
+        src:
+            - rubocop.yml
 
 I3:
     default:
@@ -148,76 +159,57 @@ Rofi Themes:
         src:
             - config/rofi/themes
 
-# Systemd User Timers:
-#         dest: ~/
-#         dot: true
-#         default:
-#                 - config/systemd/user
+Beyond Compare:
+    default:
+        src:
+            - config/bcompare/BCCommands.xml
 
-# Mutt Email:
-#         dest: ~/
-#         dot: true
-#         default:
-#                 - mbsyncrc
-#                 - msmtprc
-#                 - mutt/aliases
-#                 - mutt/bindings
-#                 - mutt/colors
-#                 - mutt/mailcap
-#                 - mutt/mbsync_folders.py
-#                 - mutt/muttrc
-#         Work:
-#                 - mutt/accounts/microchip
-#                 - mutt/microchip.com.gpg
-#                 - mutt/outlook.office365.com.pem
-#                 - mutt/signatures/work
-#         Home:
-#                 - mutt/accounts/one
-#                 - mutt/imap.one.com.pem
-#                 - mutt/send.one.com.pem
-#                 - mutt/one.com.gpg
-#                 - mutt/signatures/home
+Systemd User Timers:
+    default:
+        src:
+            - config/systemd/user
 
-# X Window:
-#         dest: ~/
-#         dot: true
-#         default:
-#                 - Xresources
-#                 - Xdefaults
-#                 - Xmodmap
+X Window:
+    default:
+        src:
+            - Xresources
+            - Xdefaults
+            - Xmodmap
 
-# Powerline:
-#         dest: ~/
-#         dot: true
-#         default:
-#                 - config/powerline
+IDEs:
+    QT Creator:
+        src:
+            - config/QtProject
 
-# QT Creator:
-#         dest: ~/
-#         dot: true
-#         default:
-#                 - config/QtProject
+    PyCharm Editor:
+        src:
+            - PyCharm
 
-# PyCharm Editor:
-#         dest: ~/
-#         default:
-#                 - PyCharm
+    Visual Studio Code:
+        src:
+            - config/Code
 
-# Beyond Compare:
-#         dest: ~/
-#         dot: true
-#         default:
-#                 - config/bcompare/BCCommands.xml
-
-# Visual Studio Code:
-#         dest: ~/
-#         dot: true
-#         default:
-#                 - config/Code
-
-# Fish Shell:
-#         dest: ~/
-#         dot: true
-#         default:
-#                 - config/fish
-
+Mutt Email:
+    default:
+        src:
+        - mbsyncrc
+        - msmtprc
+        - mutt/aliases
+        - mutt/bindings
+        - mutt/colors
+        - mutt/mailcap
+        - mutt/mbsync_folders.py
+        - mutt/muttrc
+    Work:
+        src:
+        - mutt/accounts/microchip
+        - mutt/microchip.com.gpg
+        - mutt/outlook.office365.com.pem
+        - mutt/signatures/work
+    Home:
+        src:
+        - mutt/accounts/one
+        - mutt/imap.one.com.pem
+        - mutt/send.one.com.pem
+        - mutt/one.com.gpg
+        - mutt/signatures/home

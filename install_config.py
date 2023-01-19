@@ -104,7 +104,7 @@ class InstallBase:
             return self.do_install
         self.show()
         indent = '  ' * self.level
-        prompt = f'{indent}Do you want to install {Fore.BLUE}{self.name}{Style.RESET_ALL}: (N/y) > '
+        prompt = f'{indent}{Style.BRIGHT}Do you want to install {Fore.BLUE}{self.name}{Style.RESET_ALL}: (N/y) > '
         if input(prompt).lower() == 'y':
             self.do_install = True
         return self.do_install
@@ -157,9 +157,9 @@ class InstallGroup(InstallBase):
     def show(self):
         indent = '  ' * self.level
         cindent = '  ' * (self.level + 1)
-        print(f'{indent}{Fore.GREEN}{self.name}{Style.RESET_ALL}:')
+        print(f'{indent}{Fore.LIGHTMAGENTA_EX}{self.name}{Style.RESET_ALL}:')
         for name in self.src:
-            print(f'{cindent}{name}:')
+            print(f'{cindent}{Style.DIM}{name}{Style.RESET_ALL}')
 
     def __str__(self):
         return f'InstallItem: {self.name}: {self.src}'
@@ -172,6 +172,10 @@ class Feature(InstallBase):
             self.destination = value['dest']
         if 'dot' in value:
             self.dot = value['dot']
+        if self.level > 1:
+            self.indent = '  ' * self.level
+        else:
+            self.indent = f'{Fore.BLUE}*{Style.RESET_ALL} '
 
     def query_user(self):
         if super().query_user():
@@ -187,8 +191,7 @@ class Feature(InstallBase):
 
     def install(self):
         if self.do_install:
-            indent = '  ' * self.level
-            print(f'{indent}Installing {Fore.BLUE}{self.name}{Style.RESET_ALL}')
+            print(f'{self.indent}Installing {Fore.BLUE}{self.name}{Style.RESET_ALL}')
             for child in self.children:
                 child.install()
 
@@ -214,7 +217,7 @@ class Feature(InstallBase):
 
     def show(self):
         indent = '  ' * self.level
-        print(f'{indent}{Fore.BLUE}{self.name}{Style.RESET_ALL}:')
+        print(f'{self.indent}{Fore.BLUE}{self.name}{Style.RESET_ALL}:')
         for child in self.children:
             child.show()
 
