@@ -1,6 +1,6 @@
 -- Neovim configuration Adding Language Server support
 -- Steen Hegelund
--- Time-Stamp: 2022-Oct-03 21:09
+-- Time-Stamp: 2023-Jan-19 20:05
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- yay ccls
@@ -10,6 +10,8 @@
 -- npm install -g typescript typescript-language-server
 -- yay rust-analyzer
 -- yay lua-language-server
+-- yay bash-language-server
+-- yaml-language-server
 
 return {
   {
