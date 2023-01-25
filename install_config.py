@@ -64,28 +64,27 @@ class Installer:
     def execute(self):
         indent = '  ' * (self.level + 1)
         print(f'{indent}{self.file_status.value}:  {self.srcpath} => {self.dstpath}')
-        match self.file_status:
-            case FileStatus.Missing:
-                newdir = os.path.dirname(self.dstpath)
-                if not os.path.exists(newdir):
-                    os.makedirs(newdir, exist_ok=True)
-                if os.path.exists(self.dstpath):
-                    os.remove(self.dstpath)
-                os.symlink(self.srcpath, self.dstpath)
-            case FileStatus.CorrectLink:
-                return
-            case FileStatus.Linked:
+        if self.file_status == FileStatus.Missing:
+            newdir = os.path.dirname(self.dstpath)
+            if not os.path.exists(newdir):
+                os.makedirs(newdir, exist_ok=True)
+            if os.path.exists(self.dstpath):
                 os.remove(self.dstpath)
-                os.symlink(self.srcpath, self.dstpath)
-            case FileStatus.SameContent:
-                os.remove(self.dstpath)
-                os.symlink(self.srcpath, self.dstpath)
-            case FileStatus.DifferentContent:
-                self.create_dst_backup()
-                os.symlink(self.srcpath, self.dstpath)
-            case FileStatus.Folder:
-                self.create_dst_backup()
-                os.symlink(self.srcpath, self.dstpath)
+            os.symlink(self.srcpath, self.dstpath)
+        elif self.file_status == FileStatus.CorrectLink:
+            return
+        elif self.file_status == FileStatus.Linked:
+            os.remove(self.dstpath)
+            os.symlink(self.srcpath, self.dstpath)
+        elif self.file_status == FileStatus.SameContent:
+            os.remove(self.dstpath)
+            os.symlink(self.srcpath, self.dstpath)
+        elif self.file_status == FileStatus.DifferentContent:
+            self.create_dst_backup()
+            os.symlink(self.srcpath, self.dstpath)
+        elif self.file_status == FileStatus.Folder:
+            self.create_dst_backup()
+            os.symlink(self.srcpath, self.dstpath)
 
 
 class InstallBase:
@@ -235,12 +234,11 @@ def add_feature(parent, name, value, level):
         parent.append(ft)
         if isinstance(value, dict):
             for ckey, cval in value.items():
-                match ckey:
-                    case 'dest':
-                        # ignore
-                        pass
-                    case _:
-                        add_feature(ft, ckey, cval, level + 1)
+                if ckey == 'dest':
+                    # ignore
+                    pass
+                else:
+                    add_feature(ft, ckey, cval, level + 1)
 
 
 def setup_test(features):
