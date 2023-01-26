@@ -77,12 +77,12 @@ color=#7fffd4
 interval=10
 separator=false
 
-[iface]
-label= wifi:
-instance=wifi
-color=#7fffd4
-interval=10
-separator=false
+# [iface]
+# label= wifi:
+# instance=wifi
+# color=#7fffd4
+# interval=10
+# separator=false
 
 [iface]
 label= tun:
@@ -99,10 +99,10 @@ label=
 min_width=50
 interval=10
 
-[temperature]
-label=TEMP: 
-interval=10
-SHORTFMT=
+# [temperature]
+# label=TEMP:
+# interval=10
+# SHORTFMT=
 
 [hostname]
 command=uname -n
