@@ -157,9 +157,6 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 
-# Take Screenshots with MOD+P
-bindsym $mod+P exec xfce4-screenshooter
-
 # NumLock is ON
 exec_always --no-startup-id numlockx on
 
