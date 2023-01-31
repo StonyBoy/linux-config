@@ -1,6 +1,6 @@
 -- Neovim keymap configuration
 -- Steen Hegelund
--- Time-Stamp: 2023-Jan-16 20:37
+-- Time-Stamp: 2023-Jan-31 16:19
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
@@ -61,13 +61,6 @@ vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = 
 vim.api.nvim_set_keymap('n', '<leader><leader>l', '', { noremap = true, silent = true,
   callback = function()
     require('config.functions').reload_module(vim.fn.expand('%:t:r'))
-  end,
-})
-
--- Toggle quickfix list (c) and stay in current window
-vim.api.nvim_set_keymap('n', '<F11>', '', { noremap = true, silent = true,
-  callback = function()
-    require('qf').toggle('c', true)
   end,
 })
 
