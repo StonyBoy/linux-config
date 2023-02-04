@@ -91,10 +91,8 @@
         "interval": "3600"
     },
     "custom/uptime": {
-        "format": "{}",
-        "escape": true,
-        "interval": "60",
-        "exec": "$HOME/scripts/strict_uptime"
+        "exec": "$HOME/.config/waybar/uptime.sh",
+        "return-type": "json"
     }
 }
 
