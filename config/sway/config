@@ -36,9 +36,8 @@ exec --no-startup-id exec swaymsg "output * bg /opt/wallpapers/wallpaper.jpg fil
 #
 exec swayidle -w \
          timeout 600 swaylock \
-         timeout 900 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep 'playerctl -p spotify pause' \
-         before-sleep swaylock
+         timeout 1200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+         before-sleep 'playerctl -p spotify pause'
 
 # This will lock your screen after 600 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -61,7 +60,7 @@ exec swayidle -w \
 # Mouse scrollwheel sensitivity
 #
 input "1133:4123:Logitech_M705" {
-    scroll_factor 0.5
+    scroll_factor 0.75
 }
 
 input "type:keyboard" {
