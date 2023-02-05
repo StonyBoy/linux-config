@@ -22,6 +22,7 @@ set $term alacritty
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 exec --no-startup-id exec swaymsg "output * bg /opt/wallpapers/wallpaper.jpg fill"
+bindsym $mod+ctrl+w exec swaymsg "output * bg /opt/wallpapers/wallpaper.jpg fill"
 
 #
 # Example configuration:
