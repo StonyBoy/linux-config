@@ -1,7 +1,0 @@
-[Unit]
-Description=Net Next Status Storing Service
-
-[Service]
-Type=oneshot
-ExecStart=%h/src/proj/pytools/netnextstat/netnextstat.py %h/.local/share/netnextstatus/status.csv
-
