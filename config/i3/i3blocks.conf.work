@@ -50,21 +50,21 @@ MUTED_COLOR="#a0a0a0"
 # Memory usage
 #
 # The type defaults to "mem" if the instance is not specified.
-# [memory]
-# label=
-# separator=false
-# interval=30
-# color=#fdb6b6
+[memory]
+label=
+separator=false
+interval=30
+color=#fdb6b6
 
-[memory2]
-interval=persist
-markup=pango
-#bar_chars=_▁▂▃▄▅▆▇█ 
-#bar_size=10
-critical=80
-warning=50
-color_critical=#FF7373
-color_warning=#FFA500
+#[memory2]
+#interval=persist
+#markup=pango
+##bar_chars=_▁▂▃▄▅▆▇█ 
+##bar_size=10
+#critical=80
+#warning=50
+#color_critical=#FF7373
+#color_warning=#FFA500
 
 # Disk usage
 #
