@@ -2,7 +2,7 @@
 # -*-sh-*-
 
 pathappend ~/scripts ~/.local/bin ~/bin
-pathprepend /opt/local/bin /opt/local/sbin
+pathprepend /$(pyenv root)/shims opt/local/bin /opt/local/sbin
 
 # set -x
 
@@ -23,4 +23,3 @@ function mount_efi()
 {
     sudo diskutil mount MACOS_EFI
 }
-
