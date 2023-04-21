@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 '''
 Steen Hegelund
-Time-Stamp: 2023-Jan-12 22:28
+Time-Stamp: 2023-Apr-12 13:04
 
 Mount configured shares via CIFS or SSHFS
 '''
@@ -28,7 +28,8 @@ def syscmd(cmd):
 
 
 def create_folders(config, mname = None):
-    print('create_folders', config, mname)
+    if verbose:
+        print('create_folders', config, mname)
     for name in config['mounts']:
         if not mname or mname != name:
             continue
@@ -40,7 +41,8 @@ def create_folders(config, mname = None):
 
 
 def mount_folders(config, mname = None):
-    print('mount_folders', config, mname)
+    if verbose:
+        print('mount_folders', config, mname)
     options = []
     if config['type'] == 'cifs':
         for key, value in config['options'].items():
@@ -49,7 +51,8 @@ def mount_folders(config, mname = None):
             else:
                 options.append(f"{key}")
     optstr = ','.join(options)
-    print('optstr', optstr)
+    if verbose:
+        print('optstr', optstr)
     for name in config['mounts']:
         if mname and mname != name:
             continue
@@ -60,7 +63,8 @@ def mount_folders(config, mname = None):
 
 
 def unmount_folders(config, mname = None):
-    print('unmount_folders', config, mname)
+    if verbose:
+        print('unmount_folders', config, mname)
     for name in config['mounts']:
         if mname and mname != name:
             continue
