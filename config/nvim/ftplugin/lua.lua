@@ -1,13 +1,17 @@
 -- Neovim configuration: Lua Language Server support
 -- Steen Hegelund
--- Time-Stamp: 2022-Oct-03 21:56
+-- Time-Stamp: 2023-Apr-27 17:13
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- yay lua-language-server
 
+-- local util = require 'lspconfig.util'
+
 local config = {
   name = 'luals',
   cmd = {'lua-language-server'},
+  filetypes = { 'lua' },
+  -- root_dir = util.root_pattern('.luarc.json', '.luarc.jsonc', '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml'),
   root_dir = vim.fs.dirname(vim.fs.find({'.git'}, { upward = true })[1]),
   settings = {
     Lua = {
