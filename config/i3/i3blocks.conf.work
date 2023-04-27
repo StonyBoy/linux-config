@@ -138,13 +138,13 @@ instance=shegelun
 interval=30
 
 # Arch Linux update info
-[arch-update]
-markup=pango
-interval=3600
-QUIET=true
-BASE_COLOR=#5fff5f
-UPDATE_COLOR=#FFFF85
-LABEL= 
+# [arch-update]
+# markup=pango
+# interval=3600
+# QUIET=true
+# BASE_COLOR=#5fff5f
+# UPDATE_COLOR=#FFFF85
+# LABEL= 
 
 # Monitoring specific systemctl services
 [systemctl]
