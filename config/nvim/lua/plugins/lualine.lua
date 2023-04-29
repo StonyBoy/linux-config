@@ -1,6 +1,6 @@
 -- statusline configuration
 -- Steen Hegelund
--- Time-Stamp: 2023-Jan-25 09:52
+-- Time-Stamp: 2023-Apr-29 17:53
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Show editor configuration: tabs/spaces, tabstop, softtabstop, shiftwidth and textwidth (wrapping)
@@ -79,7 +79,7 @@ return {
       },
       sections = {
         lualine_a = { 'mode' },
-        lualine_b = { 'branch', filemod_state, { abbrev_path } },
+        lualine_b = {},
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
@@ -98,15 +98,15 @@ return {
           { 'tabs',
           mode = 2,
           max_length = vim.o.columns,
+          },
         },
+        lualine_b = { { require('NeoComposer.ui').status_recording } },
+        lualine_c = {},
+        lualine_x = { language_server },
+        lualine_y = { edit_config },
+        lualine_z = {},
       },
-      lualine_b = {},
-      lualine_c = {},
-      lualine_x = { language_server },
-      lualine_y = { edit_config },
-      lualine_z = {},
-    },
-    extensions = {},
-  })
-end,
+      extensions = {},
+    })
+  end,
 }

@@ -1,5 +1,6 @@
 {
   "LuaSnip": { "branch": "master", "commit": "4baa7334e17d177841d66dbe71d51000ca55c144" },
+  "NeoComposer.nvim": { "branch": "main", "commit": "a85782bd7968eb462da03cbc2c186bc236f0b3c6" },
   "bufexplorer": { "branch": "master", "commit": "5a830d5d2d7417bf02339ec279c90e98dde822f8" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "0e6b2ed705ddcff9738ec4ea838141654f12eeef" },
@@ -24,6 +25,7 @@
   "qf.nvim": { "branch": "main", "commit": "33720f0cba45f6bc975043aeec98d44a02f2ed61" },
   "rust.vim": { "branch": "master", "commit": "889b9a7515db477f4cb6808bef1769e53493c578" },
   "splitjoin.vim": { "branch": "main", "commit": "e6af44293c55431d78cc2ddd4335ed68e6fcf6ed" },
+  "sqlite.lua": { "branch": "master", "commit": "b7e28c8463254c46a8e61c52d27d6a2040492fc3" },
   "telescope-live-grep-raw.nvim": { "branch": "master", "commit": "7de3baef1ec4fb77f7a8195fe87bebd513244b6a" },
   "telescope.nvim": { "branch": "master", "commit": "716b3753e877ecbb7cc32d58f7b1e9bc29921b7f" },
   "unicodemoji": { "branch": "master", "commit": "38a25635b21a78bad621701e6673020457c15385" },
