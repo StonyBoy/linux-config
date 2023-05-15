@@ -52,6 +52,7 @@ Scripts:
             - scripts/git_branches.py
             - scripts/config_tunnel.sh
             - scripts/config_remote_tunnel.sh
+            - scripts/cmp_folders
 
 Editor:
     Classic Vim:
