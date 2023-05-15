@@ -1,0 +1,122 @@
+#!/usr/bin/env ruby
+# Steen Hegelund
+# Time-Stamp: 2021-Apr-15 14:06
+# Optionally uses delta: https://github.com/dandavison/delta
+#
+require 'optparse'
+
+#################################################################
+# Command Line Options
+#################################################################
+
+options = {}
+
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: #{File.basename(__FILE__)} [options] folder1 folder2
+
+    Compare two folders with the same number of files, one by one
+    using vimdiff or delta
+
+Options:"
+  opts.on('-s', '--show', 'Only show the list of files to compare') do |d|
+    options[:show] = d
+  end
+  opts.on('-h', '--help', 'Show this message') do
+    puts opts
+    exit
+  end
+end
+
+parser.parse!(ARGV)
+
+if ARGV.length < 2
+  STDERR.puts "Usage: #{File.basename(__FILE__)} folder1 folder2"
+  exit 1
+end
+
+#################################################################
+# Helper functions
+#################################################################
+
+def show_compare(list)
+  list.each do |set|
+    puts '%30s - %-30s' % [File.basename(set[0]), File.basename(set[1])]
+  end
+  exit 2
+end
+
+def align_files(files1, files2)
+  result = []
+  long = files1
+  short = files2
+  if files2.length > files1.length
+    long = files2
+    short = files1
+  end
+  long.each do |pname1|
+    fname1 = File.basename(pname1)
+    short.each do |pname2|
+      fname2 = File.basename(pname2)
+      if fname1 == fname2
+        result << [pname1, pname2]
+        break
+      end
+    end
+  end
+  result
+end
+
+def get_char
+  state = `stty -g`
+  `stty raw -echo -icanon isig`
+
+  STDIN.getc.chr
+ensure
+  `stty #{state}`
+end
+
+#################################################################
+# Action
+#################################################################
+
+folder1 = File.expand_path(ARGV[0])
+folder2 = File.expand_path(ARGV[1])
+
+files1 = Dir.glob(File.join(folder1, '*')).sort
+files2 = Dir.glob(File.join(folder2, '*')).sort
+
+compare_list = align_files(files1, files2)
+STDERR.puts 'No files to compare' if compare_list.empty?
+show_compare(compare_list) if options[:show]
+
+Signal.trap('INT') do # SIGINT = control-C
+  STDOUT.puts "\r\n"
+  exit
+end
+
+compare_list.each do |set|
+  if system("diff -q #{set[0]} #{set[1]}")
+    STDOUT.puts 'Compare %30s - %-30s  == equal' % [File.basename(set[0]), File.basename(set[1])]
+  else
+    STDOUT.print 'Compare %30s - %-30s  [E]dit, [v]iew, [s]kip or [a]bort?' % [File.basename(set[0]), File.basename(set[1])]
+    STDOUT.flush
+    case get_char.downcase
+    when 'a'
+      STDOUT.puts "\r\n"
+      break
+    when 's'
+      STDOUT.puts "\r\n"
+      next
+    when 'v'
+      if File.exist?('/usr/bin/delta')
+        system("delta --paging always #{set[0]} #{set[1]}")
+      else
+        system("diff #{set[0]} #{set[1]}")
+      end
+      STDOUT.puts "\r\n"
+    when 'e', "\r"
+      system("nvim -d #{set[0]} #{set[1]}")
+      STDOUT.puts "\r\n"
+    end
+  end
+end
