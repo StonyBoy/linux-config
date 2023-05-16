@@ -1,14 +1,16 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2023-May-10 22:52
+-- Time-Stamp: 2023-May-16 23:10
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local function keymaps()
-  vim.keymap.set('n', '<leader>c',  require('dap').continue)
-  vim.keymap.set('n', '<leader>o', require('dap').step_over)
-  vim.keymap.set('n', '<leader>i', require('dap').step_into)
-  vim.keymap.set('n', '<leader>r', require('dap').step_out)
-  vim.keymap.set('n', '<leader>b', require('dap').toggle_breakpoint)
+  vim.keymap.set('n', '<leader>dc',  require('dap').continue)
+  vim.keymap.set('n', '<leader>do', require('dap').step_over)
+  vim.keymap.set('n', '<leader>di', require('dap').step_into)
+  vim.keymap.set('n', '<leader>dr', require('dap').step_out)
+  vim.keymap.set('n', '<leader>db', require('dap').toggle_breakpoint)
+  vim.keymap.set('n', '<leader>du', require('dap').run_to_cursor)
+  vim.keymap.set('n', '<leader>dr', require('dap').restart)
 end
 
 -- For rust in Arch Linux you need
@@ -70,10 +72,17 @@ local function do_rust()
 
 end
 
+local function do_python()
+  require('dap-python').setup('~/.pyenv/versions/3.11.2/bin/python')
+end
+
 return {
   {
     'rcarriga/nvim-dap-ui',
-    dependencies = {'mfussenegger/nvim-dap'},
+    dependencies = {
+      'mfussenegger/nvim-dap',
+      'mfussenegger/nvim-dap-python',
+    },
     config = function()
       local dap = require('dap')
       local dapui = require('dapui')
@@ -81,6 +90,7 @@ return {
       dapui.setup()
       keymaps()
       do_rust()
+      do_python()
       dap.listeners.after.event_initialized['dapui_config'] = function()
         dapui.open()
       end
