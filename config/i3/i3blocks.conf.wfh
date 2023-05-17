@@ -147,7 +147,7 @@ color=#ccf3d1
 [time]
 interval=5
 STRFTIME_FORMAT=%H:%M:%S
-TZONES=Europe/Copenhagen,America/New_York,Asia/Calcutta
-TZ_LABELS=CPH,NY,Hyd
+TZONES=Europe/Copenhagen,America/New_York,America/Phoenix,Asia/Calcutta
+TZ_LABELS=CPH,NY,Phx,Hyd
 color=#f9f79a
 
