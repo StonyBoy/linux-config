@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2023-May-16 23:10
+-- Time-Stamp: 2023-May-17 15:41
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local function keymaps()
@@ -11,6 +11,7 @@ local function keymaps()
   vim.keymap.set('n', '<leader>db', require('dap').toggle_breakpoint)
   vim.keymap.set('n', '<leader>du', require('dap').run_to_cursor)
   vim.keymap.set('n', '<leader>dr', require('dap').restart)
+  vim.keymap.set('n', '<leader>dt', require('dap').terminate)
 end
 
 -- For rust in Arch Linux you need
