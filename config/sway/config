@@ -364,7 +364,7 @@ bar {
     exec export SSH_AUTH_SOCK
 
     # Start a polkit authentication agent
-    exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+    exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
     # For xdg-desktop-portal-wlr (screen sharing in teams)
     exec export XDG_CURRENT_DESKTOP=sway
