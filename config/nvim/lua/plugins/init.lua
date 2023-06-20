@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2023-May-16 16:49
+-- Time-Stamp: 2023-Jun-20 21:31
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 return {
@@ -25,8 +25,6 @@ return {
     'pangloss/vim-javascript',                     -- Better Javascript indenting support
     'rust-lang/rust.vim',                          -- Rust, syntax highlighting, formatting, Syntastic integration
     'aklt/plantuml-syntax',                        -- PlantUML Syntax/  usein/FTDetect
-    'nvim-treesitter/nvim-treesitter',             -- Highlight, edit, and navigate code using a fast incremental parsing library
-    'nvim-treesitter/nvim-treesitter-textobjects', -- Additional textobjects for treesitter
     'rafcamlet/nvim-luapad',                       -- Interactive neovim scratchpad for lua
 }
 
