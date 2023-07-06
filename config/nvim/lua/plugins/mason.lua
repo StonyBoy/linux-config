@@ -12,20 +12,20 @@ return {
     build = ":MasonUpdate", -- :MasonUpdate updates registry contents
     config = function()
       require("mason").setup({
-        ensure_installed = {
-          "clangd", "pylsp", "lua_ls", "rust_analyzer", "pylsp", "yamlls", "bashls", "solargraph", "vimls", "tsserver",
-        },
         ui = {
           border = "rounded",
         },
       })
-      require("mason").setup()
     end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
     config = function()
-      require("mason-lspconfig").setup()
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          "clangd", "pylsp", "lua_ls", "rust_analyzer", "pylsp", "yamlls", "bashls", "solargraph", "vimls", "tsserver",
+        },
+      })
     end,
   },
   {
