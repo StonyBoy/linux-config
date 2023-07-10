@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2023-Jul-07 10:52
+-- Time-Stamp: 2023-Jul-10 13:03
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Portable package manager for Neovim that runs everywhere Neovim runs.
@@ -88,9 +88,6 @@ return {
             runtime = {
               version = "LuaJIT",
               path = vim.split(package.path, ';')
-            },
-            workspace = {
-              library = vim.api.nvim_get_runtime_file("", true),
             },
             telemetry = {
               enable = false,
