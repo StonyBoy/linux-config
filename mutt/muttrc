@@ -1,3 +1,7 @@
+# Steen Hegelund
+# Time-Stamp: 2023-Jul-11 21:18
+# vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=muttrc :
+#
 # paths
 set folder = ~/.local/share/mail/microchip
 set message_cachedir = ~/.mutt/cache/bodies
@@ -90,6 +94,9 @@ source $alias_file
 # keeping those in one place makes it easier for my brain
 source ~/.mutt/colors
 source ~/.mutt/bindings
+
+# Notmuch Queries
+source ~/.mutt/notmuch_queries
 
 # And finally the account config for multiple accounts
 #############################################################

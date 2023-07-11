@@ -1,3 +1,7 @@
+# Steen Hegelund
+# Time-Stamp: 2023-Jul-11 21:19
+# vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=muttrc :
+#
 set from = "steen.hegelund@microchip.com"
 set sendmail = "msmtp -a microchip"
 

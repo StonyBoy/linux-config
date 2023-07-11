@@ -1,3 +1,7 @@
+# Steen Hegelund
+# Time-Stamp: 2023-Jul-11 21:18
+# vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=muttrc :
+#
 # some sane vim-like keybindings
 bind index,pager k previous-entry
 bind index,pager j next-entry

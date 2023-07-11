@@ -1,0 +1,15 @@
+# Steen Hegelund
+# Time-Stamp: 2023-Jul-11 21:18
+# vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=muttrc :
+#
+## Notmuch (the ~/.notmuch-config has the path)
+virtual-mailboxes 'Notmuch'         "notmuch://?query="
+virtual-mailboxes '  Netdev - Daniel'         "notmuch://?query=folder:netdev_list and (from:{daniel.machon@microchip.com} or to:{daniel.machon@microchip.com})"
+virtual-mailboxes '  Netdev - Steen'          "notmuch://?query=folder:netdev_list and (from:{steen.hegelund@microchip.com} or to:{steen.hegelund@microchip.com})"
+virtual-mailboxes '  Netdev - Horatiu'        "notmuch://?query=folder:netdev_list and (from:{horatiu.vultur@microchip.com} or to:{horatiu.vultur@microchip.com})"
+virtual-mailboxes '  Netdev - Announcements'  "notmuch://?query=folder:netdev_list and thread:\"{subject:[ANN]}\""
+# virtual-mailboxes '  Netdev - Newpatch'       "notmuch://?query=folder:netdev_list and subject:/^\[PATCH/ and not subject:/[v][2-9]/ and not subject:/[2-9]+\/[2-9]+/ and is:unread"
+virtual-mailboxes '  Netdev - Bootlin'        "notmuch://?query=folder:netdev_list and thread:\"{from:bootlin.com}\""
+virtual-mailboxes '  Netdev - PCS inband'     "notmuch://?query=folder:netdev_list and subject:\"PCS inband negotiation\""
+virtual-mailboxes '  UNGLinuxDriver - FP'     "notmuch://?query=folder:unglinuxdriver_list and (thread:\"{subject:ethtool support for IEEE 802.3 MAC Merge layer}\" or thread:\"{subject:Add kernel tc-mqprio and tc-taprio support for preemptible traffic classes}\")"
+
