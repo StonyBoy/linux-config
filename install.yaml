@@ -211,6 +211,7 @@ Mutt Email:
         - mutt/mailcap
         - mutt/mbsync_folders.py
         - mutt/muttrc
+        - mutt/notmuch_queries
     Work:
         src:
         - mutt/accounts/microchip
