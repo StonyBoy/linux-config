@@ -1,5 +1,6 @@
 [Unit]
 Description=DavMail Gateway Service
+Wants=network-online.target
 After=syslog.target
 After=network.target
 
@@ -7,6 +8,8 @@ After=network.target
 Type=simple
 ExecStart=/usr/bin/davmail %h/.config/davmail/davmail.properties
 TimeoutSec=120
+Restart=always
+RestartSec=5m
 
 [Install]
 WantedBy=multi-user.target
