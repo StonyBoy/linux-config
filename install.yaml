@@ -84,6 +84,7 @@ Console:
     Bat:
         src:
             - config/bat/config
+            - profile.d/60-bat.sh
 
     Terminal Mux:
         src:
