@@ -1,9 +1,9 @@
 # Steen Hegelund
-# Time-Stamp: 2023-Jul-11 21:18
+# Time-Stamp: 2023-Jul-13 13:37
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=muttrc :
 #
 ## Notmuch (the ~/.notmuch-config has the path)
-virtual-mailboxes 'Notmuch'         "notmuch://?query="
+virtual-mailboxes 'Notmuch'         "notmuch://?query=''"
 virtual-mailboxes '  Netdev - Daniel'         "notmuch://?query=folder:netdev_list and (from:{daniel.machon@microchip.com} or to:{daniel.machon@microchip.com})"
 virtual-mailboxes '  Netdev - Steen'          "notmuch://?query=folder:netdev_list and (from:{steen.hegelund@microchip.com} or to:{steen.hegelund@microchip.com})"
 virtual-mailboxes '  Netdev - Horatiu'        "notmuch://?query=folder:netdev_list and (from:{horatiu.vultur@microchip.com} or to:{horatiu.vultur@microchip.com})"

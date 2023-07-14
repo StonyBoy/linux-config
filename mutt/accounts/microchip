@@ -1,5 +1,5 @@
 # Steen Hegelund
-# Time-Stamp: 2023-Jul-11 21:19
+# Time-Stamp: 2023-Jul-13 11:44
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=muttrc :
 #
 set from = "steen.hegelund@microchip.com"
@@ -17,17 +17,10 @@ set trash = "+microchip/Deleted Items"
 # custom signature
 set signature = ~/.mutt/signatures/work
 
-# Colors "item      foreground      background     params"
-color    status      red            default
-color    sidebar_new white          red
-
-macro index o "<shell-escape>mailsync<enter>" "run mailsync to sync mail for microchip account"
-
-macro index,pager J \
-  "<enter-command>set my_old_resolve=\$resolve noresolve<enter>\
-  <tag-prefix><clear-flag>n<enter-command>set resolve=\$my_old_resolve<enter>\
-  <save-message>+microchip/Junk Email<enter>" \
-  "mark as read and move to junk folder"
+# Colors "item             foreground     background     params"
+# color  status            red            default
+# color  sidebar_new       white          yellow
+color    sidebar_highlight white          blue
 
 macro index,pager A \
   "<save-message>+microchip/Archive<enter>"  \

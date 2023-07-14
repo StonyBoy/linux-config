@@ -1,3 +1,7 @@
+# Steen Hegelund
+# Time-Stamp: 2023-Jul-13 11:44
+# vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=muttrc :
+
 set from = "steen@hegelund-hansen.dk"
 set sendmail = "msmtp -a one"
 
@@ -14,16 +18,9 @@ set trash = "+one/Trash"
 set signature = ~/.mutt/signatures/home
 
 # Colors "item      foreground      background     params"
-color    status      green          default
-color    sidebar_new white          green
-
-macro index o "<shell-escape>mbsync one<enter>" "run mbsync to sync mail for this account"
-
-macro index,pager J \
-  "<enter-command>set my_old_resolve=\$resolve noresolve<enter>\
-  <tag-prefix><clear-flag>n<enter-command>set resolve=\$my_old_resolve<enter>\
-  <save-message>+one/Spam<enter>" \
-  "mark as read and move to spam folder"
+# color  status      green          default
+# color  sidebar_new white          yellow
+color    sidebar_highlight          white          blue
 
 macro index,pager A \
   "<save-message>+one/Archived<enter>"  \

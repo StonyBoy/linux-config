@@ -1,8 +1,14 @@
 #! /usr/bin/env python3
+# Steen Hegelund
+# Time-Stamp: 2023-Jul-13 11:59
+# vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
+# Return a list of neomutt formatted maildir foldernames
+
 import os
 import sys
 
-def get_mailbox_folder_list(top, account = None):
+
+def get_mailbox_folder_list(top, account=None):
     base = top + os.sep
     if account:
         top = os.path.join(top, account) + os.sep
@@ -11,7 +17,11 @@ def get_mailbox_folder_list(top, account = None):
     result = []
     for dirpath, dirnames, filenames in os.walk(top):
         if 'cur' in dirnames:
-            result.append('"+{}"'.format(dirpath.replace(base, '')))
+            mname = dirpath.replace(base, '')
+            if 'Inbox' in mname:
+                result.insert(0, f'"+{mname}"')
+            else:
+                result.append(f'"+{mname}"')
     return result
 
 
@@ -22,4 +32,4 @@ elif len(sys.argv) == 3:
     top = os.path.expanduser(sys.argv[1]).rstrip(os.sep)
     print(' '.join(get_mailbox_folder_list(top, sys.argv[2])))
 else:
-    print('Usage: {} <mailbox account path>'.format(sys.argv[0]))
+    print(f'Usage: {sys.argv[0]} <mailbox account path> <foldername>')
