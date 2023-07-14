@@ -4,4 +4,5 @@ Description=Mailbox synchronization service
 [Service]
 Type=oneshot
 ExecStart=/usr/bin/mbsync -c %h/.config/mbsync/mbsyncrc microchip
+ExecStartPost=/usr/bin/notmuch new
 
