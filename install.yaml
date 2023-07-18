@@ -201,28 +201,34 @@ IDEs:
         src:
             - config/Code
 
-Mutt Email:
+Email:
     default:
         src:
-        - mbsyncrc
         - msmtprc
-        - mutt/aliases
-        - mutt/bindings
-        - mutt/colors
-        - mutt/mailcap
-        - mutt/mbsync_folders.py
-        - mutt/muttrc
-        - mutt/notmuch_queries
-    Work:
+        - config/mbsync/mbsyncrc
+        - config/davmail/davmail.properties
+    aerc:
         src:
-        - mutt/accounts/microchip
-        - mutt/microchip.com.gpg
-        - mutt/outlook.office365.com.pem
-        - mutt/signatures/work
-    Home:
+        - config/aerc
+    mutt:
         src:
-        - mutt/accounts/one
-        - mutt/imap.one.com.pem
-        - mutt/send.one.com.pem
-        - mutt/one.com.gpg
-        - mutt/signatures/home
+            - mutt/aliases
+            - mutt/bindings
+            - mutt/colors
+            - mutt/mailcap
+            - mutt/mbsync_folders.py
+            - mutt/muttrc
+            - mutt/notmuch_queries
+        Work:
+            src:
+            - mutt/accounts/microchip
+            - mutt/microchip.com.gpg
+            - mutt/outlook.office365.com.pem
+            - mutt/signatures/work
+        Home:
+            src:
+            - mutt/accounts/one
+            - mutt/imap.one.com.pem
+            - mutt/send.one.com.pem
+            - mutt/one.com.gpg
+            - mutt/signatures/home
