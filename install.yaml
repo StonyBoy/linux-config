@@ -211,14 +211,15 @@ Email:
         src:
         - config/aerc
     mutt:
-        src:
-            - mutt/aliases
-            - mutt/bindings
-            - mutt/colors
-            - mutt/mailcap
-            - mutt/mbsync_folders.py
-            - mutt/muttrc
-            - mutt/notmuch_queries
+        default:
+            src:
+                - mutt/aliases
+                - mutt/bindings
+                - mutt/colors
+                - mutt/mailcap
+                - mutt/mbsync_folders.py
+                - mutt/muttrc
+                - mutt/notmuch_queries
         Work:
             src:
             - mutt/accounts/microchip
