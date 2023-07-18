@@ -1,0 +1,34 @@
+#############################################
+######## Account microchip via Davmail ######
+#############################################
+
+IMAPAccount microchip
+Host 127.0.0.1
+Port 5001
+SSLType None
+User steen.hegelund@microchip.com
+PassCmd "gpg --quiet --for-your-eyes-only --no-tty --decrypt ~/.config/login/microchip.com.gpg"
+AuthMechs LOGIN
+Timeout 0
+PipelineDepth 3
+
+# Remote storage
+IMAPStore microchip-remote
+Account microchip
+
+# Local storage
+MaildirStore microchip-local
+Path ~/.local/share/mail/microchip/
+Inbox ~/.local/share/mail/microchip/Inbox
+Subfolders Verbatim
+
+Channel microchip
+Far :microchip-remote:
+Near :microchip-local:
+Patterns INBOX netdev_list unglinuxdriver_list Linux4Microchip_list "UNG/BSP Team" Herlev "UNG/Bootlin" "Sent Items"
+SyncState *
+Create Near
+Expunge Both
+Sync Full
+CopyArrivalDate Yes
+
