@@ -1,5 +1,5 @@
 # Steen Hegelund
-# Time-Stamp: 2023-Jul-13 11:32
+# Time-Stamp: 2023-Jul-18 16:42
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=muttrc :
 #
 # some sane vim-like keybindings
@@ -28,10 +28,9 @@ bind index,pager R group-reply
 bind index,pager D purge-message
 bind index M sync-mailbox
 bind index <space> collapse-thread
-# Save all attachments
-macro index,pager S "<pipe-message>rm ~/Downloads/textfile* && ripmime -i - -d ~/Downloads" "Save all non-text attachments using ripmime"
-# opening urls with urlscan
-macro index,pager \cb "<pipe-message>urlscan<enter>" "call urlscan to extract URLs out of a message"
+
+# Apply thread to local git repo
+macro index,pager S "<pipe-message>/home/shegelun/scripts/apply_mail_patch.sh /home/shegelun/work/sparx5/upstreaming/net-next main" "Apply in net-next"
 
 # Message navigation
 bind pager <down> next-line
