@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2023-Jul-10 13:03
+-- Time-Stamp: 2023-Jul-21 10:05
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Portable package manager for Neovim that runs everywhere Neovim runs.
@@ -23,7 +23,7 @@ return {
     config = function()
       require("mason-lspconfig").setup({
         ensure_installed = {
-          "clangd", "pylsp", "lua_ls", "rust_analyzer", "pylsp", "yamlls", "bashls", "solargraph", "vimls", "tsserver",
+          "pylsp", "lua_ls", "rust_analyzer", "pylsp", "yamlls", "bashls", "solargraph", "vimls", "tsserver",
         },
       })
     end,
@@ -78,7 +78,7 @@ return {
         }
       })
 
-      lspconfig.clangd.setup({})
+      lspconfig.ccls.setup({})
       lspconfig.lua_ls.setup({
         settings = {
           Lua = {
