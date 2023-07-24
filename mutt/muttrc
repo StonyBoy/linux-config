@@ -1,5 +1,5 @@
 # Steen Hegelund
-# Time-Stamp: 2023-Jul-13 14:20
+# Time-Stamp: 2023-Jul-21 09:25
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=muttrc :
 #
 # paths
@@ -13,7 +13,7 @@ set alias_file = ~/.mutt/aliases
 # basic options
 set wait_key = no
 set mbox_type = Maildir
-set timeout = 600
+set timeout = 0
 set mail_check = 0
 set delete
 set quit
