@@ -1,0 +1,20 @@
+/* ==========================================================================
+   Rofi color theme
+   File: dual_tmux.rasi
+   ========================================================================== */
+
+* {
+    font:                        "Inconsolata 16";
+}
+
+listview {
+    lines:         15;
+    columns:       2;
+    fixed-columns: 2;
+}
+
+window {
+    location:         south east;
+}
+
+@import "Paper.rasi"
