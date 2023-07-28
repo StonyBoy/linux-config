@@ -1,5 +1,5 @@
 #!/bin/bash
-# Time-Stamp: 2023-Jul-26 17:07
+# Time-Stamp: 2023-Jul-28 11:05
 # Steen Hegelund
 #
 # Run a named tmux session in a terminal either remotely or locally
@@ -20,13 +20,13 @@ function remote_tmux() {
     if [ $# -gt 1 ]; then
         case "$2" in
             "Plain SSH Terminal")
-                coproc (alacritty --title "Work SSH" -e ssh -t $1)
+                coproc (alacritty --title "$1: $2 SSH" -e ssh -t $2)
                 ;;
             "X11 Forwarding SSH Terminal")
-                coproc (alacritty --title "X11 FWD Work SSH" -e ssh -Y -t $1)
+                coproc (alacritty --title "X11 FWD $1 $2 SSH" -e ssh -Y -t $2)
                 ;;
             *)
-                coproc (alacritty --title "$1" -e ssh -t $1 tmux -u attach-session -t $2)
+                coproc (alacritty --title "$1: $2" -e ssh -t $1 tmux -u attach-session -t $2)
                 ;;
         esac
     else
@@ -40,7 +40,7 @@ function local_tmux() {
     if [ $# -gt 1 ]; then
         case "$2" in
             *)
-                coproc (alacritty --title "$1" -e tmux -u attach-session -t $2)
+                coproc (alacritty --title "$2" -e tmux -u attach-session -t $2)
                 ;;
         esac
     else
