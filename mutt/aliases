@@ -1,5 +1,5 @@
 # Steen Hegelund
-# Time-Stamp: 2023-Jul-11 21:19
+# Time-Stamp: 2023-Sep-06 09:22
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=muttrc :
 #
 alias alex Alexandre Belloni <alexandre.belloni@bootlin.com>
@@ -45,3 +45,5 @@ alias torkil Torkil Oelgaard <Torkil.Oelgaard@microchip.com>
 alias vinodk Vinod Koul <vkoul@kernel.org>
 alias vlad Vladimir Lyalikov <Vlad.Lyalikov@microchip.com>
 alias younes Younes Leroul <Younes.Leroul@microchip.com>
+alias maxime Maxime Chevallier <maxime.chevallier@bootlin.com>
+alias herve Herve Codina <herve.codina@bootlin.com>
