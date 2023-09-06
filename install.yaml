@@ -25,6 +25,7 @@ Shells:
                 - profile.d/50-private.sh
                 - profile.d/60-tmux.sh
                 - profile.d/60-pyenv.sh
+                - profile.d/60-nodejs.sh
         Work:
             src:
                 - profile.d/30-keychain.sh
