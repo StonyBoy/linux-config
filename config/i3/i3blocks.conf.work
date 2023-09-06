@@ -73,12 +73,12 @@ color=#fdb6b6
 # (defaults to 10 for 10%).
 [disk]
 label=H:
-instance=/dev/sda2
+instance=/dev/nvme0n1p3
 interval=30
 
 [disk]
-label=W:
-instance=/dev/sdb1
+label=S:
+instance=/dev/nvme0n1p2
 interval=30
 
 # Network interface monitoring
