@@ -42,4 +42,4 @@ echo ""
 [ -d $HOME/.rvm/gems/ruby-2.6.3/bin ] && pathappend ~/.rvm/gems/ruby-2.6.3/bin
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-source "$HOME/.cargo/env"
+[ -d ~/.cargo/bin ] && source "$HOME/.cargo/env"
