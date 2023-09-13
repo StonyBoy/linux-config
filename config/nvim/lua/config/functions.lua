@@ -1,6 +1,6 @@
 -- Function Library
 -- Steen Hegelund
--- Time-Stamp: 2023-Jan-16 21:11
+-- Time-Stamp: 2023-Sep-13 10:41
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
@@ -61,6 +61,15 @@ Module.trailspace_trim = function()
   -- Search and replace trailing whitespace
   vim.cmd([[keeppatterns %s/\s\+$//e]])
   vim.api.nvim_win_set_cursor(0, curpos)
+end
+
+Module.add_mode_line = function()
+  local cmt = vim.opt.commentstring:get()
+  if string.len(cmt) > 0 then
+    vim.api.nvim_buf_set_lines(0, 0, 0, false, {string.format(vim.opt.commentstring:get(), Module.get_modeline())})
+  else
+    vim.api.nvim_buf_set_lines(0, 0, 0, false, {string.format("// %s ", Module.get_modeline())})
+  end
 end
 
 Module.get_visual_selection = function()

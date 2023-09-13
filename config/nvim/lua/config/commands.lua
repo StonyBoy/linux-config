@@ -1,6 +1,6 @@
 -- Neovim create global commands
 -- Steen Hegelund
--- Time-Stamp: 2022-Sep-19 20:18
+-- Time-Stamp: 2023-Sep-13 10:22
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Create Global Ex functions from Lua functions
@@ -10,6 +10,13 @@ vim.api.nvim_create_user_command('TrailspaceTrim', function()
 end, {
   nargs = '*',
   desc = 'Trim off trailing line whitespace'
+})
+
+vim.api.nvim_create_user_command('AddModeLine', function()
+  require('config.functions').add_mode_line()
+end, {
+  nargs = '*',
+  desc = 'Add a mode line to the current file'
 })
 
 vim.api.nvim_create_user_command('Rg', function(args)
