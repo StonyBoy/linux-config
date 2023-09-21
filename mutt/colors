@@ -1,5 +1,5 @@
 # Steen Hegelund
-# Time-Stamp: 2023-Jul-20 09:08
+# Time-Stamp: 2023-Sep-21 15:24
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=muttrc :
 #
 # basic colors ---------------------------------------------------------
@@ -50,3 +50,28 @@ color signature     brightblack     default
 color bold          black           default
 color underline     black           default
 color normal        default         default
+
+# Patch syntax highlighting
+# Original: https://raw.githubusercontent.com/jessfraz/dockerfiles/master/mutt/.mutt/mutt-patch-highlighting.muttrc
+color   body    yellow          default         ^(diff).*
+color   body    brightred       default         ^[\-\-\-].*
+color   body    brightgreen     default         ^[\+\+\+].*
+color   body    brightgreen     default         ^[\+].*
+color   body    brightred       default         ^[\-].*
+color   body    brightblue      default         ^(@@).*
+color   body    brightblue      default         ^(\s).*
+color   body    cyan            default         ^(Signed-off-by).*
+color   body    cyan            default         ^(Acked-by).*
+color   body    cyan            default         ^(Tested-by).*
+color   body    brightblue      default         ^(Cc)
+color   body    brightblack     default         "^diff \-.*"
+color   body    black           default         "^index [a-f0-9].*"
+color   body    black           default         "^---$"
+color   body    brightred       default         "^\-\-\- .*"
+color   body    brightgreen     default         "^[\+]{3} .*"
+color   body    green           default         "^[\+][^\+]+.*"
+color   body    red             default         "^\-[^\-]+.*"
+color   body    brightblack     default         "^@@ .*"
+color   body    black           default         ^[[:space:]].*
+
+
