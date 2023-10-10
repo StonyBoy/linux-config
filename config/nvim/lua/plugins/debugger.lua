@@ -1,14 +1,15 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2023-May-17 15:41
+-- Time-Stamp: 2023-Oct-10 20:27
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local function keymaps()
-  vim.keymap.set('n', '<leader>dc',  require('dap').continue)
-  vim.keymap.set('n', '<leader>do', require('dap').step_over)
-  vim.keymap.set('n', '<leader>di', require('dap').step_into)
+  vim.keymap.set('n', '<F2>', require('dap').toggle_breakpoint)
+  vim.keymap.set('n', '<F3>', require('dap').continue)
+  vim.keymap.set('n', '<F4>', require('dap').run_last)
+  vim.keymap.set('n', '<F5>', require('dap').step_over)
+  vim.keymap.set('n', '<F12>', require('dap').step_into)
   vim.keymap.set('n', '<leader>dr', require('dap').step_out)
-  vim.keymap.set('n', '<leader>db', require('dap').toggle_breakpoint)
   vim.keymap.set('n', '<leader>du', require('dap').run_to_cursor)
   vim.keymap.set('n', '<leader>dr', require('dap').restart)
   vim.keymap.set('n', '<leader>dt', require('dap').terminate)
