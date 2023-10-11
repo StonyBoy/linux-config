@@ -19,5 +19,19 @@ Style/GlobalVars:
   AllowedVariables:
     - $options
     - $ts
+    - $opt
+    - $fit
+    - $hid
+    - $bl2u
+    - $fip
+    - $nor
+    - $emmc
+    - $ext4
+    - $tty
+
+
 Style/StringLiterals:
   Enabled: false
+
+Style/MethodCallWithoutArgsParentheses:
+  AllowedPatterns: [ '*' ]
