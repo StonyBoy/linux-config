@@ -352,7 +352,7 @@ bar {
     for_window [class="Cisco AnyConnect Secure Mobility Client"] to workspace $ws10
 
     exec --no-startup-id caja
-    exec --no-startup-id spotify
+    exec --no-startup-id spotify-launcher
     exec --no-startup-id firefox
     exec --no-startup-id $term
 
