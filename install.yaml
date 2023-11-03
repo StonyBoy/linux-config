@@ -128,6 +128,7 @@ Ruby:
     default:
         src:
             - rubocop.yml
+            - profile.d/60-ruby.sh
 
 I3:
     default:

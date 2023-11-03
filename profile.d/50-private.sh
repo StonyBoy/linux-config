@@ -26,8 +26,6 @@ fi
 # Avoid rvmsudo complaints
 export rvmsudo_secure_path=1
 
-[ -s "$HOME/.rvm/scripts/rvm" ] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
 # Add Rusts Cargo to path if present
 [ -d ~/.cargo/bin ] && pathappend ~/.cargo/bin
 
