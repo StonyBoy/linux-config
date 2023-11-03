@@ -20,18 +20,13 @@ Style/GlobalVars:
     - $options
     - $ts
     - $opt
-    - $fit
-    - $hid
-    - $bl2u
-    - $fip
-    - $nor
-    - $emmc
-    - $ext4
-    - $tty
-
 
 Style/StringLiterals:
   Enabled: false
 
 Style/MethodCallWithoutArgsParentheses:
   AllowedPatterns: [ '*' ]
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
