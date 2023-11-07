@@ -1,5 +1,5 @@
 # Steen Hegelund
-# Time-Stamp: 2023-Sep-21 15:24
+# Time-Stamp: 2023-Nov-07 16:36
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=muttrc :
 #
 # basic colors ---------------------------------------------------------
@@ -14,6 +14,7 @@ color attachment    white           default
 color search        brightmagenta   default
 color indicator     white           yellow
 color tree          green           default
+color status        brightblue      white
 
 # sidebar colors -------------------------------------------------------
 color sidebar_new   default         default
