@@ -54,6 +54,7 @@
   "vim-ruby": { "branch": "master", "commit": "2ea1e3dd15b0839e2a5262f293ec567e0a2835b4" },
   "vim-solarized8": { "branch": "master", "commit": "bde9cab3d9e9368f0b62f94149ab51607fcb8b68" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
+  "vim-taskjuggler": { "branch": "master", "commit": "e94c9a0b06022d11a34310ad5f82c1c2bcd86fb7" },
   "vim-unimpaired": { "branch": "master", "commit": "6d44a6dc2ec34607c41ec78acf81657248580bf1" },
   "vim-visual-increment": { "branch": "master", "commit": "0e55bb4054cdd5eefc0bb870f3e3c249673817cb" }
 }

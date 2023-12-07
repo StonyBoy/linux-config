@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2023-Jun-20 21:31
+-- Time-Stamp: 2023-Nov-09 13:00
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 return {
@@ -26,6 +26,7 @@ return {
     'rust-lang/rust.vim',                          -- Rust, syntax highlighting, formatting, Syntastic integration
     'aklt/plantuml-syntax',                        -- PlantUML Syntax/  usein/FTDetect
     'rafcamlet/nvim-luapad',                       -- Interactive neovim scratchpad for lua
+    'kalafut/vim-taskjuggler',                     -- Vim syntax highlighting for TaskJuggler files.
 }
 
 -- These plugins are not in use due to various problems or newer neovim specific plugins
