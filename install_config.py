@@ -3,6 +3,7 @@
 Install links
 
 Installation:
+    python3 -m ensurepip
     pip3 install --user colorama
     pip3 install --user PyYAML
 '''
