@@ -112,8 +112,7 @@ input "type:keyboard" {
 #
 # TMUX session menus
 #
-    bindsym $mod+t exec rofi -show rtmux -modi "rtmux:~/scripts/remote_tmux.sh" -theme remote_tmux
-    bindsym $mod+y exec rofi -show tmux -modi "tmux:~/scripts/local_tmux.sh" -theme local_tmux
+    bindsym $mod+y exec rofi -show tmux -modi "tmux:~/scripts/dual_tmux.sh work" -theme dual_tmux
 
 #
 # Moving around:
@@ -295,15 +294,14 @@ bindsym $mod+r mode "resize"
     bindsym XF86AudioPrev exec playerctl -p spotify previous
 
     # change volume or toggle mute
-    bindsym XF86AudioMute exec pamixer -t
-    bindsym XF86AudioRaiseVolume exec pamixer -i 5 #to increase 5%
-    bindsym XF86AudioLowerVolume exec pamixer -d 5 #to decrease 5%
+    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% #to increase 5%
+    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% #to decrease 5%
 
 # Screenshot and screenclip
 # ============================================================================
     set $screenshot SCRFILE=~/Pictures/screenshots/screenshot-$(date +"%Y-%m-%d-%H-%M-%S").png && grim $SCRFILE && notify-send "Saved in $SCRFILE"
-    set $screenclip slurp | grim -g - ~/Pictures/screenshots/screenshot-$(date +"%Y-%m-%d-%H-%M-%S").png
-    set $screenclip CLIPFILE=~/Pictures/screenshots/screenclip-$(date +"%Y-%m-%d-%H-%M-%S").png && slurp | grim -g $CLIPFILE && notify-send "Saved in $CLIPFILE"
+    set $screenclip CLIPFILE=~/Pictures/screenshots/screenclip-$(date +"%Y-%m-%d-%H-%M-%S").png && grim -g "$(slurp)" $CLIPFILE && notify-send "Saved in $CLIPFILE"
     bindsym $mod+Print exec $screenshot
     bindsym $mod+Shift+Print exec $screenclip
 
