@@ -163,8 +163,13 @@ Sway:
         src:
             - config/sway/config.home
     Waybar:
-        src:
-            - config/waybar
+        dest: config/waybar/config
+        Home:
+            src:
+                - config/waybar
+        Work:
+            src:
+                - config/waybar.work
     Sway Swaylock:
         src:
             - config/swaylock
