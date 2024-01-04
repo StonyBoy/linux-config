@@ -72,7 +72,8 @@ Editor:
 
 Console:
     Alacritty:
-        src: config/alacritty/alacritty.toml
+        src:
+            - config/alacritty/alacritty.toml
 
     Bat:
         src:
