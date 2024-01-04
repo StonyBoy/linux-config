@@ -128,14 +128,17 @@ I3:
             src:
                 - config/i3/config
                 - config/i3/home.i3.conf
+                - config/dunst/dunstrc
         Work:
             src:
                 - config/i3/config
                 - config/i3/work.i3.conf
+                - config/dunst/dunstrc
         WorkFromHome:
             src:
                 - config/i3/config
                 - config/i3/wfh.i3.conf
+                - config/dunst/dunstrc
 
     Blocks:
         dest: config/i3/i3blocks.conf
@@ -155,14 +158,17 @@ Sway:
             src:
                 - config/sway/config
                 - config/sway/home.sway.config
+                - config/dunst/dunstrc
         Work:
             src:
                 - config/sway/config
                 - config/sway/work.sway.config
+                - config/dunst/dunstrc
         WorkFromHome:
             src:
                 - config/sway/config
                 - config/sway/wfh.sway.config
+                - config/dunst/dunstrc
     Waybar:
         src:
             - config/waybar
