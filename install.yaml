@@ -158,6 +158,7 @@ Sway:
             src:
                 - config/sway/config
                 - config/sway/home.sway.config
+                - config/mako/config
         Work:
             src:
                 - config/sway/config

@@ -312,7 +312,7 @@ bar {
     }
 }
 
-include ~/.config/sway/home.config
-include ~/.config/sway/work.config
-include ~/.config/sway/wfh.config
+include ~/.config/sway/home.sway.config
+include ~/.config/sway/work.sway.config
+include ~/.config/sway/wfh.sway.config
 include /etc/sway/config.d/*
