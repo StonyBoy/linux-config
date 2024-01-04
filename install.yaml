@@ -159,17 +159,21 @@ I3:
 
 Sway:
     default:
-        dest: config/sway/config
-        src:
-            - config/sway/config.home
-    Waybar:
-        dest: config/waybar/config
         Home:
             src:
-                - config/waybar
+                - config/sway/config
+                - config/sway/home.sway.config
         Work:
             src:
-                - config/waybar.work
+                - config/sway/config
+                - config/sway/work.sway.config
+        WorkFromHome:
+            src:
+                - config/sway/config
+                - config/sway/wfh.sway.config
+    Waybar:
+        src:
+            - config/waybar
     Sway Swaylock:
         src:
             - config/swaylock

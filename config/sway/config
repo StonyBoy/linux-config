@@ -1,7 +1,5 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
+# Configuration for sway
+# vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=swayconfig : 
 # Read `man 5 sway` for a complete reference.
 
 ### Variables
@@ -112,8 +110,7 @@ input "type:keyboard" {
 #
 # TMUX session menus
 #
-    bindsym $mod+t exec rofi -show rtmux -modi "rtmux:~/scripts/remote_tmux.sh" -theme remote_tmux
-    bindsym $mod+y exec rofi -show tmux -modi "tmux:~/scripts/local_tmux.sh" -theme local_tmux
+    bindsym $mod+y exec rofi -show tmux -modi "tmux:~/scripts/dual_tmux.sh work" -theme dual_tmux
 
 #
 # Moving around:
@@ -295,15 +292,14 @@ bindsym $mod+r mode "resize"
     bindsym XF86AudioPrev exec playerctl -p spotify previous
 
     # change volume or toggle mute
-    bindsym XF86AudioMute exec pamixer -t
-    bindsym XF86AudioRaiseVolume exec pamixer -i 5 #to increase 5%
-    bindsym XF86AudioLowerVolume exec pamixer -d 5 #to decrease 5%
+    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% #to increase 5%
+    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% #to decrease 5%
 
 # Screenshot and screenclip
 # ============================================================================
     set $screenshot SCRFILE=~/Pictures/screenshots/screenshot-$(date +"%Y-%m-%d-%H-%M-%S").png && grim $SCRFILE && notify-send "Saved in $SCRFILE"
-    set $screenclip slurp | grim -g - ~/Pictures/screenshots/screenshot-$(date +"%Y-%m-%d-%H-%M-%S").png
-    set $screenclip CLIPFILE=~/Pictures/screenshots/screenclip-$(date +"%Y-%m-%d-%H-%M-%S").png && slurp | grim -g $CLIPFILE && notify-send "Saved in $CLIPFILE"
+    set $screenclip CLIPFILE=~/Pictures/screenshots/screenclip-$(date +"%Y-%m-%d-%H-%M-%S").png && grim -g "$(slurp)" $CLIPFILE && notify-send "Saved in $CLIPFILE"
     bindsym $mod+Print exec $screenshot
     bindsym $mod+Shift+Print exec $screenclip
 
@@ -316,62 +312,7 @@ bar {
     }
 }
 
-# Start applications
-# ============================================================================
-#
-# Find apps under Wayland with 'waymsg -p -t get_tree'
-
-    # Workspace 1
-    for_window [class="Code"] move window to workspace $ws1
-
-    # Workspace 3
-    for_window [class="firefox"] move window to workspace $ws3
-
-    # Workspace 4
-    for_window [class="Thunar"] move window to workspace $ws4
-    for_window [class="Caja"] move window to workspace $ws4
-    for_window [class="Org.gnome.Nautilus"] move window to workspace $ws4
-
-    # Workspace 5
-    for_window [app_id="evolution"] move window to workspace $ws5
-    for_window [app_id="evolution-alarm-notify"] move window to workspace $ws5
-
-    # Workspace 6
-    for_window [class="[Bb]compare"] move window to workspace $ws6
-
-    # Workspace 7
-    for_window [class="Microsoft Teams - Preview"] move window to workspace $ws7
-
-    # Workspace 8
-    for_window [class="Clementine"] move window to workspace $ws8
-    for_window [class="Spotify"] move window to workspace $ws8
-    for_window [class="Rhythmbox"] move window to workspace $ws8
-    for_window [app_id="audacity"] move window to workspace $ws8
-
-    # Workspace 10
-    for_window [class="Cisco AnyConnect Secure Mobility Client"] to workspace $ws10
-
-    exec --no-startup-id caja
-    exec --no-startup-id spotify-launcher
-    exec --no-startup-id firefox
-    exec --no-startup-id $term
-
-    # Start notification service
-    exec --no-startup-id mako
-
-    # Start keyring service
-    exec eval $(gnome-keyring-daemon --start)
-    exec export SSH_AUTH_SOCK
-
-    # Start a polkit authentication agent
-    exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-
-    # For xdg-desktop-portal-wlr (screen sharing in teams)
-    exec export XDG_CURRENT_DESKTOP=sway
-    # Mount Frigg
-    exec --no-startup-id ~/scripts/nshares -o Media
-
-    # Mount GoogleDrive
-    exec --no-startup-id rclone --vfs-cache-mode writes mount "GoogleDrive": ~/GoogleDrive
-
+include ~/.config/sway/home.config
+include ~/.config/sway/work.config
+include ~/.config/sway/wfh.config
 include /etc/sway/config.d/*
