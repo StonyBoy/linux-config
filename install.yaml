@@ -158,7 +158,6 @@ Sway:
             src:
                 - config/sway/config
                 - config/sway/home.sway.config
-                - config/dunst/dunstrc
         Work:
             src:
                 - config/sway/config
