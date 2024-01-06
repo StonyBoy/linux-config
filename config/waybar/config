@@ -3,7 +3,7 @@
     "spacing": 4,
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["custom/media", "idle_inhibitor", "pulseaudio", "network#wan", "network#wifi", "network#tun", "cpu", "memory", "disk#sys", "disk#home", "temperature", "custom/uptime", "custom/hostname", "custom/easytest", "clock", "tray"],
+    "modules-right": ["custom/media", "idle_inhibitor", "pulseaudio", "network#wan", "network#wifi", "network#tun", "cpu", "memory", "disk#sys", "disk#home", "temperature", "custom/hostinfo", "custom/easytest", "clock", "tray"],
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
@@ -28,8 +28,8 @@
         "spacing": 10
     },
     "clock": {
-        "format": "{:%Y-%m-%d %H:%M}",
-        "format-alt": "{:%H:%M}"
+        "format": "{:%Y-%m-%d %H:%M:%S}",
+        "format-alt": "{:%H:%M:%S}"
     },
     "cpu": {
         "interval": 10,
@@ -117,14 +117,9 @@
         "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null",
         "on-click": "playerctl -p spotify play-pause"
     },
-    "custom/hostname": {
-        "format": "{}",
-        "escape": true,
-        "exec": "uname -n",
-        "interval": 3600
-    },
-    "custom/uptime": {
-        "exec": "$HOME/.config/waybar/uptime.sh",
+    "custom/hostinfo": {
+        "interval": 60,
+        "exec": "$HOME/.config/waybar/hostinfo.py",
         "return-type": "json"
     },
     "custom/easytest": {

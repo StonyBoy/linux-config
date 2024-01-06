@@ -76,8 +76,7 @@ window#waybar.chromium {
 #pulseaudio,
 #mpris,
 #custom-media,
-#custom-hostname,
-#custom-uptime,
+#custom-hostinfo,
 #custom-easytest,
 #keyboard-state,
 #tray,
@@ -266,13 +265,8 @@ label:focus {
     background: rgba(0, 0, 0, 0.2);
 }
 
-#custom-hostname {
-    background-color: #e8daef;
-    color: #000000;
-}
-
-#custom-uptime {
-    background-color: #ffd966;
+#custom-hostinfo {
+    background-color:  #aed6f1;
     color: #000000;
 }
 
