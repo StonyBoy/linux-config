@@ -78,6 +78,7 @@ window#waybar.chromium {
 #custom-media,
 #custom-hostname,
 #custom-uptime,
+#custom-easytest,
 #keyboard-state,
 #tray,
 #mode,
@@ -272,6 +273,11 @@ label:focus {
 
 #custom-uptime {
     background-color: #ffd966;
+    color: #000000;
+}
+
+#custom-easytest {
+    background-color: #aeb6bf;
     color: #000000;
 }
 

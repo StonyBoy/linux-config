@@ -3,7 +3,7 @@
     "spacing": 4,
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["custom/media", "idle_inhibitor", "pulseaudio", "network#wan", "network#wifi", "network#tun", "cpu", "memory", "disk#sys", "disk#home", "temperature", "custom/uptime", "custom/hostname", "keyboard-state", "clock", "tray"],
+    "modules-right": ["custom/media", "idle_inhibitor", "pulseaudio", "network#wan", "network#wifi", "network#tun", "cpu", "memory", "disk#sys", "disk#home", "temperature", "custom/uptime", "custom/hostname", "custom/easytest", "clock", "tray"],
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
@@ -121,10 +121,15 @@
         "format": "{}",
         "escape": true,
         "exec": "uname -n",
-        "interval": "3600"
+        "interval": 3600
     },
     "custom/uptime": {
         "exec": "$HOME/.config/waybar/uptime.sh",
+        "return-type": "json"
+    },
+    "custom/easytest": {
+        "interval": 30,
+        "exec": "$HOME/.config/waybar/easytest.py $USER",
         "return-type": "json"
     },
     "mpris": {
