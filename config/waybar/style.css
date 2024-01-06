@@ -74,6 +74,7 @@ window#waybar.chromium {
 #backlight,
 #network,
 #pulseaudio,
+#mpris,
 #custom-media,
 #custom-hostname,
 #custom-uptime,
@@ -149,7 +150,8 @@ label:focus {
 }
 
 #disk {
-    background-color: #964B00;
+    background-color: #e5e7e9;
+    color: #000000;
 }
 
 #backlight {
@@ -175,16 +177,19 @@ label:focus {
     color: #8e9306;
 }
 
+#mpris,
 #custom-media {
     background-color: #66cc99;
     color: #2a5c45;
     min-width: 100px;
 }
 
+#mpris.spotify,
 #custom-media.custom-spotify {
     background-image: linear-gradient(#9fdfbf, #66cc99);
 }
 
+#mpris.vlc,
 #custom-media.custom-vlc {
     background-color: #ffa000;
 }
@@ -261,7 +266,7 @@ label:focus {
 }
 
 #custom-hostname {
-    background-color: #a366ff;
+    background-color: #e8daef;
     color: #000000;
 }
 
