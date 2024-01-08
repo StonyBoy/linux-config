@@ -316,6 +316,9 @@ bar {
     }
 }
 
+    # Position calendar applet under cursor
+    for_window [app_id="yad"] move position cursor, move down 30px
+
 include ~/.config/sway/home.sway.config
 include ~/.config/sway/work.sway.config
 include ~/.config/sway/wfh.sway.config
