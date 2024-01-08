@@ -3,17 +3,7 @@
     "spacing": 4,
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["custom/media", "idle_inhibitor", "pulseaudio", "network#wan", "network#wifi", "network#tun", "cpu", "memory", "disk#sys", "disk#home", "temperature", "custom/hostinfo", "custom/easytest", "clock", "tray"],
-    "keyboard-state": {
-        "numlock": true,
-        "capslock": true,
-        "format": "{name} {icon}",
-        "format-icons": {
-            "locked": "",
-            "unlocked": ""
-        },
-        "tooltip-format": "KBD"
-    },
+    "modules-right": ["custom/media", "pulseaudio", "network#wan", "network#wifi", "network#tun", "cpu", "memory", "disk#sys", "disk#home", "temperature", "custom/hostinfo", "custom/easytest", "custom/davmail", "clock", "tray"],
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
@@ -127,6 +117,11 @@
     "custom/easytest": {
         "interval": 30,
         "exec": "$HOME/.config/waybar/easytest.py $USER",
+        "return-type": "json"
+    },
+    "custom/davmail": {
+        "interval": 900,
+        "exec": "$HOME/.config/waybar/davmail.py --logpath $HOME/davmail.log",
         "return-type": "json"
     },
     "mpris": {

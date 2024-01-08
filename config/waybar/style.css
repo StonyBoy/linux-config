@@ -16,15 +16,6 @@ window#waybar.hidden {
     opacity: 0.2;
 }
 
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
-
 window#waybar.termite {
     background-color: #3F3F3F;
 }
@@ -78,7 +69,7 @@ window#waybar.chromium {
 #custom-media,
 #custom-hostinfo,
 #custom-easytest,
-#keyboard-state,
+#custom-davmail,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -249,22 +240,6 @@ label:focus {
     min-width: 16px;
 }
 
-#keyboard-state {
-    background: #97e1ad;
-    color: #000000;
-    padding: 0 0px;
-    margin: 0 5px;
-    min-width: 16px;
-}
-
-#keyboard-state > label {
-    padding: 0 5px;
-}
-
-#keyboard-state > label.locked {
-    background: rgba(0, 0, 0, 0.2);
-}
-
 #custom-hostinfo {
     background-color:  #aed6f1;
     color: #000000;
@@ -272,6 +247,21 @@ label:focus {
 
 #custom-easytest {
     background-color: #aeb6bf;
+    color: #000000;
+}
+
+#custom-davmail.ok {
+    background-color: #48c9b0;
+    color: #000000;
+}
+
+#custom-davmail.warning {
+    background-color: #f4d03f;
+    color: #000000;
+}
+
+#custom-davmail.error {
+    background-color:  #ec7063;
     color: #000000;
 }
 
