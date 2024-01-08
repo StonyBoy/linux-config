@@ -6,7 +6,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/davmail %h/.config/davmail/davmail.properties
+ExecStart=/usr/bin/davmail -server %h/.config/davmail/davmail.properties
 TimeoutSec=120
 Restart=always
 RestartSec=5m
