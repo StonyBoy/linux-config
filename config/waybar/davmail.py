@@ -9,7 +9,7 @@ import json
 def parse_arguments():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--verbose', '-v', action='store_true')
+    parser.add_argument('--verbose', '-v', action='count', default=0)
     parser.add_argument('--logpath', default='~/davmail.log')
 
     return parser.parse_args()
@@ -72,15 +72,12 @@ def show_empty():
     print(json.dumps(res))
 
 
-def get_davmail_status(args):
+def parse_log(args):
     info = re.compile(r'(\S+\s+\S+)\s+INFO\s+\S+\s+\S+\s+-\s+(\S+).*')
     debug = re.compile(r'(\S+\s+\S+)\s+DEBUG\s+\S+\s+(\S+)\s+(.*)')
     email = re.compile(r'.*FETCH.*INTERNALDATE\s*\"([^"]+)\s+\S+\"')
+    uid = re.compile(r'.*FETCH\s+\(UID\s+\d+')
     history = []
-    found = False
-
-    if args.logpath is None:
-        args.logpath = '~/davmail.log'
 
     with open(os.path.expanduser(args.logpath), 'rt') as fobj:
         lines = fobj.readlines()
@@ -95,6 +92,16 @@ def get_davmail_status(args):
                         mtt = email.match(mt.group(3))
                         if mtt:
                             history.append(DavMailEvent(mt.group(1), 'Email', mtt.group(1)))
+                    else:
+                        mtt = uid.match(mt.group(3))
+                        if mtt:
+                            if len(history) > 0 and history[-1].event == 'UID':
+                                history[-1] = DavMailEvent(mt.group(1), 'UID')
+                            else:
+                                history.append(DavMailEvent(mt.group(1), 'UID'))
+                        elif args.verbose > 1:
+                            line = line.strip('\n')
+                            print(f"Line: {line}")
 
         if len(history) > 0:
             if len(history) > 1 and history[-2].event == 'FAILED':
@@ -104,8 +111,14 @@ def get_davmail_status(args):
             if args.verbose:
                 for evt in history:
                     print(evt)
-            found = True
-    if not found:
+    return len(history) > 0
+
+
+def get_davmail_status(args):
+    if args.logpath is None:
+        args.logpath = '~/davmail.log'
+
+    if not parse_log(args):
         show_empty()
         if args.verbose:
             print('No events found in the log')
