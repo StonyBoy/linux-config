@@ -72,6 +72,17 @@ def show_empty():
     print(json.dumps(res))
 
 
+def show_davmail_status(args, history):
+    if args.verbose:
+        for evt in history:
+            print(f'evt: {evt}')
+    history.reverse()
+    for evt in history:
+        if evt.event == 'FAILED' or evt.event == 'Email' or evt.event == 'DISCONNECT' or evt.event == 'UID':
+            evt.show()
+            break
+
+
 def parse_log(args):
     info = re.compile(r'(\S+\s+\S+)\s+INFO\s+\S+\s+\S+\s+-\s+(\S+).*')
     debug = re.compile(r'(\S+\s+\S+)\s+DEBUG\s+\S+\s+(\S+)\s+(.*)')
@@ -102,15 +113,9 @@ def parse_log(args):
                         elif args.verbose > 1:
                             line = line.strip('\n')
                             print(f"Line: {line}")
-
         if len(history) > 0:
-            if len(history) > 1 and history[-2].event == 'FAILED':
-                history[-2].show()
-            else:
-                history[-1].show()
-            if args.verbose:
-                for evt in history:
-                    print(evt)
+            show_davmail_status(args, history)
+
     return len(history) > 0
 
 
