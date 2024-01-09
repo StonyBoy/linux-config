@@ -9,6 +9,7 @@ import json
 def parse_arguments():
     parser = argparse.ArgumentParser()
 
+    parser.add_argument('--verbose', '-v', action='store_true')
     parser.add_argument('--logpath', default='~/davmail.log')
 
     return parser.parse_args()
@@ -49,7 +50,9 @@ class DavMailEvent:
     def show_info(self):
         diff = self.elemtimestamp - self.timestamp
         # print(f'diff: {diff}')
-        if diff < datetime.timedelta(hours=1):
+        if self.event == 'FAILED':
+            self.status = 'error'
+        elif diff < datetime.timedelta(hours=1):
             self.status = 'ok'
         elif diff < datetime.timedelta(days=1):
             self.status = 'warning'
@@ -93,11 +96,19 @@ def get_davmail_status(args):
                         if mtt:
                             history.append(DavMailEvent(mt.group(1), 'Email', mtt.group(1)))
 
-        if len(history):
-            history[-1].show()
+        if len(history) > 0:
+            if len(history) > 1 and history[-2].event == 'FAILED':
+                history[-2].show()
+            else:
+                history[-1].show()
+            if args.verbose:
+                for evt in history:
+                    print(evt)
             found = True
     if not found:
         show_empty()
+        if args.verbose:
+            print('No events found in the log')
 
 
 def main():
