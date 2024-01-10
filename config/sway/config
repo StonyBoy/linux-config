@@ -69,6 +69,8 @@ input "1133:4123:Logitech_M705" {
 input "type:keyboard" {
     # Modified US keyboard with DK letters. File at ~/.xkb/symbols/usdk
     xkb_layout "usdk"
+    # See man xkeyboard-config for options
+    xkb_options caps:none
 }
 
 ### Key bindings
@@ -77,6 +79,7 @@ input "type:keyboard" {
 #
     # Lockscreen setup
     bindsym $mod+ctrl+l exec swaylock
+    bindsym Ctrl+Alt+Delete exec swaylock
 
     # Start a terminal
     bindsym $mod+Return exec $term
