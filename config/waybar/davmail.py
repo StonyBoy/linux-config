@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+
+# Steen Hegelund
+# Time-Stamp: 2024-Jan-10 14:21
+# vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
+
 import argparse
 import os.path
 import re
@@ -10,7 +15,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--verbose', '-v', action='count', default=0)
-    parser.add_argument('--logpath', default='~/davmail.log')
+    parser.add_argument('--logpath', '-l', default='~/davmail.log')
 
     return parser.parse_args()
 
@@ -27,31 +32,11 @@ class DavMailEvent:
         if elemstr:
             self.elemtimestamp = datetime.datetime.strptime(elemstr, '%d-%b-%Y %H:%M:%S')
 
-    def show(self):
-        if self.event == 'Email':
-            self.show_email()
-        else:
-            self.show_info()
-
-    def show_email(self):
-        diff = self.timestamp - self.elemtimestamp
-        # print(f'diff: {diff}')
-        if diff < datetime.timedelta(hours=1):
-            self.status = 'ok'
-        elif diff < datetime.timedelta(days=1):
-            self.status = 'warning'
-        else:
-            self.status = 'error'
-        text = f"DavMail: {self.status}"
-        tooltip = f"DavMail Status:\n  Last: {show_datetime(self.timestamp)}\n  Email: {show_datetime(self.elemtimestamp)}"
-        res = {"text": text, "tooltip": tooltip, "class": self.status, "percentage": 100}
-        print(json.dumps(res))
-
-    def show_info(self):
-        diff = self.elemtimestamp - self.timestamp
-        # print(f'diff: {diff}')
+    def show_status(self, diff, tooltip):
         if self.event == 'FAILED':
             self.status = 'error'
+        elif self.event == 'BROKEN':
+            self.status = 'warning'
         elif diff < datetime.timedelta(hours=1):
             self.status = 'ok'
         elif diff < datetime.timedelta(days=1):
@@ -59,12 +44,48 @@ class DavMailEvent:
         else:
             self.status = 'error'
         text = f"DavMail: {self.status}"
-        tooltip = f"DavMail Status:\n  Last: {show_datetime(self.timestamp)}"
         res = {"text": text, "tooltip": tooltip, "class": self.status, "percentage": 100}
         print(json.dumps(res))
 
+    def show_email(self):
+        diff = self.timestamp - self.elemtimestamp
+        tooltip = f"DavMail Status:\n  Last: {show_datetime(self.timestamp)}\n  Email: {show_datetime(self.elemtimestamp)}"
+        self.show_status(diff, tooltip)
+
+    def show_info(self):
+        diff = self.elemtimestamp - self.timestamp
+        tooltip = f"DavMail Status:\n  Last: {show_datetime(self.timestamp)}"
+        self.show_status(diff, tooltip)
+
+    def show(self):
+        if self.event == 'Email':
+            self.show_email()
+        else:
+            self.show_info()
+
     def __str__(self):
-        return f'{self.timestamp}: {self.event} {self.elemtimestamp if not self.elemtimestamp is None else ""}'
+        return f'{self.timestamp}: {self.event} {self.elemtimestamp}'
+
+
+class EventHistory:
+    def __init__(self):
+        self.history = []
+
+    def append(self, event):
+        if len(self.history) > 0 and self.history[-1].event == event.event:
+            # Filter out duplicate events
+            self.history[-1] = event
+        else:
+            self.history.append(event)
+
+    def nonempty(self):
+        return len(self.history) > 0
+
+    def reverse(self):
+        self.history.reverse()
+
+    def __iter__(self):
+        return self.history.__iter__()
 
 
 def show_empty():
@@ -72,15 +93,16 @@ def show_empty():
     print(json.dumps(res))
 
 
-def show_davmail_status(args, history):
-    if args.verbose:
-        for evt in history:
-            print(f'evt: {evt}')
+def show_davmail_status(history):
     history.reverse()
     for evt in history:
-        if evt.event == 'FAILED' or evt.event == 'Email' or evt.event == 'DISCONNECT' or evt.event == 'UID':
+        if evt.event == 'FAILED' or evt.event == 'BROKEN':
             evt.show()
-            break
+            return
+    for evt in history:
+        if evt.event == 'Email' or evt.event == 'CONNECT' or evt.event == 'UID':
+            evt.show()
+            return
 
 
 def parse_log(args):
@@ -88,7 +110,8 @@ def parse_log(args):
     debug = re.compile(r'(\S+\s+\S+)\s+DEBUG\s+\S+\s+(\S+)\s+(.*)')
     email = re.compile(r'.*FETCH.*INTERNALDATE\s*\"([^"]+)\s+\S+\"')
     uid = re.compile(r'.*FETCH\s+\(UID\s+\d+')
-    history = []
+    pipeerr = re.compile(r'.*Exception sending error to client Broken pipe')
+    history = EventHistory()
 
     with open(os.path.expanduser(args.logpath), 'rt') as fobj:
         lines = fobj.readlines()
@@ -96,34 +119,40 @@ def parse_log(args):
             mt = info.match(line)
             if mt:
                 history.append(DavMailEvent(mt.group(1), mt.group(2)))
-            else:
-                mt = debug.match(line)
-                if mt:
-                    if mt.group(2) == 'davmail.imap.ImapConnection':
-                        mtt = email.match(mt.group(3))
-                        if mtt:
-                            history.append(DavMailEvent(mt.group(1), 'Email', mtt.group(1)))
-                    else:
-                        mtt = uid.match(mt.group(3))
-                        if mtt:
-                            if len(history) > 0 and history[-1].event == 'UID':
-                                history[-1] = DavMailEvent(mt.group(1), 'UID')
-                            else:
-                                history.append(DavMailEvent(mt.group(1), 'UID'))
-                        elif args.verbose > 1:
-                            line = line.strip('\n')
-                            print(f"Line: {line}")
-        if len(history) > 0:
-            show_davmail_status(args, history)
+                continue
+            mt = debug.match(line)
+            if mt:
+                if mt.group(2) == 'davmail.imap.ImapConnection':
+                    mtt = email.match(mt.group(3))
+                    if mtt:
+                        history.append(DavMailEvent(mt.group(1), 'Email', mtt.group(1)))
+                    continue
+                mtt = uid.match(mt.group(3))
+                if mtt:
+                    history.append(DavMailEvent(mt.group(1), 'UID'))
+                    continue
+                mtt = pipeerr.match(mt.group(3))
+                if mtt:
+                    history.append(DavMailEvent(mt.group(1), 'BROKEN'))
+                    continue
+                if args.verbose > 1:
+                    line = line.strip('\n')
+                    print(f"Line: {line}")
 
-    return len(history) > 0
+    return history
 
 
 def get_davmail_status(args):
     if args.logpath is None:
         args.logpath = '~/davmail.log'
 
-    if not parse_log(args):
+    history = parse_log(args)
+    if history.nonempty():
+        if args.verbose:
+            for evt in history:
+                print(f'evt: {evt}')
+        show_davmail_status(history)
+    else:
         show_empty()
         if args.verbose:
             print('No events found in the log')
