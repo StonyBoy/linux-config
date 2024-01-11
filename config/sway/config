@@ -115,11 +115,6 @@ input "type:keyboard" {
     bindsym $mod+Shift+e mode "$mode_system"
 
 #
-# TMUX session menus
-#
-    bindsym $mod+y exec rofi -show tmux -modi "tmux:~/scripts/dual_tmux.sh work" -theme dual_tmux
-
-#
 # Moving around:
 #
     # Move your focus around

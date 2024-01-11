@@ -49,9 +49,7 @@ Scripts:
             - scripts/tat
             - scripts/python.init.py
             - scripts/update_wallpaper.sh
-            - scripts/remote_tmux.sh
-            - scripts/local_tmux.sh
-            - scripts/dual_tmux.sh
+            - scripts/tmux_sessions.py
             - scripts/git_branches.py
             - scripts/config_tunnel.sh
             - scripts/config_remote_tunnel.sh
