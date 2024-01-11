@@ -50,6 +50,7 @@ Scripts:
             - scripts/python.init.py
             - scripts/update_wallpaper.sh
             - scripts/tmux_sessions.py
+            - scripts/remote_sway_cmds.py
             - scripts/git_branches.py
             - scripts/config_tunnel.sh
             - scripts/config_remote_tunnel.sh
