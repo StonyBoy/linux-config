@@ -97,8 +97,8 @@ input "type:keyboard" {
     # mouse button for dragging.
     floating_modifier $mod normal
 
-    # Reload the configuration file
-    bindsym $mod+Shift+c reload
+    # Reload the configuration file and refresh the wallpaper
+    bindsym $mod+Shift+c reload, exec swaymsg "output * bg /opt/wallpapers/wallpaper.jpg fill"
 
     # Exit sway (logs you out of your Wayland session)
     set $mode_system (x) logout, (d) suspend, (h) hibernate, (Shift+r) reboot, (Shift+s) shutdown
