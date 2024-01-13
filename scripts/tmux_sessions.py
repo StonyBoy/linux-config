@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Jan-11 13:02
+# Time-Stamp: 2024-Jan-13 13:38
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -22,8 +22,8 @@ def parse_arguments():
 class TmuxServer:
     srvre = re.compile(r'^(\S+):')
 
-    def __init__(self, name=''):
-        self.name = name if len(name) > 0 else 'localhost'
+    def __init__(self, name='localhost'):
+        self.name = name
         self.alive = self.is_server_alive()
         self.sessions = []
         self.get_sessions()
