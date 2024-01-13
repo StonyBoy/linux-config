@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Jan-11 17:28
+# Time-Stamp: 2024-Jan-13 12:41
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -13,7 +13,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser()
 
     parser.add_argument('command', nargs='?', default='')
-    parser.add_argument('--server', '-s', default='')
+    parser.add_argument('--server', '-s', default='localhost')
 
     return parser.parse_args()
 
@@ -52,7 +52,10 @@ def ping_server(name):
 
 
 def get_remote_swaybg_pid(args):
-    cmd = ['ssh', '-t', args.server, 'pgrep', 'swaybg']
+    if args.server == 'localhost':
+        cmd = ['pgrep', 'swaybg']
+    else:
+        cmd = ['ssh', '-t', args.server, 'pgrep', 'swaybg']
     cp = subprocess.run(cmd, capture_output=True)
     if cp.returncode == 0:
         lines = cp.stdout.decode().split('\n')
@@ -64,7 +67,10 @@ def get_remote_swaybg_pid(args):
 def get_remote_swaysock(args):
     pid = get_remote_swaybg_pid(args)
     if pid:
-        cmd = ['ssh', '-t', args.server, 'cat', f'/proc/{pid}/environ']
+        if args.server == 'localhost':
+            cmd = ['cat', f'/proc/{pid}/environ']
+        else:
+            cmd = ['ssh', '-t', args.server, 'cat', f'/proc/{pid}/environ']
         cp = subprocess.run(cmd, capture_output=True)
         if cp.returncode == 0:
             lines = cp.stdout.decode().split('\n')
@@ -92,7 +98,7 @@ def run(args):
 
 def main():
     args = parse_arguments()
-    if args.command and ping_server(args.server):
+    if args.command:
         run(args)
     else:
         get_cmd_list(args)
