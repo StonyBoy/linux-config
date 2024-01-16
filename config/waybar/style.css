@@ -70,6 +70,7 @@ window#waybar.chromium {
 #custom-hostinfo,
 #custom-easytest,
 #custom-davmail,
+#custom-systemd_unit,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -261,6 +262,21 @@ label:focus {
 }
 
 #custom-davmail.error {
+    background-color:  #ec7063;
+    color: #000000;
+}
+
+#custom-systemd_unit.ok {
+    background-color: #48c9b0;
+    color: #000000;
+}
+
+#custom-systemd_unit.warning {
+    background-color: #f4d03f;
+    color: #000000;
+}
+
+#custom-systemd_unit.error {
     background-color:  #ec7063;
     color: #000000;
 }

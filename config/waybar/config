@@ -3,7 +3,7 @@
     "spacing": 4,
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["custom/media", "pulseaudio", "network#wan", "network#wifi", "network#tun", "cpu", "memory", "disk#sys", "disk#home", "temperature", "custom/hostinfo", "custom/easytest", "custom/davmail", "clock", "tray"],
+    "modules-right": ["custom/media", "pulseaudio", "network#wan", "network#wifi", "network#tun", "cpu", "memory", "disk#sys", "disk#home", "temperature", "custom/hostinfo", "custom/easytest", "custom/davmail", "custom/systemd_unit", "clock", "tray"],
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
@@ -122,6 +122,11 @@
     "custom/davmail": {
         "interval": 900,
         "exec": "$HOME/.config/waybar/davmail.py --logpath $HOME/davmail.log",
+        "return-type": "json"
+    },
+    "custom/systemd_unit": {
+        "interval": 60,
+        "exec": "$HOME/.config/waybar/systemd_unit.py --system cbagentd.service taniumclient.service docker.service --user davmail.service mbsync.timer sway_user_lockscreen.timer sway_wallpaper.timer",
         "return-type": "json"
     },
     "mpris": {
