@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Jan-16 15:54
+# Time-Stamp: 2024-Jan-16 18:58
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -79,35 +79,42 @@ class UnitStatus:
         if mt:
             self.timer = mt[2]
 
-    def formatted(self):
+    def __str__(self):
+        result = f'{self.name} {self.state}'
+        if self.duration:
+            result += f' dur: {self.duration}'
+        if self.tasks:
+            result += f' tsk: {self.tasks}'
+        if self.memory:
+            result += f' mem: {self.memory}'
+        if self.trigger:
+            result += f' trg: {self.trigger}'
+        if self.timer:
+            result += f' tmr: {self.timer}'
+        return result
+
+    def tooltip(self):
         if '.timer' in self.name:
             kind = 'T'
             name = self.name.replace('.timer', '')
         else:
             kind = 'S'
             name = self.name.replace('.service', '')
-        self.fmt = f'<tt>{kind} <span foreground="#f1c40f">{name}</span> <b>{self.state}</b></tt>'
-
-    def __str__(self):
-        self.formatted()
+        title = f'<tt>{kind} <span foreground="#f1c40f">{name}</span> <b>{self.state}</b></tt>'
         if self.state == 'running':
-            return f'{self.fmt} for {self.duration}, {self.tasks}, {self.memory}'
+            return f'{title} for {self.duration}, {self.tasks}, {self.memory}\n'
         elif self.state == 'waiting' and len(self.timer):
-            return f'{self.fmt} next in {self.timer}'
-        elif self.state == 'waiting':
-            return self.fmt
-        elif self.state == 'starting':
-            return self.fmt
+            return f'{title} next in {self.timer}\n'
         elif self.state == 'dead' and len(self.trigger) > 0:
-            return f'{self.fmt} triggered by {self.trigger}'
-        else:
-            return self.fmt
+            return f'{title} triggered by {self.trigger}\n'
+        elif len(self.state) > 0:
+            return title + '\n'
+        return ''
 
 
 class UnitList:
     def __init__(self):
         self.units = []
-        self.state = {'text': '', 'tooltip': '', 'class': '', 'percentage': 0}
 
     def append(self, unit):
         self.units.append(unit)
@@ -126,7 +133,7 @@ class UnitList:
         if len(self.units):
             text = 'Units: OK'
         for unit in self.units:
-            tooltip += str(unit) + '\n'
+            tooltip += unit.tooltip()
             if unit.state == 'starting':
                 text = f'Unit: {unit.name} {unit.state}'
                 cls = 'warning'
