@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 '''
 Steen Hegelund
-Time-Stamp: 2023-Apr-12 13:04
+Time-Stamp: 2024-Jan-16 23:27
 
 Mount configured shares via CIFS or SSHFS
 '''
@@ -18,6 +18,18 @@ global verbose
 
 verbose = False
 
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument('-v', dest='verbose', help='Show actions', action='store_true')
+    parser.add_argument('-m', dest='mount', help='Mount all listed shares', action='store_true')
+    parser.add_argument('-u', dest='unmount', help='Unmount all listed shares', action='store_true')
+    parser.add_argument('-o', dest='mountnamed', help='Mount named share', type=str)
+    parser.add_argument('-n', dest='unmountnamed', help='Unmount named share', type=str)
+
+    return parser.parse_args()
+
+
 def syscmd(cmd):
     if verbose:
         print(f'=> {cmd}')
@@ -27,12 +39,13 @@ def syscmd(cmd):
     return []
 
 
-def create_folders(config, mname = None):
+def create_folders(config, mname=None):
     if verbose:
-        print('create_folders', config, mname)
+        print('create_folders', config['local'], config['mounts'])
     for name in config['mounts']:
-        if not mname or mname != name:
+        if mname is not None and mname != name:
             continue
+        print('go for', name)
         ldir = os.path.expanduser(os.path.join(config['local'], name))
         if os.path.exists(ldir):
             continue
@@ -40,9 +53,9 @@ def create_folders(config, mname = None):
         syscmd(f"mkdir -p {ldir}")
 
 
-def mount_folders(config, mname = None):
+def mount_folders(config, mname=None):
     if verbose:
-        print('mount_folders', config, mname)
+        print('mount_folders', config['mounts'])
     options = []
     if config['type'] == 'cifs':
         for key, value in config['options'].items():
@@ -62,11 +75,11 @@ def mount_folders(config, mname = None):
         syscmd(f"sudo mount -t cifs {rdir} {ldir} -o {optstr}")
 
 
-def unmount_folders(config, mname = None):
+def unmount_folders(config, mname=None):
     if verbose:
-        print('unmount_folders', config, mname)
+        print('unmount_folders', config['mounts'])
     for name in config['mounts']:
-        if mname and mname != name:
+        if mname is not None and mname != name:
             continue
         ldir = os.path.expanduser(os.path.join(config['local'], name))
         print(f"unmounting folder {ldir}")
@@ -118,23 +131,7 @@ def show_mounts(shares):
     sys.exit(0)
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('-v', dest='verbose', help='Show actions', action='store_true')
-    parser.add_argument('-m', dest='mount', help='Mount all listed shares', action='store_true')
-    parser.add_argument('-u', dest='unmount', help='Unmount all listed shares', action='store_true')
-    parser.add_argument('-o', dest='mountnamed', help='Mount named share', type=str)
-    parser.add_argument('-n', dest='unmountnamed', help='Unmount named share', type=str)
-
-    args = parser.parse_args()
-
-    verbose = args.verbose
-
-    cfgfile = os.path.expanduser('~/.config/python/network-shares.yaml')
-    if not os.path.exists(cfgfile):
-        print(f'Could not find #{cfgfile}')
-        sys.exit(1)
-
+def command(args, cfgfile):
     with open(cfgfile, 'rt') as fobj:
         shares = yaml.safe_load(fobj)
 
@@ -169,3 +166,15 @@ if __name__ == '__main__':
             show_mounts(shares)
 
         show_mounts(shares)
+
+
+if __name__ == '__main__':
+    args = parse_arguments()
+    verbose = args.verbose
+
+    cfgfile = os.path.expanduser('~/.config/python/network-shares.yaml')
+    if not os.path.exists(cfgfile):
+        print(f'Could not find #{cfgfile}')
+        sys.exit(1)
+
+    command(args, cfgfile)
