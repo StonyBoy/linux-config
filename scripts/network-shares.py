@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 '''
 Steen Hegelund
-Time-Stamp: 2024-Jan-16 23:27
+Time-Stamp: 2024-Jan-17 15:44
 
 Mount configured shares via CIFS or SSHFS
 '''
@@ -20,12 +20,12 @@ verbose = False
 
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('-v', dest='verbose', help='Show actions', action='store_true')
-    parser.add_argument('-m', dest='mount', help='Mount all listed shares', action='store_true')
-    parser.add_argument('-u', dest='unmount', help='Unmount all listed shares', action='store_true')
-    parser.add_argument('-o', dest='mountnamed', help='Mount named share', type=str)
-    parser.add_argument('-n', dest='unmountnamed', help='Unmount named share', type=str)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--verbose', '-v', help='Show actions', action='store_true')
+    parser.add_argument('--mount', '-m', help='Mount all listed shares', action='store_true')
+    parser.add_argument('--unmount', '-u', help='Unmount all listed shares', action='store_true')
+    parser.add_argument('--mountnamed', '-o', help='Mount named share')
+    parser.add_argument('--unmountnamed', '-n', help='Unmount named share')
 
     return parser.parse_args()
 
@@ -40,49 +40,67 @@ def syscmd(cmd):
 
 
 def create_folders(config, mname=None):
-    if verbose:
-        print('create_folders', config['local'], config['mounts'])
-    for name in config['mounts']:
+    for name in config['mounts'].keys():
         if mname is not None and mname != name:
             continue
-        print('go for', name)
         ldir = os.path.expanduser(os.path.join(config['local'], name))
         if os.path.exists(ldir):
             continue
-        print(f"creating local folder {ldir}")
-        syscmd(f"mkdir -p {ldir}")
+        print(f'creating local folder: {ldir}')
+        syscmd(f'mkdir -p {ldir}')
 
 
-def mount_folders(config, mname=None):
-    if verbose:
-        print('mount_folders', config['mounts'])
+def get_password(cmdstr):
+    cmd = []
+    for elem in cmdstr.split():
+        cmd.append(os.path.expanduser(elem))
+    cp = subprocess.run(cmd, capture_output=True)
+    lines = cp.stdout.decode().split('\n')
+    for line in lines:
+        if len(line) > 0:
+            return line
+    return ''
+
+
+def update_options(config):
+    for key, value in config['options'].items():
+        if key == 'passcmd':
+            value = get_password(value)
+            if len(value):
+                config['options']['password'] = value
+            del config['options']['passcmd']
+            break
+
+
+def parse_options(config):
     options = []
     if config['type'] == 'cifs':
+        update_options(config)
         for key, value in config['options'].items():
             if value:
                 options.append(f"{key}={value}")
             else:
                 options.append(f"{key}")
-    optstr = ','.join(options)
-    if verbose:
-        print('optstr', optstr)
-    for name in config['mounts']:
+    return ','.join(options)
+
+
+def mount_folders(config, mname=None):
+    optstr = parse_options(config)
+    for name, share in config['mounts'].items():
         if mname and mname != name:
             continue
         ldir = os.path.expanduser(os.path.join(config['local'], name))
-        rdir = f"{config['remote']}/{name}"
-        print(f"mounting folder {ldir}")
-        syscmd(f"sudo mount -t cifs {rdir} {ldir} -o {optstr}")
+        rdir = f"{config['remote']}/{share}"
+        print(f'mounting local folder: {ldir}')
+        syscmd(f'sudo mount -t cifs {rdir} {ldir} -o {optstr}')
 
 
 def unmount_folders(config, mname=None):
-    if verbose:
-        print('unmount_folders', config['mounts'])
-    for name in config['mounts']:
+    for name in config['mounts'].keys():
         if mname is not None and mname != name:
             continue
         ldir = os.path.expanduser(os.path.join(config['local'], name))
-        print(f"unmounting folder {ldir}")
+        print(f'unmounting folder {ldir}')
         syscmd(f"sudo umount {ldir}")
 
 
@@ -91,7 +109,7 @@ def get_system_mounts(shares):
         config['systemmounts'] = {}
         if not config['mounts']:
             continue
-        for name in config['mounts']:
+        for name in config['mounts'].keys():
             config['systemmounts'][name] = '-'
     resp = syscmd('mount')
     regex = re.compile(r'\S+ on (\S+)')
@@ -102,28 +120,30 @@ def get_system_mounts(shares):
         for name, config in shares.items():
             if not config['mounts']:
                 continue
-            for lname in config['mounts']:
-                ldir = os.path.expanduser(os.path.join(config['local'], lname))
+            for sname, share in config['mounts'].items():
+                ldir = os.path.expanduser(os.path.join(config['local'], sname))
                 if item[1] != ldir:
                     continue
-                config['systemmounts'][lname] = f'-> {item[1]}'
+                config['systemmounts'][sname] = f'-> {item[1]}'
 
 
 def show_folders(config):
-    for name in config['mounts']:
+    for name, share in config['mounts'].items():
         if config['type'] == 'cifs':
-            rdir = f"{config['remote']}/{name}"
+            rdir = f"{config['remote']}/{share}"
         elif config['type'] == 'sshfs':
-            rdir = f"{config['options']['username']}@{config['remote']}:{name}"
+            rdir = f"{config['options']['username']}@{config['remote']}:{share}"
         else:
-            print(f"\"{config['type']}\" mounts not supported")
+            print(f'\"{config["type"]}\" mounts not supported')
             break
-        print(f"{name:<20}: {rdir:<60} {config['systemmounts'][name]}")
+        print(f'{name:<20}: {rdir:<60} {config["systemmounts"][name]}')
 
 
 def show_mounts(shares):
     get_system_mounts(shares)
-    print("Currently mounted shares")
+    print('Currently mounted shares:\n')
+    print(f'{"Name":<20}: {"Network Share":<60} Local Mounted Folder')
+    print(f'{"-"*110}')
     for name, config in shares.items():
         if not config['mounts']:
             continue
@@ -143,7 +163,7 @@ def command(args, cfgfile):
                 mount_folders(config, args.mountnamed)
             show_mounts(shares)
 
-        if args.mount:
+        elif args.mount:
             for name, config in shares.items():
                 if not config['mounts']:
                     continue
@@ -151,21 +171,22 @@ def command(args, cfgfile):
                 mount_folders(config)
             show_mounts(shares)
 
-        if args.unmountnamed:
+        elif args.unmountnamed:
             for name, config in shares.items():
                 if not config['mounts']:
                     continue
                 unmount_folders(config, args.unmountnamed)
             show_mounts(shares)
 
-        if args.unmount:
+        elif args.unmount:
             for name, config in shares.items():
                 if not config['mounts']:
                     continue
                 unmount_folders(config)
             show_mounts(shares)
 
-        show_mounts(shares)
+        else:
+            show_mounts(shares)
 
 
 if __name__ == '__main__':
@@ -174,7 +195,7 @@ if __name__ == '__main__':
 
     cfgfile = os.path.expanduser('~/.config/python/network-shares.yaml')
     if not os.path.exists(cfgfile):
-        print(f'Could not find #{cfgfile}')
+        print(f'Could not find {cfgfile}')
         sys.exit(1)
 
     command(args, cfgfile)
