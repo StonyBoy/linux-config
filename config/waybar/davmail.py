@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Jan-10 14:21
+# Time-Stamp: 2024-Jan-17 11:24
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -43,6 +43,10 @@ class DavMailEvent:
             self.status = 'warning'
         else:
             self.status = 'error'
+
+        if self.status == 'ok':
+            return show_empty()
+
         text = f"DavMail: {self.status}"
         res = {"text": text, "tooltip": tooltip, "class": self.status, "percentage": 100}
         print(json.dumps(res))
@@ -146,16 +150,17 @@ def get_davmail_status(args):
     if args.logpath is None:
         args.logpath = '~/davmail.log'
 
-    history = parse_log(args)
-    if history.nonempty():
-        if args.verbose:
-            for evt in history:
-                print(f'evt: {evt}')
-        show_davmail_status(history)
-    else:
-        show_empty()
-        if args.verbose:
-            print('No events found in the log')
+    if os.path.exists(args.logpath):
+        history = parse_log(args)
+        if history.nonempty():
+            if args.verbose:
+                for evt in history:
+                    print(f'evt: {evt}')
+            show_davmail_status(history)
+            return
+    show_empty()
+    if args.verbose:
+        print('No events found in the log')
 
 
 def main():
