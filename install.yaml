@@ -56,6 +56,7 @@ Scripts:
             - scripts/config_remote_tunnel.sh
             - scripts/cmp_folders
             - scripts/apply_mail_patch.sh
+            - scripts/import-gsettings.sh
 
 Editor:
     Classic Vim:
