@@ -125,7 +125,7 @@
         "return-type": "json"
     },
     "custom/systemd_unit": {
-        "interval": 60,
+        "interval": 300,
         "exec": "$HOME/.config/waybar/systemd_unit.py --system cbdaemon.service cbebpfdaemon.service taniumclient.service docker.service --user davmail.service mbsync.timer sway_user_lockscreen.timer sway_wallpaper.timer",
         "return-type": "json"
     },
