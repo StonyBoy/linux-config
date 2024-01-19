@@ -38,6 +38,7 @@ bindsym $mod+ctrl+w exec swaymsg "output * bg /opt/wallpapers/wallpaper.jpg fill
 # Example configuration:
 #
 exec swayidle -w \
+         timeout 1130  'notify-send -t 15000 -u critical -i /home/shegelun/.icons/candy-icons/apps/scalable/system-log-out.svg "Idle timeout" "Screen is locking in 30 seconds"' \
          timeout 1200 swaylock \
          timeout 1800 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          before-sleep 'playerctl -p spotify pause'
@@ -300,8 +301,8 @@ bindsym $mod+r mode "resize"
 
 # Screenshot and screenclip
 # ============================================================================
-    set $screenshot SCRFILE=~/Pictures/Screenshots/screenshot-$(date +"%Y-%m-%d-%H-%M-%S").png && grim $SCRFILE && satty --filename $SCRFILE --output-filename $SCRFILE && notify-send "Saved in $SCRFILE"
-    set $screenclip CLIPFILE=~/Pictures/Screenshots/screenclip-$(date +"%Y-%m-%d-%H-%M-%S").png && grim -g "$(slurp)" - | satty --filename - --output-filename $CLIPFILE && notify-send "Saved in $CLIPFILE"
+    set $screenshot SCRFILE=~/Pictures/Screenshots/screenshot-$(date +"%Y-%m-%d-%H-%M-%S").png && grim $SCRFILE && satty --filename $SCRFILE --output-filename $SCRFILE
+    set $screenclip CLIPFILE=~/Pictures/Screenshots/screenclip-$(date +"%Y-%m-%d-%H-%M-%S").png && grim -g "$(slurp)" - | satty --filename - --output-filename $CLIPFILE
     bindsym $mod+Print exec $screenshot
     bindsym $mod+Shift+Print exec $screenclip
 
