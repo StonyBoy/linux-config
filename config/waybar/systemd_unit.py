@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Jan-16 18:58
+# Time-Stamp: 2024-Jan-19 11:24
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -131,7 +131,7 @@ class UnitList:
         tooltip = ''
         cls = 'ok'
         if len(self.units):
-            text = 'Units: OK'
+            text = 'OK'
         for unit in self.units:
             tooltip += unit.tooltip()
             if unit.state == 'starting':
