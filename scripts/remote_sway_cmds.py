@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Jan-13 12:41
+# Time-Stamp: 2024-Jan-24 14:47
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -21,7 +21,7 @@ def parse_arguments():
 remote_commands = {
     'refresh_wallpaper': 'output * bg /opt/wallpapers/wallpaper.jpg fill',
     'lock_screen': 'exec swaylock',
-    'toggle_monitor': 'output DP-2 toggle',
+    'toggle_monitor': 'output DP-1 toggle',
     'open_terminal': 'exec alacritty',
     'reload_sway_config': 'reload',
     'show_mainmenu': 'exec rofi -modi drun#run -show drun -theme mainmenu',
