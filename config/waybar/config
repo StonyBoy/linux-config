@@ -3,7 +3,7 @@
     "spacing": 4,
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["custom/media", "pulseaudio", "network#wan", "network#wifi", "network#tun", "cpu", "memory", "disk#sys", "disk#home", "temperature", "custom/hostinfo", "custom/easytest", "custom/davmail", "custom/systemd_unit", "clock", "tray"],
+    "modules-right": ["custom/media", "pulseaudio", "network#wan", "network#wifi", "network#tun", "cpu", "memory", "disk#sys", "disk#home", "temperature", "custom/hostinfo", "custom/easytest", "custom/davmail", "custom/systemd_unit", "custom/multi_clock", "tray"],
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
@@ -21,6 +21,7 @@
         "format": "{:%Y-%m-%d %H:%M:%S %Z} ",
         "format-alt": "{:%H:%M:%S %z}",
         "locale": "en_DK.UTF-8",
+        "timezones": ["Europe/Copenhagen", "America/New_York", "America/Phoenix", "Asia/Calcutta"],
         "on-click-right": "yad --calendar --width=200 --height=200 --undecorated --fixed --close-on-unfocus --no-buttons"
     },
     "cpu": {
@@ -129,6 +130,13 @@
         "interval": 60,
         "format": "{} ",
         "exec": "$HOME/.config/waybar/systemd_unit.py --system cbdaemon.service cbebpfdaemon.service taniumclient.service docker.service --user davmail.service mbsync.timer sway_user_lockscreen.timer sway_wallpaper.timer",
+        "return-type": "json"
+    },
+    "custom/multi_clock": {
+        "interval": 10,
+        "format": "{} ",
+        "exec": "$HOME/.config/waybar/multi_clock.py --zone America/New_York America/Phoenix Asia/Calcutta --name NY PHO HYD",
+        "on-click-right": "yad --calendar --width=200 --height=200 --undecorated --fixed --close-on-unfocus --no-buttons",
         "return-type": "json"
     },
     "mpris": {
