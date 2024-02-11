@@ -1,32 +1,19 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2023-Nov-09 13:00
+-- Time-Stamp: 2024-Feb-11 17:47
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 return {
-    'tpope/vim-eunuch',                            -- Vim sugar for the UNIX shell commands that need it the most
-    'tpope/vim-fugitive',                          -- GIT support
-    'tpope/vim-obsession',                         -- Automatic editing sessions
-    'tpope/vim-markdown',                          -- Syntax highlighting for markdown files
-    'tpope/vim-dispatch',                          -- Run build commands in the background and parse the result
-    'tpope/vim-unimpaired',                        -- Pairs of handy bracket mappings
-    'tpope/vim-surround',                          -- Mappings to easily delete, change and add such surroundings in pairs
-    'tpope/vim-abolish',                           -- Word Case substitution: snake/mixed/camel/upper/
-    'tpope/vim-commentary',                        -- Comment in/out lines of text in various languages
-    'airblade/vim-gitgutter',                      -- Git: Changed lines since last revision
-    'AndrewRadev/linediff.vim',                    -- Diff two separate blocks of text
-    'AndrewRadev/splitjoin.vim',                   -- Switching between a single-line statement and a multi-line one
-    'triglav/vim-visual-increment',                -- Increment lists in visual mode
-    'azabiong/vim-highlighter',                    -- Save/Load highlights, finding variables, and customizing colors
-    'wsdjeg/vim-fetch',                            -- Use line and column jumps in file paths as found in stack traces and similar output
-    'rhysd/vim-clang-format',                      -- Format your code with specific coding style using clang-format
-    'yazgoo/unicodemoji',                          -- fast unicode emojis in terminal and vim with fzf
-    'vim-ruby/vim-ruby',                           -- Ruby support
-    'pangloss/vim-javascript',                     -- Better Javascript indenting support
-    'rust-lang/rust.vim',                          -- Rust, syntax highlighting, formatting, Syntastic integration
-    'aklt/plantuml-syntax',                        -- PlantUML Syntax/  usein/FTDetect
-    'rafcamlet/nvim-luapad',                       -- Interactive neovim scratchpad for lua
-    'kalafut/vim-taskjuggler',                     -- Vim syntax highlighting for TaskJuggler files.
+  'tpope/vim-eunuch',                  -- Vim sugar for the UNIX shell commands that need it the most
+  'tpope/vim-fugitive',                -- GIT support
+  'tpope/vim-obsession',               -- Automatic editing sessions
+  'tpope/vim-abolish',                 -- Word Case substitution: snake/mixed/camel/upper/
+  'AndrewRadev/linediff.vim',          -- Diff two separate blocks of text
+  'triglav/vim-visual-increment',      -- Increment lists in visual mode
+  'azabiong/vim-highlighter',          -- Save/Load highlights, finding variables, and customizing colors
+  'wsdjeg/vim-fetch',                  -- Use line and column jumps in file paths as found in stack traces and similar output
+  'aklt/plantuml-syntax',              -- PlantUML Syntax/  usein/FTDetect
+  'rafcamlet/nvim-luapad',             -- Interactive neovim scratchpad for lua
 }
 
 -- These plugins are not in use due to various problems or newer neovim specific plugins
@@ -58,3 +45,16 @@ return {
 -- 'tpope/vim-sensible'                -- Sensible VIM settings: overwrites listchars in neovim 0.8.2
 -- 'nathanalderson/yang.vim'           -- YANG syntax highlighting and other niceties for VIM
 -- 'rebelot/kanagawa.nvim'             -- Colorscheme inspired by the colors of the famous painting by Katsushika Hokusai.
+-- 'tpope/vim-markdown',               -- Syntax highlighting for markdown files
+-- 'tpope/vim-dispatch',               -- Run build commands in the background and parse the result
+-- 'tpope/vim-unimpaired',             -- Pairs of handy bracket mappings
+-- 'tpope/vim-surround',               -- Mappings to easily delete, change and add such surroundings in pairs
+-- 'AndrewRadev/splitjoin.vim',        -- Switching between a single-line statement and a multi-line one
+-- 'rhysd/vim-clang-format',           -- Format your code with specific coding style using clang-format
+-- 'yazgoo/unicodemoji',               -- fast unicode emojis in terminal and vim with fzf
+-- 'vim-ruby/vim-ruby',                -- Ruby support
+-- 'pangloss/vim-javascript',          -- Better Javascript indenting support
+-- 'rust-lang/rust.vim',               -- Rust, syntax highlighting, formatting, Syntastic integration
+-- 'kalafut/vim-taskjuggler',          -- Vim syntax highlighting for TaskJuggler files.
+-- 'tpope/vim-commentary',             -- Comment in/out lines of text in various languages
+-- 'airblade/vim-gitgutter',           -- Git: Changed lines since last revision
