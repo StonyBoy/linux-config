@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Jan-13 13:38
+# Time-Stamp: 2024-Feb-12 08:52
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -67,7 +67,7 @@ def get_tmux_sessions(args):
 
 def attach(server_session):
     server, session = server_session.split('@')
-    title = f'Tmux Session: {session} @ {server}'
+    title = f'{{{session}}} @ {server}'
     if server == 'localhost':
         cmd = ['alacritty', '--title', title, '-e', 'tmux', '-u', 'attach-session', '-t', session]
     else:
