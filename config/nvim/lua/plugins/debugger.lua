@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2024-Feb-14 22:10
+-- Time-Stamp: 2024-Feb-14 23:20
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local function keymaps()
@@ -16,6 +16,14 @@ local function keymaps()
 end
 
 
+local function do_ext_term()
+  local dap = require('dap')
+  dap.defaults.fallback.external_terminal = {
+    command = '/usr/local/bin/alacritty';
+    args = {'-e'};
+  }
+end
+
 -- For rust in Arch Linux you need
 -- lldb for lldb-vscode
 -- llvm for llvm-symbolizer
@@ -28,7 +36,8 @@ local function do_lldb()
   dap.adapters.lldb = {
     type = 'executable',
     command = cmdstr, -- adjust as needed, must be absolute path
-    name = 'lldb'
+    name = 'lldb',
+    console = 'internalConsole',
   }
 end
 
@@ -100,6 +109,7 @@ local function do_c_cpp()
       cwd = '${workspaceFolder}',
       stopOnEntry = false,
       stopAtBeginningOfMainSubprogram = true,
+      console = 'internalConsole',
       args = {},
 
       -- 💀
@@ -113,7 +123,7 @@ local function do_c_cpp()
       --
       -- But you should be aware of the implications:
       -- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
-      -- runInTerminal = false,
+      runInTerminal = true,
     },
   }
   dap.configurations.c = dap.configurations.cpp
@@ -168,6 +178,7 @@ return {
         } },
       })
       keymaps()
+      do_ext_term()
       do_lldb()
       do_rust()
       do_c_cpp()
