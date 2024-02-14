@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2024-Feb-14 09:49
+-- Time-Stamp: 2024-Feb-14 22:10
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local function keymaps()
@@ -15,16 +15,26 @@ local function keymaps()
   vim.keymap.set('n', '<leader>dt', require('dap').terminate)
 end
 
+
 -- For rust in Arch Linux you need
 -- lldb for lldb-vscode
 -- llvm for llvm-symbolizer
-local function do_rust()
+local function do_lldb()
   local dap = require('dap')
+  local cmdstr = '/usr/bin/lldb-vscode'
+  if vim.fn.has('macunix') then
+    cmdstr = '/usr/local/opt/llvm/bin/lldb-vscode'
+  end
   dap.adapters.lldb = {
     type = 'executable',
-    command = '/usr/bin/lldb-vscode', -- adjust as needed, must be absolute path
+    command = cmdstr, -- adjust as needed, must be absolute path
     name = 'lldb'
   }
+end
+
+
+local function do_rust()
+  local dap = require('dap')
   dap.configurations.rust = {
     {
       name = 'Launch',
@@ -79,11 +89,6 @@ end
 
 local function do_c_cpp()
   local dap = require('dap')
-  dap.adapters.lldb = {
-    type = 'executable',
-    command = '/usr/bin/lldb-vscode', -- adjust as needed, must be absolute path
-    name = 'lldb'
-  }
   dap.configurations.cpp = {
     {
       name = 'Launch',
@@ -163,6 +168,7 @@ return {
         } },
       })
       keymaps()
+      do_lldb()
       do_rust()
       do_c_cpp()
       do_python()
