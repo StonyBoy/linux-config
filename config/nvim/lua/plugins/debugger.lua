@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2023-Oct-10 20:27
+-- Time-Stamp: 2024-Feb-14 09:49
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local function keymaps()
@@ -71,11 +71,58 @@ local function do_rust()
       end,
     },
   }
-
 end
 
 local function do_python()
   require('dap-python').setup('~/.pyenv/versions/3.11.2/bin/python')
+end
+
+local function do_c_cpp()
+  local dap = require('dap')
+  dap.adapters.lldb = {
+    type = 'executable',
+    command = '/usr/bin/lldb-vscode', -- adjust as needed, must be absolute path
+    name = 'lldb'
+  }
+  dap.configurations.cpp = {
+    {
+      name = 'Launch',
+      type = 'lldb',
+      request = 'launch',
+      program = function()
+        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+      end,
+      cwd = '${workspaceFolder}',
+      stopOnEntry = false,
+      stopAtBeginningOfMainSubprogram = true,
+      args = {},
+
+      -- 💀
+      -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
+      --
+      --    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+      --
+      -- Otherwise you might get the following error:
+      --
+      --    Error on launch: Failed to attach to the target process
+      --
+      -- But you should be aware of the implications:
+      -- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
+      -- runInTerminal = false,
+    },
+  }
+  dap.configurations.c = dap.configurations.cpp
+end
+
+local function setup_ui()
+  -- highlight debugPC cterm=reverse ctermfg=162 ctermbg=230 gui=reverse guifg=#d33682 guibg=#fdf6e3
+  vim.api.nvim_set_hl(0, "debugPC", {
+    fg = "#d33682",
+    bg = "#fdf6e3",
+    reverse = true,
+    ctermbg = 230,
+    ctermfg = 162
+  })
 end
 
 return {
@@ -89,9 +136,35 @@ return {
       local dap = require('dap')
       local dapui = require('dapui')
 
-      dapui.setup()
+      dapui.setup({
+        layouts = { {
+          elements = { {
+            id = "watches",
+            size = 0.25
+          }, {
+            id = "stacks",
+            size = 0.25
+          }, {
+            id = "scopes",
+            size = 0.50
+          } },
+          position = "left",
+          size = 50
+        }, {
+          elements = { {
+            id = "repl",
+            size = 0.5
+          }, {
+            id = "console",
+            size = 0.5
+          } },
+          position = "bottom",
+          size = 10
+        } },
+      })
       keymaps()
       do_rust()
+      do_c_cpp()
       do_python()
       dap.listeners.after.event_initialized['dapui_config'] = function()
         dapui.open()
@@ -102,6 +175,7 @@ return {
       dap.listeners.before.event_exited['dapui_config'] = function()
         dapui.close()
       end
+      setup_ui()
     end,
   },
 }
