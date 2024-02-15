@@ -1,12 +1,22 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2023-Sep-04 16:04
+-- Time-Stamp: 2024-Feb-15 23:36
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Portable package manager for Neovim that runs everywhere Neovim runs.
 -- Easily install and manage LSP servers, DAP servers, linters, and formatters.
 
 return {
+  {
+    -- Neovim setup for init.lua and plugin development with full signature help, docs and completion 
+    -- for the nvim lua API.
+    'folke/neodev.nvim',
+    config = function()
+      require("neodev").setup({
+        -- add any options here, or leave empty to use the default settings
+      })
+    end,
+  },
   {
     "williamboman/mason.nvim",
     build = ":MasonUpdate", -- :MasonUpdate updates registry contents
@@ -30,6 +40,9 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    dependencies = {
+      'folke/neodev.nvim',
+    },
     config = function()
       local lspconfig = require('lspconfig')
 

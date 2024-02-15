@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2024-Feb-15 21:07
+-- Time-Stamp: 2024-Feb-15 21:22
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local function keymaps()
@@ -30,7 +30,7 @@ end
 local function do_lldb()
   local dap = require('dap')
   local cmdstr = '/usr/bin/lldb-vscode'
-  if vim.fn.has('macunix') then
+  if vim.fn.has('macunix') ~= 0 then
     cmdstr = '/usr/local/opt/llvm/bin/lldb-vscode'
   end
   dap.adapters.lldb = {
