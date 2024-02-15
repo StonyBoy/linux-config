@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2024-Feb-14 23:20
+-- Time-Stamp: 2024-Feb-15 21:07
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local function keymaps()
@@ -39,6 +39,31 @@ local function do_lldb()
     name = 'lldb',
     console = 'internalConsole',
   }
+end
+
+-- Download a release from https://github.com/microsoft/vscode-js-debug/releases
+-- and install in /opt
+local function do_nodejs()
+  local dap = require('dap')
+  dap.adapters["pwa-node"] = {
+    type = "server",
+    host = "localhost",
+    port = "${port}",
+    executable = {
+      command = "node",
+      -- 💀 Make sure to update this path to point to your installation
+      args = {"/opt/js-debug/src/dapDebugServer.js", "${port}"},
+    }
+  }
+  dap.configurations.javascript = {
+  {
+    type = "pwa-node",
+    request = "launch",
+    name = "Launch file",
+    program = "${file}",
+    cwd = "${workspaceFolder}",
+  },
+}
 end
 
 
@@ -92,9 +117,11 @@ local function do_rust()
   }
 end
 
+
 local function do_python()
   require('dap-python').setup('~/.pyenv/versions/3.11.2/bin/python')
 end
+
 
 local function do_c_cpp()
   local dap = require('dap')
@@ -129,6 +156,12 @@ local function do_c_cpp()
   dap.configurations.c = dap.configurations.cpp
 end
 
+
+local function do_ruby()
+  require("dap-ruby").setup()
+end
+
+
 local function setup_ui()
   -- highlight debugPC cterm=reverse ctermfg=162 ctermbg=230 gui=reverse guifg=#d33682 guibg=#fdf6e3
   vim.api.nvim_set_hl(0, "debugPC", {
@@ -146,6 +179,8 @@ return {
     dependencies = {
       'mfussenegger/nvim-dap',
       'mfussenegger/nvim-dap-python',
+      'mxsdev/nvim-dap-vscode-js',
+      'suketa/nvim-dap-ruby',
     },
     config = function()
       local dap = require('dap')
@@ -183,6 +218,8 @@ return {
       do_rust()
       do_c_cpp()
       do_python()
+      do_nodejs()
+      do_ruby()
       dap.listeners.after.event_initialized['dapui_config'] = function()
         dapui.open()
       end
