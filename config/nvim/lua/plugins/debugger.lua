@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2024-Feb-16 11:34
+-- Time-Stamp: 2024-Feb-16 14:12
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local function keymaps()
@@ -24,7 +24,7 @@ local function do_ext_term()
   }
 end
 
--- For rust in Arch Linux you need
+-- For C, CPP and Rust you need these packages with these two programs in your path
 -- lldb for lldb-vscode
 -- llvm for llvm-symbolizer
 local function do_lldb()
@@ -75,11 +75,18 @@ local function do_rust()
       type = 'lldb',
       request = 'launch',
       program = function()
-        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+        return vim.fn.input({
+          prompt = 'Path to executable: ',
+          default = vim.fn.getcwd() .. '/',
+          completion = 'file'
+        })
       end,
       cwd = '${workspaceFolder}',
       stopOnEntry = false,
-      args = {},
+      args = function()
+        -- completion: see help command-complete
+        return vim.split(vim.fn.input({prompt = 'Arguments: ', completion = 'file'}), ' ')
+      end,
 
       -- 💀
       -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
@@ -133,13 +140,20 @@ local function do_c_cpp()
       type = 'lldb',
       request = 'launch',
       program = function()
-        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+        return vim.fn.input({
+          prompt = 'Path to executable: ',
+          default = vim.fn.getcwd() .. '/',
+          completion = 'file'
+        })
       end,
       cwd = '${workspaceFolder}',
       stopOnEntry = false,
       stopAtBeginningOfMainSubprogram = true,
       console = 'internalConsole',
-      args = {},
+      args = function()
+        -- completion: see help command-complete
+        return vim.split(vim.fn.input({prompt = 'Arguments: ', completion = 'file'}), ' ')
+      end,
 
       -- 💀
       -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
