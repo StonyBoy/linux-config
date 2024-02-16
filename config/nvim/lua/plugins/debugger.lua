@@ -1,18 +1,18 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2024-Feb-16 14:19
+-- Time-Stamp: 2024-Feb-16 14:32
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local function keymaps()
-  vim.keymap.set('n', '<F2>', require('dap').toggle_breakpoint)
-  vim.keymap.set('n', '<F3>', require('dap').continue)
-  vim.keymap.set('n', '<F4>', require('dap').run_last)
-  vim.keymap.set('n', '<F5>', require('dap').step_over)
-  vim.keymap.set('n', '<F12>', require('dap').step_into)
-  vim.keymap.set('n', '<leader>dr', require('dap').step_out)
-  vim.keymap.set('n', '<leader>du', require('dap').run_to_cursor)
-  vim.keymap.set('n', '<leader>dr', require('dap').restart)
-  vim.keymap.set('n', '<leader>dt', require('dap').terminate)
+  vim.keymap.set('n', '<F2>', require('dap').toggle_breakpoint, {desc = 'Toggle Breakpoint'})
+  vim.keymap.set('n', '<F3>', require('dap').continue, {desc = 'Continue execution'})
+  vim.keymap.set('n', '<F4>', require('dap').run_last, {desc = 'Run the last session again'})
+  vim.keymap.set('n', '<F5>', require('dap').step_over, {desc = 'Step over'})
+  vim.keymap.set('n', '<F12>', require('dap').step_into, {desc = 'Step into'})
+  vim.keymap.set('n', '<leader>dr', require('dap').step_out, {desc = 'Step out'})
+  vim.keymap.set('n', '<leader>du', require('dap').run_to_cursor, {desc = 'Run to cursor'})
+  vim.keymap.set('n', '<leader>dr', require('dap').restart, {desc = 'Restart session'})
+  vim.keymap.set('n', '<leader>dt', require('dap').terminate, {desc = 'Terminate session'})
 end
 
 
