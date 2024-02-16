@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2024-Feb-15 21:22
+-- Time-Stamp: 2024-Feb-16 11:34
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local function keymaps()
@@ -118,8 +118,10 @@ local function do_rust()
 end
 
 
+-- Create a ~/python folder and create a virtual environment there, and install debugpy via pip
+-- mkdir ~/python && cd ~/python && python -m venv . && ~/python/bin/python -m pip install debugpy
 local function do_python()
-  require('dap-python').setup('~/.pyenv/versions/3.11.2/bin/python')
+  require('dap-python').setup('~/python/bin/python')
 end
 
 
