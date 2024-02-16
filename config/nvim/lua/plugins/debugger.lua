@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2024-Feb-16 14:12
+-- Time-Stamp: 2024-Feb-16 14:19
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local function keymaps()
@@ -205,11 +205,14 @@ return {
       dapui.setup({
         layouts = { {
           elements = { {
+            id = "breakpoints",
+            size = 0.10
+          }, {
             id = "watches",
-            size = 0.25
+            size = 0.20
           }, {
             id = "stacks",
-            size = 0.25
+            size = 0.20
           }, {
             id = "scopes",
             size = 0.50
