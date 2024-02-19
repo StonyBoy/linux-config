@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Feb-12 08:52
+# Time-Stamp: 2024-Feb-19 09:36
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -54,7 +54,10 @@ class TmuxServer:
 
     def print_sessions(self):
         for session in self.sessions:
-            print(f'{self.name}@{session}')
+            if self.name != 'localhost':
+                print(f'{self.name}@{session}')
+            else:
+                print(session)
 
 
 def get_tmux_sessions(args):
@@ -66,12 +69,14 @@ def get_tmux_sessions(args):
 
 
 def attach(server_session):
-    server, session = server_session.split('@')
-    title = f'{{{session}}} @ {server}'
-    if server == 'localhost':
-        cmd = ['alacritty', '--title', title, '-e', 'tmux', '-u', 'attach-session', '-t', session]
-    else:
+    if '@' in server_session:
+        server, session = server_session.split('@')
+        title = f'{{{session}}} @ {server}'
         cmd = ['alacritty', '--title', title, '-e', 'ssh', '-t', server, 'tmux', '-u', 'attach-session', '-t', session]
+    else:
+        session = server_session
+        title = f'{{{session}}}'
+        cmd = ['alacritty', '--title', title, '-e', 'tmux', '-u', 'attach-session', '-t', session]
 
     # Specifying a pipe for the 3 std devices allows the process to run detached
     subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
