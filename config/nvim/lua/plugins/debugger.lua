@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2024-Feb-16 14:32
+-- Time-Stamp: 2024-Feb-19 14:35
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local function keymaps()
@@ -186,6 +186,12 @@ local function setup_ui()
     reverse = true,
     ctermbg = 230,
     ctermfg = 162
+  })
+  vim.api.nvim_set_hl(0, "DapUIScope", {
+    fg= "#b58900",
+  })
+  vim.api.nvim_set_hl(0, "DapUIDecoration", {
+    fg= "#b58900",
   })
 end
 
