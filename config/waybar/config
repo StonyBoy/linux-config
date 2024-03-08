@@ -47,7 +47,7 @@
         "unit": "GB"
     },
     "temperature": {
-        "thermal-zone": 1,
+        "thermal-zone": 0,
         "critical-threshold": 75,
         "format": "{temperatureC}°C {icon}",
         "format-icons": ["", "", ""]
