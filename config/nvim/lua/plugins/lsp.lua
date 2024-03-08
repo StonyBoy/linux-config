@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2024-Feb-19 15:56
+-- Time-Stamp: 2024-Mar-08 14:40
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Portable package manager for Neovim that runs everywhere Neovim runs.
@@ -66,7 +66,6 @@ return {
 
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(args)
-          vim.keymap.set({'n', 'v'}, '<a-CR>', vim.lsp.buf.code_action, { noremap = true, buffer = args.buf, silent = true, desc = 'LSP code action' })
           vim.keymap.set({'n', 'v'}, 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap = true, buffer = args.buf, silent = true, desc = 'LSP references'})
           vim.keymap.set({'n', 'v'}, 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', { noremap = true, buffer = args.buf, silent = true, desc = 'LSP declaration'})
           vim.keymap.set({'n', 'v'}, 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, buffer = args.buf, silent = true, desc = 'LSP definition'})
@@ -80,6 +79,7 @@ return {
           vim.keymap.set({'n', 'v'}, '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', { noremap = true, buffer = args.buf, silent = true, desc = 'LSP type definition'})
           vim.keymap.set({'n', 'v'}, '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', { noremap = true, buffer = args.buf, silent = true, desc = 'LSP rename symbol'})
           vim.keymap.set({'n', 'v'}, '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, buffer = args.buf, silent = true, desc = 'LSP code action'})
+          -- vim.keymap.set({'n', 'v'}, '<leader>ca', vim.lsp.buf.code_action, { noremap = true, buffer = args.buf, silent = true, desc = 'LSP code action' })
           vim.keymap.set({'n', 'v'}, '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', { noremap = true, buffer = args.buf, silent = true, desc = 'LSP show line diagnostics'})
           vim.keymap.set({'n', 'v'}, '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', { noremap = true, buffer = args.buf, silent = true, desc = 'LSP goto prev diagnostics'})
           vim.keymap.set({'n', 'v'}, ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', { noremap = true, buffer = args.buf, silent = true, desc = 'LSP goto next diagnostics'})
