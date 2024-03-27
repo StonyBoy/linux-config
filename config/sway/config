@@ -80,7 +80,7 @@ input "type:keyboard" {
 #
     # Lockscreen setup
     bindsym $mod+ctrl+l exec swaylock
-    bindsym Ctrl+Alt+Delete exec swaylock
+    # bindsym Ctrl+Alt+Delete exec swaylock
 
     # Start a terminal
     bindsym $mod+Return exec $term
