@@ -85,9 +85,6 @@ input "type:keyboard" {
     # Kill focused window
     bindsym $mod+Shift+q kill
 
-    # Start your launcher: Use the rofi menu
-    bindsym $mod+space exec rofi -modi drun#run -show drun -theme mainmenu -monitor 0
-
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
