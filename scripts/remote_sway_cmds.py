@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Jan-24 14:47
+# Time-Stamp: 2024-Apr-14 12:43
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -14,6 +14,7 @@ def parse_arguments():
 
     parser.add_argument('command', nargs='?', default='')
     parser.add_argument('--server', '-s', default='localhost')
+    parser.add_argument('--verbose', '-v', action='store_true')
 
     return parser.parse_args()
 
@@ -24,6 +25,8 @@ remote_commands = {
     'toggle_monitor': 'output DP-1 toggle',
     'open_terminal': 'exec alacritty',
     'reload_sway_config': 'reload',
+    'monitors': '-t get_outputs',
+    'apps': '-p -t get_tree',
     'show_mainmenu': 'exec rofi -modi drun#run -show drun -theme mainmenu',
     'goto_workspace_1': 'workspace number 1',
     'goto_workspace_2': 'workspace number 2',
@@ -85,15 +88,19 @@ def get_remote_swaysock(args):
                             return elem
                     except ValueError:
                         return None
+    elif len(args.server) > 0:
+        print('Could not find any sway session')
 
 
 def run(args):
     swaysock = get_remote_swaysock(args)
     if swaysock:
-        cmd = ['ssh', '-t', args.server, f'{swaysock} swaymsg \'{remote_commands[args.command]}\'']
+        cmd = ['ssh', '-t', args.server, f'{swaysock} swaymsg {remote_commands[args.command]}']
 
         # Specifying a pipe for the 3 std devices allows the process to run detached
-        subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        cp = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        if cp.returncode == 0:
+            print(cp.stdout.decode())
 
 
 def main():
