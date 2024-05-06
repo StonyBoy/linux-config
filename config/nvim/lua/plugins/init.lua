@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2024-Feb-11 17:47
+-- Time-Stamp: 2024-May-06 11:29
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 return {
@@ -14,6 +14,7 @@ return {
   'wsdjeg/vim-fetch',                  -- Use line and column jumps in file paths as found in stack traces and similar output
   'aklt/plantuml-syntax',              -- PlantUML Syntax/  usein/FTDetect
   'rafcamlet/nvim-luapad',             -- Interactive neovim scratchpad for lua
+  'nvim-neotest/nvim-nio',             -- A library for asynchronous IO in Neovim, inspired by the asyncio library in Python
 }
 
 -- These plugins are not in use due to various problems or newer neovim specific plugins
