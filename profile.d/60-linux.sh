@@ -1,6 +1,6 @@
 #! /bin/bash
 # -*-sh-*-
-alias lsblk='lsblk --output NAME,FSTYPE,LABEL,UUID,PARTUUID,MOUNTPOINT'
+alias lsblk='lsblk --output NAME,FSTYPE,LABEL,SIZE,UUID,PARTUUID,MOUNTPOINT'
 
 
 function _complete_start_vnc()
