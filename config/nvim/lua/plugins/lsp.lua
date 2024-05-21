@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2024-Mar-08 14:40
+-- Time-Stamp: 2024-May-17 13:08
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Portable package manager for Neovim that runs everywhere Neovim runs.
@@ -93,7 +93,7 @@ return {
           pylsp = {
             plugins = {
               pycodestyle = {
-                ignore = {'W391'},
+                ignore = {'W391','E501', 'E231'},
                 maxLineLength = 120
               }
             }

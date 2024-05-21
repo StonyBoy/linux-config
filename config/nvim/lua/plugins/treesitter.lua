@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2024-Feb-11 16:38
+-- Time-Stamp: 2024-May-21 14:39
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Highlight, edit, and navigate code using a fast incremental parsing library
@@ -60,5 +60,6 @@ return {
   },
   {
     'nvim-treesitter/nvim-treesitter-textobjects', -- Additional textobjects for treesitter
+    -- commit = "73e44f43c70289c70195b5e7bc6a077ceffddda4", -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects/issues/513
   }
 }
