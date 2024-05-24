@@ -16,9 +16,29 @@ set $right l
 # Your preferred terminal emulator
 set $term alacritty
 
-hide_edge_borders vertical
-default_border pixel 1
-default_floating_border pixel 1
+#
+### Setting up windows and types
+#
+    hide_edge_borders vertical
+    default_border pixel 1
+    default_floating_border pixel 1
+
+    set {
+        $ii inhibit_idle focus
+        $game inhibit_idle focus; floating enable; border none; fullscreen enable; shadows disable
+        $popup floating enable; border pixel 1; sticky enable; shadows enable
+        $float floating enable; border pixel 1; shadows enable
+        $video inhibit_idle fullscreen; border none; max_render_time off
+        $important inhibit_idle open; floating enable; border pixel 1
+        $max inhibit_idle visible; floating enable; sticky enable; border pixel 1
+    }
+
+    for_window {
+        # Popup Windows Rules
+        [title="(?:Open|Save) (?:File|Folder|As)"] $popup
+        [app_id="pavucontrol"] $popup
+    }
+
 
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
