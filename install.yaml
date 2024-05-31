@@ -176,6 +176,12 @@ Sway:
         src:
             - config/swaylock
 
+Niri:
+    Home:
+        dest: config/niri/config.kdl
+        src:
+        - config/niri/home.kdl
+
 Rofi Themes:
     default:
         src:
