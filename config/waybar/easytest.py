@@ -2,6 +2,8 @@
 import argparse
 import subprocess
 import json
+import os.path
+import sys
 
 
 def parse_arguments():
@@ -45,6 +47,9 @@ def get_easytest_status(args):
 
 def main():
     arguments = parse_arguments()
+    if not os.path.exists(arguments.path):
+        print(f"EasyTest is not found at {arguments.path}")
+        sys.exit(1)
     get_easytest_status(arguments)
 
 
