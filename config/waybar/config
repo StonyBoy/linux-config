@@ -1,11 +1,17 @@
 {
-    "height": 26,
+    "height": 32,
     "spacing": 4,
-    "modules-left": ["sway/workspaces", "sway/mode"],
+    "layer": "top",
+    "modules-left": ["sway/workspaces", "wlr/taskbar", "sway/mode"],
     "modules-center": ["sway/window"],
     "modules-right": ["custom/media", "pulseaudio", "network#wan", "network#wifi", "network#tun", "cpu", "memory", "disk#sys", "disk#home", "temperature", "custom/hostinfo", "custom/easytest", "custom/davmail", "custom/systemd_unit", "custom/multi_clock", "tray"],
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
+    },
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "tooltip-format": "{title} | {app_id}",
+        "on-click": "activate"
     },
     "idle_inhibitor": {
         "format": "{icon}",
