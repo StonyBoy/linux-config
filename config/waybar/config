@@ -135,7 +135,7 @@
     "custom/systemd_unit": {
         "interval": 60,
         "format": "{} ",
-        "exec": "$HOME/.config/waybar/systemd_unit.py --system cbdaemon.service cbebpfdaemon.service cbagentd.service taniumclient.service docker.service --user davmail.service mbsync.timer sway_user_lockscreen.timer sway_wallpaper.timer",
+        "exec": "$HOME/.config/waybar/systemd_unit.py --system cbdaemon.service cbebpfdaemon.service cbagentd.service taniumclient.service docker.service --user davmail.service mbsync.timer sway_lockscreen.service swaybg.service swayidle.service",
         "return-type": "json"
     },
     "custom/multi_clock": {
