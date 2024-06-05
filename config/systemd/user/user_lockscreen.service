@@ -1,6 +1,0 @@
-[Unit]
-Description=User Lockscreen Wallpaper Change Service
-
-[Service]
-Type=oneshot
-ExecStart=%h/src/proj/pytools/wallpapers/wallpapers.py -x 2560 -y 1440 -l -r /opt/wallpapers

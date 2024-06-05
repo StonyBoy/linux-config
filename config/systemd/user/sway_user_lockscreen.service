@@ -1,6 +1,0 @@
-[Unit]
-Description=Sway (Wayland) User Lockscreen Wallpaper Change Service
-
-[Service]
-Type=oneshot
-ExecStart=%h/src/proj/pytools/wallpapers/wallpapers.py -l -z -r /opt/wallpapers
