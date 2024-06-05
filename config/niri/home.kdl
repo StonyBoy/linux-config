@@ -178,17 +178,6 @@ window-rule {
     open-on-workspace "Music"
 }
 
-// Start application and services
-spawn-at-startup "waybar"
-spawn-at-startup "~/scripts/wallpapers" "--wallpaper" "--sway" "--interval" "3600" "2560" "1440" "/opt/wallpapers"
-spawn-at-startup "~/scripts/wallpapers" "--lockscreen" "--info" "--sway" "--interval" "3600" "2560" "1440" "/opt/wallpapers"
-
-// Start notification service
-spawn-at-startup "mako"
-
-// Start a polkit authentication agent
-spawn-at-startup "/usr/bin/gnome-keyring-daemon" "--daemonize" "--login"
-
 // Mount NAS shares
 spawn-at-startup "~/scripts/nshares" "-o" "pho"
 spawn-at-startup "~/scripts/nshares" "-o" "wp"
@@ -201,12 +190,6 @@ spawn-at-startup "firefox"
 spawn-at-startup "Thunar"
 spawn-at-startup "evolution"
 spawn-at-startup "spotify" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland"
-
-// Lock Screen Timeout and Screen Powerdown Timeout
-spawn-at-startup "swayidle" "-w" \
-                 "timeout" "1200" "swaylock" \
-                 "timeout" "1800" "niri msg output DP-2 off" "resume" "niri msg output DP-2 on && pkill waybar && waybar &" \
-                 "before-sleep" "playerctl -p spotify pause"
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
