@@ -49,25 +49,19 @@ layout {
         // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 6
-
-        // Colors can be set in a variety of ways:
-        // - CSS named colors: "red"
-        // - RGB hex: "#rgb", "#rgba", "#rrggbb", "#rrggbbaa"
-        // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
+        width 4
 
         // Color of the ring on the active monitor.
-        active-color "#7fc8ff"
-
+        active-color "#b58900"
         // Color of the ring on inactive monitors.
-        inactive-color "#505050"
+        inactive-color "#586e75"
+        // Color of the ring on the active monitor as a gradient
+        active-gradient from="#fd5a09" to="#ffe000" angle=45
     }
 
     // You can also add a border. It's similar to the focus ring, but always visible.
     border {
-        off
-
-        width 4
+        width 2
         active-color "#ffc87f"
         inactive-color "#505050"
 
@@ -136,10 +130,10 @@ animations {
 // Workspaces
 
 workspace "Editor"
+workspace "Music"
 workspace "Internet"
 workspace "Files"
 workspace "Email"
-workspace "Music"
 
 window-rule {
     match at-startup=true app-id=r#"[Aa]lacritty"#
@@ -184,19 +178,35 @@ window-rule {
     open-on-workspace "Music"
 }
 
-// Add lines like this to spawn processes at startup.
+// Start application and services
 spawn-at-startup "waybar"
-spawn-at-startup "swaybg" "-i" "/opt/wallpapers/wallpaper.jpg"
+spawn-at-startup "~/scripts/wallpapers" "--wallpaper" "--sway" "--interval" "3600" "2560" "1440" "/opt/wallpapers"
+spawn-at-startup "~/scripts/wallpapers" "--lockscreen" "--info" "--sway" "--interval" "3600" "2560" "1440" "/opt/wallpapers"
+
+// Start notification service
+spawn-at-startup "mako"
+
+// Start a polkit authentication agent
+spawn-at-startup "/usr/bin/gnome-keyring-daemon" "--daemonize" "--login"
+
+// Mount NAS shares
+spawn-at-startup "~/scripts/nshares" "-o" "pho"
+spawn-at-startup "~/scripts/nshares" "-o" "wp"
+
+// Mount GoogleDrive
+spawn-at-startup "rclone" "--vfs-cache-mode" "writes" "mount" "--drive-import-formats" "docx" "GoogleDrive:" "~/GoogleDrive"
+
 spawn-at-startup "alacritty"
 spawn-at-startup "firefox"
 spawn-at-startup "Thunar"
 spawn-at-startup "evolution"
 spawn-at-startup "spotify" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland"
+
+// Lock Screen Timeout and Screen Powerdown Timeout
 spawn-at-startup "swayidle" "-w" \
                  "timeout" "1200" "swaylock" \
-                 "timeout" "1800" "niri msg output DP-2 off" "resume" "niri msg output DP-2 on" \
+                 "timeout" "1800" "niri msg output DP-2 off" "resume" "niri msg output DP-2 on && pkill waybar && waybar &" \
                  "before-sleep" "playerctl -p spotify pause"
-
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
