@@ -1,0 +1,9 @@
+[Unit]
+Description=Sway (Wayland) Lockscreen Change Service
+PartOf=graphical-session.target
+After=graphical-session.target
+Requisite=graphical-session.target
+
+[Service]
+ExecStart=%h/.pyenv/shims/python3 %h/scripts/wallpapers --lockscreen --sway --info --interval 3600 2560 1440 /opt/wallpapers
+Restart=on-failure

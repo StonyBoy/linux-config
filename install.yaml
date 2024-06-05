@@ -195,16 +195,10 @@ Beyond Compare:
 Systemd User Units:
     default:
         src:
-            - config/systemd/user/mbsync.timer
-            - config/systemd/user/netnextinstall.timer
-            - config/systemd/user/netnextpredict.timer
-            - config/systemd/user/sway_user_lockscreen.timer
-            - config/systemd/user/sway_wallpaper.timer
             - config/systemd/user/davmail.service
-            - config/systemd/user/mbsync.service
-            - config/systemd/user/netnextpredict.service
-            - config/systemd/user/sway_user_lockscreen.service
-            - config/systemd/user/sway_wallpaper.service
+            - config/systemd/user/sway_lockscreen.service
+            - config/systemd/user/swaybg.service
+            - config/systemd/user/swayidle.service
 
 X Window:
     default:
