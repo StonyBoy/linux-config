@@ -1,0 +1,11 @@
+# Steen Hegelund
+# Time-Stamp: 2024-Jun-05 21:57
+# vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=bash :
+#
+# Install somewhere in the path before /usr/bin/niri
+#
+if [ -z "$WAYLAND_DISPLAY" ]; then
+    if [ -e /usr/bin/niri ]; then
+        systemctl --user start niri
+    fi
+fi
