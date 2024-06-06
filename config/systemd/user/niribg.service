@@ -5,5 +5,5 @@ After=graphical-session.target
 Requisite=graphical-session.target
 
 [Service]
-ExecStart=%h/.pyenv/shims/python3 %h/src/proj/pytools/wallpapers/wallpapers.py --wallpaper --sway --interval 3600 2560 1440 /opt/wallpapers
+ExecStart=%h/.pyenv/shims/python3 %h/src/proj/pytools/wallpapers/wallpapers.py --wallpaper --niri --interval 3600 2560 1440 /opt/wallpapers
 Restart=on-failure
