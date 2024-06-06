@@ -178,6 +178,12 @@ window-rule {
     open-on-workspace "Music"
 }
 
+// Niri support services
+spawn-at-startup "systemctl" "--user" "restart" "waybar.service"
+spawn-at-startup "systemctl" "--user" "restart" "niriidle.service"
+spawn-at-startup "systemctl" "--user" "restart" "niribg.service"
+spawn-at-startup "systemctl" "--user" "restart" "niri_lockscreen.service"
+
 // Mount NAS shares
 spawn-at-startup "~/scripts/nshares" "-o" "pho"
 spawn-at-startup "~/scripts/nshares" "-o" "wp"
