@@ -193,12 +193,18 @@ Beyond Compare:
             - config/bcompare/BCCommands.xml
 
 Systemd User Units:
-    default:
+    Work:
         src:
             - config/systemd/user/davmail.service
+    Sway:
+        src:
             - config/systemd/user/sway_lockscreen.service
             - config/systemd/user/swaybg.service
-            - config/systemd/user/swayidle.service
+    Niri:
+        src:
+            - config/systemd/user/niri_lockscreen.service
+            - config/systemd/user/niribg.service
+            - config/systemd/user/niriidle.service
 
 X Window:
     default:

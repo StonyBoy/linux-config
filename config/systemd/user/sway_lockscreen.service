@@ -1,0 +1,6 @@
+[Unit]
+Description=Sway (Wayland) Lockscreen Change Service
+
+[Service]
+ExecStart=%h/scripts/wallpapers --lockscreen --sway --info --interval 3600 2560 1440 /opt/wallpapers
+Restart=on-failure

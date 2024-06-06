@@ -1,0 +1,6 @@
+[Unit]
+Description=Sway (Wayland) Wallpaper Change service
+
+[Service]
+ExecStart=%h/src/proj/pytools/wallpapers/wallpapers.py --wallpaper --sway --interval 3600 2560 1440 /opt/wallpapers
+Restart=on-failure
