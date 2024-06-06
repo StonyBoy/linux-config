@@ -1,11 +1,15 @@
 # Steen Hegelund
-# Time-Stamp: 2024-Jun-05 21:57
+# Time-Stamp: 2024-Jun-06 18:29
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=bash :
 #
 # Install somewhere in the path before /usr/bin/niri
 #
-if [ -z "$WAYLAND_DISPLAY" ]; then
-    if [ -e /usr/bin/niri ]; then
+if [ -e /usr/bin/niri ]; then
+    if [ -z "$WAYLAND_DISPLAY" ]; then
         systemctl --user start niri
+    else
+        /usr/bin/niri $*
     fi
+else
+    echo Niri is not installed
 fi
