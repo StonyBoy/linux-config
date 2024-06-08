@@ -57,6 +57,7 @@ Scripts:
             - scripts/apply_mail_patch.sh
             - scripts/import-gsettings.sh
             - scripts/ruby_gems.sh
+            - scripts/system_commands.py
 
 Editor:
     Classic Vim:

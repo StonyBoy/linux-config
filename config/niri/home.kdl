@@ -222,6 +222,7 @@ binds {
 
     Mod+Y { spawn "bash" "-c" "~/scripts/tmux_sessions.py | ~/scripts/tmux_sessions.py $(fuzzel -d -l 12 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s b58900ff)"; }
     Mod+T { spawn "bash" "-c" "~/scripts/tmux_sessions.py  -g work -g buri -g odin -g yggdrasil -g frigg | ~/scripts/tmux_sessions.py $(fuzzel -d -l 12 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s 268bd2ff)"; }
+    Mod+Shift+E { spawn "bash" "-c" "~/scripts/system_commands.py  | ~/scripts/system_commands.py $(fuzzel -d -l 12 -f 'Inconsolata:style=Regular:size=12' -a top -p 'Select>' -t 000080ff -S fdf6e3ff -s ff6347ff -b f5deb3ff)"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
@@ -349,7 +350,7 @@ binds {
     Alt+Print { screenshot-window; }
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
-    Mod+Shift+E { quit; }
+    // Mod+Shift+E { quit; }
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
