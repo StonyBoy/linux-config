@@ -1,0 +1,10 @@
+[Unit]
+Description=Google Drive User Service
+Wants=network-online.target
+After=syslog.target
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/rclone --vfs-cache-mode writes mount "GoogleDrive": %h/GoogleDrive
+TimeoutSec=120

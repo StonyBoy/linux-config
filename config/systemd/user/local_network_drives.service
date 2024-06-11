@@ -1,0 +1,10 @@
+[Unit]
+Description=Local Network Drive User Service
+Wants=network-online.target
+After=syslog.target
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.pyenv/shims/python3 %h/src/proj/linux-config/scripts/network-shares.py -o ab mus pho wp
+TimeoutSec=120

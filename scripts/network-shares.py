@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 '''
 Steen Hegelund
-Time-Stamp: 2024-Jan-17 15:44
+Time-Stamp: 2024-Jun-11 20:11
 
 Mount configured shares via CIFS or SSHFS
 '''
@@ -24,8 +24,8 @@ def parse_arguments():
     parser.add_argument('--verbose', '-v', help='Show actions', action='store_true')
     parser.add_argument('--mount', '-m', help='Mount all listed shares', action='store_true')
     parser.add_argument('--unmount', '-u', help='Unmount all listed shares', action='store_true')
-    parser.add_argument('--mountnamed', '-o', help='Mount named share')
-    parser.add_argument('--unmountnamed', '-n', help='Unmount named share')
+    parser.add_argument('--mountnamed', '-o', nargs='*', help='Mount named share')
+    parser.add_argument('--unmountnamed', '-n', nargs='*', help='Unmount named share')
 
     return parser.parse_args()
 
@@ -41,7 +41,7 @@ def syscmd(cmd):
 
 def create_folders(config, mname=None):
     for name in config['mounts'].keys():
-        if mname is not None and mname != name:
+        if mname is not None and name not in mname:
             continue
         ldir = os.path.expanduser(os.path.join(config['local'], name))
         if os.path.exists(ldir):
@@ -87,7 +87,7 @@ def parse_options(config):
 def mount_folders(config, mname=None):
     optstr = parse_options(config)
     for name, share in config['mounts'].items():
-        if mname and mname != name:
+        if mname is not None and name not in mname:
             continue
         ldir = os.path.expanduser(os.path.join(config['local'], name))
         rdir = f"{config['remote']}/{share}"
@@ -97,7 +97,7 @@ def mount_folders(config, mname=None):
 
 def unmount_folders(config, mname=None):
     for name in config['mounts'].keys():
-        if mname is not None and mname != name:
+        if mname is not None and name not in mname:
             continue
         ldir = os.path.expanduser(os.path.join(config['local'], name))
         print(f'unmounting folder {ldir}')
