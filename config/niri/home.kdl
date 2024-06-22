@@ -185,11 +185,10 @@ spawn-at-startup "systemctl" "--user" "restart" "niribg.service"
 spawn-at-startup "systemctl" "--user" "restart" "niri_lockscreen.service"
 
 // Mount NAS shares
-spawn-at-startup "~/scripts/nshares" "-o" "pho"
-spawn-at-startup "~/scripts/nshares" "-o" "wp"
+spawn-at-startup "systemctl" "--user" "start" "local_network_drives.service"
 
 // Mount GoogleDrive
-spawn-at-startup "rclone" "--vfs-cache-mode" "writes" "mount" "--drive-import-formats" "docx" "GoogleDrive:" "~/GoogleDrive"
+spawn-at-startup "systemctl" "--user" "start" "google_drive.service"
 
 spawn-at-startup "alacritty"
 spawn-at-startup "firefox"
