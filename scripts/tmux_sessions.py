@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Feb-19 09:36
+# Time-Stamp: 2024-Jun-28 14:37
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -15,6 +15,8 @@ def parse_arguments():
 
     parser.add_argument('server_session', nargs='?', default='')
     parser.add_argument('--get', '-g', action='append', default=[])
+    parser.add_argument('--inline', '-i', action='store_true')
+    parser.add_argument('--verbose', '-v', action='store_true')
 
     return parser.parse_args()
 
@@ -68,24 +70,35 @@ def get_tmux_sessions(args):
         server.print_sessions()
 
 
-def attach(server_session):
-    if '@' in server_session:
-        server, session = server_session.split('@')
+def attach(args):
+    if '@' in args.server_session:
+        server, session = args.server_session.split('@')
         title = f'{{{session}}} @ {server}'
-        cmd = ['alacritty', '--title', title, '-e', 'ssh', '-t', server, 'tmux', '-u', 'attach-session', '-t', session]
+        if args.inline:
+            cmd = ['ssh', '-t', server, 'tmux', '-u', 'attach-session', '-t', session]
+        else:
+            cmd = ['alacritty', '--title', title, '-e', 'ssh', '-t', server, 'tmux', '-u', 'attach-session', '-t', session]
     else:
-        session = server_session
+        session = args.server_session
         title = f'{{{session}}}'
-        cmd = ['alacritty', '--title', title, '-e', 'tmux', '-u', 'attach-session', '-t', session]
+        if args.inline:
+            cmd = ['tmux', '-u', 'attach-session', '-t', session]
+        else:
+            cmd = ['alacritty', '--title', title, '-e', 'tmux', '-u', 'attach-session', '-t', session]
 
     # Specifying a pipe for the 3 std devices allows the process to run detached
-    subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    if args.verbose:
+        print(f'Command: {' '.join(cmd)}')
+    if args.inline:
+        subprocess.run(cmd)
+    else:
+        subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
 
 
 def main():
     args = parse_arguments()
     if args.server_session:
-        attach(args.server_session)
+        attach(args)
     else:
         get_tmux_sessions(args)
 
