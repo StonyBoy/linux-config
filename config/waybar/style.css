@@ -70,6 +70,7 @@ window#waybar.chromium {
 #custom-hostinfo,
 #custom-easytest,
 #custom-davmail,
+#custom-mailstatus,
 #custom-systemd_unit,
 #custom-multi_clock,
 #tray,
@@ -274,6 +275,16 @@ label:focus {
 
 #custom-systemd_unit.warning {
     background-color: #f4d03f;
+    color: #000000;
+}
+
+#custom-mailstatus.unchanged {
+    background-color: #e5e7e9;
+    color: #000000;
+}
+
+#custom-mailstatus.new {
+    background-color: #f6ddcc;
     color: #000000;
 }
 
