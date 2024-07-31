@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Jun-28 14:37
+# Time-Stamp: 2024-Jul-31 16:40
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -88,7 +88,7 @@ def attach(args):
 
     # Specifying a pipe for the 3 std devices allows the process to run detached
     if args.verbose:
-        print(f'Command: {' '.join(cmd)}')
+        print(f'Command: {" ".join(cmd)}')
     if args.inline:
         subprocess.run(cmd)
     else:
