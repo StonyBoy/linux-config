@@ -46,7 +46,7 @@ layout {
 
     focus-ring {
         // Uncomment this line to disable the focus ring.
-        // off
+        off
 
         // How many logical pixels the ring extends out from the windows.
         width 4
@@ -61,10 +61,10 @@ layout {
 
     // You can also add a border. It's similar to the focus ring, but always visible.
     border {
-        width 2
-        active-color "#ffc87f"
-        inactive-color "#505050"
-
+        active-gradient from="orangered" to="yellow" angle=30 in="oklch shorter hue"
+        inactive-gradient from="black" to="lightgray" angle=30 in="oklch shorter hue"
+        // background: linear-gradient(30deg in oklch shorter hue, orangered, yellow);
+        width 8
     }
 
     // Struts shrink the area occupied by windows, similarly to layer-shell panels.
