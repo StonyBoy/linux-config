@@ -1,0 +1,173 @@
+{
+    "height": 32,
+    "spacing": 4,
+    "layer": "top",
+    "modules-left": ["custom/current_window", "sway/workspaces", "wlr/taskbar", "sway/mode"],
+    "modules-center": [],
+    "modules-right": ["custom/media", "pulseaudio", "network#wan", "network#wifi", "network#tun", "cpu", "memory", "disk#sys", "disk#home", "temperature", "custom/hostinfo", "custom/easytest", "custom/davmail", "custom/mailstatus", "custom/systemd_unit", "custom/multi_clock", "tray"],
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "tooltip-format": "{title} | {app_id}",
+        "on-click": "activate"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "clock": {
+        "format": "{:%Y-%m-%d %H:%M:%S %Z} ",
+        "format-alt": "{:%H:%M:%S %z}",
+        "locale": "en_DK.UTF-8",
+        "timezones": ["Europe/Copenhagen", "America/New_York", "America/Phoenix", "Asia/Calcutta"],
+        "on-click-right": "yad --calendar --width=200 --height=200 --undecorated --fixed --close-on-unfocus --no-buttons"
+    },
+    "cpu": {
+        "interval": 10,
+        "format": "{usage}% "
+    },
+    "memory": {
+        "interval": 30,
+        "format": "{used:0.1f}G/{total:0.1f}G "
+    },
+    "disk#sys": {
+        "path": "/",
+        "interval": 30,
+        "format": " {percentage_free}% ",
+        "format-alt": "{path}: {specific_free:0.2f}/{specific_total:0.2f}GB available ",
+        "unit": "GB"
+    },
+    "disk#home": {
+        "path": "/home",
+        "interval": 30,
+        "format": " {percentage_free}% ",
+        "format-alt": "{path}: {specific_free:0.2f}/{specific_total:0.2f}GB available ",
+        "unit": "GB"
+    },
+    "temperature": {
+        "thermal-zone": 0,
+        "critical-threshold": 75,
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+    "network#wan": {
+        "interface": "wan",
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname}",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "network#wifi": {
+        "interface": "wifi",
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname}",
+       
+        "format-disconnected": "",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "network#tun": {
+        "interface": "cscotun0",
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname}",
+        "format-linked": "",
+        "format-disconnected": "",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "$HOME/.config/waybar/pulse_audio_toggle.sh",
+        "on-click-right": "pavucontrol"
+    },
+    "custom/media": {
+        "format": "{icon} {}",
+        "return-type": "json",
+        "format-icons": {
+            "spotify": "",
+            "default": "🎜"
+        },
+        "tooltip-format": "{}",
+        "escape": true,
+        "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null",
+        "on-click": "playerctl -p spotify play-pause"
+    },
+    "custom/hostinfo": {
+        "interval": 60,
+        "format": "{} ",
+        "exec": "$HOME/.config/waybar/hostinfo.py",
+        "return-type": "json"
+    },
+    "custom/easytest": {
+        "interval": 30,
+        "exec": "$HOME/.config/waybar/easytest.py $USER",
+        "return-type": "json"
+    },
+    "custom/davmail": {
+        "interval": 900,
+        "exec": "$HOME/.config/waybar/davmail.py --logpath $HOME/davmail.log",
+        "return-type": "json"
+    },
+    "custom/mailstatus": {
+        "interval": 900,
+        "exec": "$HOME/.config/waybar/mailstatus.py --maildir ~/.local/share/mail/microchip/Inbox ~/.local/share/mail/microchip/unglinuxdriver_list",
+        "return-type": "json"
+    },
+    "custom/systemd_unit": {
+        "interval": 60,
+        "format": "{} ",
+        "exec": "$HOME/.config/waybar/systemd_unit.py --system cbdaemon.service cbebpfdaemon.service cbagentd.service taniumclient.service docker.service --user davmail.service mbsync.timer sway_lockscreen.service swaybg.service swayidle.service niri_lockscreen.service niribg.service niriidle.service",
+        "return-type": "json"
+    },
+    "custom/multi_clock": {
+        "interval": 10,
+        "format": "{} ",
+        "exec": "$HOME/.config/waybar/multi_clock.py --zone America/New_York America/Phoenix Asia/Calcutta --name NY PHO HYD",
+        "on-click-right": "yad --calendar --width=200 --height=200 --undecorated --fixed --close-on-unfocus --no-buttons",
+        "return-type": "json"
+    },
+    "mpris": {
+        "format": "{player_icon} {artist} - {title}",
+        "format-paused": "{status_icon} {title}",
+        "player-icons": {
+            "default": "▶",
+            "spotify": "",
+            "mpv": "🎵"
+        },
+        "status-icons": {
+            "paused": "⏸"
+        },
+        "ignored-players": ["firefox"]
+    },
+    "custom/current_window": {
+        "interval": 5,
+        "exec": "$HOME/.config/waybar/current_window.py",
+        "return-type": "json"
+    }
+}
+
+// vim: set ts=4 sw=4 sts=4 tw=250 cc=350 et ft=json :

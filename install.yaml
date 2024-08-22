@@ -171,17 +171,51 @@ Sway:
                 - config/sway/wfh.sway.config
                 - config/dunst/dunstrc
     Waybar:
-        src:
-            - config/waybar
+        default:
+            dest: config/waybar/config
+            src:
+                - config/waybar/config.sway
+        Widgets:
+            src:
+                - config/waybar/current_window.py
+                - config/waybar/davmail.py
+                - config/waybar/easytest.py
+                - config/waybar/hostinfo.py
+                - config/waybar/mailstatus.py
+                - config/waybar/mediaplayer.py
+                - config/waybar/multi_clock.py
+                - config/waybar/pulse_audio_toggle.sh
+                - config/waybar/style.css
+                - config/waybar/systemd_unit.py
+
     Sway Swaylock:
         src:
             - config/swaylock
 
 Niri:
-    Home:
-        dest: config/niri/config.kdl
-        src:
-        - config/niri/home.kdl
+    default:
+        Home:
+            dest: config/niri/config.kdl
+            src:
+            - config/niri/home.kdl
+        Waybar:
+            default:
+                dest: config/waybar/config
+                src:
+                    - config/waybar/config.niri
+        Widgets:
+            src:
+                - config/waybar/current_window.py
+                - config/waybar/davmail.py
+                - config/waybar/easytest.py
+                - config/waybar/hostinfo.py
+                - config/waybar/mailstatus.py
+                - config/waybar/mediaplayer.py
+                - config/waybar/multi_clock.py
+                - config/waybar/pulse_audio_toggle.sh
+                - config/waybar/style.css
+                - config/waybar/systemd_unit.py
+
 
 Rofi Themes:
     default:
