@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Jul-03 15:53
+# Time-Stamp: 2024-Aug-19 21:06
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -49,7 +49,7 @@ def get_mail_status(args):
         show_empty()
         if args.verbose:
             print('Maildir not found')
-            return
+        return
 
     main = folders[0]
     if main.unread == 0:
