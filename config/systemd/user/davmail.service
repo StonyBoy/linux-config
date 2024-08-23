@@ -1,8 +1,7 @@
 [Unit]
 Description=DavMail Gateway Service
 Wants=network-online.target
-After=syslog.target
-After=network.target
+After=network-online.target
 
 [Service]
 Type=simple
