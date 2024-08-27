@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Apr-14 12:43
+# Time-Stamp: 2024-Aug-27 13:01
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -20,7 +20,7 @@ def parse_arguments():
 
 
 remote_commands = {
-    'refresh_wallpaper': 'output * bg /opt/wallpapers/wallpaper.jpg fill',
+    'refresh_wallpaper': 'output * bg ~/Pictures/Wallpapers/wallpaper.jpg fill',
     'lock_screen': 'exec swaylock',
     'toggle_monitor': 'output DP-1 toggle',
     'open_terminal': 'exec alacritty',

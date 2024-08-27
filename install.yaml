@@ -58,6 +58,7 @@ Scripts:
             - scripts/import-gsettings.sh
             - scripts/ruby_gems.sh
             - scripts/system_commands.py
+            - scripts/wallpapers.py
 
 Editor:
     Classic Vim:

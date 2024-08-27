@@ -3,7 +3,6 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-set $wallpaper "/opt/wallpapers/wallpaper.jpg"
 
 set $ws1   "1: Editor "
 set $ws2   "2: Builds "
@@ -159,11 +158,6 @@ bindsym $mod+r mode "resize"
 
 # NumLock is ON
 exec_always --no-startup-id numlockx on
-
-# Wallpaper and lockscreen setup
-exec feh --bg-fill $wallpaper
-bindsym $mod+ctrl+l exec ~/scripts/i3_user_lock.sh
-bindsym $mod+ctrl+w exec feh --bg-fill $wallpaper
 
 # Next/previous workspace
 bindsym Mod1+Tab workspace next

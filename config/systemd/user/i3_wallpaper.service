@@ -3,4 +3,4 @@ Description=Wallpaper Change service
 
 [Service]
 Type=oneshot
-ExecStart=%h/src/proj/pytools/wallpapers/wallpapers.py -w -z -r /opt/wallpapers -t
+ExecStart=%%h/scripts/wallpapers.py -w -z -r %h/Pictures/Wallpapers

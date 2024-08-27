@@ -1,6 +1,6 @@
 daemonize
 show-failed-attempts
-image=/opt/wallpapers/lockscreen.jpg
+image=~/Pictures/Wallpapers/lockscreen.jpg
 scaling=fill
 indicator-idle-visible
 indicator-radius=90

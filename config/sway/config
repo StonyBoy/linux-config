@@ -40,11 +40,6 @@ set $term alacritty
     }
 
 
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-exec --no-startup-id exec swaymsg "output * bg /opt/wallpapers/wallpaper.jpg fill"
-bindsym $mod+ctrl+w exec swaymsg "output * bg /opt/wallpapers/wallpaper.jpg fill"
-
 ### Idle configuration
 #
 exec swayidle -w \
@@ -92,8 +87,8 @@ input "type:keyboard" {
     # mouse button for dragging.
     floating_modifier $mod normal
 
-    # Reload the configuration file and refresh the wallpaper
-    bindsym $mod+Shift+c reload, exec swaymsg "output * bg /opt/wallpapers/wallpaper.jpg fill"
+    # Reload the configuration file
+    bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
     set $mode_system (x) logout, (d) suspend, (h) hibernate, (Shift+r) reboot, (Shift+s) shutdown
