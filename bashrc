@@ -41,5 +41,7 @@ echo ""
 [ -d $HOME/.rvm/bin ] && pathappend ~/.rvm/bin
 [ -d $HOME/.rvm/gems/ruby-2.6.3/bin ] && pathappend ~/.rvm/gems/ruby-2.6.3/bin
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
+
 [ -d ~/.cargo/bin ] && source "$HOME/.cargo/env"
