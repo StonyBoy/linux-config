@@ -1,8 +1,5 @@
 [Unit]
 Description=Sway (Wayland) Wallpaper Change service
-PartOf=graphical-session.target
-After=graphical-session.target
-Requisite=graphical-session.target
 
 [Service]
 ExecStart=%h/scripts/wallpapers.py --wallpaper --sway --interval 3600 2560 1440 %h/Pictures/Wallpapers
