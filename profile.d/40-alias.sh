@@ -11,3 +11,4 @@ alias du_sorted='du -abx | sort -n | gawk '\''{if(match($0, /^([[:digit:]]+)[\t 
 alias fzfp='fzf --preview="bat --style=full --color=always {}" --multi --bind "enter:execute(nvim {})" --bind "space:execute(nvim -O {+})"'
 alias gdrive='rclone --vfs-cache-mode writes mount "GoogleDrive": ~/GoogleDrive &'
 alias ncal='ncal -M -W 4 -w -y'
+alias devs='ll /dev/ | rg ^l'
