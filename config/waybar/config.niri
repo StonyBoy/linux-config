@@ -105,7 +105,6 @@
         "on-click-right": "pavucontrol"
     },
     "custom/media": {
-        "format": "{icon} {}",
         "return-type": "json",
         "format-icons": {
             "spotify": "",
