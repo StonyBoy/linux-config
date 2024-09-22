@@ -15,7 +15,7 @@ window#waybar.hidden {
     opacity: 0.2;
 }
 
-window#waybar.termite {
+window#waybar.Alacritty {
     background-color: #3F3F3F;
 }
 
@@ -55,6 +55,7 @@ window#waybar.chromium {
     border-bottom: 3px solid #ffffff;
 }
 
+#language,
 #clock,
 #battery,
 #cpu,
@@ -72,7 +73,6 @@ window#waybar.chromium {
 #custom-mailstatus,
 #custom-systemd_unit,
 #custom-multi_clock,
-#custom-current_window,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -236,11 +236,9 @@ label:focus {
 }
 
 #language {
-    background: #00b093;
+    background: #fffacd;
     color: #740864;
-    padding: 0 5px;
-    margin: 0 5px;
-    min-width: 16px;
+    min-width: 40px;
 }
 
 #custom-hostinfo {
@@ -296,10 +294,4 @@ label:focus {
 #custom-multi_clock {
     background-color:  #d9d9d9;
     color: #000000;
-}
-
-#custom-current_window {
-    background-color:  #0e0e0e;
-    color: #f7f7f7;
-    border: 5px solid #5dade2;
 }
