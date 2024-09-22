@@ -5,6 +5,20 @@
     "modules-left": ["niri/workspaces"],
     "modules-center": ["niri/window"],
     "modules-right": ["custom/media", "pulseaudio", "network#wan", "network#wifi", "network#tun", "cpu", "memory", "disk#sys", "disk#home", "temperature", "custom/hostinfo", "custom/easytest", "custom/davmail", "custom/mailstatus", "custom/systemd_unit", "custom/multi_clock", "tray"],
+    "niri/workspaces": {
+        "format": "{index}: {name} {icon}",
+        "format-icons": {
+            "Editor": "",
+            "Music": "",
+            "Internet": "",
+            "Files": "",
+            "Email": "",
+
+            // Icons by state
+            "active": "",
+            "default": ""
+        }
+    },
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
