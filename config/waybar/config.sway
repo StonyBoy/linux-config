@@ -147,7 +147,7 @@
         "interval": 10,
         "format": "{} ",
         "exec": "$HOME/.config/waybar/multi_clock.py --zone America/New_York America/Phoenix Asia/Calcutta --name NY PHO HYD",
-        "on-click-right": "yad --calendar --width=200 --height=200 --undecorated --fixed --close-on-unfocus --no-buttons",
+        "on-click-right": "yad --calendar --width=200 --height=200 --undecorated --fixed --close-on-unfocus --no-buttons --show-weeks",
         "return-type": "json"
     },
     "mpris": {
