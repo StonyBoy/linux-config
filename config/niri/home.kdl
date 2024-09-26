@@ -157,7 +157,7 @@ window-rule {
 }
 
 window-rule {
-    match at-startup=true app-id=r#"evolution"#
+    match at-startup=true app-id=r#"org.gnome.Evolution"#
 
     open-on-workspace "Email"
     open-maximized true
