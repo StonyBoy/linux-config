@@ -4,7 +4,7 @@
     "layer": "top",
     "modules-left": ["niri/workspaces"],
     "modules-center": ["niri/window"],
-    "modules-right": ["custom/media", "pulseaudio", "network#wan", "network#wifi", "network#tun", "cpu", "memory", "disk#sys", "disk#home", "temperature", "custom/hostinfo", "custom/easytest", "custom/davmail", "custom/mailstatus", "custom/systemd_unit", "custom/multi_clock", "tray"],
+    "modules-right": ["custom/media", "pulseaudio", "network#wan", "network#wifi", "network#tun", "group/hardware", "custom/easytest", "custom/davmail", "custom/mailstatus", "custom/systemd_unit", "custom/multi_clock", "tray"],
     "niri/workspaces": {
         "format": "{index}: {name} {icon}",
         "format-icons": {
@@ -18,6 +18,22 @@
             "default": ""
         }
     },
+    "group/hardware": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-power",
+            "transition-left-to-right": false,
+        },
+        "modules": [
+            "custom/hostinfo",
+            "cpu",
+            "memory",
+            "disk#sys",
+            "disk#home",
+            "temperature",
+        ]
+    },
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
@@ -26,7 +42,8 @@
         }
     },
     "tray": {
-        "spacing": 10
+        "spacing": 20,
+        "show-passive-items": true,
     },
     "clock": {
         "format": "{:%Y-%m-%d %H:%M:%S %Z} ",
