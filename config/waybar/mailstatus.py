@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Aug-19 21:06
+# Time-Stamp: 2024-Sep-27 15:46
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -52,11 +52,11 @@ def get_mail_status(args):
         return
 
     main = folders[0]
-    if main.unread == 0:
-        show_empty()
-        return
-    status = 'new' if main.unread > 0 else 'unchanged'
-    text = f"{main.unread} unread"
+    status = 'unchanged'
+    text = "No"
+    if main.unread > 0:
+        status = 'new'
+        text = f"{main.unread} unread"
     tooltip = ''
     for fld in folders:
         tooltip += f'{os.path.basename(fld.path)}: {fld.unread} unread of {fld.total}\n'
