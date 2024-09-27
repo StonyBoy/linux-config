@@ -8,6 +8,25 @@
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "format": "{index}: {name} {icon}",
+        "format-icons": {
+            "1: Editor": "",
+            "2: Builds": "",
+            "3: Internet": "",
+            "4: Files": "",
+            "5: Email": "",
+            "6: Compare": "",
+            "7: Teams": "",
+            "8: Music": "",
+            "9: Private": "",
+            "10: VPN": "",
+
+            // Icons by state
+            "default": ""
+        }
+    },
     "wlr/taskbar": {
         "format": "{icon}",
         "tooltip-format": "{title} | {app_id}",
@@ -150,6 +169,7 @@
     },
     "custom/mailstatus": {
         "interval": 900,
+        "format": "{} ",
         "exec": "$HOME/.config/waybar/mailstatus.py --maildir ~/.local/share/mail/microchip/Inbox ~/.local/share/mail/microchip/unglinuxdriver_list",
         "return-type": "json"
     },

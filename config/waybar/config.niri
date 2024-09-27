@@ -155,6 +155,7 @@
     },
     "custom/mailstatus": {
         "interval": 900,
+        "format": "{} ",
         "exec": "$HOME/.config/waybar/mailstatus.py --maildir ~/.local/share/mail/microchip/Inbox ~/.local/share/mail/microchip/unglinuxdriver_list",
         "return-type": "json"
     },

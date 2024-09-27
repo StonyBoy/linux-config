@@ -131,16 +131,16 @@ input "type:keyboard" {
 #
 # Workspaces:
 #
-    set $ws1   "1: Editor "
-    set $ws2   "2: Builds "
-    set $ws3   "3: Internet "
-    set $ws4   "4: Files "
-    set $ws5   "5: Email "
-    set $ws6   "6: Compare "
-    set $ws7   "7: Teams "
-    set $ws8   "8: Music "
-    set $ws9   "9: Private "
-    set $ws10 "10: VPN "
+    set $ws1  "1: Editor"
+    set $ws2  "2: Builds"
+    set $ws3  "3: Internet"
+    set $ws4  "4: Files"
+    set $ws5  "5: Email"
+    set $ws6  "6: Compare"
+    set $ws7  "7: Teams"
+    set $ws8  "8: Music"
+    set $ws9  "9: Private"
+    set $ws10 "10: VPN"
 
     # Switch to workspace
     bindsym $mod+1 workspace $ws1
