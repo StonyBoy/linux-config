@@ -10,22 +10,6 @@
     },
     "sway/workspaces": {
         "disable-scroll": true,
-        "format": "{index}: {name} {icon}",
-        "format-icons": {
-            "1: Editor": "",
-            "2: Builds": "",
-            "3: Internet": "",
-            "4: Files": "",
-            "5: Email": "",
-            "6: Compare": "",
-            "7: Teams": "",
-            "8: Music": "",
-            "9: Private": "",
-            "10: VPN": "",
-
-            // Icons by state
-            "default": ""
-        }
     },
     "wlr/taskbar": {
         "format": "{icon}",
