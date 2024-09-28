@@ -21,6 +21,7 @@ import socket
 import datetime
 import time
 import re
+import glob
 
 
 def parse_arguments():
@@ -39,6 +40,14 @@ def parse_arguments():
     parser.add_argument('height', help='Display Height', type=int, default=1440)
     parser.add_argument('path', help='Path to images')
     return parser.parse_args(), parser
+
+
+def wait_for_swaysock():
+    swaysock = glob.glob('/run/user/*/sway-ipc.*')
+    while len(swaysock) == 0:
+        print('Waiting for a sway socket')
+        time.sleep(2.0)
+        swaysock = glob.glob('/run/user/*/sway-ipc.*')
 
 
 def set_wallpaper(args):
@@ -139,6 +148,8 @@ if __name__ == '__main__':
     args, parser = parse_arguments()
 
     if len(args.path):
+        if args.sway:
+            wait_for_swaysock()
         while True:
             fullpath = select_random_image(os.path.abspath(args.path))
             if args.lockscreen:
