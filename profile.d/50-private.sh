@@ -29,9 +29,6 @@ export rvmsudo_secure_path=1
 # Add Rusts Cargo to path if present
 [ -d ~/.cargo/bin ] && pathappend ~/.cargo/bin
 
-# Add pyenv to path if present
-[ -d ~/.pyenv ] && pathprepend $(pyenv root)/shims
-
 # Set core file size limit
 ulimit -c unlimited
 
