@@ -4,7 +4,7 @@
     "layer": "top",
     "modules-left": ["niri/workspaces"],
     "modules-center": ["niri/window"],
-    "modules-right": ["custom/media", "pulseaudio", "network#wan", "network#wifi", "network#tun", "group/hardware", "custom/easytest", "custom/davmail", "custom/mailstatus", "custom/systemd_unit", "custom/multi_clock", "tray"],
+    "modules-right": ["custom/media", "pulseaudio", "network#wan", "network#wifi", "network#tun", "group/hardware", "custom/easytest", "custom/davmail", "custom/systemd_unit", "custom/multi_clock", "tray"],
     "niri/workspaces": {
         "format": "{index}: {name} {icon}",
         "format-icons": {
@@ -151,12 +151,6 @@
     "custom/davmail": {
         "interval": 900,
         "exec": "$HOME/.config/waybar/davmail.py --logpath $HOME/davmail.log",
-        "return-type": "json"
-    },
-    "custom/mailstatus": {
-        "interval": 900,
-        "format": "{} ",
-        "exec": "$HOME/.config/waybar/mailstatus.py --maildir ~/.local/share/mail/microchip/Inbox ~/.local/share/mail/microchip/unglinuxdriver_list",
         "return-type": "json"
     },
     "custom/systemd_unit": {

@@ -6,6 +6,11 @@
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Overview
 
+environment {
+    // Used by xwayland applications
+    DISPLAY ":0"
+}
+
 // Input device configuration.
 // Find the full list of options on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
@@ -179,7 +184,6 @@ window-rule {
 }
 
 // Niri support services
-spawn-at-startup "systemctl" "--user" "restart" "waybar.service"
 spawn-at-startup "systemctl" "--user" "restart" "niriidle.service"
 spawn-at-startup "systemctl" "--user" "restart" "niribg.service"
 spawn-at-startup "systemctl" "--user" "restart" "niri_lockscreen.service"
