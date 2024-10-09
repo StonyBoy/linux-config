@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 '''
 Steen Hegelund
-Time-Stamp: 2024-Jun-11 20:11
+Time-Stamp: 2024-Oct-09 14:31
 
 Mount configured shares via CIFS or SSHFS
 '''
@@ -22,10 +22,10 @@ verbose = False
 def parse_arguments():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--verbose', '-v', help='Show actions', action='store_true')
-    parser.add_argument('--mount', '-m', help='Mount all listed shares', action='store_true')
-    parser.add_argument('--unmount', '-u', help='Unmount all listed shares', action='store_true')
-    parser.add_argument('--mountnamed', '-o', nargs='*', help='Mount named share')
-    parser.add_argument('--unmountnamed', '-n', nargs='*', help='Unmount named share')
+    parser.add_argument('--mountall', '-a', help='Mount all listed shares', action='store_true')
+    parser.add_argument('--unmountall', '-x', help='Unmount all listed shares', action='store_true')
+    parser.add_argument('--unmount', '-u', nargs='*', help='Unmount this share')
+    parser.add_argument('mount', nargs='*', help='Mount this share')
 
     return parser.parse_args()
 
@@ -155,15 +155,15 @@ def command(args, cfgfile):
     with open(cfgfile, 'rt') as fobj:
         shares = yaml.safe_load(fobj)
 
-        if args.mountnamed:
+        if args.mount:
             for name, config in shares.items():
                 if not config['mounts']:
                     continue
-                create_folders(config, args.mountnamed)
-                mount_folders(config, args.mountnamed)
+                create_folders(config, args.mount)
+                mount_folders(config, args.mount)
             show_mounts(shares)
 
-        elif args.mount:
+        elif args.mountall:
             for name, config in shares.items():
                 if not config['mounts']:
                     continue
@@ -171,14 +171,14 @@ def command(args, cfgfile):
                 mount_folders(config)
             show_mounts(shares)
 
-        elif args.unmountnamed:
+        elif args.unmount:
             for name, config in shares.items():
                 if not config['mounts']:
                     continue
-                unmount_folders(config, args.unmountnamed)
+                unmount_folders(config, args.unmount)
             show_mounts(shares)
 
-        elif args.unmount:
+        elif args.unmountall:
             for name, config in shares.items():
                 if not config['mounts']:
                     continue
