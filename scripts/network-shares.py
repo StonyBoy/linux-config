@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 '''
 Steen Hegelund
-Time-Stamp: 2024-Oct-11 13:44
+Time-Stamp: 2024-Oct-11 13:49
 
 Mount configured shares via CIFS or SSHFS
 
@@ -11,9 +11,9 @@ The configuration can consist of a number of sections like the example below:
     <name>:
       type: cifs
       local: <path to local folder e.g. ~/mnt/name>
-      remote: <remote server e.g. //server/share >
+      remote: <remote server e.g. //server >
       mounts:
-        <mount name>: <path on remote eg. "User/name/Downloads",  This is appended on "remote" >
+        <mount name>: <share path on remote eg. "share/path",  This is appended on "remote" >
       options:
         username: <remote username>
         password: <remote plaintext password>
