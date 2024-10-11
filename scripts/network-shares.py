@@ -1,9 +1,31 @@
 #! /usr/bin/env python3
 '''
 Steen Hegelund
-Time-Stamp: 2024-Oct-09 14:31
+Time-Stamp: 2024-Oct-11 13:40
 
 Mount configured shares via CIFS or SSHFS
+
+The scripts reads a configuration file at ~/.config/python/network-shares.yaml
+The configuration can consist of a number of sections like the example below:
+
+    <name>:
+      type: cifs
+      local: ~/mnt/laptop
+      remote: <remote server e.g. //server/share >
+      mounts:
+        <mount name>: <path on remote eg. "User/name/Downloads",  This is appended on "remote" >
+      options:
+        username: <remote username>
+        password: <remote plaintext password>
+        passcmd: <command to get the remote password e.g using gpg>
+        domain: <domain name>
+        uid: <local username>
+        gid: <local groupname>
+        iocharset: utf8
+        vers: <use cifs protocol version, e.g. 1.0 or 2.0>
+
+There can be multiple mounts specified on the same server, and you use the mount name to select which one to use.
+
 '''
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
