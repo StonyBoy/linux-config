@@ -1,9 +1,13 @@
 [Unit]
 Description=Sway (Wayland) Wallpaper Change service
+BindsTo=graphical-session.target
 PartOf=graphical-session.target
 After=graphical-session.target
 Requisite=graphical-session.target
 
 [Service]
-ExecStart=%h/.pyenv/shims/python3 %h/scripts/wallpapers.py --wallpaper --niri --interval 3600 2560 1440 %h/Pictures/Wallpapers
+ExecStart=/usr/bin/python3 %h/scripts/wallpapers.py --wallpaper --niri --interval 3600 2560 1440 %h/Pictures/Wallpapers
 Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target

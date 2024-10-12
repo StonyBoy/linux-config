@@ -1,5 +1,6 @@
 [Unit]
 Description=Sway (Wayland) Idle Detection Service
+BindsTo=graphical-session.target
 PartOf=graphical-session.target
 After=graphical-session.target
 Requisite=graphical-session.target
@@ -7,3 +8,6 @@ Requisite=graphical-session.target
 [Service]
 ExecStart=/usr/bin/swayidle -w timeout 1200 'swaylock -f' timeout 1800 'niri msg action power-off-monitors' resume 'systemctl --user restart waybar.service' before-sleep 'playerctl -p spotify pause'
 Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target
