@@ -199,6 +199,10 @@ Niri:
             dest: config/niri/config.kdl
             src:
             - config/niri/home.kdl
+        Work:
+            dest: config/niri/config.kdl
+            src:
+            - config/niri/work.kdl
         Waybar:
             default:
                 dest: config/waybar/config
@@ -216,6 +220,12 @@ Niri:
                 - config/waybar/pulse_audio_toggle.sh
                 - config/waybar/style.css
                 - config/waybar/systemd_unit.py
+        Sway Swaylock:
+            src:
+                - config/swaylock
+        Notifications:
+            src:
+                - config/mako/config
 
 
 Rofi Themes:

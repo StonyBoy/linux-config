@@ -1,4 +1,4 @@
-// Home Configuration for niri
+// Work Configuration for niri
 // Steen Hegelund
 // vim: set ts=4 sw=4 sts=4 tw=500 cc=500 et ft=kdl : 
 // This config is in the KDL format: https://kdl.dev
@@ -17,7 +17,7 @@ environment {
 input {
     keyboard {
         xkb {
-            // Modified US keyboard with DK letters. File at /usr/share/X11/xkb/symbols
+            // Modified US keyboard with DK letters. File at ~/.config/xkb/symbols/usdk
             layout "usdk"
             options "caps:none"
         }
@@ -139,6 +139,7 @@ workspace "Music"
 workspace "Internet"
 workspace "Files"
 workspace "Email"
+workspace "Teams"
 
 window-rule {
     match at-startup=true app-id=r#"[Aa]lacritty"#
@@ -148,7 +149,7 @@ window-rule {
 }
 
 window-rule {
-    match at-startup=true app-id="firefox"
+    match at-startup=true app-id="[Ff]irefox"
 
     open-on-workspace "Internet"
     open-maximized true
@@ -162,9 +163,23 @@ window-rule {
 }
 
 window-rule {
-    match at-startup=true app-id=r#"org.gnome.Evolution"#
+    match at-startup=true app-id=r#"[Nn]autilus"#
+
+    open-on-workspace "Files"
+    open-maximized true
+}
+
+window-rule {
+    match at-startup=true app-id=r#"[Ee]volution"#
 
     open-on-workspace "Email"
+    open-maximized true
+}
+
+window-rule {
+    match at-startup=true app-id=r#"[Tt]eams-for-linux"#
+
+    open-on-workspace "Teams"
     open-maximized true
 }
 
@@ -179,14 +194,9 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"org.pulseaudio.pavucontrol"#
+    match app-id=r#"[Pp]avucontrol"#
     open-on-workspace "Music"
 }
-
-// Niri support services
-spawn-at-startup "systemctl" "--user" "restart" "niriidle.service"
-spawn-at-startup "systemctl" "--user" "restart" "niribg.service"
-spawn-at-startup "systemctl" "--user" "restart" "niri_lockscreen.service"
 
 // Mount NAS shares
 spawn-at-startup "systemctl" "--user" "start" "local_network_drives.service"
@@ -197,8 +207,10 @@ spawn-at-startup "systemctl" "--user" "start" "google_drive.service"
 spawn-at-startup "alacritty"
 spawn-at-startup "firefox"
 spawn-at-startup "Thunar"
+spawn-at-startup "nautilus" "--new-window"
 spawn-at-startup "evolution"
 spawn-at-startup "spotify" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland"
+spawn-at-startup "teams-for-linux"
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
