@@ -203,6 +203,10 @@ Niri:
             dest: config/niri/config.kdl
             src:
             - config/niri/work.kdl
+        USDK Keyboard:
+            dest: config/xkb/symbols/usdk
+            src:
+            - xkb/usdk
         Waybar:
             default:
                 dest: config/waybar/config
@@ -251,6 +255,9 @@ Systemd User Units:
             - config/systemd/user/niri_lockscreen.service
             - config/systemd/user/niribg.service
             - config/systemd/user/niriidle.service
+    Waybar:
+        src:
+            - config/systemd/user/waybar.service
 
 X Window:
     default:
