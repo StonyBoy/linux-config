@@ -17,7 +17,7 @@ environment {
 input {
     keyboard {
         xkb {
-            // Modified US keyboard with DK letters. File at /usr/share/X11/xkb/symbols
+            // Modified US keyboard with DK letters. File at ~/.config/xkb/symbols/usdk
             layout "usdk"
             options "caps:none"
         }
@@ -148,7 +148,7 @@ window-rule {
 }
 
 window-rule {
-    match at-startup=true app-id="firefox"
+    match at-startup=true app-id="[Ff]irefox"
 
     open-on-workspace "Internet"
     open-maximized true
@@ -162,7 +162,14 @@ window-rule {
 }
 
 window-rule {
-    match at-startup=true app-id=r#"org.gnome.Evolution"#
+    match at-startup=true app-id=r#"[Nn]autilus"#
+
+    open-on-workspace "Files"
+    open-maximized true
+}
+
+window-rule {
+    match at-startup=true app-id=r#"[Ee]volution"#
 
     open-on-workspace "Email"
     open-maximized true
@@ -179,7 +186,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"org.pulseaudio.pavucontrol"#
+    match app-id=r#"[Pp]avucontrol"#
     open-on-workspace "Music"
 }
 
@@ -225,7 +232,7 @@ binds {
 
     Mod+Y { spawn "bash" "-c" "~/scripts/tmux_sessions.py | ~/scripts/tmux_sessions.py $(fuzzel -d -l 12 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s b58900ff)"; }
     Mod+T { spawn "bash" "-c" "~/scripts/tmux_sessions.py  -g work -g buri -g odin -g yggdrasil -g frigg | ~/scripts/tmux_sessions.py $(fuzzel -d -l 12 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s 268bd2ff)"; }
-    Mod+Shift+E { spawn "bash" "-c" "~/scripts/system_commands.py  | ~/scripts/system_commands.py $(fuzzel -d -l 12 -f 'Inconsolata:style=Regular:size=12' -a top -p 'Select>' -t 000080ff -S fdf6e3ff -s ff6347ff -b f5deb3ff)"; }
+    Mod+Shift+E { spawn "bash" "-c" "~/scripts/system_commands.py  | ~/scripts/system_commands.py $(fuzzel -d -l 12 -f 'Inconsolata:style=Regular:size=12' -p 'Select>' -t 000080ff -S fdf6e3ff -s ff6347ff -b f5deb3ff)"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
