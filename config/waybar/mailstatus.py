@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Oct-02 13:16
+# Time-Stamp: 2024-Oct-10 14:46
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
 import os.path
 import mailbox
 import json
+import subprocess
 
 
 def parse_arguments():
@@ -15,6 +16,7 @@ def parse_arguments():
 
     parser.add_argument('--verbose', '-v', action='count', default=0)
     parser.add_argument('--maildir', '-d', nargs='*', default=[])
+    parser.add_argument('--mailsync', '-m', action='store_true')
 
     return parser.parse_args()
 
@@ -37,6 +39,12 @@ class MailFolder:
 
     def __str__(self):
         return f'{self.unread} unread of {self.total} in {os.path.basename(self.path)}'
+
+
+def mail_sync(args):
+    cmd = ['systemctl', '--user', 'restart', 'mbsync.service']
+    cp = subprocess.run(cmd, capture_output=True)
+    return cp.stdout.decode().split('\n')
 
 
 def get_mail_status(args):
@@ -67,6 +75,8 @@ def get_mail_status(args):
 
 def main():
     args = parse_arguments()
+    if args.mailsync:
+        mail_sync(args)
     get_mail_status(args)
 
 
