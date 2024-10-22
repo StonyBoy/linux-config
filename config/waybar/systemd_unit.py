@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Jan-19 11:24
+# Time-Stamp: 2024-Oct-22 16:36
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -23,6 +23,7 @@ def parse_arguments():
 class UnitStatus:
     keyvalregex = re.compile(r'\s*(\S+):\s+(.*)')
     activeregex = re.compile(r'(\S+)\s+\((\S+)\)\s+since\s+([^;]+);\s+(.*)\s+ago')
+    inactiveregex = re.compile(r'(\S+)\s+(.*)')
     tasksregex = re.compile(r'(\S+)\s+\(\S+\s+(\S+)\)')
     triggerregex = re.compile(r'\S+\s+(\S+)')
     timerregex = re.compile(r'([^;]+);\s+(.*)\s+left')
@@ -63,6 +64,11 @@ class UnitStatus:
         if mt:
             self.state = mt[2]
             self.duration = mt[4]
+            return
+        mt = self.inactiveregex.match(text)
+        if mt:
+            self.state = mt[1]
+            self.duration = mt[2]
 
     def parse_tasks(self, text):
         mt = self.tasksregex.match(text)
@@ -137,9 +143,10 @@ class UnitList:
             if unit.state == 'starting':
                 text = f'Unit: {unit.name} {unit.state}'
                 cls = 'warning'
-            elif unit.state == 'dead' and len(unit.trigger) == 0:
-                text = f'Unit: {unit.name} {unit.state}'
-                cls = 'error'
+            elif len(unit.trigger) == 0:
+                if unit.state == 'dead' or unit.state == 'inactive' or unit.state == 'failed':
+                    text = f'Unit: {unit.name} {unit.state}'
+                    cls = 'error'
         return {'text': text, 'tooltip': tooltip, 'class': cls}
 
 
