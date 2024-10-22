@@ -4,7 +4,7 @@
     "layer": "top",
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["custom/media", "pulseaudio", "network#wan", "network#wifi", "network#tun", "group/hardware", "custom/easytest", "custom/davmail", "custom/mailstatus", "custom/systemd_unit", "custom/multi_clock", "tray"],
+    "modules-right": ["custom/media", "pulseaudio", "network#wan", "network#wifi", "network#tun", "group/hardware", "custom/easytest", "custom/mailstatus", "custom/systemd_unit", "custom/multi_clock", "tray"],
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
@@ -146,16 +146,11 @@
         "exec": "$HOME/.config/waybar/easytest.py $USER",
         "return-type": "json"
     },
-    "custom/davmail": {
-        "interval": 900,
-        "exec": "$HOME/.config/waybar/davmail.py --logpath $HOME/davmail.log",
-        "return-type": "json"
-    },
     "custom/mailstatus": {
         "interval": 900,
         "format": "{} ",
-        "exec": "$HOME/.config/waybar/mailstatus.py --maildir ~/.local/share/mail/microchip/Inbox ~/.local/share/mail/microchip/unglinuxdriver_list",
-        "on-click": "$HOME/.config/waybar/mailstatus.py --maildir ~/.local/share/mail/microchip/Inbox ~/.local/share/mail/microchip/unglinuxdriver_list --mailsync",
+        "exec": "$HOME/.config/waybar/mailstatus.py --logpath ~/davmail.log --maildir ~/.local/share/mail/microchip/Inbox ~/.local/share/mail/microchip/unglinuxdriver_list",
+        "on-click": "$HOME/.config/waybar/mailstatus.py --logpath ~/davmail.log --maildir ~/.local/share/mail/microchip/Inbox ~/.local/share/mail/microchip/unglinuxdriver_list --mailsync",
         "return-type": "json"
     },
     "custom/systemd_unit": {

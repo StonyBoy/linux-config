@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Oct-10 14:46
+# Time-Stamp: 2024-Oct-22 09:25
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -9,14 +9,17 @@ import os.path
 import mailbox
 import json
 import subprocess
+import datetime
+import re
 
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--verbose', '-v', action='count', default=0)
-    parser.add_argument('--maildir', '-d', nargs='*', default=[])
-    parser.add_argument('--mailsync', '-m', action='store_true')
+    parser.add_argument('--verbose', '-v', action='count', default=0, help='Provide more information')
+    parser.add_argument('--maildir', '-d', nargs='*', default=[], help='List of maildir folders to scan')
+    parser.add_argument('--logpath', '-l', help='The Davmail logfile to parse for status')
+    parser.add_argument('--mailsync', '-m', action='store_true', help='Run mailsync')
 
     return parser.parse_args()
 
@@ -39,6 +42,39 @@ class MailFolder:
 
     def __str__(self):
         return f'{self.unread} unread of {self.total} in {os.path.basename(self.path)}'
+
+
+class DavMailEvent:
+    def __init__(self, etype, datetimestr, eventstr, elemstr=None):
+        self.etype = etype
+        self.event = eventstr
+        self.timestamp = datetime.datetime.fromisoformat(datetimestr.replace(',', '.'))
+        self.elemtimestamp = datetime.datetime.now(tz=None)
+        if elemstr:
+            self.elemtimestamp = datetime.datetime.strptime(elemstr, '%d-%b-%Y %H:%M:%S')
+
+    def show_status(self, diff, tooltip):
+        status = 'ok'
+        if diff < datetime.timedelta(hours=1):
+            self.status = 'ok'
+        elif diff < datetime.timedelta(days=1):
+            self.status = 'warning'
+        if self.etype == 'Error':
+            status = 'error'
+        text = f'DavMail: {status}'
+        res = {"text": text, "tooltip": tooltip, "class": status, "percentage": 100}
+        print(json.dumps(res))
+
+    def show_datetime(self):
+        return self.timestamp.strftime('%d-%b-%Y %H:%M:%S')
+
+    def show(self):
+        diff = self.elemtimestamp - self.timestamp
+        tooltip = f"DavMail Status:\n  Last: {self.show_datetime()}"
+        self.show_status(diff, tooltip)
+
+    def __str__(self):
+        return f'{self.etype}: {self.timestamp}: {self.event} {self.elemtimestamp}'
 
 
 def mail_sync(args):
@@ -73,11 +109,55 @@ def get_mail_status(args):
     print(json.dumps(res))
 
 
+def parse_davmail_log(args):
+    info = re.compile(r'(\S+\s+\S+)\s+INFO\s+\S+\s+\S+\s+-\s+(\S+).*')
+    error = re.compile(r'(\S+\s+\S+)\s+ERROR\s+\S+\s+\S+\s+-\s+(\S+.*)')
+    history = []
+
+    with open(os.path.expanduser(args.logpath), 'rt') as fobj:
+        lines = fobj.readlines()
+        for line in lines:
+            mt = info.match(line)
+            if mt:
+                history.append(DavMailEvent('Info', mt.group(1), mt.group(2)))
+                continue
+            mt = error.match(line)
+            if mt:
+                history.append(DavMailEvent('Error', mt.group(1), mt.group(2)))
+                continue
+
+    return history
+
+
+def get_davmail_status(args):
+    if args.logpath is None:
+        args.logpath = '~/davmail.log'
+
+    if os.path.exists(args.logpath):
+        history = parse_davmail_log(args)
+        if len(history) > 2:
+            if args.verbose > 1:
+                for evt in history:
+                    print(f'evt: {evt}')
+            for idx in range(-3, 0):
+                evt = history[idx]
+                if args.verbose == 1:
+                    print(f'evt: {evt}')
+                if evt.etype == 'Error':
+                    evt.show()
+                    return False
+            return True
+    return False
+
+
 def main():
     args = parse_arguments()
     if args.mailsync:
         mail_sync(args)
-    get_mail_status(args)
+    if get_davmail_status(args):
+        get_mail_status(args)
+    else:
+        show_empty()
 
 
 if __name__ == '__main__':

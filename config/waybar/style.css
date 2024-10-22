@@ -60,7 +60,6 @@ window#waybar.hidden {
 #custom-media,
 #custom-hostinfo,
 #custom-easytest,
-#custom-davmail,
 #custom-mailstatus,
 #custom-systemd_unit,
 #custom-multi_clock,
@@ -239,21 +238,6 @@ label:focus {
 
 #custom-easytest {
     background-color: #aeb6bf;
-    color: #000000;
-}
-
-#custom-davmail.ok {
-    background-color: #48c9b0;
-    color: #000000;
-}
-
-#custom-davmail.warning {
-    background-color: #f4d03f;
-    color: #000000;
-}
-
-#custom-davmail.error {
-    background-color:  #ec7063;
     color: #000000;
 }
 
