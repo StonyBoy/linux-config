@@ -251,6 +251,11 @@ label:focus {
     color: #000000;
 }
 
+#custom-systemd_unit.error {
+    background-color:  #ec7063;
+    color: #000000;
+}
+
 #custom-mailstatus.unchanged {
     background-color: #848482;
     color: #000000;
@@ -261,8 +266,8 @@ label:focus {
     color: #000000;
 }
 
-#custom-systemd_unit.error {
-    background-color:  #ec7063;
+#custom-mailstatus.warning {
+    background-color: #f4d03f;
     color: #000000;
 }
 

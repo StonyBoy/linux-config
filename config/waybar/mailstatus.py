@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Oct-22 09:25
+# Time-Stamp: 2024-Oct-22 20:10
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -25,7 +25,7 @@ def parse_arguments():
 
 
 def show_empty():
-    res = {"text": "", "tooltip": "", "class": "", "percentage": 0}
+    res = {"text": "None", "tooltip": "", "class": "warning", "percentage": 0}
     print(json.dumps(res))
 
 
