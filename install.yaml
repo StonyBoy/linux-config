@@ -178,7 +178,6 @@ Sway:
                 - config/waybar/config.sway
         Widgets:
             src:
-                - config/waybar/current_window.py
                 - config/waybar/davmail.py
                 - config/waybar/easytest.py
                 - config/waybar/hostinfo.py
