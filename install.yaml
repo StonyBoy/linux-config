@@ -286,7 +286,12 @@ Email:
         - config/davmail/davmail.properties
     aerc:
         src:
-        - config/aerc
+        - config/aerc/aerc.conf
+        - config/aerc/accounts.conf
+        - config/aerc/binds.conf
+        - config/aerc/book.txt
+        - config/aerc/notmuch_queries.txt
+        - config/aerc/stylesets/steen
     mutt:
         default:
             src:
