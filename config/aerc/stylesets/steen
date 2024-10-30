@@ -1,17 +1,20 @@
 # Steen Hegelund
-# Time-Stamp: 2024-Oct-30 09:49
+# Time-Stamp: 2024-Oct-30 17:17
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=dosini :
 # aerc steen styleset
 #
 # More information on how to configure the styleset can be found in
 # the aerc-stylesets(7) manpage.
 
+tab.reverse=true
 tab.selected.bold=false
-tab.selected.bg=#b58900
-tab.selected.fg=#fdf6e3
+tab.selected.bg=#fdf6e3
+tab.selected.fg=#b58900
 
+dirlist.selected.reverse=true
 dirlist.selected.bg=#fdf6e3
 dirlist.selected.fg=#b58900
 
+msglist.selected.reverse=true
 msglist.selected.bg=#fdf6e3
 msglist.selected.fg=#b58900
