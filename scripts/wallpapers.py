@@ -1,13 +1,15 @@
-#! /usr/bin/env python3
+#!/usr/local/pyvenv/steen/bin/python3
 '''
 Use JPEG photo as wallpaper images.
 
 You can rename image files and convert, size and crop them
 You can also set them as lockscreen or wallpaper
 
-Dependencies:
+Installation:
+    source /usr/local/pyvenv/steen/bin/activate
+    pip install -r requirements.txt
+    deactivate
 
-    pip install Pillow
 '''
 import os
 import os.path

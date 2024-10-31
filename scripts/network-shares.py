@@ -1,7 +1,7 @@
-#! /usr/bin/env python3
+#!/usr/local/pyvenv/steen/bin/python3
 '''
 Steen Hegelund
-Time-Stamp: 2024-Oct-11 13:49
+Time-Stamp: 2024-Oct-31 22:05
 
 Mount configured shares via CIFS or SSHFS
 
@@ -26,6 +26,10 @@ The configuration can consist of a number of sections like the example below:
 
 There can be multiple mounts specified on the same server, and you use the mount name to select which one to use.
 
+Installation:
+    source /usr/local/pyvenv/steen/bin/activate
+    pip install -r requirements.txt
+    deactivate
 '''
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
