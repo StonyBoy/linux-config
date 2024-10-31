@@ -1,11 +1,11 @@
-#! /usr/bin/env python3
+#!/usr/local/pyvenv/steen/bin/python3
 '''
-Install links
+Install configuration for a Linux/Unix environment
 
 Installation:
-    python3 -m ensurepip
-    pip3 install --user colorama
-    pip3 install --user PyYAML
+    source /usr/local/pyvenv/steen/bin/activate
+    pip install -r requirements.txt
+    deactivate
 '''
 import os
 import sys
