@@ -6,5 +6,5 @@ After=network.target
 
 [Service]
 Type=oneshot
-ExecStart=%h/.pyenv/shims/python3 %h/src/proj/linux-config/scripts/network-shares.py -o ab mus pho wp
+ExecStart=%h/src/proj/linux-config/scripts/network-shares.py ab mus pho wp
 TimeoutSec=120
