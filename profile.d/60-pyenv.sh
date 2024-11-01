@@ -2,9 +2,9 @@
 # -*-sh-*-
 # Setup pyenv for multiple python versions
 
-if [ -e /usr/bin/pyenv ]; then
-    pathprepend $PYENV_ROOT
-    pathprepend /$(pyenv root)/shims
+if [ -e $HOME/.pyenv ]; then
     export PYENV_ROOT="$HOME/.pyenv"
+    pathprepend $PYENV_ROOT/bin
+    pathprepend $(pyenv root)/shims
     eval "$(pyenv init -)"
 fi
