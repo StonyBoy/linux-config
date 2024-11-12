@@ -3,5 +3,6 @@ steen=folder:netdev_list and thread:"{from:steen.hegelund}"
 horatiu=folder:netdev_list and thread:"{from:horatiu.vultur@microchip.com}"
 daniel=folder:netdev_list and thread:"{from:daniel.machon@microchip.com}"
 parthiban=folder:netdev_list and thread:"{from:parthiban.veerasooran@microchip.com}"
+herve=folder:netdev_list and thread:"{from:herve.codina@bootlin.com}"
 bootlin=folder:netdev_list and thread:"{from:bootlin.com}"
 newpatch=folder:netdev_list and subject:/^\[PATCH/ and not subject:/[v][2-9]/ and not subject:/[2-9]+\/[2-9]+/ and is:unread
