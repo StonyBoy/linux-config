@@ -158,7 +158,7 @@
         "return-type": "json"
     },
     "custom/mailstatus": {
-        "interval": 900,
+        "interval": 600,
         "format": "{} ",
         "exec": "$HOME/.config/waybar/mailstatus.py --logpath ~/davmail.log --maildir ~/.local/share/mail/microchip/Inbox ~/.local/share/mail/microchip/unglinuxdriver_list",
         "on-click": "$HOME/.config/waybar/mailstatus.py --logpath ~/davmail.log --maildir ~/.local/share/mail/microchip/Inbox ~/.local/share/mail/microchip/unglinuxdriver_list --mailsync",
