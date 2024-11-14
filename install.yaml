@@ -53,7 +53,7 @@ Scripts:
             - scripts/git_branches.py
             - scripts/config_tunnel.sh
             - scripts/config_remote_tunnel.sh
-            - scripts/cmp_folders
+            - scripts/difftree.py
             - scripts/apply_mail_patch.sh
             - scripts/import-gsettings.sh
             - scripts/ruby_gems.sh
