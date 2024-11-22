@@ -1,7 +1,7 @@
 #!/usr/local/pyvenv/steen/bin/python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Nov-15 11:53
+# Time-Stamp: 2024-Nov-22 13:42
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 '''
@@ -75,10 +75,13 @@ class DiffFileItem(FileItem):
         self.isdiff = subprocess.run(cmd, capture_output=True).returncode != 0
 
     def _diffvalue(self, path: str):
-        with open(path, 'rt') as fobj:
-            lines = fobj.readlines()
-            return len(lines)
-        return 0
+        try:
+            with open(path, 'rt', encoding='utf-8', errors='ignore') as fobj:
+                lines = fobj.readlines()
+                return len(lines)
+            return 0
+        except FileNotFoundError:
+            return -1
 
     def compare(self):
         match self.tool:
@@ -104,7 +107,9 @@ class DiffFileItem(FileItem):
     def __str__(self):
         res = FileItem.__str__(self)
         if self.isdiff:
-            res = f'  {Fore.RED}{res.strip()} - lines: {self.locdiff} {self.remdiff}{Style.RESET_ALL}'
+            locdiff = 'Missing' if self.locdiff == -1 else self.locdiff
+            remdiff = 'Missing' if self.remdiff == -1 else self.remdiff
+            res = f'  {Fore.RED}{res.strip()} - lines: {locdiff} {remdiff}{Style.RESET_ALL}'
         return res
 
 
