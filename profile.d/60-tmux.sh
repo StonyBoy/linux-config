@@ -1,7 +1,7 @@
 #! /bin/bash
 #  vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=sh :
 # Steen Hegelund
-# Time-Stamp: 2024-Nov-28 19:39
+# Time-Stamp: 2024-Nov-28 20:52
 
 pane_id_prefix="resurrect_"
 
@@ -30,53 +30,65 @@ fi
 # Stash the new history each time a command runs.
 export PROMPT_COMMAND="history -a"
 
-# Provide TAT (tmux attach) with tab-expansion with session names
+# Provide TAT (tmux attach) with tab-expansion of session names
 tat() {
-  local session_name="$1"
-  local sessions=( $(tmux list-sessions 2>/dev/null | cut -d ":" -f 1 | grep "^$session_name$") )
+    local session_name="$1"
+    local sessions=( $(tmux list-sessions 2>/dev/null | cut -d ":" -f 1 | grep "^$session_name$") )
 
-  if [ ${#sessions[@]} -gt 0 ]; then
-    # If there is already a session with the same name, attach to it.
-    tmux attach-session -t "$session_name"
-  else
-    # If there is no existing session, create a new (detached) one.
-    tmux new-session -d -s "$session_name"
+    if [ ${#sessions[@]} -gt 0 ]; then
+        # If there is already a session with the same name, attach to it.
+        tmux attach-session -t "$session_name"
+    else
+        # If there is no existing session, create a new (detached) one.
+        tmux new-session -d -s "$session_name"
 
-    # Try to find a matching code directory.
-    local code_root_dirs=$(echo $CODE_ROOT_DIRS | sed 's/:/ /g')
-    local matching_dirs=( $(find $code_root_dirs -maxdepth 1 -name "$session_name" -type d ) )
-
-    # If there is a matching directory, set it as the default path and jump into the directory.
-    if [ ${#matching_dirs[@]} -gt 0 ]; then
-      local code_dir=${matching_dirs[0]}
-      tmux set default-path "$code_dir" 1>/dev/null
-      tmux send-keys -t "$session_name:1" "cd $code_dir && clear" C-m
-
-      # If there is a .tmux file in this directory, execute it.
-      if [ -f "$code_dir/.tmux" ]; then
-        eval "$code_dir/.tmux" $session_name
-      fi
+        # Finally, attach to the newly created session.
+        tmux attach-session -t "$session_name"
     fi
-
-    # Finally, attach to the newly created session.
-    tmux attach-session -t "$session_name"
-  fi
 }
 
 _tat() {
-  COMPREPLY=()
-  local session="${COMP_WORDS[COMP_CWORD]}"
-  local code_root_dirs=$(echo $CODE_ROOT_DIRS | sed 's/:/ /g')
+    COMPREPLY=()
+    local session="${COMP_WORDS[COMP_CWORD]}"
 
-  # For autocomplete, use both existing sessions as well as directory names.
-  local sessions=( $(compgen -W "$(tmux list-sessions 2>/dev/null | awk -F: '{ print $1 }')" -- "$session") )
-  local directories=( $(
-  for dir in $code_root_dirs; do
-    cd "$dir" 2 >/dev/null && compgen -d -- "$session"
-  done
-  ) )
-
-  COMPREPLY=( ${sessions[@]} ${directories[@]} )
+    local sessions=( $(compgen -W "$(tmux list-sessions 2>/dev/null | awk -F: '{ print $1 }')" -- "$session") )
+    COMPREPLY=( ${sessions[@]} ${directories[@]} )
 }
 
-complete -o filenames -o nospace -F _tat tat
+complete -F _tat tat
+
+# Provide RTAT (remote ssh tmux attach) with tab-expansion of servers and session names
+rtat() {
+    local server_name="$1"
+    local session_name="$2"
+    local sessions=( $(ssh -t $server_name tmux list-sessions 2>/dev/null | cut -d ":" -f 1 | grep "^$session_name$") )
+
+    if [ ${#sessions[@]} -gt 0 ]; then
+        # If there is already a session with the same name, attach to it.
+        ssh -t $server_name tmux attach-session -t "$session_name"
+    else
+        # If there is no existing session, create a new (detached) one.
+        ssh tmux -t $server_name new-session -d -s "$session_name"
+        ssh tmux -t $server_name attach-session -t "$session_name"
+    fi
+}
+
+_rtat() {
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+
+    case $COMP_CWORD in
+        1)
+            local words=( $(compgen -W "$(grep -i '^host' ~/.ssh/config)" -- "$cur" ) )
+            COMPREPLY=( ${words[@]} )
+            ;;
+        2)
+            local words=( $(compgen -W "$(ssh -t ${COMP_WORDS[1]} tmux list-sessions 2>/dev/null | awk -F: '{ print $1 }')" -- "$cur" ) )
+            COMPREPLY=( ${words[@]} )
+            ;;
+        *)
+            COMPREPLY=()
+            ;;
+    esac
+}
+
+complete -F _rtat rtat
