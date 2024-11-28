@@ -1,7 +1,7 @@
 #! /bin/bash
 #  vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=sh :
 # Steen Hegelund
-# Time-Stamp: 2024-Nov-28 20:52
+# Time-Stamp: 2024-Nov-28 21:02
 
 pane_id_prefix="resurrect_"
 
@@ -41,8 +41,6 @@ tat() {
     else
         # If there is no existing session, create a new (detached) one.
         tmux new-session -d -s "$session_name"
-
-        # Finally, attach to the newly created session.
         tmux attach-session -t "$session_name"
     fi
 }
@@ -82,7 +80,7 @@ _rtat() {
             COMPREPLY=( ${words[@]} )
             ;;
         2)
-            local words=( $(compgen -W "$(ssh -t ${COMP_WORDS[1]} tmux list-sessions 2>/dev/null | awk -F: '{ print $1 }')" -- "$cur" ) )
+            local words=( $(compgen -W "$(ssh -t ${COMP_WORDS[COMP_CWORD-1]} tmux list-sessions 2>/dev/null | awk -F: '{ print $1 }')" -- "$cur" ) )
             COMPREPLY=( ${words[@]} )
             ;;
         *)
