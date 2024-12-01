@@ -1,7 +1,7 @@
 #! /bin/bash
 #  vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=sh :
 # Steen Hegelund
-# Time-Stamp: 2024-Nov-28 21:02
+# Time-Stamp: 2024-Dec-01 15:33
 
 pane_id_prefix="resurrect_"
 
@@ -32,16 +32,28 @@ export PROMPT_COMMAND="history -a"
 
 # Provide TAT (tmux attach) with tab-expansion of session names
 tat() {
-    local session_name="$1"
+    local path_name="$(basename "$PWD" | tr . -)"
+    local session_name=${1-$path_name}
     local sessions=( $(tmux list-sessions 2>/dev/null | cut -d ":" -f 1 | grep "^$session_name$") )
 
-    if [ ${#sessions[@]} -gt 0 ]; then
-        # If there is already a session with the same name, attach to it.
-        tmux attach-session -t "$session_name"
+    if [ -z "$TMUX" ]; then
+        # Not in TMUX already
+        if [ ${#sessions[@]} -gt 0 ]; then
+            # If there is already a session with the same name, attach to it.
+            tmux attach-session -t "$session_name"
+        else
+            # If there is no existing session, create a new (detached) one.
+            tmux new-session -d -s "$session_name"
+            tmux attach-session -t "$session_name"
+        fi
     else
-        # If there is no existing session, create a new (detached) one.
-        tmux new-session -d -s "$session_name"
-        tmux attach-session -t "$session_name"
+        # Already in TMUX
+        if [ ${#sessions[@]} -eq 0 ]; then
+            # If there is no existing session, create a new (detached) one.
+            (TMUX='' tmux new-session -Ad -s "$session_name")
+        fi
+        # Open the session
+        tmux switch-client -t "$session_name"
     fi
 }
 
