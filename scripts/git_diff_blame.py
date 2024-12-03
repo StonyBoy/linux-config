@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 # Steen Hegelund
-# Time-Stamp: 2024-Dec-02 17:02
+# Time-Stamp: 2024-Dec-03 16:32
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 '''
@@ -17,8 +17,9 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
 
     parser.add_argument('-c', '--commits', action='store_true', help='Show list of commits referred in the diff')
-    parser.add_argument('range', help='commit or commit range to process')
-    parser.add_argument('files', nargs='*', help='files to be diffed')
+    parser.add_argument('-d', '--diff', action='store_true', help='Use plain diff instead of delta to show hunks')
+    parser.add_argument('range', help='Commit or commit range to process')
+    parser.add_argument('files', nargs='*', help='Files to be diffed')
 
     return parser.parse_args()
 
@@ -64,8 +65,12 @@ class Hunk:
     def get_commits(self):
         return self.shas
 
-    def show(self):
-        print('\n'.join(self.blamehunklines))
+    def show(self, use_diff):
+        if use_diff:
+            print('\n'.join(self.blamehunklines))
+        else:
+            input = '\n'.join(self.blamehunklines)
+            subprocess.run(['delta'], input=input.encode())
 
     def __str__(self):
         return 'file: {}'.format(self.file)
@@ -74,9 +79,10 @@ class Hunk:
 class DiffFile:
     hunk_regex = re.compile(r'^@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@')
 
-    def __init__(self, file, rge):
+    def __init__(self, file, rge, use_diff):
         self.file = file
         self.range = rge
+        self.use_diff = use_diff
         self.begin = rge
         self.end = 'HEAD'
         if '..' in self.begin:
@@ -125,7 +131,7 @@ class DiffFile:
     def show(self, commits):
         self.header(str(self))
         for hunk in self.hunks:
-            hunk.show()
+            hunk.show(self.use_diff)
         if commits:
             print()
             self.show_commits()
@@ -145,7 +151,7 @@ def main():
         args.files = list(filter(non_empty, run(['git', '--no-pager', 'diff', '--name-only', f'{args.range}'])))
 
     for file in args.files:
-        dfile = DiffFile(file, args.range)
+        dfile = DiffFile(file, args.range, args.diff)
         dfile.show(args.commits)
 
 
