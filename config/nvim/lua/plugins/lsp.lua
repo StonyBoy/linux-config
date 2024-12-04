@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2024-Sep-22 11:25
+-- Time-Stamp: 2024-Dec-04 14:53
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Portable package manager for Neovim that runs everywhere Neovim runs.
@@ -10,15 +10,15 @@ local enabled = true
 local function toggle_diagnostics()
   -- if this Neovim version supports checking if diagnostics are enabled
   -- then use that for the current state
-  if vim.diagnostic.is_disabled then
-    enabled = not vim.diagnostic.is_disabled()
+  if not vim.diagnostic.is_enable() then
+    enabled = vim.diagnostic.is_enabled()
   end
   enabled = not enabled
 
   if enabled then
     vim.diagnostic.enable()
   else
-    vim.diagnostic.disable()
+    vim.diagnostic.enable(false)
   end
 end
 
@@ -49,7 +49,7 @@ return {
     config = function()
       require("mason-lspconfig").setup({
         ensure_installed = {
-          "lua_ls", "rust_analyzer", "pylsp", "yamlls", "bashls", "solargraph", "vimls", "ts_ls",
+          "lua_ls", "rust_analyzer", "pylsp", "yamlls", "bashls", "solargraph", "vimls", "ts_ls", "clangd",
         },
       })
     end,
@@ -109,7 +109,6 @@ return {
         }
       })
 
-      lspconfig.ccls.setup({})
       lspconfig.lua_ls.setup({
         settings = {
           Lua = {
@@ -126,11 +125,71 @@ return {
           }
         }
       })
+      lspconfig.clangd.setup({
+          on_attach = function(client, bufnr)
+              -- require("workspace-diagnostics").populate_workspace_diagnostics(vim.lsp.buf_get_clients()[1], 1)
+              -- require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+              -- client.server_capabilities.semanticTokensProvider = nil
+          end,
+
+          keys = {
+              { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+          },
+          root_dir = function(fname)
+              require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(fname)
+          end,
+          capabilities = {
+              offsetEncoding = { "utf-16" },
+          },
+          cmd = {
+              "clangd",
+              "--background-index",
+              "--clang-tidy",
+              "--completion-style=detailed",
+              "--function-arg-placeholders",
+              "--fallback-style=llvm",
+          },
+          init_options = {
+              usePlaceholders = true,
+              completeUnimported = true,
+              clangdFileStatus = true,
+          },
+      })
       lspconfig.bashls.setup({})
       lspconfig.solargraph.setup({})
       lspconfig.ts_ls.setup({})
       lspconfig.rust_analyzer.setup({})
       lspconfig.vimls.setup({})
     end,
+  },
+  {
+      "p00f/clangd_extensions.nvim",
+      --lazy = true,
+      config = function() end,
+      opts = {
+          inlay_hints = {
+              inline = false,
+          },
+          ast = {
+              --These require codicons (https://github.com/microsoft/vscode-codicons)
+              role_icons = {
+                  type = "",
+                  declaration = "",
+                  expression = "",
+                  specifier = "",
+                  statement = "",
+                  ["template argument"] = "",
+              },
+              kind_icons = {
+                  Compound = "",
+                  Recovery = "",
+                  TranslationUnit = "",
+                  PackExpansion = "",
+                  TemplateTypeParm = "",
+                  TemplateTemplateParm = "",
+                  TemplateParamObject = "",
+              },
+          },
+      },
   },
 }
