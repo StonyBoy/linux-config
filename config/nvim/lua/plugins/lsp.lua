@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2024-Dec-04 14:53
+-- Time-Stamp: 2024-Dec-05 17:07
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Portable package manager for Neovim that runs everywhere Neovim runs.
@@ -10,7 +10,7 @@ local enabled = true
 local function toggle_diagnostics()
   -- if this Neovim version supports checking if diagnostics are enabled
   -- then use that for the current state
-  if not vim.diagnostic.is_enable() then
+  if not vim.diagnostic.is_enabled() then
     enabled = vim.diagnostic.is_enabled()
   end
   enabled = not enabled
