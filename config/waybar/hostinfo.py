@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-import argparse
+
 import os
-import subprocess
 import time
 import json
+import posix
 
 SECS_PER_DAY = 86400
 SECS_PER_HOUR = 3600
 SECS_PER_MINUTE = 60
 
-def show_host_info(uname, secs):
+
+def show_host_info(uname: posix.uname_result, secs: int):
     sep = chr(0xf104)
     days = secs // SECS_PER_DAY
     remainder = secs % SECS_PER_DAY
@@ -24,7 +25,6 @@ def show_host_info(uname, secs):
 
 
 def get_host_info():
-    uname = os.uname()
     show_host_info(os.uname(), int(time.clock_gettime(time.CLOCK_BOOTTIME)))
 
 

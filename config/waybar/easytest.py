@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 import argparse
 import subprocess
 import json
@@ -6,7 +7,7 @@ import os.path
 import sys
 
 
-def parse_arguments():
+def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
 
     parser.add_argument('user')
@@ -16,7 +17,7 @@ def parse_arguments():
     return parser.parse_args()
 
 
-def show_easytest(elem):
+def show_easytest(elem: dict):
     text = f"{elem['name']}"
     tooltip = f"Easytest Status:\n  Server: {elem['name']}\n  Target: {elem['vsc']}\n  User: {elem['user']}\n  Since: {elem['date']} {elem['time']}"
     res = {"text": text, "tooltip": tooltip, "class": "custom-easytest", "percentage": 100}
@@ -28,7 +29,7 @@ def show_empty():
     print(json.dumps(res))
 
 
-def get_easytest_status(args):
+def get_easytest_status(args: argparse.Namespace):
     found = False
     cp = subprocess.run([args.path, 'status', args.server], capture_output=True)
     if cp.returncode == 0:
@@ -46,11 +47,11 @@ def get_easytest_status(args):
 
 
 def main():
-    arguments = parse_arguments()
+    args = parse_arguments()
     if not os.path.exists(arguments.path):
         print(f"EasyTest is not found at {arguments.path}")
         sys.exit(1)
-    get_easytest_status(arguments)
+    get_easytest_status(args)
 
 
 if __name__ == '__main__':

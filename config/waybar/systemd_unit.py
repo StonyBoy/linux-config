@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Oct-22 16:36
+# Time-Stamp: 2024-Dec-05 17:05
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -10,7 +10,7 @@ import re
 import json
 
 
-def parse_arguments():
+def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--verbose', '-v', action='count', default=0)
@@ -28,7 +28,7 @@ class UnitStatus:
     triggerregex = re.compile(r'\S+\s+(\S+)')
     timerregex = re.compile(r'([^;]+);\s+(.*)\s+left')
 
-    def __init__(self, name, user=False):
+    def __init__(self, name: str, user: bool = False):
         self.name = name
         self.state = ''
         self.tasks = ''
@@ -51,7 +51,7 @@ class UnitStatus:
                 if mt[1] == 'Trigger':
                     self.parse_timer(mt[2])
 
-    def cmd(self, user):
+    def cmd(self, user: bool) -> list[str]:
         cmd = ['systemctl', 'status', self.name]
         if user:
             cmd = ['systemctl', '--user', 'status', self.name]
@@ -59,7 +59,7 @@ class UnitStatus:
         cp = subprocess.run(cmd, capture_output=True)
         return cp.stdout.decode().split('\n')
 
-    def parse_active(self, text):
+    def parse_active(self, text: str):
         mt = self.activeregex.match(text)
         if mt:
             self.state = mt[2]
@@ -70,17 +70,17 @@ class UnitStatus:
             self.state = mt[1]
             self.duration = mt[2]
 
-    def parse_tasks(self, text):
+    def parse_tasks(self, text: str):
         mt = self.tasksregex.match(text)
         if mt:
             self.tasks = mt[1]
 
-    def parse_trigger(self, text):
+    def parse_trigger(self, text: str):
         mt = self.triggerregex.match(text)
         if mt:
             self.trigger = mt[1]
 
-    def parse_timer(self, text):
+    def parse_timer(self, text: str):
         mt = self.timerregex.match(text)
         if mt:
             self.timer = mt[2]
@@ -99,7 +99,7 @@ class UnitStatus:
             result += f' tmr: {self.timer}'
         return result
 
-    def tooltip(self):
+    def tooltip(self) -> str:
         if '.timer' in self.name:
             kind = 'T'
             name = self.name.replace('.timer', '')
@@ -122,7 +122,7 @@ class UnitList:
     def __init__(self):
         self.units = []
 
-    def append(self, unit):
+    def append(self, unit: UnitStatus):
         self.units.append(unit)
 
     def __len__(self):
@@ -150,7 +150,7 @@ class UnitList:
         return {'text': text, 'tooltip': tooltip, 'class': cls}
 
 
-def get_unit_status(args):
+def get_unit_status(args: argparse.Namespace):
     units = UnitList()
     if args.system:
         for sys in args.system:

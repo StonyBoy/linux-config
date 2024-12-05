@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Oct-22 20:10
+# Time-Stamp: 2024-Dec-05 17:15
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -13,7 +13,7 @@ import datetime
 import re
 
 
-def parse_arguments():
+def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--verbose', '-v', action='count', default=0, help='Provide more information')
@@ -30,7 +30,7 @@ def show_empty():
 
 
 class MailFolder:
-    def __init__(self, path):
+    def __init__(self, path: str):
         self.path = os.path.expanduser(path)
         self.unread = 0
         self.total = 0
@@ -77,13 +77,13 @@ class DavMailEvent:
         return f'{self.etype}: {self.timestamp}: {self.event} {self.elemtimestamp}'
 
 
-def mail_sync(args):
+def mail_sync(args: argparse.Namespace) -> list[str]:
     cmd = ['systemctl', '--user', 'restart', 'mbsync.service']
     cp = subprocess.run(cmd, capture_output=True)
     return cp.stdout.decode().split('\n')
 
 
-def get_mail_status(args):
+def get_mail_status(args: argparse.Namespace):
     folders = []
     for maildir in args.maildir:
         if os.path.exists(maildir):
@@ -109,7 +109,7 @@ def get_mail_status(args):
     print(json.dumps(res))
 
 
-def parse_davmail_log(args):
+def parse_davmail_log(args: argparse.Namespace) -> list[DavMailEvent]:
     info = re.compile(r'(\S+\s+\S+)\s+INFO\s+\S+\s+\S+\s+-\s+(\S+).*')
     error = re.compile(r'(\S+\s+\S+)\s+ERROR\s+\S+\s+\S+\s+-\s+(\S+.*)')
     history = []
@@ -129,7 +129,7 @@ def parse_davmail_log(args):
     return history
 
 
-def get_davmail_status(args):
+def get_davmail_status(args: argparse.Namespace) -> bool:
     if args.logpath is None:
         args.logpath = '~/davmail.log'
 
