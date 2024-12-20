@@ -55,7 +55,10 @@ exec swayidle -w \
 #
 # Mouse scrollwheel sensitivity
 #
-input "1133:4123:Logitech_M705" {
+input "type:pointer" {
+    natural_scroll disabled
+    accel_profile "flat" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
+    pointer_accel 0.55 # set mouse sensitivity (between -1 and 1)
     scroll_factor 0.55
 }
 
