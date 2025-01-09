@@ -48,8 +48,8 @@ def get_easytest_status(args: argparse.Namespace):
 
 def main():
     args = parse_arguments()
-    if not os.path.exists(arguments.path):
-        print(f"EasyTest is not found at {arguments.path}")
+    if not os.path.exists(args.path):
+        print(f"EasyTest is not found at {args.path}")
         sys.exit(1)
     get_easytest_status(args)
 
