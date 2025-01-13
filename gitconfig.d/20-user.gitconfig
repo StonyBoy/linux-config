@@ -17,6 +17,7 @@
     lrv = log --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s \" --decorate --grep=\"Reviewed-by: Steen Hegelund\"
     lso = log --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s \" --decorate --grep=\"Signed-off-by: Steen Hegelund\"
     ll = log --decorate --stat
+    li = !git log --pretty=format:\"%h : %as : %an : %d %s\" | fzf --layout reverse --delimiter \":\" --preview 'git show {1} | delta --width=${FZF_PREVIEW_COLUMNS}' --preview-window=70% --preview-label='TAB: Opens diff(s) in editor' --color='preview-label:bright-red' --bind 'tab:execute(git difftool {1}~1 {1})'
     mt = mergetool
     r = reset
     rh = !git reset --hard
