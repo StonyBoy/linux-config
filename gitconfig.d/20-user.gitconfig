@@ -17,7 +17,6 @@
     lrv = log --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s \" --decorate --grep=\"Reviewed-by: Steen Hegelund\"
     lso = log --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s \" --decorate --grep=\"Signed-off-by: Steen Hegelund\"
     ll = log --decorate --stat
-    li = !git log --pretty=format:\"%h : %as : %an : %d %s\" | fzf --layout reverse --delimiter \":\" --preview 'git show {1} | delta --width=${FZF_PREVIEW_COLUMNS}' --preview-window=70% --preview-label='TAB: Opens diff(s) in editor' --color='preview-label:bright-red' --bind 'tab:execute(git difftool {1}~1 {1})'
     mt = mergetool
     r = reset
     rh = !git reset --hard
@@ -39,6 +38,9 @@
     delete-remote =  "!gitdelremotebranches() { ~/scripts/git_branches.py -r ; }; gitdelremotebranches"
     del-local =  "!gitdellocals() { ~/scripts/git_branches.py -l ; }; gitdellocals"
     db = "!gitdiffblame() { ~/scripts/git_diff_blame.py $* ; }; gitdiffblame"
+    li = "!gloginter() { git log --pretty=format:\"%C(yellow)%h%Creset : %Cgreen%as%Creset : %Cblue%an%Creset : %Cred%d%Creset %s\" --color=always $* | fzf --layout reverse --delimiter \":\" --ansi --preview 'git show {1} | delta --width=${FZF_PREVIEW_COLUMNS}' --preview-window=70% --preview-label='TAB: Opens diff(s) in editor' --color='preview-label:bright-red' --bind 'tab:execute(git difftool {1}~1 {1})'; }; gloginter"
+    bi = "!gbranchinter() { git branch --sort=-committerdate --sort=-HEAD --format=\"%(HEAD) %(color:yellow)%(refname:short):%(color:green)(%(committerdate:relative)):%(color:blue)%(subject)%(color:reset)\" --color=always | column -t -s: -l 3 | fzf --ansi --layout reverse --preview 'git log --pretty=format:\"%C(yellow)%h%Creset : %Cgreen%as%Creset : %Cblue%an%Creset : %Cred%d%Creset %s\" --color=always {1}'; }; gbranchinter"
+    ti = "!gtaginter() { git tag --color=always --sort=-creatordate --format=\"%(color:green)%(refname:short):%(color:yellow)%(creatordate:short):%(color:blue)%(objectname:short):%(color:reset)%(contents:subject)\" --list  | column -t -s: -l 4 | fzf --ansi --layout reverse --preview 'git log --color=always --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s\" {1}'; }; gtaginter"
 
 [color]
     ui = true
