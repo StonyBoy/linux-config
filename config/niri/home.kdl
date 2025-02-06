@@ -131,6 +131,7 @@ animations {
 
 // Window rules let you adjust behavior for individual windows.
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
+// Get info about the focused window with "niri msg focused-window"
 
 // Workspaces
 
@@ -139,11 +140,19 @@ workspace "Music"
 workspace "Internet"
 workspace "Files"
 workspace "Email"
+workspace "Notion"
 
 window-rule {
     match at-startup=true app-id=r#"[Aa]lacritty"#
 
     open-on-workspace "Editor"
+    default-column-width { proportion 0.5; }
+}
+
+window-rule {
+    match at-startup=true app-id=r#"notion-app"#
+
+    open-on-workspace "Notion"
     default-column-width { proportion 0.5; }
 }
 
@@ -206,6 +215,7 @@ spawn-at-startup "firefox"
 spawn-at-startup "Thunar"
 spawn-at-startup "evolution"
 spawn-at-startup "spotify" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland"
+spawn-at-startup "notion-app"
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name

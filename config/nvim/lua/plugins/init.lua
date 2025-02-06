@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2024-May-06 11:29
+-- Time-Stamp: 2025-Feb-06 20:46
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 return {
@@ -15,6 +15,7 @@ return {
   'aklt/plantuml-syntax',              -- PlantUML Syntax/  usein/FTDetect
   'rafcamlet/nvim-luapad',             -- Interactive neovim scratchpad for lua
   'nvim-neotest/nvim-nio',             -- A library for asynchronous IO in Neovim, inspired by the asyncio library in Python
+  'imsnif/kdl.vim',                    -- Syntax and indent files for KDL
 }
 
 -- These plugins are not in use due to various problems or newer neovim specific plugins
