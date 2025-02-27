@@ -149,7 +149,38 @@ label:focus {
 }
 
 #network.disconnected {
-    background-color: #ff9999;
+    background-color: #f0f0f0;
+}
+
+#network.wan.ethernet {
+    color: #0f0f0f;
+}
+
+#network.eth_black.ethernet,
+#network.tun.ethernet,
+#network.wifi.wifi {
+    color: #fcfcfc;
+    background-color: #3f3f3f;
+}
+
+#network.eth_red.ethernet {
+    color: #fcfcfc;
+    background-color: #c00000;
+}
+
+#network.eth_green.ethernet {
+    color: #000000;
+    background-color: #00c000;
+}
+
+#network.eth_blue.ethernet {
+    color: #fcfcfc;
+    background-color: #0000c0;
+}
+
+#network.eth_yellow.ethernet {
+    color: #000000;
+    background-color: #c0c000;
 }
 
 #pulseaudio {
