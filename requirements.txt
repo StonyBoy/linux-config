@@ -1,4 +1,12 @@
 colorama
 PyYAML
-Pillow
-
+pillow
+cryptography
+docutils
+keyring
+mypy
+pygments
+pyserial
+requests
+setuptools
+b4
