@@ -4,7 +4,7 @@
     "layer": "top",
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["custom/media", "pulseaudio", "group/network", "group/hardware", "custom/easytest", "custom/mailstatus", "custom/systemd_unit", "custom/multi_clock", "tray"],
+    "modules-right": ["custom/media", "group/network", "group/hardware", "custom/easytest", "custom/mailstatus", "custom/systemd_unit", "custom/multi_clock", "pulseaudio", "tray"],
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
