@@ -4,7 +4,7 @@
     "layer": "top",
     "modules-left": ["niri/workspaces"],
     "modules-center": ["niri/window"],
-    "modules-right": ["custom/media", "pulseaudio", "network#wan", "network#wifi", "network#tun", "group/hardware", "custom/easytest", "custom/davmail", "custom/systemd_unit", "custom/multi_clock", "tray"],
+    "modules-right": ["custom/media", "group/network", "group/hardware", "custom/easytest", "custom/mailstatus", "custom/systemd_unit", "custom/multi_clock", "pulseaudio", "tray"],
     "niri/workspaces": {
         "format": "{index}: {name} {icon}",
         "format-icons": {
@@ -34,6 +34,7 @@
             "disk#sys",
             "disk#home",
             "temperature",
+            "bluetooth",
         ]
     },
     "idle_inhibitor": {
@@ -82,32 +83,81 @@
         "format": "{temperatureC}°C {icon}",
         "format-icons": ["", "", ""]
     },
+    "bluetooth": {
+        "format": " {status}",
+        "format-connected": " {device_alias}",
+        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+        // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+    },
+    "group/network": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "network",
+            "transition-left-to-right": false,
+        },
+        "modules": [
+            "network#wan",
+            "network#tun",
+            "network#wifi",
+            "network#eth_red",
+            "network#eth_green",
+            "network#eth_blue",
+            "network#eth_yellow",
+            "network#eth_black",
+        ]
+    },
+    "network#eth_red": {
+        "interface": "eth_red",
+        "format-ethernet": "{ipaddr}/{cidr}",
+        "format-disconnected": "{ifname}",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+    },
+    "network#eth_green": {
+        "interface": "eth_green",
+        "format-ethernet": "{ipaddr}/{cidr}",
+        "format-disconnected": "{ifname}",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+    },
+    "network#eth_blue": {
+        "interface": "eth_blue",
+        "format-ethernet": "{ipaddr}/{cidr}",
+        "format-disconnected": "{ifname}",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+    },
+    "network#eth_yellow": {
+        "interface": "eth_yellow",
+        "format-ethernet": "{ipaddr}/{cidr}",
+        "format-disconnected": "{ifname}",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+    },
+    "network#eth_black": {
+        "interface": "eth_black",
+        "format-ethernet": "{ipaddr}/{cidr}",
+        "format-disconnected": "{ifname}",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+    },
     "network#wan": {
         "interface": "wan",
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname}",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-ethernet": "{ipaddr}/{cidr}",
+        "format-disconnected": "{ifname}",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
     },
     "network#wifi": {
         "interface": "wifi",
         "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname}",
-
-        "format-disconnected": "",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-disconnected": "{ifname}",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
     },
     "network#tun": {
         "interface": "cscotun0",
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname}",
-        "format-linked": "",
-        "format-disconnected": "",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-ethernet": "{ipaddr}/{cidr}",
+        "format-disconnected": "{ifname}",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
     },
     "pulseaudio": {
         "format": "{volume}% {icon} {format_source}",
@@ -150,15 +200,17 @@
         "exec": "$HOME/.config/waybar/easytest.py $USER",
         "return-type": "json"
     },
-    "custom/davmail": {
-        "interval": 900,
-        "exec": "$HOME/.config/waybar/davmail.py --logpath $HOME/davmail.log",
+    "custom/mailstatus": {
+        "interval": 600,
+        "format": "{} ",
+        "exec": "$HOME/.config/waybar/mailstatus.py --logpath ~/davmail.log --maildir ~/.local/share/mail/microchip/Inbox ~/.local/share/mail/microchip/unglinuxdriver_list",
+        "on-click": "$HOME/.config/waybar/mailstatus.py --logpath ~/davmail.log --maildir ~/.local/share/mail/microchip/Inbox ~/.local/share/mail/microchip/unglinuxdriver_list --mailsync",
         "return-type": "json"
     },
     "custom/systemd_unit": {
         "interval": 60,
         "format": "{} ",
-        "exec": "$HOME/.config/waybar/systemd_unit.py --system cbdaemon.service cbebpfdaemon.service cbagentd.service taniumclient.service docker.service --user davmail.service mbsync.timer sway_lockscreen.service swaybg.service swayidle.service niri_lockscreen.service niribg.service niriidle.service",
+        "exec": "$HOME/.config/waybar/systemd_unit.py --system cbebpfdaemon.service cbagentd.service taniumclient.service docker.service --user davmail.service mbsync.timer sway_lockscreen.service swaybg.service swayidle.service niri_lockscreen.service niribg.service niriidle.service",
         "return-type": "json"
     },
     "custom/multi_clock": {
