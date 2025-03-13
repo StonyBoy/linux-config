@@ -250,6 +250,11 @@ window-rule {
     open-on-workspace "Music"
 }
 
+window-rule {
+    match app-id=r#"yad"#
+    default-floating-position x=32 y=32 relative-to="top-right"
+}
+
 // Indicate screencasted windows with red colors.
 window-rule {
     match is-window-cast-target=true
