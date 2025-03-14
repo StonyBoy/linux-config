@@ -10,3 +10,4 @@ pyserial
 requests
 setuptools
 b4
+mako
