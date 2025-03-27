@@ -1,6 +1,6 @@
 -- statusline configuration
 -- Steen Hegelund
--- Time-Stamp: 2023-May-02 09:36
+-- Time-Stamp: 2025-Mar-27 20:23
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Show editor configuration: tabs/spaces, tabstop, softtabstop, shiftwidth and textwidth (wrapping)
@@ -44,7 +44,7 @@ end
 
 -- Show which language server is attatched to the active buffer
 local language_server = function()
-  local buf_clients = vim.lsp.buf_get_clients()
+  local buf_clients = vim.lsp.get_clients()
   local original_bufnr = vim.api.nvim_get_current_buf()
 
   for _, client in pairs(buf_clients) do
