@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Dec-05 17:15
+# Time-Stamp: 2025-Mar-05 21:29
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -18,6 +18,7 @@ def parse_arguments() -> argparse.Namespace:
 
     parser.add_argument('--verbose', '-v', action='count', default=0, help='Provide more information')
     parser.add_argument('--maildir', '-d', nargs='*', default=[], help='List of maildir folders to scan')
+    parser.add_argument('--evolution', '-e', action='store_true', help='Use Evolution Mail folder')
     parser.add_argument('--logpath', '-l', help='The Davmail logfile to parse for status')
     parser.add_argument('--mailsync', '-m', action='store_true', help='Run mailsync')
 
@@ -26,6 +27,11 @@ def parse_arguments() -> argparse.Namespace:
 
 def show_empty():
     res = {"text": "None", "tooltip": "", "class": "warning", "percentage": 0}
+    print(json.dumps(res))
+
+
+def show_nothing():
+    res = {}
     print(json.dumps(res))
 
 
@@ -152,12 +158,12 @@ def get_davmail_status(args: argparse.Namespace) -> bool:
 
 def main():
     args = parse_arguments()
+    if args.evolution:
+        get_mail_status(args)
     if args.mailsync:
         mail_sync(args)
     if get_davmail_status(args):
         get_mail_status(args)
-    else:
-        show_empty()
 
 
 if __name__ == '__main__':
