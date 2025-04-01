@@ -2,9 +2,6 @@
 AllCops:
   TargetRubyVersion: 2.5
 
-Metrics/LineLength:
-  Max: 120
-
 Metrics/BlockLength:
   Max: 100
 
@@ -14,6 +11,9 @@ Metrics/MethodLength:
 Layout/IndentationWidth:
   # Number of spaces for each indentation level.
   Width: 4
+
+Layout/LineLength:
+  Max: 120
 
 Style/GlobalVars:
   AllowedVariables:
