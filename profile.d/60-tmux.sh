@@ -1,9 +1,10 @@
 #! /bin/bash
 #  vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=sh :
 # Steen Hegelund
-# Time-Stamp: 2024-Dec-01 15:33
+# Time-Stamp: 2025-Apr-02 22:53
 
 pane_id_prefix="resurrect_"
+nvim_pane_id_prefix="nvim term"
 
 # Create history directory if it doesn't exist
 HISTS_DIR=$HOME/.tmux/bash_history
@@ -13,7 +14,7 @@ if [ -n "${TMUX_PANE}" ]; then
 
   # Check if we've already set this pane title
   pane_id=$(tmux display -pt "${TMUX_PANE:?}" "#{pane_title}")
-  if [[ $pane_id != "$pane_id_prefix"* ]]; then
+  if [[ $pane_id != "$pane_id_prefix"* ]] && [[ $pane_id != "$nvim_pane_id_prefix"* ]]; then
 
     # if not, set it to a random ID
     random_id=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 16)
