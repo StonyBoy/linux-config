@@ -12,11 +12,12 @@ import sys
 import enum
 import subprocess
 import yaml
-from colorama import Fore, Back, Style
+from colorama import Fore, Style
 import time
 
 global root
 root = '~/'
+
 
 class FileStatus(enum.Enum):
     CorrectLink = f'{Fore.GREEN}Nothing to do{Style.RESET_ALL}'
@@ -216,7 +217,6 @@ class Feature(InstallBase):
         return True
 
     def show(self):
-        indent = '  ' * self.level
         print(f'{self.indent}{Fore.BLUE}{self.name}{Style.RESET_ALL}:')
         for child in self.children:
             child.show()
