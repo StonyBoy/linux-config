@@ -11,3 +11,4 @@ requests
 setuptools
 b4
 mako
+pygobject
