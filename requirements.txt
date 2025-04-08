@@ -11,4 +11,4 @@ requests
 setuptools
 b4
 mako
-pygobject
+pygobject==3.50.0
