@@ -1,4 +1,5 @@
-#! /usr/bin/env python3
+#!/usr/local/pyvenv/steen/bin/python3
+
 '''
 Prune local git branches that do not have remote counterparts either unconditionally or by prompting the user
 '''

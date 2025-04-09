@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/local/pyvenv/steen/bin/python3
 
 import argparse
 import subprocess

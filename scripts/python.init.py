@@ -1,5 +1,7 @@
+#!/usr/local/pyvenv/steen/bin/python3
+
 # Steen Hegelund
-# Time-Stamp: 2022-Mar-02 09:57
+# Time-Stamp: 2025-Apr-09 20:05
 # Set env PYTHONSTARTUP to this file to have this functionality in the interpreter
 
 import sys

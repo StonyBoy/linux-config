@@ -1,7 +1,7 @@
 #!/usr/local/pyvenv/steen/bin/python3
 
 # Steen Hegelund
-# Time-Stamp: 2024-Nov-22 13:42
+# Time-Stamp: 2025-Apr-09 20:05
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 '''
