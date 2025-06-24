@@ -210,7 +210,7 @@
     "custom/systemd_unit": {
         "interval": 60,
         "format": "{} ",
-        "exec": "$HOME/.config/waybar/systemd_unit.py --system cbebpfdaemon.service cbagentd.service taniumclient.service docker.service --user davmail.service mbsync.timer sway_lockscreen.service swaybg.service swayidle.service niri_lockscreen.service niribg.service niriidle.service",
+        "exec": "$HOME/.config/waybar/systemd_unit.py --system nessusagent.service sentinelone.service docker.service --user davmail.service mbsync.timer sway_lockscreen.service swaybg.service swayidle.service niri_lockscreen.service niribg.service niriidle.service",
         "return-type": "json"
     },
     "custom/multi_clock": {
