@@ -1,0 +1,13 @@
+[Unit]
+Description=OneDriver Useer Service
+Wants=network-online.target
+After=syslog.target
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/rclone --vfs-cache-mode writes mount "onedrive": %h/OneDrive
+TimeoutSec=120
+
+# When the token expire you can refresh it with
+#  rclone config reconnect onedrive:
