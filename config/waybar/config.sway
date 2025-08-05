@@ -74,7 +74,7 @@
         "unit": "GB"
     },
     "temperature": {
-        "hwmon-path": ["/sys/class/hwmon/hwmon6/temp1_input"],
+        "hwmon-path": ["/sys/class/thermal/thermal_zone1/temp"],
         "critical-threshold": 75,
         "format": "{temperatureC}°C {icon}",
         "format-icons": ["", "", ""]
