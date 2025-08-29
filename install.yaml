@@ -59,6 +59,7 @@ Scripts:
             - scripts/ruby_gems.sh
             - scripts/system_commands.py
             - scripts/wallpapers.py
+            - scripts/python_template.py
 
 Editor:
     Classic Vim:
