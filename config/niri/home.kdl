@@ -191,6 +191,13 @@ layout {
     }
 }
 
+// Disable the overview hot corners.
+gestures {
+    hot-corners {
+        off
+    }
+}
+
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
@@ -267,7 +274,6 @@ workspace "Music"
 workspace "Internet"
 workspace "Files"
 workspace "Email"
-workspace "Notion"
 
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
@@ -320,6 +326,13 @@ window-rule {
     match at-startup=true app-id=r#"[Ee]volution"#
 
     open-on-workspace "Email"
+    open-maximized true
+}
+
+window-rule {
+    match at-startup=true app-id=r#"[Tt]eams-for-linux"#
+
+    open-on-workspace "Teams"
     open-maximized true
 }
 
