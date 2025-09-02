@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2022-Jun-21 09:20
+-- Time-Stamp: 2025-Sep-01 09:52
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Filetype handling
@@ -50,7 +50,11 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = {'make'},
   command = 'setlocal tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 colorcolumn=80',
 })
-
+vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
+  group = grp,
+  pattern = {'Jenkinsfile*'},
+  command = 'setf groovy | setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=200 expandtab colorcolumn=200 cindent',
+})
 -- Auto resize all VIM windows when VIM is resized
 grp = vim.api.nvim_create_augroup('nvim_windows', {})
 vim.api.nvim_create_autocmd({'VimResized'}, {
