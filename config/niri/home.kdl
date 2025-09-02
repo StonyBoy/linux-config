@@ -7,8 +7,7 @@
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
 
 environment {
-    // Used by xwayland applications
-    DISPLAY ":0"
+    // Empty
 }
 
 // Input device configuration.
@@ -204,7 +203,7 @@ gestures {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "systemctl" "--user" "restart" "waybar.service"
+spawn-sh-at-startup "systemctl --user restart waybar.service"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -392,21 +391,21 @@ layer-rule {
 }
 
 // Niri support services
-spawn-at-startup "systemctl" "--user" "restart" "niriidle.service"
-spawn-at-startup "systemctl" "--user" "restart" "niribg.service"
-spawn-at-startup "systemctl" "--user" "restart" "niri_lockscreen.service"
+spawn-sh-at-startup "systemctl --user restart niriidle.service"
+spawn-sh-at-startup "systemctl --user restart niribg.service"
+spawn-sh-at-startup "systemctl --user restart niri_lockscreen.service"
 
 // Mount NAS shares
-spawn-at-startup "systemctl" "--user" "start" "local_network_drives.service"
+spawn-sh-at-startup "systemctl --user start local_network_drives.service"
 
 // Mount GoogleDrive
-spawn-at-startup "systemctl" "--user" "start" "google_drive.service"
+spawn-sh-at-startup "systemctl --user start google_drive.service"
 
-spawn-at-startup "alacritty"
-spawn-at-startup "firefox"
-spawn-at-startup "Thunar"
-spawn-at-startup "evolution"
-spawn-at-startup "spotify" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland"
+spawn-sh-at-startup "alacritty"
+spawn-sh-at-startup "firefox"
+spawn-sh-at-startup "Thunar"
+spawn-sh-at-startup "evolution"
+spawn-sh-at-startup "spotify --enable-features=UseOzonePlatform --ozone-platform=wayland"
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -424,23 +423,23 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+Return hotkey-overlay-title="Console" { spawn "alacritty"; }
-    Mod+Space hotkey-overlay-title="Menu" { spawn "fuzzel" "-l" "20" "-p" "Run>"; }
+    Mod+Space hotkey-overlay-title="Menu" { spawn-sh "fuzzel -l 20 -p 'Run>'"; }
     Mod+Alt+L hotkey-overlay-title="Lock Screen" { spawn "swaylock"; }
 
-    Mod+Y hotkey-overlay-title="TMux Sessions" { spawn "bash" "-c" "~/scripts/tmux_sessions.py | ~/scripts/tmux_sessions.py $(fuzzel -d -l 12 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s b58900ff)"; }
-    Mod+T hotkey-overlay-title="Remote TMux Sessions" { spawn "bash" "-c" "~/scripts/tmux_sessions.py  -g work -g buri -g odin -g yggdrasil -g frigg | ~/scripts/tmux_sessions.py $(fuzzel -d -l 12 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s 268bd2ff)"; }
-    Mod+Shift+E hotkey-overlay-title="System Menu" { spawn "bash" "-c" "~/scripts/system_commands.py  | ~/scripts/system_commands.py $(fuzzel -d -l 12 -f 'Inconsolata:style=Regular:size=12' -p 'Select>' -t 000080ff -S fdf6e3ff -s ff6347ff -b f5deb3ff)"; }
+    Mod+Y hotkey-overlay-title="TMux Sessions" { spawn-sh "bash -c ~/scripts/tmux_sessions.py | ~/scripts/tmux_sessions.py $(fuzzel -d -l 12 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s b58900ff)"; }
+    Mod+T hotkey-overlay-title="Remote TMux Sessions" { spawn-sh "bash -c ~/scripts/tmux_sessions.py  -g work -g buri -g odin -g yggdrasil -g frigg | ~/scripts/tmux_sessions.py $(fuzzel -d -l 12 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s 268bd2ff)"; }
+    Mod+Shift+E hotkey-overlay-title="System Menu" { spawn-sh "bash -c ~/scripts/system_commands.py  | ~/scripts/system_commands.py $(fuzzel -d -l 12 -f 'Inconsolata:style=Regular:size=12' -p 'Select>' -t 000080ff -S fdf6e3ff -s ff6347ff -b f5deb3ff)"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
-    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
-    XF86AudioPlay        allow-when-locked=true { spawn "playerctl" "-p" "spotify" "play-pause"; }
-    XF86AudioPause       allow-when-locked=true { spawn "playerctl" "-p" "spotify" "play-pause"; }
-    XF86AudioNext        allow-when-locked=true { spawn "playerctl" "-p" "spotify" "next"; }
-    XF86AudioPrev        allow-when-locked=true { spawn "playerctl" "-p" "spotify" "previous"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+    XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl -p spotify play-pause"; }
+    XF86AudioPause       allow-when-locked=true { spawn-sh "playerctl -p spotify play-pause"; }
+    XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl -p spotify next"; }
+    XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl -p spotify previous"; }
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
@@ -552,8 +551,8 @@ binds {
     // These binds are also affected by touchpad's natural-scroll, so these
     // example binds are "inverted", since we have natural-scroll enabled for
     // touchpads by default.
-    // Mod+TouchpadScrollDown { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"; }
-    // Mod+TouchpadScrollUp   { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
+    // Mod+TouchpadScrollDown { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02+"; }
+    // Mod+TouchpadScrollUp   { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02-"; }
 
     // You can refer to workspaces by index. However, keep in mind that
     // niri is a dynamic workspace system, so these commands are kind of
