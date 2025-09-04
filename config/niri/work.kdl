@@ -275,6 +275,7 @@ workspace "Internet"
 workspace "Files"
 workspace "Email"
 workspace "Teams"
+workspace "VPN"
 
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
@@ -357,6 +358,13 @@ window-rule {
     default-floating-position x=32 y=32 relative-to="top-right"
 }
 
+window-rule {
+    match app-id=r#"com.cisco.secureclient.gui"#
+    open-on-workspace "VPN"
+}
+
+
+
 // Indicate screencasted windows with red colors.
 window-rule {
     match is-window-cast-target=true
@@ -398,10 +406,13 @@ spawn-sh-at-startup "systemctl --user restart niribg.service"
 spawn-sh-at-startup "systemctl --user restart niri_lockscreen.service"
 
 // Mount NAS shares
-spawn-sh-at-startup "systemctl --user start local_network_drives.service"
+// spawn-sh-at-startup "systemctl --user start local_network_drives.service"
+
+// Mount OneDrive
+spawn-sh-at-startup "systemctl --user start one_drive.service"
 
 // Mount GoogleDrive
-spawn-sh-at-startup "systemctl --user start google_drive.service"
+// spawn-sh-at-startup "systemctl --user start google_drive.service"
 
 spawn-sh-at-startup "alacritty"
 spawn-sh-at-startup "firefox"
@@ -409,6 +420,7 @@ spawn-sh-at-startup "Thunar"
 spawn-sh-at-startup "evolution"
 spawn-sh-at-startup "spotify --enable-features=UseOzonePlatform --ozone-platform=wayland"
 spawn-sh-at-startup "teams-for-linux"
+spawn-sh-at-startup "/opt/cisco/secureclient/bin/vpnui"
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name

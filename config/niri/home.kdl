@@ -7,7 +7,8 @@
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
 
 environment {
-    // Empty
+    // Used by xwayland (teams-for-linux) applications
+    DISPLAY ":0"
 }
 
 // Input device configuration.
