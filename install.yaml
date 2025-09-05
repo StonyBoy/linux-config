@@ -211,10 +211,18 @@ Niri:
             src:
             - xkb/usdk
         Waybar:
-            default:
+            Home:
                 dest: config/waybar/config
                 src:
-                    - config/waybar/config.niri
+                - config/waybar/home.kdl
+            Work:
+                dest: config/waybar/config
+                src:
+                - config/waybar/work.kdl
+            WorkFromHome:
+                dest: config/waybar/config
+                src:
+                - config/waybar/wfh.kdl
         Widgets:
             src:
                 - config/waybar/easytest.py
