@@ -202,6 +202,10 @@ Niri:
             dest: config/niri/config.kdl
             src:
             - config/niri/work.kdl
+        WorkFromHome:
+            dest: config/niri/config.kdl
+            src:
+            - config/niri/wfh.kdl
         USDK Keyboard:
             dest: config/xkb/symbols/usdk
             src:

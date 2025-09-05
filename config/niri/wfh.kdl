@@ -1,4 +1,4 @@
-// Home Configuration for niri
+// Work Configuration for niri
 // Steen Hegelund
 // vim: set ts=4 sw=4 sts=4 tw=500 cc=500 et ft=kdl : 
 // This config is in the KDL format: https://kdl.dev
@@ -274,6 +274,8 @@ workspace "Music"
 workspace "Internet"
 workspace "Files"
 workspace "Email"
+workspace "Teams"
+workspace "VPN"
 
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
@@ -356,6 +358,13 @@ window-rule {
     default-floating-position x=32 y=32 relative-to="top-right"
 }
 
+window-rule {
+    match app-id=r#"com.cisco.secureclient.gui"#
+    open-on-workspace "VPN"
+}
+
+
+
 // Indicate screencasted windows with red colors.
 window-rule {
     match is-window-cast-target=true
@@ -396,17 +405,19 @@ spawn-sh-at-startup "systemctl --user restart niriidle.service"
 spawn-sh-at-startup "systemctl --user restart niribg.service"
 spawn-sh-at-startup "systemctl --user restart niri_lockscreen.service"
 
-// Mount NAS shares
-spawn-sh-at-startup "systemctl --user start local_network_drives.service"
+// Mount OneDrive
+spawn-sh-at-startup "systemctl --user start one_drive.service"
 
 // Mount GoogleDrive
-spawn-sh-at-startup "systemctl --user start google_drive.service"
+// spawn-sh-at-startup "systemctl --user start google_drive.service"
 
 spawn-sh-at-startup "alacritty"
 spawn-sh-at-startup "firefox"
 spawn-sh-at-startup "Thunar"
 spawn-sh-at-startup "evolution"
 spawn-sh-at-startup "spotify --enable-features=UseOzonePlatform --ozone-platform=wayland"
+spawn-sh-at-startup "teams-for-linux"
+spawn-sh-at-startup "/opt/cisco/secureclient/bin/vpnui"
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -428,7 +439,7 @@ binds {
     Mod+Alt+L hotkey-overlay-title="Lock Screen" { spawn "swaylock"; }
 
     Mod+Y hotkey-overlay-title="TMux Sessions" { spawn-sh "~/scripts/tmux_sessions.py | ~/scripts/tmux_sessions.py $(fuzzel -d -l 12 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s b58900ff)"; }
-    Mod+T hotkey-overlay-title="Remote TMux Sessions" { spawn-sh "~/scripts/tmux_sessions.py  -g work -g buri -g odin -g yggdrasil -g frigg | ~/scripts/tmux_sessions.py $(fuzzel -d -l 12 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s 268bd2ff)"; }
+    Mod+T hotkey-overlay-title="Remote TMux Sessions" { spawn-sh "~/scripts/tmux_sessions.py  -g work | ~/scripts/tmux_sessions.py $(fuzzel -d -l 12 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s 268bd2ff)"; }
     Mod+Shift+E hotkey-overlay-title="System Menu" { spawn-sh "~/scripts/system_commands.py  | ~/scripts/system_commands.py $(fuzzel -d -l 12 -f 'Inconsolata:style=Regular:size=12' -p 'Select>' -t 000080ff -S fdf6e3ff -s ff6347ff -b f5deb3ff)"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
