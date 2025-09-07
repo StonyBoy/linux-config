@@ -214,15 +214,15 @@ Niri:
             Home:
                 dest: config/waybar/config
                 src:
-                - config/waybar/home.kdl
+                - config/waybar/home.config.niri
             Work:
                 dest: config/waybar/config
                 src:
-                - config/waybar/work.kdl
+                - config/waybar/work.config.niri
             WorkFromHome:
                 dest: config/waybar/config
                 src:
-                - config/waybar/wfh.kdl
+                - config/waybar/wfh.config.niri
         Widgets:
             src:
                 - config/waybar/easytest.py
