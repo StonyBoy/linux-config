@@ -6,6 +6,15 @@
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
 
+output "HDMI-A-1" {
+    position x=0 y=0
+    focus-at-startup
+}
+
+output "DP-1" {
+    position x=2560 y=0
+}
+
 environment {
     // Used by xwayland (teams-for-linux) applications
     DISPLAY ":0"
@@ -269,12 +278,30 @@ animations {
 
 // Workspaces
 
-workspace "Editor"
-workspace "Music"
-workspace "Internet"
-workspace "Files"
-workspace "Email"
-workspace "Teams"
+workspace "Editor" {
+    open-on-output "HDMI-A-1"
+}
+workspace "Test" {
+    open-on-output "HDMI-A-1"
+}
+workspace "Internet" {
+    open-on-output "HDMI-A-1"
+}
+
+workspace "Files" {
+    open-on-output "HDMI-A-1"
+}
+
+workspace "Email" {
+    open-on-output "HDMI-A-1"
+}
+
+workspace "Teams" {
+    open-on-output "DP-1"
+}
+workspace "Music" {
+    open-on-output "DP-1"
+}
 
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
@@ -483,6 +510,7 @@ binds {
     Mod+Ctrl+Home { move-column-to-first; }
     Mod+Ctrl+End  { move-column-to-last; }
 
+    Mod+Shift+Tab   { focus-monitor-next; }
     Mod+Shift+Left  { focus-monitor-left; }
     Mod+Shift+Down  { focus-monitor-down; }
     Mod+Shift+Up    { focus-monitor-up; }
@@ -506,8 +534,10 @@ binds {
     // ...
 
     // And you can also move a whole workspace to another monitor:
-    // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
-    // ...
+    Mod+Shift+Alt+Left  { move-workspace-to-monitor-left; }
+    Mod+Shift+Alt+Down  { move-workspace-to-monitor-down; }
+    Mod+Shift+Alt+Up    { move-workspace-to-monitor-up; }
+    Mod+Shift+Alt+Right { move-workspace-to-monitor-right; }
 
     Mod+Page_Down      { focus-workspace-down; }
     Mod+Page_Up        { focus-workspace-up; }
@@ -671,4 +701,9 @@ binds {
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
+
+    // Workspace specific shortcuts
+    Mod+Shift+D { focus-workspace "Editor"; }
+    Mod+Shift+T { focus-workspace "Teams"; }
+    Mod+Shift+M { focus-workspace "Music"; }
 }

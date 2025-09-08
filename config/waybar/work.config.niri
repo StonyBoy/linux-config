@@ -9,11 +9,12 @@
         "format": "{index}: {name} {icon}",
         "format-icons": {
             "Editor": "",
-            "Music": "",
+            "Test": "",
             "Internet": "",
             "Files": "",
             "Email": "",
             "Teams": "",
+            "Music": "",
 
             // Icons by state
             "default": ""
