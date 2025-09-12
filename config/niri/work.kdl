@@ -706,4 +706,7 @@ binds {
     Mod+Shift+D { focus-workspace "Editor"; }
     Mod+Shift+T { focus-workspace "Teams"; }
     Mod+Shift+M { focus-workspace "Music"; }
+
+    // Turn the right (extra) monitor off
+    Mod+M { spawn-sh "niri msg output DP-1 off"; }
 }
