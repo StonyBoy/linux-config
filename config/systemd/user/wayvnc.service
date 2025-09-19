@@ -1,0 +1,13 @@
+[Unit]
+Description=VNC Server
+Documentation=man:wayvnc
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/wayvnc 0.0.0.0
+Restart=always
+KillSignal=INT
+
+[Install]
+WantedBy=multi-user.target
