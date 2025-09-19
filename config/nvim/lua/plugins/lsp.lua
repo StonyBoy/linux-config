@@ -1,6 +1,6 @@
 -- Neovim Language Server Configuration
 -- Steen Hegelund
--- Time-Stamp: 2025-Apr-02 09:26
+-- Time-Stamp: 2025-Sep-18 14:28
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Enable Language Servers - prefer the language name if possible
@@ -13,6 +13,14 @@ vim.diagnostic.config({
 
 -- Enable autocompletion and add more keybindings
 vim.api.nvim_create_autocmd('LspAttach', {
+  -- These GLOBAL keymaps are created unconditionally when Nvim starts:
+  -- "grn" is mapped in Normal mode to |vim.lsp.buf.rename()|
+  -- "gra" is mapped in Normal and Visual mode to |vim.lsp.buf.code_action()|
+  -- "grr" is mapped in Normal mode to |vim.lsp.buf.references()|
+  -- "gri" is mapped in Normal mode to |vim.lsp.buf.implementation()|
+  -- "grt" is mapped in Normal mode to |vim.lsp.buf.type_definition()|
+  -- "gO" is mapped in Normal mode to |vim.lsp.buf.document_symbol()|
+  -- CTRL-S is mapped in Insert mode to |vim.lsp.buf.signature_help()|
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     if client and client:supports_method('textDocument/completion') then

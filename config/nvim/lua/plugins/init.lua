@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2025-Feb-06 20:46
+-- Time-Stamp: 2025-Sep-19 14:58
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 return {
@@ -16,6 +16,7 @@ return {
   'rafcamlet/nvim-luapad',             -- Interactive neovim scratchpad for lua
   'nvim-neotest/nvim-nio',             -- A library for asynchronous IO in Neovim, inspired by the asyncio library in Python
   'imsnif/kdl.vim',                    -- Syntax and indent files for KDL
+  'will133/vim-dirdiff',               -- If you like Vim's diff mode, you would love to do this recursively on two directories!
 }
 
 -- These plugins are not in use due to various problems or newer neovim specific plugins
