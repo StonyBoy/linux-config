@@ -1,12 +1,12 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2023-Jan-16 21:11
+-- Timestamp: 2025-Oct-26 13:24
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Add name-timestamp header in the beginning of the file
 
 local add_file_header = function()
-  local template = {'Steen Hegelund', 'Time-Stamp: #', require('config.functions').get_modeline()}
+  local template = {'Steen Hegelund', 'Timestamp: #', require('config.functions').get_modeline()}
   local lines = {}
 
   for _, line in ipairs(template) do
