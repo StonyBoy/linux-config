@@ -30,6 +30,7 @@ Shells:
             src:
                 - profile.d/30-keychain.sh
                 - profile.d/30-misc-env.sh
+                - profile.d/60-sam-ba.sh
         MacOS:
             src:
                 - profile.d/60-macos.sh
