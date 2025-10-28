@@ -4,7 +4,7 @@
     "layer": "top",
     "modules-left": ["niri/workspaces"],
     "modules-center": ["niri/window"],
-    "modules-right": ["custom/media", "group/network", "group/hardware", "custom/easytest", "custom/mailstatus", "custom/systemd_unit", "custom/multi_clock", "pulseaudio", "tray"],
+    "modules-right": ["custom/media", "group/network", "group/hardware", "custom/easytest", "custom/systemd_unit", "custom/multi_clock", "pulseaudio", "tray"],
     "niri/workspaces": {
         "format": "{index}: {name} {icon}",
         "format-icons": {
@@ -210,7 +210,7 @@
     "custom/systemd_unit": {
         "interval": 60,
         "format": "{} ",
-        "exec": "$HOME/.config/waybar/systemd_unit.py --system nessusagent.service sentinelone.service docker.service --user davmail.service mbsync.timer niri_lockscreen.service niribg.service niriidle.service",
+        "exec": "$HOME/.config/waybar/systemd_unit.py --system nessusagent.service sentinelone.service docker.service --user niri_lockscreen.service niribg.service niriidle.service",
         "return-type": "json"
     },
     "custom/multi_clock": {
