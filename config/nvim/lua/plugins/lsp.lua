@@ -1,10 +1,11 @@
 -- Neovim Language Server Configuration
 -- Steen Hegelund
--- Time-Stamp: 2025-Sep-18 14:28
+-- Time-Stamp: 2025-Oct-30 21:25
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Enable Language Servers - prefer the language name if possible
-vim.lsp.enable({ 'lua_ls', 'rust_ls', 'python_ls', 'yaml_ls', 'bash_ls', 'ruby_ls', 'vim_ls', 'typescript_ls', 'clangd' })
+vim.lsp.enable({ 'lua_ls', 'rust_ls', 'python_ls', 'yaml_ls', 'bash_ls', 'ruby_ls', 'vim_ls', 'typescript_ls', 'clangd',
+  'groovyls', 'dockerls', 'language-server-bitbake' })
 
 -- Show diagnostics
 vim.diagnostic.config({
@@ -52,7 +53,9 @@ return {
     config = function()
       require('mason-lspconfig').setup({
         ensure_installed = {
-          'lua_ls', 'rust_analyzer', 'pylsp', 'yamlls', 'bashls', 'solargraph', 'vimls', 'ts_ls', 'clangd',
+          'lua_ls', 'rust_analyzer', 'pylsp', 'yamlls', 'bashls', 'solargraph', 'vimls', 'ts_ls', 'clangd', 'groovyls',
+          'dockerls',
+          -- 'language-server-bitbake' must be installed manually (via Mason)
         },
       })
     end,

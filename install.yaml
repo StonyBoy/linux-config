@@ -34,6 +34,7 @@ Shells:
         MacOS:
             src:
                 - profile.d/60-macos.sh
+                - profile.d/60-openjdk.sh
         Linux:
             src:
                 - profile.d/60-linux.sh
