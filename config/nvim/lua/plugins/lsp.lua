@@ -1,11 +1,7 @@
 -- Neovim Language Server Configuration
 -- Steen Hegelund
--- Time-Stamp: 2025-Oct-30 21:25
+-- Time-Stamp: 2025-Nov-01 14:27
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
-
--- Enable Language Servers - prefer the language name if possible
-vim.lsp.enable({ 'lua_ls', 'rust_ls', 'python_ls', 'yaml_ls', 'bash_ls', 'ruby_ls', 'vim_ls', 'typescript_ls', 'clangd',
-  'groovyls', 'dockerls', 'language-server-bitbake' })
 
 -- Show diagnostics
 vim.diagnostic.config({
@@ -36,6 +32,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+-- Enable Language Servers
+-- These names are from Mesons 'Installed' list, the second name shown.  This name must also be used for the
+-- configuration file
+vim.lsp.enable({ 'lua_ls', 'rust_analyzer', 'pylsp', 'yamlls', 'bashls', 'solargraph', 'vimls', 'ts_ls', 'clangd',
+  'groovyls', 'dockerls', 'language-server-bitbake' })
+
+-- groovyls need java and javac
+-- On Ubuntu 24.04 this means installing openjdk-21-jdk and openjdk-21-jdk-headless
+
 return {
   {
     'williamboman/mason.nvim',
@@ -53,6 +58,7 @@ return {
     config = function()
       require('mason-lspconfig').setup({
         ensure_installed = {
+          -- These names are from Mesons 'Installed' list, the seconf name shown if available
           'lua_ls', 'rust_analyzer', 'pylsp', 'yamlls', 'bashls', 'solargraph', 'vimls', 'ts_ls', 'clangd', 'groovyls',
           'dockerls',
           -- 'language-server-bitbake' must be installed manually (via Mason)
