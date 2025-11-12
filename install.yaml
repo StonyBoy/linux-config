@@ -37,6 +37,7 @@ Shells:
                 - profile.d/60-openjdk.sh
         Linux:
             src:
+                - profile.d/50-openjdk.sh
                 - profile.d/60-linux.sh
                 - profile.d/70-linux-keyboard.sh
         Home:
