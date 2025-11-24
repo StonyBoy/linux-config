@@ -1,0 +1,9 @@
+# Steen Hegelund
+# Time-Stamp: 2025-Nov-24 15:59
+# vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=udevrules :
+
+SUBSYSTEM=="tty", ATTRS{product}=="MCP2221 USB-I2C/UART Combo", SYMLINK+="tty_mcp2221_%s{devpath}", MODE="0664", GROUP="wheel"
+SUBSYSTEM=="tty", ATTRS{product}=="MCP2200 USB Serial Port Emulator", SYMLINK+="tty_mcp2200_%s{devpath}", MODE="0664", GROUP="wheel"
+SUBSYSTEM=="tty", ATTRS{product}=="FT232R USB UART", SYMLINK+="tty_ft232r_%s{devpath}", MODE="0664", GROUP="wheel"
+SUBSYSTEM=="tty", ATTRS{manufacturer}=="Prolific Technology Inc.", ATTRS{idProduct}=="2303", SYMLINK+="tty_pl2303_%s{devpath}", MODE="0664", GROUP="wheel"
+
