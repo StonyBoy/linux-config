@@ -32,7 +32,7 @@
             "bluetooth",
             "disk#home",
             "disk#sys",
-            "memory",
+            "custom/memory",
             "temperature",
             "cpu",
         ]
@@ -205,6 +205,12 @@
         "format": "{} ",
         "exec": "$HOME/.config/waybar/mailstatus.py --logpath ~/davmail.log --maildir ~/.local/share/mail/microchip/Inbox ~/.local/share/mail/microchip/unglinuxdriver_list",
         "on-click": "$HOME/.config/waybar/mailstatus.py --logpath ~/davmail.log --maildir ~/.local/share/mail/microchip/Inbox ~/.local/share/mail/microchip/unglinuxdriver_list --mailsync",
+        "return-type": "json"
+    },
+    "custom/memory": {
+        "interval": 30,
+        "format": "{} ",
+        "exec": "$HOME/.config/waybar/memory_monitor.py",
         "return-type": "json"
     },
     "custom/systemd_unit": {
