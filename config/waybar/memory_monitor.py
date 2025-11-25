@@ -1,7 +1,7 @@
 #!/usr/local/pyvenv/steen/bin/python3
 
 # Steen Hegelund
-# Time-Stamp: 2025-Nov-24 11:45
+# Time-Stamp: 2025-Nov-25 12:50
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -23,7 +23,7 @@ class TaskInfo:
         self.pid = pid
         self.user = user
         self.pctmem = pctmem
-        self.rss = int(rss) // 1024 // 1024
+        self.rss = int(rss) / 1024 / 1024
         self.oom = oom
         self.cmd = cmd[0:35]
 
@@ -44,8 +44,8 @@ def get_memory_info():
             meminfo[key] = value
 
     # Values are in kB, convert to GB
-    total = meminfo['MemTotal'] // 1024 // 1014
-    available = meminfo['MemAvailable'] // 1024 // 1024
+    total = meminfo['MemTotal'] / 1024 / 1014
+    available = meminfo['MemAvailable'] / 1024 / 1024
     used = total - available
     return used, total
 
