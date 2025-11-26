@@ -4,7 +4,7 @@
     "layer": "top",
     "modules-left": ["niri/workspaces"],
     "modules-center": ["niri/window"],
-    "modules-right": ["custom/media", "group/network", "group/hardware", "custom/easytest", "custom/mailstatus", "custom/systemd_unit", "custom/multi_clock", "pulseaudio", "tray"],
+    "modules-right": ["custom/media", "group/network", "group/hardware", "custom/easytest", "custom/systemd_unit", "custom/multi_clock", "pulseaudio", "tray"],
     "niri/workspaces": {
         "format": "{index}: {name} {icon}",
         "format-icons": {
@@ -31,7 +31,7 @@
             "bluetooth",
             "disk#home",
             "disk#sys",
-            "memory",
+            "custom/memory",
             "temperature",
             "cpu",
         ]
@@ -204,6 +204,12 @@
         "format": "{} ",
         "exec": "$HOME/.config/waybar/mailstatus.py --logpath ~/davmail.log --maildir ~/.local/share/mail/microchip/Inbox ~/.local/share/mail/microchip/unglinuxdriver_list",
         "on-click": "$HOME/.config/waybar/mailstatus.py --logpath ~/davmail.log --maildir ~/.local/share/mail/microchip/Inbox ~/.local/share/mail/microchip/unglinuxdriver_list --mailsync",
+        "return-type": "json"
+    },
+    "custom/memory": {
+        "interval": 30,
+        "format": "{} ",
+        "exec": "$HOME/.config/waybar/memory_monitor.py",
         "return-type": "json"
     },
     "custom/systemd_unit": {
