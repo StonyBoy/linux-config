@@ -1,7 +1,7 @@
 #!/usr/local/pyvenv/steen/bin/python3
 
 # Steen Hegelund
-# Time-Stamp: 2025-Nov-25 12:50
+# Time-Stamp: 2025-Dec-02 15:03
 # vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=python :
 
 import argparse
@@ -54,7 +54,7 @@ def get_task_status(args: argparse.Namespace):
     cmd = ["ps", "-axo", "pid,user,pmem,rss,oom,cmd", "--sort=-pmem"]
     cp = subprocess.run(cmd, capture_output=True)
     lines = cp.stdout.decode().split('\n')
-    taskrex = re.compile(r'\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(.*)')
+    taskrex = re.compile(r'\s*(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(.*)')
     tasks = []
     for line in lines[1:6]:
         mt = taskrex.match(line)
