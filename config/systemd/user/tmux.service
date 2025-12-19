@@ -1,0 +1,12 @@
+[Unit]
+Description=tmux main service
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/tmux new-session -s main -d
+ExecStop=/usr/local/bin/tmux kill-session -t main
+Slice=tmux.slice
+
+[Install]
+WantedBy=multi-user.target
+

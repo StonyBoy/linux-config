@@ -191,6 +191,7 @@ Sway:
                 - config/waybar/style.css
                 - config/waybar/systemd_unit.py
                 - config/waybar/memory_monitor.py
+                - config/waybar/user_slice_memory_monitor.py
     Sway Swaylock:
         src:
             - config/swaylock
@@ -258,7 +259,12 @@ Beyond Compare:
 Systemd User Units:
     Work:
         src:
-            - config/systemd/user/davmail.service
+            - config/systemd/user/tmux.service
+            - config/systemd/user/browser.slice
+            - config/systemd/user/mail.slice
+            - config/systemd/user/spotify.slice
+            - config/systemd/user/teams.slice
+            - config/systemd/user/tmux.slice
     Sway:
         src:
             - config/systemd/user/sway_lockscreen.service
