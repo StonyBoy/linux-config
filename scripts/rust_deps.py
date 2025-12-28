@@ -9,7 +9,7 @@ parser = argparse.ArgumentParser(description="Check and optionally update direct
 parser.add_argument(
     "-u", "--update",
     action="store_true",
-    help="Update the versions in Cargo.toml to the latest crates.io versions"
+    help="Update the versions in Cargo.toml to the latest stable crates.io versions"
 )
 parser.add_argument(
     "-l", "--list-versions",
@@ -26,12 +26,12 @@ def list_versions(crate_name):
         versions_info = response.json()["versions"]
         versions = [v["num"] for v in versions_info]
 
-        # Determine latest stable version (ignore pre-release versions with '-')
-        stable_versions = [v for v in versions if "-" not in v]
+        # Determine latest stable version (ignore pre-release and build metadata)
+        stable_versions = [v for v in versions if "-" not in v and "+" not in v]
         latest_stable = stable_versions[0] if stable_versions else versions[0]
 
         print(f"All versions of {crate_name}:")
-        for v in sorted(versions, key=lambda s: list(map(int, s.split('+')[0].split('.')[:3]))):
+        for v in sorted(versions, key=lambda s: list(map(int, s.split('.')[0:3]))):
             marker = " <- latest stable" if v == latest_stable else ""
             print(f"{v}{marker}")
     except Exception as e:
@@ -61,7 +61,7 @@ def get_direct_dependencies(cargo_toml):
 
 direct_deps = get_direct_dependencies(cargo_toml)
 
-# --- Compare each dependency to the latest on crates.io ---
+# --- Compare each dependency to the latest stable on crates.io ---
 outdated = []
 
 for name, info in direct_deps.items():
@@ -70,17 +70,22 @@ for name, info in direct_deps.items():
     else:
         current_version = info
     try:
-        response = requests.get(f"https://crates.io/api/v1/crates/{name}")
+        response = requests.get(f"https://crates.io/api/v1/crates/{name}/versions")
         response.raise_for_status()
-        latest_version = response.json()["crate"]["max_stable_version"]
-        if current_version != latest_version:
-            outdated.append((name, current_version, latest_version))
+        versions_info = response.json()["versions"]
+        # Keep only stable versions
+        stable_versions = [v["num"] for v in versions_info if "-" not in v["num"] and "+" not in v["num"]]
+        if not stable_versions:
+            continue
+        latest_stable = stable_versions[0]
+
+        if current_version != latest_stable:
+            outdated.append((name, current_version, latest_stable))
             if args.update:
-                # Update the version in the cargo_toml structure
                 if isinstance(info, dict):
-                    info["version"] = latest_version
+                    info["version"] = latest_stable
                 else:
-                    cargo_toml["dependencies"][name] = latest_version
+                    cargo_toml["dependencies"][name] = latest_stable
     except Exception:
         continue
 
@@ -96,5 +101,5 @@ else:
 if args.update and outdated:
     with open(cargo_file, "w") as f:
         toml.dump(cargo_toml, f)
-    print("\nCargo.toml has been updated with latest versions.")
+    print("\nCargo.toml has been updated with latest stable versions.")
 

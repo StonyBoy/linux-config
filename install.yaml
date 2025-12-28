@@ -63,6 +63,7 @@ Scripts:
             - scripts/system_commands.py
             - scripts/wallpapers.py
             - scripts/python_template.py
+            - scripts/rust_deps.py
 
 Editor:
     Classic Vim:
