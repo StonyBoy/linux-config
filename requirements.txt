@@ -12,3 +12,4 @@ setuptools
 b4
 mako
 pygobject==3.50.0
+toml
