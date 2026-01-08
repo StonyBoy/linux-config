@@ -211,7 +211,7 @@
     "custom/memory": {
         "interval": 30,
         "format": "{} ",
-        "exec": "$HOME/.config/waybar/memory_monitor.py",
+        "exec": "$HOME/.config/waybar/user_slice_memory_monitor.py -s user@$(id -u).service -p firefox teams-for-linux tmux spotify evolution",
         "return-type": "json"
     },
     "custom/systemd_unit": {

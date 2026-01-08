@@ -239,6 +239,7 @@ Niri:
                 - config/waybar/style.css
                 - config/waybar/systemd_unit.py
                 - config/waybar/memory_monitor.py
+                - config/waybar/user_slice_memory_monitor.py
         Sway Swaylock:
             src:
                 - config/swaylock
