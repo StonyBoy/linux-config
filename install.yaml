@@ -258,14 +258,6 @@ Beyond Compare:
             - config/bcompare/BCCommands.xml
 
 Systemd User Units:
-    Work:
-        src:
-            - config/systemd/user/tmux.service
-            - config/systemd/user/browser.slice
-            - config/systemd/user/mail.slice
-            - config/systemd/user/spotify.slice
-            - config/systemd/user/teams.slice
-            - config/systemd/user/tmux.slice
     Sway:
         src:
             - config/systemd/user/sway_lockscreen.service
@@ -275,6 +267,12 @@ Systemd User Units:
             - config/systemd/user/niri_lockscreen.service
             - config/systemd/user/niribg.service
             - config/systemd/user/niriidle.service
+            - config/systemd/user/tmux.service
+            - config/systemd/user/browser.slice
+            - config/systemd/user/mail.slice
+            - config/systemd/user/spotify.slice
+            - config/systemd/user/teams.slice
+            - config/systemd/user/tmux.slice
     Waybar:
         src:
             - config/systemd/user/waybar.service
