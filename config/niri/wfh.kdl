@@ -298,42 +298,42 @@ window-rule {
 }
 
 window-rule {
-    match at-startup=true app-id=r#"notion-app"#
+    match app-id=r#"notion-app"#
 
     open-on-workspace "Notion"
     default-column-width { proportion 0.5; }
 }
 
 window-rule {
-    match at-startup=true app-id="[Ff]irefox"
+    match app-id="[Ff]irefox"
 
     open-on-workspace "Internet"
     open-maximized true
 }
 
 window-rule {
-    match at-startup=true app-id=r#"[Tt]hunar"#
+    match app-id=r#"[Tt]hunar"#
 
     open-on-workspace "Files"
     open-maximized true
 }
 
 window-rule {
-    match at-startup=true app-id=r#"[Nn]autilus"#
+    match app-id=r#"[Nn]autilus"#
 
     open-on-workspace "Files"
     open-maximized true
 }
 
 window-rule {
-    match at-startup=true app-id=r#"[Ee]volution"#
+    match app-id=r#"[Ee]volution"#
 
     open-on-workspace "Email"
     open-maximized true
 }
 
 window-rule {
-    match at-startup=true app-id=r#"[Tt]eams-for-linux"#
+    match app-id=r#"[Tt]eams-for-linux"#
 
     open-on-workspace "Teams"
     open-maximized true

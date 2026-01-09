@@ -295,42 +295,42 @@ window-rule {
 }
 
 window-rule {
-    match at-startup=true app-id=r#"notion-app"#
+    match app-id=r#"notion-app"#
 
     open-on-workspace "Notion"
     default-column-width { proportion 0.5; }
 }
 
 window-rule {
-    match at-startup=true app-id="[Ff]irefox"
+    match app-id="[Ff]irefox"
 
     open-on-workspace "Internet"
     open-maximized true
 }
 
 window-rule {
-    match at-startup=true app-id=r#"[Tt]hunar"#
+    match app-id=r#"[Tt]hunar"#
 
     open-on-workspace "Files"
     open-maximized true
 }
 
 window-rule {
-    match at-startup=true app-id=r#"[Nn]autilus"#
+    match app-id=r#"[Nn]autilus"#
 
     open-on-workspace "Files"
     open-maximized true
 }
 
 window-rule {
-    match at-startup=true app-id=r#"[Ee]volution"#
+    match app-id=r#"[Ee]volution"#
 
     open-on-workspace "Email"
     open-maximized true
 }
 
 window-rule {
-    match at-startup=true app-id=r#"[Tt]eams-for-linux"#
+    match app-id=r#"[Tt]eams-for-linux"#
 
     open-on-workspace "Teams"
     open-maximized true
@@ -402,11 +402,14 @@ spawn-sh-at-startup "systemctl --user start local_network_drives.service"
 // Mount GoogleDrive
 spawn-sh-at-startup "systemctl --user start google_drive.service"
 
+// Get tmux started with a detached "main" session in its own slice
+spawn-sh-at-startup "systemctl --user restart tmux.service"
+
 spawn-sh-at-startup "alacritty"
-spawn-sh-at-startup "firefox"
+spawn-sh-at-startup "systemd-run --user --slice=browser.slice firefox"
 spawn-sh-at-startup "Thunar"
-spawn-sh-at-startup "evolution"
-spawn-sh-at-startup "spotify --enable-features=UseOzonePlatform --ozone-platform=wayland"
+spawn-sh-at-startup "systemd-run --user --slice=mail.slice evolution"
+spawn-sh-at-startup "systemd-run --user --slice=spotify.slice spotify --enable-features=UseOzonePlatform --ozone-platform=wayland"
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
