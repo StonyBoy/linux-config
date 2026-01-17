@@ -1,7 +1,7 @@
 #! /bin/bash
 #  vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=sh :
 # Steen Hegelund
-# Time-Stamp: 2025-Apr-02 22:53
+# Time-Stamp: 2026-jan-17 19:23
 
 pane_id_prefix="resurrect_"
 nvim_pane_id_prefix="nvim term"
@@ -76,11 +76,11 @@ rtat() {
 
     if [ ${#sessions[@]} -gt 0 ]; then
         # If there is already a session with the same name, attach to it.
-        ssh -t $server_name tmux attach-session -t "$session_name"
+        ssh -t $server_name tmux -u attach-session -t "$session_name"
     else
         # If there is no existing session, create a new (detached) one.
-        ssh tmux -t $server_name new-session -d -s "$session_name"
-        ssh tmux -t $server_name attach-session -t "$session_name"
+        ssh -t $server_name tmux -u new-session -d -s "$session_name"
+        ssh -t $server_name tmux -u attach-session -t "$session_name"
     fi
 }
 
