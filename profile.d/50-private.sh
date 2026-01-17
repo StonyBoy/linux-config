@@ -1,7 +1,7 @@
 #! /bin/bash
 # -*-sh-*-
 # .bash_profile
-# Time-stamp: 2021-Jul-08 22:29
+# Time-stamp: 2026-jan-17 18:20
 # Settings for all interactive shells
 
 # Debugging
@@ -120,23 +120,6 @@ function title()
         echo -ne "\033]0;"$1"\007"
     fi
 }
-
-function rtmux()
-{
-    if [[ -n $1 ]]; then
-        title $1 && ssh -t work tmux -u attach-session -t $1
-    else
-        echo Provide a tmux session name
-    fi
-}
-
-function _complete_rtmux()
-{
-    COMPREPLY=( $(compgen -W "$(ssh work tmux list-sessions | sed -E 's/:.*//')" -- ${COMP_WORDS[COMP_CWORD]}) )
-    return 0
-}
-
-complete -F _complete_rtmux rtmux
 
 function set_clang()
 {
