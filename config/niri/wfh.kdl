@@ -441,7 +441,7 @@ binds {
     Mod+Alt+L hotkey-overlay-title="Lock Screen" { spawn "swaylock"; }
 
     Mod+Y hotkey-overlay-title="TMux Sessions" { spawn-sh "~/scripts/tmux_sessions.py | ~/scripts/tmux_sessions.py $(fuzzel -d -l 20 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s b58900ff)"; }
-    Mod+T hotkey-overlay-title="Remote TMux Sessions" { spawn-sh "~/scripts/tmux_sessions.py -g work | ~/scripts/tmux_sessions.py $(fuzzel -d -l 20 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s 268bd2ff)"; }
+    Mod+T hotkey-overlay-title="Remote TMux Sessions" { spawn-sh "~/scripts/tmux_sessions.py -g den-dl-m31857 | ~/scripts/tmux_sessions.py $(fuzzel -d -l 20 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s 268bd2ff)"; }
     Mod+Shift+E hotkey-overlay-title="System Menu" { spawn-sh "~/scripts/system_commands.py  | ~/scripts/system_commands.py $(fuzzel -d -l 20 -f 'Inconsolata:style=Regular:size=12' -p 'Select>' -t 000080ff -S fdf6e3ff -s ff6347ff -b f5deb3ff)"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
