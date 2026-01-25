@@ -21,7 +21,6 @@ Shells:
                 - profile.d/30-ls-colors.sh
                 - profile.d/20-prompt-color.sh
                 - profile.d/30-gcc-color-output.sh
-                - profile.d/40-alias.sh
                 - profile.d/50-private.sh
                 - profile.d/60-tmux.sh
                 - profile.d/60-pyenv.sh
@@ -29,7 +28,6 @@ Shells:
         Work:
             src:
                 - profile.d/30-keychain.sh
-                - profile.d/30-misc-env.sh
                 - profile.d/60-sam-ba.sh
         MacOS:
             src:

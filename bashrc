@@ -37,15 +37,11 @@ fi
 
 echo ""
 
+# fzf shell integration
+eval "$(fzf --bash)"
 
 [ -d $HOME/.rvm/bin ] && pathappend ~/.rvm/bin
 [ -d $HOME/.rvm/gems/ruby-2.6.3/bin ] && pathappend ~/.rvm/gems/ruby-2.6.3/bin
 
-# Set up fzf key bindings and fuzzy completion
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-[ -f /usr/share/fzf/key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash
-[ -f /usr/share/fzf/completion.bash ] && source /usr/share/fzf/completion.bash
-
 [ -d ~/.cargo/bin ] && source "$HOME/.cargo/env"
-
 
