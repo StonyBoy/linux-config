@@ -1,335 +1,337 @@
 #  vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=yaml :
 ---
-Shells:
-    Fish Shell:
-        src:
-            - config/fish
+Console Configuration:
+    Shells:
+        Fish Shell:
+            src:
+                - config/fish
 
-    Bash Shell:
+        Bash Shell:
+            default:
+                src:
+                    - bash_logout
+                    - bash_profile
+                    - bashrc
+                    - clang-format
+                    - inputrc
+                    - profile
+                    - profile.d/00-path-ops.sh
+                    - profile.d/01-colors-defines.sh
+                    - profile.d/02-colors-defines-background.sh
+                    - profile.d/10-git-prompt.sh
+                    - profile.d/30-ls-colors.sh
+                    - profile.d/20-prompt-color.sh
+                    - profile.d/30-gcc-color-output.sh
+                    - profile.d/60-tmux.sh
+                    - profile.d/60-pyenv.sh
+                    - profile.d/60-nodejs.sh
+            Work:
+                src:
+                    - profile.d/30-keychain.sh
+                    - profile.d/40-worklog.sh
+                    - profile.d/60-sam-ba.sh
+                    - profile.d/90-script-completion.sh
+            MacOS:
+                src:
+                    - profile.d/60-macos.sh
+                    - profile.d/60-openjdk.sh
+            Linux:
+                src:
+                    - profile.d/60-linux.sh
+                    - profile.d/50-openjdk.sh
+            Home:
+                src:
+                    - profile.d/70-audiobooks.sh
+
+    Scripts:
         default:
+            dot: false
             src:
-                - bash_logout
-                - bash_profile
-                - bashrc
-                - clang-format
-                - inputrc
-                - profile
-                - profile.d/00-path-ops.sh
-                - profile.d/01-colors-defines.sh
-                - profile.d/02-colors-defines-background.sh
-                - profile.d/10-git-prompt.sh
-                - profile.d/30-ls-colors.sh
-                - profile.d/20-prompt-color.sh
-                - profile.d/30-gcc-color-output.sh
-                - profile.d/60-tmux.sh
-                - profile.d/60-pyenv.sh
-                - profile.d/60-nodejs.sh
-        Work:
-            src:
-                - profile.d/30-keychain.sh
-                - profile.d/40-worklog.sh
-                - profile.d/60-sam-ba.sh
-                - profile.d/90-script-completion.sh
-        MacOS:
-            src:
-                - profile.d/60-macos.sh
-                - profile.d/60-openjdk.sh
-        Linux:
-            src:
-                - profile.d/60-linux.sh
-                - profile.d/50-openjdk.sh
-        Home:
-            src:
-                - profile.d/70-audiobooks.sh
+                - scripts/python.init.py
+                - scripts/update_wallpaper.sh
+                - scripts/tmux_sessions.py
+                - scripts/remote_sway_cmds.py
+                - scripts/git_branches.py
+                - scripts/config_tunnel.sh
+                - scripts/config_remote_tunnel.sh
+                - scripts/difftree.py
+                - scripts/apply_mail_patch.sh
+                - scripts/import-gsettings.sh
+                - scripts/ruby_gems.sh
+                - scripts/system_commands.py
+                - scripts/wallpapers.py
+                - scripts/python_template.py
+                - scripts/rust_deps.py
 
-Scripts:
-    default:
-        dot: false
-        src:
-            - scripts/tat
-            - scripts/python.init.py
-            - scripts/update_wallpaper.sh
-            - scripts/tmux_sessions.py
-            - scripts/remote_sway_cmds.py
-            - scripts/git_branches.py
-            - scripts/config_tunnel.sh
-            - scripts/config_remote_tunnel.sh
-            - scripts/difftree.py
-            - scripts/apply_mail_patch.sh
-            - scripts/import-gsettings.sh
-            - scripts/ruby_gems.sh
-            - scripts/system_commands.py
-            - scripts/wallpapers.py
-            - scripts/python_template.py
-            - scripts/rust_deps.py
-
-Editor:
-    Classic Vim:
-        src:
-            - vim/packages.vim
-            - vimrc
-            - vim/config
-
-    NeoVim Editor:
-        src:
-            - profile.d/80-nvim.sh
-            - config/nvim
-
-Console:
-    Alacritty:
-        src:
-            - config/alacritty/alacritty.toml
-
-    Bat:
-        src:
-            - config/bat/config
-            - profile.d/60-bat.sh
-
-    Terminal Mux:
-        src:
-            - tmux.conf
-
-    Powerline:
-        src:
-            - config/powerline
-
-Git:
-    default:
-        src:
-            - gitconfig
-            - gitignore
-            - gitconfig.d/20-user.gitconfig
-    Diff tool:
-        Classic diff:
-            src:
-                - gitconfig.d/30-diff.gitconfig
-        git-delta:
-            src:
-                - gitconfig.d/30-delta.gitconfig
     Editor:
         Classic Vim:
             src:
-                - gitconfig.d/30-editor-vim.gitconfig
-        Neovim:
-            src:
-                - gitconfig.d/30-editor-neovim.gitconfig
-    Work:
-        src:
-            - gitconfig.d/10-work.gitconfig
-            - git-hooks
-    MacOS:
-        src:
-            - gitconfig.d/40-macos.gitconfig
+                - vim/packages.vim
+                - vimrc
+                - vim/config
 
-Ruby:
-    default:
-        src:
-            - rubocop.yml
-            - profile.d/60-ruby.sh
+        NeoVim Editor:
+            src:
+                - profile.d/80-nvim.sh
+                - config/nvim
 
-I3:
-    default:
-        Home:
+    Console:
+        Alacritty:
             src:
-                - config/i3/config
-                - config/i3/home.i3.conf
-                - config/dunst/dunstrc
-        Work:
-            src:
-                - config/i3/config
-                - config/i3/work.i3.conf
-                - config/dunst/dunstrc
-        WorkFromHome:
-            src:
-                - config/i3/config
-                - config/i3/wfh.i3.conf
-                - config/dunst/dunstrc
+                - config/alacritty/alacritty.toml
 
-    Blocks:
-        dest: config/i3/i3blocks.conf
-        Home:
+        Bat:
             src:
-                - config/i3/i3blocks.conf.home
-        Work:
-            src:
-                - config/i3/i3blocks.conf.work
-        WorkFromHome:
-            src:
-                - config/i3/i3blocks.conf.wfh
+                - config/bat/config
+                - profile.d/60-bat.sh
 
-Sway:
-    default:
-        Home:
+        Terminal Mux:
             src:
-                - config/sway/config
-                - config/sway/home.sway.config
-                - config/mako/config
-        Work:
+                - tmux.conf
+
+        Powerline:
             src:
-                - config/sway/config
-                - config/sway/work.sway.config
-                - config/dunst/dunstrc
-        WorkFromHome:
-            src:
-                - config/sway/config
-                - config/sway/wfh.sway.config
-                - config/dunst/dunstrc
-    Waybar:
+                - config/powerline
+
+    Git:
         default:
-            dest: config/waybar/config
             src:
-                - config/waybar/config.sway
-        Widgets:
-            src:
-                - config/waybar/easytest.py
-                - config/waybar/hostinfo.py
-                - config/waybar/mailstatus.py
-                - config/waybar/mediaplayer.py
-                - config/waybar/multi_clock.py
-                - config/waybar/pulse_audio_toggle.sh
-                - config/waybar/style.css
-                - config/waybar/systemd_unit.py
-                - config/waybar/memory_monitor.py
-                - config/waybar/user_slice_memory_monitor.py
-    Sway Swaylock:
-        src:
-            - config/swaylock
-
-Niri:
-    default:
-        Home:
-            dest: config/niri/config.kdl
-            src:
-            - config/niri/home.kdl
-        Work:
-            dest: config/niri/config.kdl
-            src:
-            - config/niri/work.kdl
-        WorkFromHome:
-            dest: config/niri/config.kdl
-            src:
-            - config/niri/wfh.kdl
-        USDK Keyboard:
-            dest: config/xkb/symbols/usdk
-            src:
-            - xkb/usdk
-        Waybar:
-            Home:
-                dest: config/waybar/config
+                - gitconfig
+                - gitignore
+                - gitconfig.d/20-user.gitconfig
+        Diff tool:
+            Classic diff:
                 src:
-                - config/waybar/home.config.niri
+                    - gitconfig.d/30-diff.gitconfig
+            git-delta:
+                src:
+                    - gitconfig.d/30-delta.gitconfig
+        Editor:
+            Classic Vim:
+                src:
+                    - gitconfig.d/30-editor-vim.gitconfig
+            Neovim:
+                src:
+                    - gitconfig.d/30-editor-neovim.gitconfig
+        Work:
+            src:
+                - gitconfig.d/10-work.gitconfig
+                - git-hooks
+        MacOS:
+            src:
+                - gitconfig.d/40-macos.gitconfig
+
+    Ruby:
+        default:
+            src:
+                - rubocop.yml
+                - profile.d/60-ruby.sh
+
+    Email:
+        default:
+            src:
+            - msmtprc
+            - config/mbsync/mbsyncrc
+            - config/davmail/davmail.properties
+        aerc:
+            src:
+            - config/aerc/aerc.conf
+            - config/aerc/accounts.conf
+            - config/aerc/binds.conf
+            - config/aerc/book.txt
+            - config/aerc/notmuch_queries.txt
+            - config/aerc/stylesets/steen
+        mutt:
+            default:
+                src:
+                    - mutt/aliases
+                    - mutt/bindings
+                    - mutt/colors
+                    - mutt/mailcap
+                    - mutt/mbsync_folders.py
+                    - mutt/muttrc
+                    - mutt/notmuch_queries
             Work:
-                dest: config/waybar/config
                 src:
-                - config/waybar/work.config.niri
-            WorkFromHome:
-                dest: config/waybar/config
+                - mutt/accounts/microchip
+                - mutt/microchip.com.gpg
+                - mutt/outlook.office365.com.pem
+                - mutt/signatures/work
+            Home:
                 src:
-                - config/waybar/wfh.config.niri
-        Widgets:
-            src:
-                - config/waybar/easytest.py
-                - config/waybar/hostinfo.py
-                - config/waybar/mailstatus.py
-                - config/waybar/mediaplayer.py
-                - config/waybar/multi_clock.py
-                - config/waybar/pulse_audio_toggle.sh
-                - config/waybar/style.css
-                - config/waybar/systemd_unit.py
-                - config/waybar/memory_monitor.py
-                - config/waybar/user_slice_memory_monitor.py
-        Sway Swaylock:
-            src:
-                - config/swaylock
-        Notifications:
-            src:
-                - config/mako/config
+                - mutt/accounts/one
+                - mutt/imap.one.com.pem
+                - mutt/send.one.com.pem
+                - mutt/one.com.gpg
+                - mutt/signatures/home
 
-
-Rofi Themes:
-    default:
-        src:
-            - config/rofi/themes
-
-Beyond Compare:
-    default:
-        src:
-            - config/bcompare/BCCommands.xml
-
-Systemd User Units:
-    Sway:
-        src:
-            - config/systemd/user/sway_lockscreen.service
-            - config/systemd/user/swaybg.service
-    Niri:
-        src:
-            - config/systemd/user/niri_lockscreen.service
-            - config/systemd/user/niribg.service
-            - config/systemd/user/niriidle.service
-            - config/systemd/user/tmux.service
-            - config/systemd/user/browser.slice
-            - config/systemd/user/mail.slice
-            - config/systemd/user/spotify.slice
-            - config/systemd/user/teams.slice
-            - config/systemd/user/tmux.slice
-    Waybar:
-        src:
-            - config/systemd/user/waybar.service
-
-X Window:
-    default:
-        src:
-            - Xresources
-            - Xdefaults
-            - Xmodmap
-
-IDEs:
-    QT Creator:
-        src:
-            - config/QtProject
-
-    PyCharm Editor:
-        src:
-            - PyCharm
-
-    Visual Studio Code:
-        src:
-            - config/Code
-
-Email:
-    default:
-        src:
-        - msmtprc
-        - config/mbsync/mbsyncrc
-        - config/davmail/davmail.properties
-    aerc:
-        src:
-        - config/aerc/aerc.conf
-        - config/aerc/accounts.conf
-        - config/aerc/binds.conf
-        - config/aerc/book.txt
-        - config/aerc/notmuch_queries.txt
-        - config/aerc/stylesets/steen
-    mutt:
+GUI Configuration:
+    X Window:
         default:
             src:
-                - mutt/aliases
-                - mutt/bindings
-                - mutt/colors
-                - mutt/mailcap
-                - mutt/mbsync_folders.py
-                - mutt/muttrc
-                - mutt/notmuch_queries
-        Work:
+                - Xresources
+                - Xdefaults
+                - Xmodmap
+
+        I3:
+            default:
+                Home:
+                    src:
+                        - config/i3/config
+                        - config/i3/home.i3.conf
+                        - config/dunst/dunstrc
+                Work:
+                    src:
+                        - config/i3/config
+                        - config/i3/work.i3.conf
+                        - config/dunst/dunstrc
+                WorkFromHome:
+                    src:
+                        - config/i3/config
+                        - config/i3/wfh.i3.conf
+                        - config/dunst/dunstrc
+
+            Blocks:
+                dest: config/i3/i3blocks.conf
+                Home:
+                    src:
+                        - config/i3/i3blocks.conf.home
+                Work:
+                    src:
+                        - config/i3/i3blocks.conf.work
+                WorkFromHome:
+                    src:
+                        - config/i3/i3blocks.conf.wfh
+
+    Wayland:
+        Sway:
+            default:
+                Home:
+                    src:
+                        - config/sway/config
+                        - config/sway/home.sway.config
+                        - config/mako/config
+                Work:
+                    src:
+                        - config/sway/config
+                        - config/sway/work.sway.config
+                        - config/dunst/dunstrc
+                WorkFromHome:
+                    src:
+                        - config/sway/config
+                        - config/sway/wfh.sway.config
+                        - config/dunst/dunstrc
+            Waybar:
+                default:
+                    dest: config/waybar/config
+                    src:
+                        - config/waybar/config.sway
+                Widgets:
+                    src:
+                        - config/waybar/easytest.py
+                        - config/waybar/hostinfo.py
+                        - config/waybar/mailstatus.py
+                        - config/waybar/mediaplayer.py
+                        - config/waybar/multi_clock.py
+                        - config/waybar/pulse_audio_toggle.sh
+                        - config/waybar/style.css
+                        - config/waybar/systemd_unit.py
+                        - config/waybar/memory_monitor.py
+                        - config/waybar/user_slice_memory_monitor.py
+            Sway Swaylock:
+                src:
+                    - config/swaylock
+
+        Niri:
+            default:
+                Home:
+                    dest: config/niri/config.kdl
+                    src:
+                    - config/niri/home.kdl
+                Work:
+                    dest: config/niri/config.kdl
+                    src:
+                    - config/niri/work.kdl
+                WorkFromHome:
+                    dest: config/niri/config.kdl
+                    src:
+                    - config/niri/wfh.kdl
+                USDK Keyboard:
+                    dest: config/xkb/symbols/usdk
+                    src:
+                    - xkb/usdk
+                Waybar:
+                    Home:
+                        dest: config/waybar/config
+                        src:
+                        - config/waybar/home.config.niri
+                    Work:
+                        dest: config/waybar/config
+                        src:
+                        - config/waybar/work.config.niri
+                    WorkFromHome:
+                        dest: config/waybar/config
+                        src:
+                        - config/waybar/wfh.config.niri
+                Widgets:
+                    src:
+                        - config/waybar/easytest.py
+                        - config/waybar/hostinfo.py
+                        - config/waybar/mailstatus.py
+                        - config/waybar/mediaplayer.py
+                        - config/waybar/multi_clock.py
+                        - config/waybar/pulse_audio_toggle.sh
+                        - config/waybar/style.css
+                        - config/waybar/systemd_unit.py
+                        - config/waybar/memory_monitor.py
+                        - config/waybar/user_slice_memory_monitor.py
+                Sway Swaylock:
+                    src:
+                        - config/swaylock
+                Notifications:
+                    src:
+                        - config/mako/config
+
+    Systemd User Units:
+        Sway:
             src:
-            - mutt/accounts/microchip
-            - mutt/microchip.com.gpg
-            - mutt/outlook.office365.com.pem
-            - mutt/signatures/work
-        Home:
+                - config/systemd/user/sway_lockscreen.service
+                - config/systemd/user/swaybg.service
+        Niri:
             src:
-            - mutt/accounts/one
-            - mutt/imap.one.com.pem
-            - mutt/send.one.com.pem
-            - mutt/one.com.gpg
-            - mutt/signatures/home
+                - config/systemd/user/niri_lockscreen.service
+                - config/systemd/user/niribg.service
+                - config/systemd/user/niriidle.service
+                - config/systemd/user/tmux.service
+                - config/systemd/user/browser.slice
+                - config/systemd/user/mail.slice
+                - config/systemd/user/spotify.slice
+                - config/systemd/user/teams.slice
+                - config/systemd/user/tmux.slice
+        Waybar:
+            src:
+                - config/systemd/user/waybar.service
+
+    Rofi Themes:
+        default:
+            src:
+                - config/rofi/themes
+
+    Beyond Compare:
+        default:
+            src:
+                - config/bcompare/BCCommands.xml
+
+    IDEs:
+        QT Creator:
+            src:
+                - config/QtProject
+
+        PyCharm Editor:
+            src:
+                - PyCharm
+
+        Visual Studio Code:
+            src:
+                - config/Code
+
