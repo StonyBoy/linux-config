@@ -71,9 +71,16 @@ Console Configuration:
                 - vim/config
 
         NeoVim Editor:
-            src:
-                - profile.d/80-nvim.sh
-                - config/nvim
+            default:
+                src:
+                    - profile.d/80-nvim.sh
+            Full Support:
+                src:
+                    - config/nvim
+            Simple Support:
+                dest: config/nvim
+                src:
+                    - config/nvim-simple
 
     Console:
         Alacritty:
