@@ -35,6 +35,8 @@ Console Configuration:
                 src:
                     - profile.d/60-macos.sh
                     - profile.d/60-openjdk.sh
+                    - profile.d/80-iterm2.sh
+                    - profile.d/90-docker.sh
             Linux:
                 src:
                     - profile.d/60-linux.sh
