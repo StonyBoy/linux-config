@@ -21,23 +21,23 @@ Shells:
                 - profile.d/30-ls-colors.sh
                 - profile.d/20-prompt-color.sh
                 - profile.d/30-gcc-color-output.sh
-                - profile.d/50-private.sh
                 - profile.d/60-tmux.sh
                 - profile.d/60-pyenv.sh
                 - profile.d/60-nodejs.sh
         Work:
             src:
                 - profile.d/30-keychain.sh
+                - profile.d/40-worklog.sh
                 - profile.d/60-sam-ba.sh
+                - profile.d/90-script-completion.sh
         MacOS:
             src:
                 - profile.d/60-macos.sh
                 - profile.d/60-openjdk.sh
         Linux:
             src:
-                - profile.d/50-openjdk.sh
                 - profile.d/60-linux.sh
-                - profile.d/70-linux-keyboard.sh
+                - profile.d/50-openjdk.sh
         Home:
             src:
                 - profile.d/70-audiobooks.sh
