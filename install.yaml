@@ -86,8 +86,14 @@ Console Configuration:
 
     Console:
         Alacritty:
-            src:
-                - config/alacritty/alacritty.toml
+            Linux:
+                dest: config/alacritty/alacritty.toml
+                src:
+                    - config/alacritty/linux.toml
+            MacOS:
+                dest: config/alacritty/alacritty.toml
+                src:
+                    - config/alacritty/macos.toml
 
         Bat:
             src:

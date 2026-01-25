@@ -1,0 +1,97 @@
+[bell]
+animation = "Ease"
+color = "#cb4b16"
+duration = 10
+
+[colors.bright]
+black = "#002b36"
+blue = "#839496"
+cyan = "#93a1a1"
+green = "#586e75"
+magenta = "#6c71c4"
+red = "#cb4b16"
+white = "#fdf6e3"
+yellow = "#657b83"
+
+[colors.cursor]
+cursor = "#657b83"
+text = "#fdf6e3"
+
+[colors.normal]
+black = "#073642"
+blue = "#268bd2"
+cyan = "#2aa198"
+green = "#859900"
+magenta = "#d33682"
+red = "#dc322f"
+white = "#eee8d5"
+yellow = "#b58900"
+
+[colors.primary]
+background = "#fdf6e3"
+foreground = "#657b83"
+
+[cursor]
+blink_interval = 500
+
+[cursor.style]
+blinking = "Always"
+shape = "Block"
+
+[font]
+size = 16
+
+[font.bold]
+family = "Inconsolata Nerd Font Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "Inconsolata Nerd Font Mono"
+style = "Bold Italic"
+
+[font.italic]
+family = "Inconsolata Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "Inconsolata Nerd Font Mono"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 1
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Key0"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "PageUp"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "PageDown"
+mods = "Control|Shift"
+
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+
+[window]
+dynamic_title = true
+
+[window.padding]
+x = 6
+y = 6
