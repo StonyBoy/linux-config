@@ -26,6 +26,9 @@ pathprepend /usr/local/sbin
 export PAGER='less -s'
 export PYTHONSTARTUP=~/scripts/python.init.py
 
+# fzf shell integration
+eval "$(fzf --bash)"
+
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 function brew_update()

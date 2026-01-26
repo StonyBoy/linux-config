@@ -38,9 +38,16 @@ Console Configuration:
                     - profile.d/80-iterm2.sh
                     - profile.d/90-docker.sh
             Linux:
-                src:
-                    - profile.d/60-linux.sh
-                    - profile.d/50-openjdk.sh
+                default:
+                    src:
+                        - profile.d/60-linux.sh
+                        - profile.d/50-openjdk.sh
+                Ubuntu:
+                    src:
+                        - profile.d/60-ubuntu.sh
+                Arch Linux:
+                    src:
+                        - profile.d/60-arch.sh
             Home:
                 src:
                     - profile.d/70-audiobooks.sh

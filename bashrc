@@ -37,9 +37,6 @@ fi
 
 echo ""
 
-# fzf shell integration
-eval "$(fzf --bash)"
-
 [ -d $HOME/.rvm/bin ] && pathappend ~/.rvm/bin
 [ -d $HOME/.rvm/gems/ruby-2.6.3/bin ] && pathappend ~/.rvm/gems/ruby-2.6.3/bin
 
