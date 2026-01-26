@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2023-Jan-03 21:53
+-- Time-Stamp: 2026-Jan-26 14:51
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local function set_background()
@@ -20,12 +20,27 @@ return {
     config = function()
       set_background()
       vim.cmd([[colorscheme solarized8_high]])
-      -- Dim the inactive windows
-      if vim.go.background == 'dark' then
-        vim.cmd('highlight NormalNC guifg=#eee8d5 guibg=#073642')
-      else
-        vim.cmd('highlight NormalNC guifg=#073642 guibg=#eee8d5')
-      end
+      --
+      -- Define highlight groups for focused and unfocused gutters
+      vim.cmd([[
+        highlight FocusedGutter guifg=#002b36 guibg=#eee8d5
+        highlight UnfocusedGutter guifg=#586e75 guibg=#fdf6e3
+      ]])
+
+      -- Add autocommands to handle the window events
+      vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter" }, {
+        pattern = "*",
+        callback = function()
+          vim.opt_local.winhighlight = "LineNr:FocusedGutter,SignColumn:FocusedGutter"
+        end,
+      })
+
+      vim.api.nvim_create_autocmd("WinLeave", {
+        pattern = "*",
+        callback = function()
+          vim.opt_local.winhighlight = "LineNr:UnfocusedGutter,SignColumn:UnfocusedGutter"
+        end,
+      })
     end,
   },
   {
