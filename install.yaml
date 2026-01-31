@@ -18,13 +18,17 @@ Console Configuration:
                     - profile.d/00-path-ops.sh
                     - profile.d/01-colors-defines.sh
                     - profile.d/02-colors-defines-background.sh
-                    - profile.d/10-git-prompt.sh
                     - profile.d/30-ls-colors.sh
                     - profile.d/20-prompt-color.sh
-                    - profile.d/30-gcc-color-output.sh
                     - profile.d/60-tmux.sh
-                    - profile.d/60-pyenv.sh
-                    - profile.d/60-nodejs.sh
+
+            Dark background:
+                src:
+                    - profile.d/02-colors-defines-dark-background.sh
+
+            Light background:
+                src:
+                    - profile.d/02-colors-defines-light-background.sh
             Work:
                 src:
                     - profile.d/30-keychain.sh
@@ -51,6 +55,23 @@ Console Configuration:
             Home:
                 src:
                     - profile.d/70-audiobooks.sh
+
+            Programming:
+                GCC:
+                    src:
+                        - profile.d/30-gcc-color-output.sh
+                Nodejs:
+                    src:
+                        - profile.d/60-nodejs.sh
+                Python:
+                    src:
+                        - profile.d/60-pyenv.sh
+                Rust:
+                    src:
+                        - profile.d/60-rustlang.sh
+                Go:
+                    src:
+                        - profile.d/60-golang.sh
 
     Scripts:
         default:
@@ -121,6 +142,7 @@ Console Configuration:
                 - gitconfig
                 - gitignore
                 - gitconfig.d/20-user.gitconfig
+                - profile.d/10-git-prompt.sh
         Diff tool:
             Classic diff:
                 src:
@@ -211,6 +233,7 @@ GUI Configuration:
                 - Xresources
                 - Xdefaults
                 - Xmodmap
+                - profile.d/70-linux-x-keyboard.sh
 
         I3:
             default:
@@ -248,21 +271,22 @@ GUI Configuration:
     Wayland:
         Sway:
             default:
-                Home:
-                    src:
-                        - config/sway/config
-                        - config/sway/home.sway.config
-                        - config/mako/config
-                Work:
-                    src:
-                        - config/sway/config
-                        - config/sway/work.sway.config
-                        - config/dunst/dunstrc
-                WorkFromHome:
-                    src:
-                        - config/sway/config
-                        - config/sway/wfh.sway.config
-                        - config/dunst/dunstrc
+                src:
+                    - config/sway/config
+                    - profile.d/50-sway.sh
+                    - config/dunst/dunstrc
+            Home:
+                src:
+                    - config/sway/home.sway.config
+
+            Work:
+                src:
+                    - config/sway/work.sway.config
+
+            WorkFromHome:
+                src:
+                    - config/sway/wfh.sway.config
+
             Waybar:
                 default:
                     dest: config/waybar/config
