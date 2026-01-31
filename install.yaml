@@ -152,17 +152,17 @@ Console Configuration:
     Email:
         default:
             src:
-            - msmtprc
-            - config/mbsync/mbsyncrc
-            - config/davmail/davmail.properties
+                - msmtprc
+                - config/mbsync/mbsyncrc
+                - config/davmail/davmail.properties
         aerc:
             src:
-            - config/aerc/aerc.conf
-            - config/aerc/accounts.conf
-            - config/aerc/binds.conf
-            - config/aerc/book.txt
-            - config/aerc/notmuch_queries.txt
-            - config/aerc/stylesets/steen
+                - config/aerc/aerc.conf
+                - config/aerc/accounts.conf
+                - config/aerc/binds.conf
+                - config/aerc/book.txt
+                - config/aerc/notmuch_queries.txt
+                - config/aerc/stylesets/steen
         mutt:
             default:
                 src:
@@ -175,17 +175,34 @@ Console Configuration:
                     - mutt/notmuch_queries
             Work:
                 src:
-                - mutt/accounts/microchip
-                - mutt/microchip.com.gpg
-                - mutt/outlook.office365.com.pem
-                - mutt/signatures/work
+                    - mutt/accounts/microchip
+                    - mutt/microchip.com.gpg
+                    - mutt/outlook.office365.com.pem
+                    - mutt/signatures/work
             Home:
                 src:
-                - mutt/accounts/one
-                - mutt/imap.one.com.pem
-                - mutt/send.one.com.pem
-                - mutt/one.com.gpg
-                - mutt/signatures/home
+                    - mutt/accounts/one
+                    - mutt/imap.one.com.pem
+                    - mutt/send.one.com.pem
+                    - mutt/one.com.gpg
+                    - mutt/signatures/home
+
+    Systemd User Units:
+        Google Drive:
+            src:
+                - config/systemd/user/google_drive.service
+
+        Local Network Drives:
+            src:
+                - config/systemd/user/local_network_drives.service
+
+        Work:
+            One Drive:
+                src:
+                    - config/systemd/user/one_drive.service
+            Perforce:
+                src:
+                    - config/systemd/user/perforce.service
 
 GUI Configuration:
     X Window:
@@ -197,6 +214,8 @@ GUI Configuration:
 
         I3:
             default:
+                src:
+                    - config/systemd/user/i3_wallpaper.service
                 Home:
                     src:
                         - config/i3/config
@@ -224,6 +243,7 @@ GUI Configuration:
                 WorkFromHome:
                     src:
                         - config/i3/i3blocks.conf.wfh
+
 
     Wayland:
         Sway:
@@ -315,6 +335,14 @@ GUI Configuration:
                         - config/mako/config
 
     Systemd User Units:
+        VNC:
+            src:
+                - config/systemd/user/wayvnc.service
+
+        XWayland:
+            src:
+                - config/systemd/user/xwayland-satellite.service
+
         Sway:
             src:
                 - config/systemd/user/sway_lockscreen.service
@@ -356,4 +384,3 @@ GUI Configuration:
         Visual Studio Code:
             src:
                 - config/Code
-
