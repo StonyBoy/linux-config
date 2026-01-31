@@ -98,11 +98,16 @@ class InstallBase:
         self.dot = True
         self.do_install = False
         self.children = []
+        self.do_clear = 'cls' if os.name == 'nt' else 'clear'
+
+    def clear(self):
+        os.system(self.do_clear)
 
     def query_user(self):
         if self.name == 'default':
             self.do_install = True
             return self.do_install
+        self.clear()
         self.show()
         indent = '  ' * self.level
         prompt = f'{indent}{Style.BRIGHT}Do you want to install {Fore.BLUE}{self.name}{Style.RESET_ALL}: (N/y) > '
@@ -158,7 +163,7 @@ class InstallGroup(InstallBase):
     def show(self):
         indent = '  ' * self.level
         cindent = '  ' * (self.level + 1)
-        print(f'{indent}{Fore.LIGHTMAGENTA_EX}{self.name}{Style.RESET_ALL}:')
+        print(f'{indent}{Fore.MAGENTA}{self.name}{Style.RESET_ALL}:')
         for name in self.src:
             print(f'{cindent}{Style.DIM}{name}{Style.RESET_ALL}')
 
@@ -278,7 +283,7 @@ def install_items():
     for f in features:
         changes = changes or f.installation_needed()
     if changes:
-        prompt = f'{Fore.MAGENTA}Begin installation{Style.RESET_ALL}: (y/n) > '
+        prompt = f'{Fore.GREEN}Begin installation{Style.RESET_ALL}: (y/n) > '
         response = ''
         while response != 'n' and response != 'y':
             response = input(prompt).lower()
