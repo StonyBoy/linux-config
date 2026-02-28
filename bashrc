@@ -37,6 +37,9 @@ fi
 
 echo ""
 
+# Add local binaries
+[ -d $HOME/.local/bin ] && pathappend ~/.local/bin
+
 [ -d $HOME/.rvm/bin ] && pathappend ~/.rvm/bin
 [ -d $HOME/.rvm/gems/ruby-2.6.3/bin ] && pathappend ~/.rvm/gems/ruby-2.6.3/bin
 
