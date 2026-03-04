@@ -1,24 +1,24 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2024-May-21 14:39
+-- Time-Stamp: 2026-Mar-04 22:19
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Highlight, edit, and navigate code using a fast incremental parsing library
 return {
   {
     'nvim-treesitter/nvim-treesitter',
+    lazy = false,
+    build = ":TSUpdate",
     config = function()
-      require 'nvim-treesitter'.setup()
-      require 'nvim-treesitter.configs'.setup {
-        -- Modules and its options go here
-        ensure_installed = {
+      local treesitter = require("nvim-treesitter")
+      treesitter.setup()
+      treesitter.install {
           "awk",
           "bash",
           "c",
           "cmake",
           "css",
           "devicetree",
-          "diff",
           "dockerfile",
           "html",
           "javascript",
@@ -35,27 +35,40 @@ return {
           "vimdoc",
           "yaml",
           "yang"
-        },
-        highlight = { enable = true },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "<C-space>",
-            node_incremental = "<C-space>",
-            scope_incremental = false,
-            node_decremental = "<bs>",
-          },
-        },
-        textobjects = {
-          move = {
-            enable = true,
-            goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer" },
-            goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer" },
-            goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer" },
-            goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer" },
-          },
-        },
       }
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = {
+            "awk",
+            "bash",
+            "c",
+            "cmake",
+            "css",
+            "devicetree",
+            "dockerfile",
+            "html",
+            "javascript",
+            "json",
+            "lua",
+            "markdown",
+            "python",
+            "query",
+            "regex",
+            "ruby",
+            "rust",
+            "toml",
+            "vim",
+            "vimdoc",
+            "yaml",
+            "yang"
+        },
+        callback = function()
+          -- syntax highlighting, provided by Neovim
+          vim.treesitter.start()
+          vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+          vim.wo.foldmethod = 'expr'
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
     end,
   },
   {
