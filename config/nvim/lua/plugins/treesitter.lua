@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2026-Mar-04 22:19
+-- Time-Stamp: 2026-Mar-06 14:48
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Highlight, edit, and navigate code using a fast incremental parsing library
@@ -50,7 +50,6 @@ return {
             "json",
             "lua",
             "markdown",
-            "python",
             "query",
             "regex",
             "ruby",
@@ -65,7 +64,7 @@ return {
           -- syntax highlighting, provided by Neovim
           vim.treesitter.start()
           vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-          vim.wo.foldmethod = 'expr'
+          -- vim.wo.foldmethod = 'expr'
           vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end,
       })
