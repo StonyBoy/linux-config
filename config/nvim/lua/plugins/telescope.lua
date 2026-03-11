@@ -21,6 +21,12 @@ return {
         ts.grep_string({search = require('config.functions').get_visual_selection() }) end })
       vim.api.nvim_set_keymap('n', '<Leader>fb', '', { noremap = true, silent = true, callback = function()
         ts.current_buffer_fuzzy_find({ case_mode = 'ignore_case', sort = require('telescope.sorters').highlighter_only }) end })
+      vim.api.nvim_set_keymap('n', '<Leader>ft', '', { noremap = true, silent = true, callback = ts.treesitter,
+        desc = 'Telescope treesitter symbols' })
+      vim.api.nvim_set_keymap('n', '<Leader>fs', '', { noremap = true, silent = true, callback = ts.lsp_document_symbols,
+        desc = 'Telescope LSP document symbols' })
+      vim.api.nvim_set_keymap('n', '<Leader>fw', '', { noremap = true, silent = true, callback = ts.lsp_workspace_symbols,
+        desc = 'Telescope LSP workspace symbols' })
     end,
   }
 }

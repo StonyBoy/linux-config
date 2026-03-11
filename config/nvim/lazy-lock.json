@@ -2,6 +2,7 @@
   "LuaSnip": { "branch": "master", "commit": "dae4f5aaa3574bd0c2b9dd20fb9542a02c10471c" },
   "NeoComposer.nvim": { "branch": "main", "commit": "7ecb04d4a1712a6fd7272c1c9482ea878c144588" },
   "bufexplorer": { "branch": "master", "commit": "b96d275811b92e86ee52be3112e1de735ba08fb9" },
+  "clangd_extensions.nvim": { "branch": "main", "commit": "c9f2190064c4b42d5ce58419684251771019961f" },
   "cmp-buffer": { "branch": "main", "commit": "b74fab3656eea9de20a9b8116afa3cfc4ec09657" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "cbc7b02bb99fae35cb42f514762b89b5126651ef" },
   "cmp-nvim-lua": { "branch": "main", "commit": "e3a22cb071eb9d6508a156306b102c45cd2d573d" },

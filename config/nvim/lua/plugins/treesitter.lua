@@ -66,6 +66,9 @@ return {
       if #missing > 0 then
         treesitter.install(missing)
       end
+      vim.api.nvim_create_user_command('Tsast', function()
+        vim.treesitter.inspect_tree()
+      end, { desc = "Show treesitter AST for current buffer" })
       vim.api.nvim_create_autocmd('FileType', {
         pattern = languages,
         callback = function()
