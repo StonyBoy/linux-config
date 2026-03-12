@@ -14,7 +14,6 @@ def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--verbose', '-v', action='count', default=0)
-    parser.add_argument('--service', '-s', nargs='+', help='Service to monitor', default=[])
     parser.add_argument('--process', '-p', nargs='+', help='Process to monitor', default=[])
 
     return parser.parse_args()
@@ -102,14 +101,11 @@ class MemoryScope:
 
 def main():
     args = parse_arguments()
+    user_service = MemoryScope(f'user@{os.getuid()}.service', ScopeType.SERVICE)
     items = []
-    for servname in args.service:
-        items.append(MemoryScope(servname, ScopeType.SERVICE))
     for procname in args.process:
         items.append(MemoryScope(procname, ScopeType.PROCESS))
-    used = sum(item.usedmem for item in items)
-    peak = max(item.peakmem for item in items)
-    text = f'Used Mem: {used:0.1f}GB, Peak Mem: {peak:0.1f}GB'
+    text = f'Used Mem: {user_service.usedmem:0.1f}GB, Peak Mem: {user_service.peakmem:0.1f}GB'
     tooltip = '\n'.join(str(item) for item in items)
     info = {'text': text, 'tooltip': tooltip, 'class': 'ok'}
     print(json.dumps(info))
