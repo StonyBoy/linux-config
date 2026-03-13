@@ -63,6 +63,7 @@ window#waybar.hidden {
 #custom-easytest,
 #custom-mailstatus,
 #custom-memory,
+#custom-power,
 #custom-systemd_unit,
 #custom-multi_clock,
 #tray,
@@ -271,6 +272,11 @@ label:focus {
     background: #fffacd;
     color: #740864;
     min-width: 40px;
+}
+
+#custom-power {
+    background-color: #f5cba7;
+    color: #000000;
 }
 
 #custom-hostinfo {
