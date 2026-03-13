@@ -34,6 +34,7 @@
             "disk#home",
             "disk#sys",
             "custom/memory",
+            "custom/power",
             "temperature",
             "cpu",
         ]
@@ -189,6 +190,12 @@
         "escape": true,
         "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null",
         "on-click": "playerctl -p spotify play-pause"
+    },
+    "custom/power": {
+        "interval": 10,
+        "format": "{} ",
+        "exec": "sudo $HOME/.config/waybar/power_monitor.py",
+        "return-type": "json"
     },
     "custom/hostinfo": {
         "interval": 60,

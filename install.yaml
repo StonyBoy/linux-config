@@ -347,6 +347,7 @@ GUI Configuration:
                         - config/waybar/mediaplayer.py
                         - config/waybar/multi_clock.py
                         - config/waybar/pulse_audio_toggle.sh
+                        - config/waybar/power_monitor.py
                         - config/waybar/style.css
                         - config/waybar/systemd_unit.py
                         - config/waybar/memory_monitor.py

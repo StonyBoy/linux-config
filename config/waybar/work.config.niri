@@ -30,10 +30,10 @@
         "modules": [
             "custom/hostinfo",
             "bluetooth",
-            "custom/power",
             "disk#home",
             "disk#sys",
             "custom/memory",
+            "custom/power",
             "temperature",
             "cpu",
         ]
