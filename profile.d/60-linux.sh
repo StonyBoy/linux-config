@@ -4,33 +4,32 @@
 # Debugging
 # set -x
 
-alias a=alias
-alias h=history
-alias ls="ls --color=tty"
-alias ll='ls -la'
-alias pse='ps -o pid,user,args -eH'
-alias psu='ps -o pid,user,args -u $USER -H'
-alias psc='ps -o pid,user,args -H -C'
-alias pst="ps -AfH f"
-alias pstl="ps -fH f -u `id -u`"
-alias lsofi="lsof -i -n -P"
-alias sudo='sudo '
-alias du_sorted='du -abx | sort -n | gawk '\''{if(match($0, /^([[:digit:]]+)[\t ]+(.+)/, a)){ s = int(a[1]); n = a[2]; u = "B "; if(s >= 1024){s = s/1024; u = "KB";} if(s >= 1024){s = s/1024; u = "MB";} if(s >= 1024){s = s/1024; u = "GB";} if(s >= 1024){s = s/1024; u = "TB";} printf("%8.2f%s %s\n", s, u, n)}}'\'''
-alias fzfp='fzf --preview="bat --style=full --color=always {}" --multi --bind "enter:execute(nvim {})" --bind "space:execute(nvim -O {+})"'
-alias ncal='ncal -M -W 4 -w -y'
-alias devs='ll /dev/ | rg ^l'
-alias cls='clear'
-alias vi=vim
-alias home='env | grep --text HOME'
-alias user='env | grep --text USER'
-alias path='env | grep --text PATH'
 
+alias a=alias
 alias bcp='bcompare'
 alias cf='clang-format -i'
-
-alias lsblk='lsblk --output NAME,FSTYPE,LABEL,SIZE,UUID,PARTUUID,MOUNTPOINT'
+alias cls='clear'
+alias devs='ll /dev/ | rg ^l'
+alias du_sorted='du -abx | sort -n | gawk '\''{if(match($0, /^([[:digit:]]+)[\t ]+(.+)/, a)){ s = int(a[1]); n = a[2]; u = "B "; if(s >= 1024){s = s/1024; u = "KB";} if(s >= 1024){s = s/1024; u = "MB";} if(s >= 1024){s = s/1024; u = "GB";} if(s >= 1024){s = s/1024; u = "TB";} printf("%8.2f%s %s\n", s, u, n)}}'\'''
+alias fzfp='fzf --preview="bat --style=full --color=always {}" --multi --bind "enter:execute(nvim {})" --bind "space:execute(nvim -O {+})"'
 alias gdrive='rclone mount "GoogleDrive": ~/GoogleDrive &'
-alias stopgdrive='pkill  -f "rclone.*GoogleDrive"'
+alias h=history
+alias home='env | grep --text HOME'
+alias ll='ls -la'
+alias llh='ls -lah'
+alias ls="ls --color=tty"
+alias lsblk='lsblk --output NAME,FSTYPE,LABEL,SIZE,UUID,PARTUUID,MOUNTPOINT'
+alias lsofi="lsof -i -n -P"
+alias ncal='ncal -M -W 4 -w -y'
+alias path='env | grep --text PATH'
+alias psc='ps -o pid,user,args -H -C'
+alias pse='ps -o pid,user,args -eH'
+alias pst="ps -AfH f"
+alias pstl="ps -fH f -u `id -u`"
+alias psu='ps -o pid,user,args -u $USER -H'
+alias rl='readlink -f '
+alias user='env | grep --text USER'
+alias vi=vim
 
 pathappend ~/scripts
 pathprepend /usr/local/sbin
