@@ -1,6 +1,6 @@
 -- statusline configuration
 -- Steen Hegelund
--- Time-Stamp: 2025-Mar-27 21:04
+-- Time-Stamp: 2026-Apr-09 13:10
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Show editor configuration: tabs/spaces, tabstop, softtabstop, shiftwidth and textwidth (wrapping)
@@ -48,7 +48,7 @@ local language_server = function()
   local original_bufnr = vim.api.nvim_get_current_buf()
 
   for _, client in pairs(buf_clients) do
-    local attached_buffers_list = vim.lsp.get_buffers_by_client_id(client.id)
+    local attached_buffers_list = vim.lsp.get_client_by_id(client.id).attached_buffers
     for _, bufno in pairs(attached_buffers_list) do
       if bufno == original_bufnr then
         return client.name
