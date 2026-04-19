@@ -1,6 +1,6 @@
 -- Neovim keymap configuration
 -- Steen Hegelund
--- Time-Stamp: 2023-Jan-31 16:19
+-- Time-Stamp: 2026-Apr-19 11:44
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 local Module = {}
@@ -43,6 +43,9 @@ vim.api.nvim_set_keymap('n', '<Leader>ml', '', { noremap = true, silent = true,
     vim.call('nvim_buf_set_lines', 0, -1, -1, 0, funcs.get_modeline_struct())
   end,
 })
+
+-- Show character values (when using EasyAlign)
+vim.keymap.set("n", "<leader>a", "ga", { noremap = true })
 
 -- Toggle C style formatting and indenting between Linux Kernel and Userspace style
 vim.api.nvim_set_keymap('n', '<leader><leader>c', '', { noremap = true, silent = true,
