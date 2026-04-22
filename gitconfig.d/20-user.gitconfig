@@ -1,6 +1,7 @@
 ;  vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 ft=gitconfig:
 [alias]
     b = !git branch -vv
+    bra = !git branch --remotes --format='%(color:red)%(refname:short) %(color:green)%(committerdate:relative) %(color:blue)%(authorname)%(color:reset)' --sort=-committerdate --color=always | grep -v soak
     ca = commit --amend
     cas = commit --amend --signoff
     cp = cherry-pick
