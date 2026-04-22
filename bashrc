@@ -29,7 +29,6 @@ if [ $HAVE_TTY -eq 1 ]; then
 
   for SHFILE in ${HOME}/.profile.d/*.sh; do
       if [ -f ${SHFILE} ]; then
-          echo "Running: ${SHFILE}"
           . ${SHFILE}
       fi
   done
