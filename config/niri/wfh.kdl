@@ -313,7 +313,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id="[Ff]irefox"
+    match app-id="^[Ff]irefox$"
 
     open-on-workspace "Internet"
     open-maximized true
@@ -334,7 +334,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id="$[Ee]volution$"
+    match app-id="^org.gnome.Evolution$"
 
     open-on-workspace "Email"
     open-maximized true
