@@ -101,7 +101,7 @@ def scale_to_display(newfullpath, fullpath, displaysize, crop):
 
 
 def select_random_image(filepath):
-    images = [p for p in os.listdir(filepath) if p.endswith('.jpg')]
+    images = [p for p in os.listdir(filepath) if p.endswith('.jpg') or p.endswith('.png')]
     choice = random.randrange(len(images))
     return os.path.join(filepath, images[choice])
 
