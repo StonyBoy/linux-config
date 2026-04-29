@@ -275,27 +275,35 @@ workspace "Internet"
 workspace "Files"
 workspace "Email"
 
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
     // This app-id regular expression will work for both:
     // - host Firefox (app-id is "firefox")
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    match app-id="^firefox$" title="^Picture-in-Picture$"
     open-floating true
 }
 
 window-rule {
-    match at-startup=true app-id=r#"[Aa]lacritty"#
+    match at-startup=true app-id="^[Aa]lacritty$"
 
     open-on-workspace "Editor"
     default-column-width { proportion 0.5; }
-
-    // Corners
-    geometry-corner-radius 10
 }
 
 window-rule {
-    match app-id=r#"notion-app"#
+    match app-id="^[Aa]lacritty$"
+
+    default-column-width { proportion 1.0; }
+}
+
+window-rule {
+    match app-id="^notion-app$"
 
     open-on-workspace "Notion"
     default-column-width { proportion 0.5; }
@@ -309,51 +317,56 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"[Tt]hunar"#
+    match app-id="^[Tt]hunar$"
 
     open-on-workspace "Files"
     open-maximized true
 }
 
 window-rule {
-    match app-id=r#"[Nn]autilus"#
+    match app-id="^[Nn]autilus$"
 
     open-on-workspace "Files"
     open-maximized true
 }
 
 window-rule {
-    match app-id=r#"[Ee]volution"#
+    match app-id="$[Ee]volution$"
 
     open-on-workspace "Email"
     open-maximized true
 }
 
 window-rule {
-    match app-id=r#"[Tt]eams-for-linux"#
+    match app-id="^[Tt]eams-for-linux$"
 
     open-on-workspace "Teams"
     open-maximized true
 }
 
 window-rule {
-    match title=r#"[Ss]potify.*"#
+    match title="^[Ss]potify$"
     open-on-workspace "Music"
 }
 
 window-rule {
-    match app-id=r#"[Aa]udacity"#
+    match app-id="^[Aa]udacity$"
     open-on-workspace "Music"
 }
 
 window-rule {
-    match app-id=r#"[Pp]avucontrol"#
+    match app-id="^[Pp]avucontrol$"
     open-on-workspace "Music"
 }
 
 window-rule {
-    match app-id=r#"yad"#
+    match app-id="^yad$"
     default-floating-position x=32 y=32 relative-to="top-right"
+}
+
+window-rule {
+    match app-id="^com.cisco.secureclient.gui$"
+    open-on-workspace "VPN"
 }
 
 // Indicate screencasted windows with red colors.
@@ -386,9 +399,6 @@ layer-rule {
     shadow {
         on
     }
-
-    // Fuzzel defaults to 10 px rounded corners.
-    geometry-corner-radius 10
 }
 
 // Niri support services
