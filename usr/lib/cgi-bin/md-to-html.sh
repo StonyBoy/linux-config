@@ -1,0 +1,20 @@
+#!/bin/bash
+echo "Content-Type: text/html"
+echo ""
+# lighttpd sets SCRIPT_FILENAME to the actual file path
+FILE="${PATH_TRANSLATED:-$SCRIPT_FILENAME}"
+echo "<!DOCTYPE html>"
+echo "<html><head>"
+echo "<meta charset=\"utf-8\">"
+echo "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+TITLE=$(basename "$FILE" .md)
+echo "<title>$TITLE</title>"
+echo "<style>"
+echo "body { font-family: sans-serif; max-width: 75em; margin: 2em auto; padding: 0 1em; line-height: 1.6; }"
+echo "pre { background: #f4f4f4; padding: 1em; overflow-x: auto; }"
+echo "code { background: #f4f4f4; padding: 0.2em 0.4em; }"
+echo "table { border-collapse: collapse; } th, td { border: 1px solid #ddd; padding: 0.5em; }"
+echo "</style>"
+echo "</head><body>"
+pandoc "$FILE"
+echo "</body></html>"
