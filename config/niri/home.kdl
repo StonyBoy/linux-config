@@ -274,6 +274,7 @@ workspace "Music"
 workspace "Internet"
 workspace "Files"
 workspace "Email"
+workspace "Games"
 
 window-rule {
     geometry-corner-radius 12
@@ -290,16 +291,10 @@ window-rule {
 }
 
 window-rule {
-    match at-startup=true app-id="^[Aa]lacritty$"
+    match at-startup=true app-id="^Alacritty$"
 
     open-on-workspace "Editor"
     default-column-width { proportion 0.5; }
-}
-
-window-rule {
-    match app-id="^[Aa]lacritty$"
-
-    default-column-width { proportion 1.0; }
 }
 
 window-rule {
@@ -345,7 +340,7 @@ window-rule {
 }
 
 window-rule {
-    match title="^[Ss]potify$"
+    match app-id="^Spotify$"
     open-on-workspace "Music"
 }
 
@@ -357,6 +352,11 @@ window-rule {
 window-rule {
     match app-id="^[Pp]avucontrol$"
     open-on-workspace "Music"
+}
+
+window-rule {
+    match app-id="^steam$"
+    open-on-workspace "Games"
 }
 
 window-rule {
