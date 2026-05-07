@@ -279,6 +279,10 @@ workspace "Games"
 window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
+    opacity 0.85
+    background-effect {
+      blur true
+    }
 }
 
 // Open the Firefox picture-in-picture player as floating by default.
@@ -291,50 +295,55 @@ window-rule {
 }
 
 window-rule {
-    match at-startup=true app-id="^Alacritty$"
-
+    match at-startup=true app-id="^[Aa]lacritty$"
     open-on-workspace "Editor"
     default-column-width { proportion 0.5; }
 }
 
 window-rule {
-    match app-id="^notion-app$"
+    match app-id="^[Aa]lacritty$"
+    default-column-width { proportion 1.0; }
+}
 
+window-rule {
+    match app-id="^notion-app$"
     open-on-workspace "Notion"
     default-column-width { proportion 0.5; }
 }
 
 window-rule {
     match app-id="^[Ff]irefox$"
-
     open-on-workspace "Internet"
     open-maximized true
 }
 
 window-rule {
     match app-id="^[Tt]hunar$"
-
     open-on-workspace "Files"
     open-maximized true
 }
 
 window-rule {
     match app-id="^[Nn]autilus$"
-
     open-on-workspace "Files"
     open-maximized true
 }
 
 window-rule {
-    match app-id="^org.gnome.Evolution$"
-
+    match app-id="[Ee]volution$"
     open-on-workspace "Email"
     open-maximized true
+    opacity 0.95
+}
+
+window-rule {
+    match app-id="[Ee]volution$" title="^(Re:|Fwd:|Compose Message)"
+    open-maximized false
+    default-column-width { proportion 0.5; }
 }
 
 window-rule {
     match app-id="^[Tt]eams-for-linux$"
-
     open-on-workspace "Teams"
     open-maximized true
 }
@@ -342,6 +351,7 @@ window-rule {
 window-rule {
     match app-id="^Spotify$"
     open-on-workspace "Music"
+    opacity 0.95
 }
 
 window-rule {
@@ -357,6 +367,7 @@ window-rule {
 window-rule {
     match app-id="^steam$"
     open-on-workspace "Games"
+    opacity 1.0
 }
 
 window-rule {
@@ -395,7 +406,6 @@ window-rule {
 // Add a shadow for fuzzel.
 layer-rule {
     match namespace="^launcher$"
-
     shadow {
         on
     }
