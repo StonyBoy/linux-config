@@ -3,8 +3,8 @@ Description=tmux main service
 
 [Service]
 Type=forking
-ExecStart=/usr/local/bin/tmux new-session -s main -d
-ExecStop=/usr/local/bin/tmux kill-session -t main
+ExecStart=%h/.nix-profile/bin/tmux new-session -s main -d
+ExecStop=%h/.nix-profile/bin/tmux kill-session -t main
 Slice=tmux.slice
 
 [Install]
