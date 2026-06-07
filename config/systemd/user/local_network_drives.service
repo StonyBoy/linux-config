@@ -6,5 +6,5 @@ After=network.target
 
 [Service]
 Type=oneshot
-ExecStart=%h/src/proj/linux-config/scripts/network-shares.py ab mus pho wp
+ExecStart=%h/src/proj/linux-config/scripts/network-shares.py ab mus net pho usr wp
 TimeoutSec=120
