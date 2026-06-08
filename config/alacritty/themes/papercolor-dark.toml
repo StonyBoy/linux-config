@@ -1,0 +1,37 @@
+# Steen Hegelund
+# vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=nix :
+
+# PaperColor (dark). Companion to papercolor-light for a dark terminal.
+# Palette from NLKNguyen/papercolor-theme.
+# Imported by alacritty.toml via [general].import.
+
+[bell]
+color = "#ffaf00"
+
+[colors.primary]
+background = "#1c1c1c"
+foreground = "#808080"
+
+[colors.cursor]
+cursor = "#808080"
+text = "#1c1c1c"
+
+[colors.normal]
+black = "#1c1c1c"
+red = "#af005f"
+green = "#5faf00"
+yellow = "#d7af5f"
+blue = "#5fafd7"
+magenta = "#808080"
+cyan = "#d7875f"
+white = "#d0d0d0"
+
+[colors.bright]
+black = "#585858"
+red = "#5faf5f"
+green = "#afd700"
+yellow = "#af87d7"
+blue = "#ffaf00"
+magenta = "#ffaf00"
+cyan = "#00afaf"
+white = "#5f8787"

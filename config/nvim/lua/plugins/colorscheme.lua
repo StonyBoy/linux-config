@@ -13,10 +13,41 @@ end
 
 return {
   {
-    'lifepillar/vim-solarized8',
+    'NLKNguyen/papercolor-theme', -- Higher contrast than Solarized: dark text on near-white (light) background.
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     enabled = true,
+    config = function()
+      set_background()
+      vim.cmd([[colorscheme PaperColor]])
+      --
+      -- Define highlight groups for focused and unfocused gutters (PaperColor light)
+      vim.cmd([[
+        highlight FocusedGutter guifg=#444444 guibg=#d0d0d0
+        highlight UnfocusedGutter guifg=#bcbcbc guibg=#eeeeee
+      ]])
+
+      -- Add autocommands to handle the window events
+      vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter" }, {
+        pattern = "*",
+        callback = function()
+          vim.opt_local.winhighlight = "LineNr:FocusedGutter,SignColumn:FocusedGutter"
+        end,
+      })
+
+      vim.api.nvim_create_autocmd("WinLeave", {
+        pattern = "*",
+        callback = function()
+          vim.opt_local.winhighlight = "LineNr:UnfocusedGutter,SignColumn:UnfocusedGutter"
+        end,
+      })
+    end,
+  },
+  {
+    'lifepillar/vim-solarized8',
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+    enabled = false,
     config = function()
       set_background()
       vim.cmd([[colorscheme solarized8_high]])

@@ -62,6 +62,8 @@ local colorscheme = function()
   local cscheme = vim.g.colors_name
   if vim.startswith(cscheme, 'solarized') then
     cscheme = 'solarized_' .. vim.go.background
+  elseif cscheme == 'PaperColor' then
+    cscheme = 'papercolor_' .. vim.go.background
   end
   return cscheme
 end

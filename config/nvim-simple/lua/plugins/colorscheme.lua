@@ -13,10 +13,26 @@ end
 
 return {
   {
-    'lifepillar/vim-solarized8',
+    'NLKNguyen/papercolor-theme', -- Higher contrast than Solarized: dark text on near-white (light) background.
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     enabled = true,
+    config = function()
+      set_background()
+      vim.cmd([[colorscheme PaperColor]])
+      -- Dim the inactive windows
+      if vim.go.background == 'dark' then
+        vim.cmd('highlight NormalNC guifg=#808080 guibg=#262626')
+      else
+        vim.cmd('highlight NormalNC guifg=#444444 guibg=#e4e4e4')
+      end
+    end,
+  },
+  {
+    'lifepillar/vim-solarized8',
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+    enabled = false,
     config = function()
       set_background()
       vim.cmd([[colorscheme solarized8_high]])

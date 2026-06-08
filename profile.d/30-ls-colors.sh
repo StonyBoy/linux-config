@@ -64,7 +64,7 @@ export LS_COLORS="no=00"                       # no effects as default
 export LS_COLORS=$LS_COLORS:"fi=00"            # no efects on files as default
 if [ -z $TERM_DARK_BACKGROUND ]
 then
-    export LS_COLORS=$LS_COLORS:"di=00;30"         # directory is black
+    export LS_COLORS=$LS_COLORS:"di=01;34"         # directory bold blue (color0/black == background in PaperColor light, so 30 was invisible)
 else
     export LS_COLORS=$LS_COLORS:"di=01;33"         # directory is bold and orange
 fi
@@ -179,14 +179,14 @@ export LS_COLORS=$LS_COLORS:"*.wav=00;35"
 if [ -z $TERM_DARK_BACKGROUND ]
 then
 #text documents is gray
-export LS_COLORS=$LS_COLORS:"*.pdf=00;90"
-export LS_COLORS=$LS_COLORS:"*.ps=00;90"
-export LS_COLORS=$LS_COLORS:"*.txt=00;90"
-export LS_COLORS=$LS_COLORS:"*.patch=00;90"
-export LS_COLORS=$LS_COLORS:"*.diff=00;90"
-export LS_COLORS=$LS_COLORS:"*.log=00;90"
-export LS_COLORS=$LS_COLORS:"*.tex=00;90"
-export LS_COLORS=$LS_COLORS:"*.doc=00;90"
+export LS_COLORS=$LS_COLORS:"*.pdf=00;35"
+export LS_COLORS=$LS_COLORS:"*.ps=00;35"
+export LS_COLORS=$LS_COLORS:"*.txt=00;35"
+export LS_COLORS=$LS_COLORS:"*.patch=00;35"
+export LS_COLORS=$LS_COLORS:"*.diff=00;35"
+export LS_COLORS=$LS_COLORS:"*.log=00;35"
+export LS_COLORS=$LS_COLORS:"*.tex=00;35"
+export LS_COLORS=$LS_COLORS:"*.doc=00;35"
 
 else
 #text documents is gray

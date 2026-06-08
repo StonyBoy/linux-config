@@ -114,6 +114,10 @@ Console Configuration:
 
     Console:
         Alacritty:
+            default:
+                dest: config/alacritty/themes
+                src:
+                    - config/alacritty/themes
             Linux:
                 dest: config/alacritty/alacritty.toml
                 src:
