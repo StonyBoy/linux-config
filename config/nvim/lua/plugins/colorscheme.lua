@@ -27,6 +27,16 @@ return {
         highlight UnfocusedGutter guifg=#bcbcbc guibg=#eeeeee
       ]])
 
+      -- Diff colors matching git-delta's light-theme defaults: plus #d0ffd0
+      -- (added/changed lines), plus-emph #a0efa0 (changed text span), minus
+      -- #ffe0e0 (deleted lines).
+      vim.cmd([[
+        highlight DiffAdd    guibg=#d0ffd0 ctermbg=194
+        highlight DiffChange guibg=#d0ffd0 ctermbg=194
+        highlight DiffText   guibg=#a0efa0 ctermbg=157
+        highlight DiffDelete guibg=#ffe0e0 ctermbg=224
+      ]])
+
       -- Add autocommands to handle the window events
       vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter" }, {
         pattern = "*",

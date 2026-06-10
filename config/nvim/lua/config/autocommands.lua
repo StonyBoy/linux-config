@@ -61,4 +61,11 @@ vim.api.nvim_create_autocmd({'VimResized'}, {
   group = grp,
   command = 'wincmd ='
 })
+-- Turn off 'list' in diff windows so DiffAdd/DiffChange fill the whole line
+-- (listchars paint Whitespace/NonText over the diff background otherwise)
+vim.api.nvim_create_autocmd('OptionSet', {
+  group = grp,
+  pattern = 'diff',
+  command = 'if v:option_new == 1 | setlocal nolist | endif'
+})
 
