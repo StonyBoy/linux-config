@@ -36,10 +36,22 @@ return {
       treesitter.setup()
       -- Add bundled queries to runtimepath so highlights.scm etc. are found
       vim.opt.rtp:append(plugin.dir .. "/runtime")
+      -- Languages Neovim bundles. Neovim owns the parser and queries for these.
+      -- Never install them via nvim-treesitter: its older parser would shadow
+      -- Neovim's bundled one and break the bundled queries.
+      local bundled = {
+          "c",
+          "lua",
+          "markdown",
+          "markdown_inline",
+          "query",
+          "vim",
+          "vimdoc",
+      }
+      -- Languages nvim-treesitter installs and keeps updated.
       local languages = {
           "awk",
           "bash",
-          "c",
           "cmake",
           "css",
           "devicetree",
@@ -47,16 +59,11 @@ return {
           "html",
           "javascript",
           "json",
-          "lua",
-          "markdown",
           "python",
-          "query",
           "regex",
           "ruby",
           "rust",
           "toml",
-          "vim",
-          "vimdoc",
           "yaml",
           "yang",
       }
@@ -69,14 +76,18 @@ return {
       vim.api.nvim_create_user_command('Tsast', function()
         vim.treesitter.inspect_tree()
       end, { desc = "Show treesitter AST for current buffer" })
+      -- Start highlight and folding for both sets. Only managed languages get
+      -- the nvim-treesitter indent; bundled languages keep Neovim's indenting.
+      local highlight = vim.list_extend(vim.list_extend({}, languages), bundled)
       vim.api.nvim_create_autocmd('FileType', {
-        pattern = languages,
-        callback = function()
-          local ok, err = pcall(vim.treesitter.start)
+        pattern = highlight,
+        callback = function(ev)
+          local ok = pcall(vim.treesitter.start)
           if ok then
             vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-            -- vim.wo.foldmethod = 'expr'
-            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            if vim.tbl_contains(languages, ev.match) then
+              vim.bo.indentexpr = "nvim_treesitter#indent()"
+            end
           end
         end,
       })
@@ -84,6 +95,5 @@ return {
   },
   {
     'nvim-treesitter/nvim-treesitter-textobjects', -- Additional textobjects for treesitter
-    -- commit = "73e44f43c70289c70195b5e7bc6a077ceffddda4", -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects/issues/513
   }
 }
