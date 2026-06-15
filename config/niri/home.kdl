@@ -357,7 +357,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id="^Spotify$"
+    match app-id="^[Ss]potify$"
     open-on-workspace "Music"
     opacity 0.95
 }
@@ -373,7 +373,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id="^steam$"
+    match app-id="^[Ss]team$"
     open-on-workspace "Games"
     opacity 1.0
 }
