@@ -296,6 +296,10 @@ workspace "Email" {
     open-on-output "HDMI-A-1"
 }
 
+workspace "Windows" {
+    open-on-output "HDMI-A-1"
+}
+
 workspace "Teams" {
     open-on-output "DP-1"
 }
@@ -384,7 +388,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id="^Spotify$"
+    match app-id="^[Ss]potify$"
     open-on-workspace "Music"
     opacity 0.95
 }
@@ -400,8 +404,18 @@ window-rule {
 }
 
 window-rule {
-    match app-id="^steam$"
+    match app-id="^[Ss]team$"
     open-on-workspace "Games"
+    opacity 1.0
+}
+
+window-rule {
+    match app-id="^xfreerdp$"
+    open-on-workspace "Windows"
+    open-maximized-to-edges true
+    open-floating false
+    // default-floating-position x=64 y=64 relative-to="top-left"
+    // open-floating true
     opacity 1.0
 }
 

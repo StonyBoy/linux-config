@@ -379,6 +379,16 @@ window-rule {
 }
 
 window-rule {
+    match app-id="^xfreerdp$"
+    open-on-workspace "Windows"
+    open-maximized-to-edges true
+    open-floating false
+    // default-floating-position x=64 y=64 relative-to="top-left"
+    // open-floating true
+    opacity 1.0
+}
+
+window-rule {
     match app-id="^yad$"
     default-floating-position x=32 y=32 relative-to="top-right"
 }

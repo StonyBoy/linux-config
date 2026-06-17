@@ -274,6 +274,7 @@ workspace "Test"
 workspace "Internet"
 workspace "Files"
 workspace "Email"
+workspace "Windows"
 workspace "Teams"
 workspace "VPN"
 workspace "Music"
@@ -377,6 +378,16 @@ window-rule {
 window-rule {
     match app-id="^steam$"
     open-on-workspace "Games"
+    opacity 1.0
+}
+
+window-rule {
+    match app-id="^xfreerdp$"
+    open-on-workspace "Windows"
+    open-maximized-to-edges true
+    open-floating false
+    // default-floating-position x=64 y=64 relative-to="top-left"
+    // open-floating true
     opacity 1.0
 }
 

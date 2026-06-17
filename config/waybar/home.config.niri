@@ -8,6 +8,7 @@
     "niri/workspaces": {
         "format": "{index}: {name} {icon}",
         "format-icons": {
+            // Use https://www.nerdfonts.com/cheat-sheet for the icons
             "Editor": "",
             "Music": "",
             "Internet": "",
