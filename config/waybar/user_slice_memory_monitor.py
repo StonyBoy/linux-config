@@ -15,6 +15,8 @@ def parse_arguments() -> argparse.Namespace:
 
     parser.add_argument('--verbose', '-v', action='count', default=0)
     parser.add_argument('--process', '-p', nargs='+', help='Process to monitor', default=[])
+    parser.add_argument('--slice', '-s', nargs='+', help='Slice to monitor', default=[])
+    parser.add_argument('--service', '-S', nargs='+', help='Service unit to monitor', default=[])
 
     return parser.parse_args()
 
@@ -23,6 +25,7 @@ class ScopeType(enum.IntEnum):
     UNDEF = 0
     SERVICE = 1
     PROCESS = 2
+    SLICE = 3
 
 
 class MemoryScope:
@@ -38,6 +41,10 @@ class MemoryScope:
                 self.usedmem, self.peakmem = self.get_cgroup_memory(cgroup_path)
                 self.name = name.removesuffix('.service')
 
+            case ScopeType.SLICE:
+                cgroup_path = self.get_cgroup_path_by_name(name)
+                self.usedmem, self.peakmem = self.get_cgroup_memory(cgroup_path)
+
             case ScopeType.PROCESS:
                 pid = self.get_pid_by_name(name)
                 if pid is None:
@@ -48,6 +55,8 @@ class MemoryScope:
                 self.usedmem, self.peakmem = self.get_cgroup_memory(cgroup_path)
 
     def get_memory_value(self, cgroup_path, filename):
+        if cgroup_path is None:
+            return 0
         mem_file = os.path.join(cgroup_path, filename)
         if self.verbose:
             print(mem_file)
@@ -103,6 +112,10 @@ def main():
     args = parse_arguments()
     user_service = MemoryScope(f'user@{os.getuid()}.service', ScopeType.SERVICE)
     items = []
+    for servicename in args.service:
+        items.append(MemoryScope(servicename, ScopeType.SERVICE))
+    for slicename in args.slice:
+        items.append(MemoryScope(slicename, ScopeType.SLICE))
     for procname in args.process:
         items.append(MemoryScope(procname, ScopeType.PROCESS))
     text = f'Used Mem: {user_service.usedmem:0.1f}GB, Peak Mem: {user_service.peakmem:0.1f}GB'

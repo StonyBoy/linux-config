@@ -5,7 +5,6 @@ Description=tmux main service
 Type=forking
 ExecStart=%h/.nix-profile/bin/tmux new-session -s main -d
 ExecStop=%h/.nix-profile/bin/tmux kill-session -t main
-Slice=tmux.slice
 
 [Install]
 WantedBy=multi-user.target

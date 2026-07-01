@@ -385,11 +385,10 @@ GUI Configuration:
                 - config/systemd/user/niri_lockscreen.service
                 - config/systemd/user/niribg.service
                 - config/systemd/user/niriidle.service
-                - config/systemd/user/browser.slice
-                - config/systemd/user/mail.slice
-                - config/systemd/user/spotify.slice
-                - config/systemd/user/teams.slice
-                - config/systemd/user/tmux.slice
+        Memory Limits:
+            src:
+                - config/systemd/user/-.slice.d/override.conf
+                - config/systemd/user/isolate.slice
         Tmux:
             Host:
                 src:

@@ -218,7 +218,7 @@
     "custom/memory": {
         "interval": 30,
         "format": "{} ",
-        "exec": "$HOME/.config/waybar/user_slice_memory_monitor.py -p firefox spotify evolution",
+        "exec": "$HOME/.config/waybar/user_slice_memory_monitor.py -s isolate.slice -S firefox.service evolution.service spotify.service tmux.service",
         "return-type": "json"
     },
     "custom/systemd_unit": {

@@ -13,3 +13,5 @@ ID
 .solargraph.yml
 Session.vim
 .ctags.d/
+
+**/.claude/settings.local.json

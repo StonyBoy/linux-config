@@ -440,14 +440,14 @@ spawn-sh-at-startup "systemctl --user start local_network_drives.service"
 // Mount GoogleDrive
 spawn-sh-at-startup "systemctl --user start google_drive.service"
 
-// Get tmux started with a detached "main" session in its own slice
+// Get tmux started with a detached "main" session
 spawn-sh-at-startup "systemctl --user restart tmux.service"
 
 spawn-sh-at-startup "alacritty"
-spawn-sh-at-startup "systemd-run --user --slice=browser.slice firefox"
+spawn-sh-at-startup "systemd-run --user --unit=firefox firefox"
 spawn-sh-at-startup "Thunar"
-spawn-sh-at-startup "systemd-run --user --slice=mail.slice evolution"
-spawn-sh-at-startup "systemd-run --user --slice=spotify.slice spotify --enable-features=UseOzonePlatform --ozone-platform=wayland"
+spawn-sh-at-startup "systemd-run --user --unit=evolution evolution"
+spawn-sh-at-startup "systemd-run --user --unit=spotify spotify --enable-features=UseOzonePlatform --ozone-platform=wayland"
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name

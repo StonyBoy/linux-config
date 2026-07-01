@@ -1,0 +1,5 @@
+# On-demand isolation slice; run risky apps with: systemd-run --user --slice=isolate.slice CMD
+# Per-run override: systemd-run --user --slice=isolate.slice -p MemoryMax=6G CMD
+[Slice]
+MemoryHigh=8G
+MemoryMax=10G
