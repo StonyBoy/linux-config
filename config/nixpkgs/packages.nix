@@ -19,6 +19,9 @@ let
         ripgrep
         fzf
         git
+        git-lfs       # provides the 'git lfs' subcommand via PATH
+        delta         # git-delta: syntax-highlighting pager for git diffs
+        bat           # cat clone with syntax highlighting
         gh
         tmux
         direnv
