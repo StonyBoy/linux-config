@@ -15,6 +15,7 @@
     l = log --decorate
     lf = log --format='Fixes: %h ("%s")'
     basedon = "!f() { git log -1 --abbrev=12 --format=\"Based on: $1 @ %h (\\\"%s\\\")\" \"$1\" ; }; f"
+    using = "!use() { git log -1 --abbrev=12 --format=\"Using: $(git remote get-url origin) @ %h (\\\"%s\\\")\" HEAD ; }; use"
     ls = log --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s \" --decorate
     lrv = log --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s \" --decorate --grep=\"Reviewed-by: Steen Hegelund\"
     lso = log --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s \" --decorate --grep=\"Signed-off-by: Steen Hegelund\"
