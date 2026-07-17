@@ -25,6 +25,7 @@ Console Configuration:
                     - profile.d/30-ls-colors.sh
                     - profile.d/20-prompt-color.sh
                     - profile.d/60-tmux.sh
+                    - profile.d/60-claude.sh
 
             Dark background:
                 src:
@@ -84,6 +85,7 @@ Console Configuration:
                 - scripts/python.init.py
                 - scripts/update_wallpaper.sh
                 - scripts/tmux_sessions.py
+                - scripts/claude_sessions.py
                 - scripts/remote_sway_cmds.py
                 - scripts/git_branches.py
                 - scripts/config_tunnel.sh
