@@ -44,18 +44,12 @@ end
 
 -- Show which language server is attatched to the active buffer
 local language_server = function()
-  local buf_clients = vim.lsp.get_clients()
-  local original_bufnr = vim.api.nvim_get_current_buf()
-
-  for _, client in pairs(buf_clients) do
-    local attached_buffers_list = vim.lsp.get_client_by_id(client.id).attached_buffers
-    for _, bufno in pairs(attached_buffers_list) do
-      if bufno == original_bufnr then
-        return client.name
-      end
-    end
+  local clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+  local names = {}
+  for _, client in pairs(clients) do
+    table.insert(names, client.name)
   end
-  return ''
+  return table.concat(names, ',')
 end
 
 local colorscheme = function()
