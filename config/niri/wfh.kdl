@@ -360,7 +360,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id="^Spotify$"
+    match app-id="^[Ss]potify$"
     open-on-workspace "Music"
     opacity 0.95
 }
@@ -376,7 +376,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id="^steam$"
+    match app-id="^[Ss]team$"
     open-on-workspace "Games"
     opacity 1.0
 }
@@ -470,12 +470,11 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+Return hotkey-overlay-title="Console" { spawn "alacritty"; }
-    Mod+Space hotkey-overlay-title="Menu" { spawn-sh "fuzzel -l 20 -p 'Run>'"; }
+    Mod+Space hotkey-overlay-title="Menu" { spawn-sh "fuzzel -l 20 -w 50 -p 'Run>'"; }
     Mod+Alt+L hotkey-overlay-title="Lock Screen" { spawn "swaylock"; }
 
-    // Mod+Y hotkey-overlay-title="TMux Sessions" { spawn-sh "~/scripts/tmux_sessions.py | ~/scripts/tmux_sessions.py $(fuzzel -d -l 20 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s b58900ff)"; }
-    Mod+Y hotkey-overlay-title="TMux Sessions" { spawn-sh "~/scripts/tmux_sessions.py -g den-dl-m31857 | ~/scripts/tmux_sessions.py $(fuzzel -d -l 20 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s 268bd2ff)"; }
-    Mod+Shift+E hotkey-overlay-title="System Menu" { spawn-sh "~/scripts/system_commands.py  | ~/scripts/system_commands.py $(fuzzel -d -l 20 -f 'Inconsolata:style=Regular:size=12' -p 'Select>' -t 000080ff -S fdf6e3ff -s ff6347ff -b f5deb3ff)"; }
+    Mod+Y hotkey-overlay-title="TMux Sessions" { spawn-sh "~/scripts/tmux_sessions.py -g den-dl-m31857.microsemi.net | ~/scripts/tmux_sessions.py $(fuzzel -d -l 20 -w 50 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s 268bd2ff)"; }
+    Mod+Shift+E hotkey-overlay-title="System Menu" { spawn-sh "~/scripts/system_commands.py  | ~/scripts/system_commands.py $(fuzzel -d -l 20 -w 80 -f 'Inconsolata:style=Regular:size=12' -p 'Select>' -t 000080ff -S fdf6e3ff -s ff6347ff -b f5deb3ff)"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
@@ -718,8 +717,7 @@ binds {
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
 
-    // Workspace specific shortcuts
-    Mod+Shift+D { focus-workspace "Editor"; }
-    Mod+Shift+T { focus-workspace "Teams"; }
-    Mod+Shift+M { focus-workspace "Music"; }
+    // Turn the right (extra) monitor on/off
+    Mod+M { spawn-sh "niri msg output DP-1 off"; }
+    Mod+Shift+M { spawn-sh "niri msg output DP-1 on"; }
 }

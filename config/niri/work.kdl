@@ -480,7 +480,6 @@ spawn-sh-at-startup "Thunar"
 spawn-sh-at-startup "systemd-run --user --unit=evolution evolution"
 // spawn-sh-at-startup "systemd-run --user --unit=spotify spotify --enable-features=UseOzonePlatform --ozone-platform=wayland"
 spawn-sh-at-startup "systemd-run --user --unit=teams --slice=isolate.slice teams-for-linux"
-// spawn-sh-at-startup "/opt/cisco/secureclient/bin/vpnui"
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -498,12 +497,11 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+Return hotkey-overlay-title="Console" { spawn "alacritty"; }
-    Mod+Space hotkey-overlay-title="Menu" { spawn-sh "fuzzel -l 20 -p 'Run>'"; }
+    Mod+Space hotkey-overlay-title="Menu" { spawn-sh "fuzzel -l 20 -w 50 -p 'Run>'"; }
     Mod+Alt+L hotkey-overlay-title="Lock Screen" { spawn "swaylock"; }
 
-    Mod+Y hotkey-overlay-title="TMux Sessions" { spawn-sh "~/scripts/tmux_sessions.py | ~/scripts/tmux_sessions.py $(fuzzel -d -l 20 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s b58900ff)"; }
-    Mod+T hotkey-overlay-title="Remote TMux Sessions" { spawn-sh "~/scripts/tmux_sessions.py -g den-dl-m31857 | ~/scripts/tmux_sessions.py $(fuzzel -d -l 20 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s 268bd2ff)"; }
-    Mod+Shift+E hotkey-overlay-title="System Menu" { spawn-sh "~/scripts/system_commands.py  | ~/scripts/system_commands.py $(fuzzel -d -l 20 -f 'Inconsolata:style=Regular:size=12' -p 'Select>' -t 000080ff -S fdf6e3ff -s ff6347ff -b f5deb3ff)"; }
+    Mod+Y hotkey-overlay-title="TMux Sessions" { spawn-sh "~/scripts/tmux_sessions.py | ~/scripts/tmux_sessions.py $(fuzzel -d -l 20 -w 50 -f 'Inconsolata:style=Regular:size=12' -p 'TMux Sessions>' -t 073642ff -S fdf6e3ff -s b58900ff)"; }
+    Mod+Shift+E hotkey-overlay-title="System Menu" { spawn-sh "~/scripts/system_commands.py  | ~/scripts/system_commands.py $(fuzzel -d -l 20 -w 80 -f 'Inconsolata:style=Regular:size=12' -p 'Select>' -t 000080ff -S fdf6e3ff -s ff6347ff -b f5deb3ff)"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
