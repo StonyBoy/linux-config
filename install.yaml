@@ -4,6 +4,7 @@ Console Configuration:
     Nix:
         src:
             - config/nixpkgs/packages.nix
+            - profile.d/60-nix.sh
 
     Shells:
         Fish Shell:
