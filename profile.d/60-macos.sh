@@ -21,7 +21,8 @@ alias bcp='bcompare'
 alias cf='clang-format -i'
 
 pathappend ~/scripts
-pathprepend /usr/local/sbin
+pathprepend /opt/local/sbin
+pathprepend /opt/local/bin
 
 export PAGER='less -s'
 export PYTHONSTARTUP=~/scripts/python.init.py
@@ -30,11 +31,6 @@ export PYTHONSTARTUP=~/scripts/python.init.py
 eval "$(fzf --bash)"
 
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
-
-function brew_update()
-{
-    brew upgrade $(brew outdated)
-}
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
