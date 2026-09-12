@@ -31,6 +31,3 @@ echo ""
 
 [ -d $HOME/.rvm/bin ] && pathappend ~/.rvm/bin
 [ -d $HOME/.rvm/gems/ruby-2.6.3/bin ] && pathappend ~/.rvm/gems/ruby-2.6.3/bin
-
-[ -d ~/.cargo/bin ] && source "$HOME/.cargo/env"
-

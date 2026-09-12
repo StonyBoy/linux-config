@@ -32,4 +32,3 @@ pathprepend() {
 
 [ -d $HOME/.rvm/bin ] && pathappend ~/.rvm/bin
 [ -s "$HOME/.rvm/scripts/rvm" ] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-[ -d ~/.cargo/bin ] && source "$HOME/.cargo/env"
