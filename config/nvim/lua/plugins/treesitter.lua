@@ -1,6 +1,6 @@
 -- Neovim configuration
 -- Steen Hegelund
--- Time-Stamp: 2026-Mar-11 14:48
+-- Time-Stamp: 2026-Sep-12 19:08
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Highlight, edit, and navigate code using a fast incremental parsing library
@@ -94,6 +94,58 @@ return {
     end,
   },
   {
-    'nvim-treesitter/nvim-treesitter-textobjects', -- Additional textobjects for treesitter
-  }
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
+
+    init = function()
+      vim.g.no_plugin_maps = true
+    end,
+
+    config = function()
+      require("nvim-treesitter-textobjects").setup({
+        select = {
+          lookahead = true,
+          selection_modes = {
+            ["@parameter.outer"] = "v",
+            ["@function.outer"] = "V",
+            ["@class.outer"] = "V",
+          },
+        },
+
+        move = {
+          set_jumps = true,
+        },
+      })
+
+      local select = require("nvim-treesitter-textobjects.select")
+      local move = require("nvim-treesitter-textobjects.move")
+
+      -- Select function
+      vim.keymap.set({ "x", "o" }, "af", function()
+        select.select_textobject("@function.outer", "textobjects")
+      end)
+
+      vim.keymap.set({ "x", "o" }, "if", function()
+        select.select_textobject("@function.inner", "textobjects")
+      end)
+
+      -- Select class
+      vim.keymap.set({ "x", "o" }, "ac", function()
+        select.select_textobject("@class.outer", "textobjects")
+      end)
+
+      vim.keymap.set({ "x", "o" }, "ic", function()
+        select.select_textobject("@class.inner", "textobjects")
+      end)
+
+      -- Move between functions
+      vim.keymap.set({ "n", "x", "o" }, "]m", function()
+        move.goto_next_start("@function.outer", "textobjects")
+      end)
+
+      vim.keymap.set({ "n", "x", "o" }, "[m", function()
+        move.goto_previous_start("@function.outer", "textobjects")
+      end)
+    end,
+  },
 }
