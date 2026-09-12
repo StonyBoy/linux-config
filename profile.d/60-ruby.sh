@@ -1,13 +1,10 @@
 #! /bin/bash
 # -*-sh-*-
-# Time-stamp: 2021-Jul-08 22:29
-# Ruby configuration
+# Time-stamp: 2026-Sep-12 23:11
+# Ruby / RVM
 
-# Debugging
-# set -x
+[ -s "$HOME/.rvm/scripts/rvm" ] && source "$HOME/.rvm/scripts/rvm"
+[ -d "$HOME/.rvm/bin" ] && pathappend "$HOME/.rvm/bin"
 
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-[ -d "~/.rvm/bin" ] && pathappend ~/.rvm/bin
-[ -s "$HOME/.rvm/scripts/rvm" ] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
+# Avoid rvmsudo complaints
+export rvmsudo_secure_path=1
