@@ -1,7 +1,7 @@
 #! /bin/bash
 #  vim: set ts=4 sw=4 sts=4 tw=120 cc=120 et ft=sh :
 # Steen Hegelund
-# Time-Stamp: 2026-jan-17 19:23
+# Time-Stamp: 2026-Sep-12 22:53
 
 pane_id_prefix="resurrect_"
 nvim_pane_id_prefix="nvim term"
@@ -17,7 +17,7 @@ if [ -n "${TMUX_PANE}" ]; then
   if [[ $pane_id != "$pane_id_prefix"* ]] && [[ $pane_id != "$nvim_pane_id_prefix"* ]]; then
 
     # if not, set it to a random ID
-    random_id=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 16)
+    random_id=$(LC_ALL=C tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 16)
     printf "\033]2;$pane_id_prefix$random_id\033\\"
     pane_id=$(tmux display -pt "${TMUX_PANE:?}" "#{pane_title}")
   fi
