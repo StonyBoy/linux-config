@@ -19,6 +19,7 @@
     ls = log --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s \" --decorate
     lrv = log --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s \" --decorate --grep=\"Reviewed-by: Steen Hegelund\"
     lso = log --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s \" --decorate --grep=\"Signed-off-by: Steen Hegelund\"
+    lb = log --pretty=format:\"    - %s\"
     ll = log --decorate --stat
     mt = mergetool
     r = reset
