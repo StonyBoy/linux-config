@@ -1,6 +1,6 @@
 -- Neovim Language Server Configuration
 -- Steen Hegelund
--- Time-Stamp: 2025-Nov-01 14:27
+-- Time-Stamp: 2026-Sep-14 10:08
 -- vim: set ts=2 sw=2 sts=2 tw=120 et cc=120 ft=lua :
 
 -- Show diagnostics
@@ -35,11 +35,22 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- Enable Language Servers
 -- These names are from Mesons 'Installed' list, the second name shown.  This name must also be used for the
 -- configuration file
-vim.lsp.enable({ 'lua_ls', 'rust_analyzer', 'pylsp', 'yamlls', 'bashls', 'solargraph', 'vimls', 'ts_ls', 'clangd',
-  'groovyls', 'dockerls', 'language-server-bitbake' })
+local mandatory_lsps = { 'lua_ls', 'rust_analyzer', 'pylsp', 'yamlls', 'bashls', 'vimls', 'ts_ls', 'clangd' }
 
+-- Optional LSPs come from .config/nvim/lua/opt-lsp.lua which is not tracked so it stays project-local
+-- This can return a list of extra LSPs, like this:
+--    return { 'solargraph', 'groovyls', 'dockerls', 'language-server-bitbake' }
+--
 -- groovyls need java and javac
 -- On Ubuntu 24.04 this means installing openjdk-21-jdk and openjdk-21-jdk-headless
+
+local ok, optional_lsps = pcall(require, 'opt-lsp')
+if not ok then
+  optional_lsps = {}
+end
+
+local enabled_lsps = vim.list_extend(vim.deepcopy(mandatory_lsps), optional_lsps)
+vim.lsp.enable(enabled_lsps)
 
 return {
   {
@@ -56,13 +67,11 @@ return {
   {
     'williamboman/mason-lspconfig.nvim',
     config = function()
+      -- 'language-server-bitbake' has no mason-lspconfig server mapping, so it must be installed manually (via Mason)
+      local ensure_installed = vim.tbl_filter(function(name) return name ~= 'language-server-bitbake' end, enabled_lsps)
       require('mason-lspconfig').setup({
-        ensure_installed = {
-          -- These names are from Mesons 'Installed' list, the seconf name shown if available
-          'lua_ls', 'rust_analyzer', 'pylsp', 'yamlls', 'bashls', 'solargraph', 'vimls', 'ts_ls', 'clangd', 'groovyls',
-          'dockerls',
-          -- 'language-server-bitbake' must be installed manually (via Mason)
-        },
+        -- These names are from Mesons 'Installed' list, the second name shown if available
+        ensure_installed = ensure_installed,
       })
     end,
   },

@@ -13,5 +13,6 @@ ID
 .solargraph.yml
 Session.vim
 .ctags.d/
+config/nvim/lua/opt-lsp.lua
 
 **/.claude/settings.local.json
