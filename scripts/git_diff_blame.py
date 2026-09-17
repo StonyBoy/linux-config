@@ -46,22 +46,40 @@ class Hunk:
     def update(self, lines, end):
         self.hunklines = lines[self.start:end]
 
-    def resolve(self, blames):
+    @staticmethod
+    def _blame_at(blame_lines, line_num):
+        if line_num < 1 or line_num > len(blame_lines):
+            return None
+        bline = blame_lines[line_num - 1]
+        if not bline:
+            return None
+        found = Hunk.blame_regex.findall(bline)
+        return found[0] if found else None
+
+    @staticmethod
+    def _format(sign, sha, content):
+        return '{} {} {}'.format(sign, sha, content) if content else '{} {}'.format(sign, sha)
+
+    def resolve(self, blame_begin, blame_end):
+        old_line = int(self.box[0])
+        new_line = int(self.box[2])
         for line in self.hunklines:
             self.blamehunklines.append(line)
-            if len(line) > 0:
-                for blm in blames:
-                    for bline in blm:
-                        if len(bline) > 0:
-                            binfo = Hunk.blame_regex.findall(bline)[0]
-                            if line.startswith('-'):
-                                if line[1:] in bline:
-                                    self.blamehunklines[-1] = '- {} {}'.format(binfo[0], line[1:])
-                                    self.shas[binfo[0]] = binfo[1]
-                            if line.startswith('+'):
-                                if line[1:] in bline:
-                                    self.blamehunklines[-1] = '+ {} {}'.format(binfo[0], line[1:])
-                                    self.shas[binfo[0]] = binfo[1]
+            if line.startswith('-'):
+                binfo = self._blame_at(blame_begin, old_line)
+                if binfo:
+                    self.blamehunklines[-1] = self._format('-', binfo[0], line[1:])
+                    self.shas[binfo[0]] = binfo[1]
+                old_line += 1
+            elif line.startswith('+'):
+                binfo = self._blame_at(blame_end, new_line)
+                if binfo:
+                    self.blamehunklines[-1] = self._format('+', binfo[0], line[1:])
+                    self.shas[binfo[0]] = binfo[1]
+                new_line += 1
+            elif line.startswith(' '):
+                old_line += 1
+                new_line += 1
 
     def get_commits(self):
         return self.shas
@@ -88,8 +106,10 @@ class DiffFile:
         self.end = 'HEAD'
         if '..' in self.begin:
             self.begin, self.end = self.begin.split('..')
-        self.blames = [self._get_blame(self.begin)]
-        self.blames.append(self._get_blame(self.end))
+        # blame_begin attributes removed lines to whoever last touched them before the range
+        self.blame_begin = self._get_blame(self.begin)
+        # blame_end is restricted to the range so added lines resolve to a commit inside it
+        self.blame_end = self._get_blame(f'{self.begin}..{self.end}')
         self._hunks()
 
     def _get_diff(self):
@@ -113,10 +133,10 @@ class DiffFile:
         if start:
             self.hunks[-1].update(lines, -1)
         for hunk in self.hunks:
-            hunk.resolve(self.blames)
+            hunk.resolve(self.blame_begin, self.blame_end)
 
     def _get_commit(self, rev):
-        return run(['git', '--no-pager', 'show', '-s', '--format="%h %as %ae %s"', rev])[0]
+        return run(['git', '--no-pager', 'show', '-s', '--format="%h %as %ae %s"', rev.lstrip('^')])[0]
 
     def header(self, text):
         print(f'##### {text} #####')
