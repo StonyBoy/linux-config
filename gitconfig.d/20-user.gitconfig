@@ -1,50 +1,47 @@
 ;  vim: set ts=4 sw=4 sts=4 tw=120 et cc=120 ft=gitconfig:
 [alias]
     b = !git branch -vv
+    basedon = "!f() { git log -1 --abbrev=12 --format=\"Based on: $1 @ %h (\\\"%s\\\")\" \"$1\" ; }; f"
+    bi = "!gbranchinter() { git branch --sort=-committerdate --sort=-HEAD --format=\"%(HEAD) %(color:yellow)%(refname:short):%(color:green)(%(committerdate:relative)):%(color:blue)%(subject)%(color:reset)\" --color=always | column -t -s: -l 3 | fzf --ansi --layout reverse --preview 'git log --pretty=format:\"%C(yellow)%h%Creset : %Cgreen%as%Creset : %Cblue%an%Creset : %Cred%d%Creset %s\" --color=always {1}'; }; gbranchinter"
     bra = !git branch --remotes --format='%(color:red)%(refname:short) %(color:green)%(committerdate:relative) %(color:blue)%(authorname)%(color:reset)' --sort=-committerdate --color=always | grep -v soak
     ca = commit --amend
     cas = commit --amend --signoff
+    clb =  "!gitcleanupbranches() { ~/scripts/git_branches.py -c ; }; gitcleanupbranches"
     cp = cherry-pick
-    dn = !git diff --name-only
+    db = "!gitdiffblame() { ~/scripts/git_diff_blame.py $* ; }; gitdiffblame"
     dc = !git diff --cached
-    dtc = !git difftool --cached
+    dn = !git diff --name-only
     dt = difftool
-    mt = mergetool
+    dtc = !git difftool --cached
     dtlast = !git difftool HEAD~1
-    la = !git config -l | grep alias | cut -c 7-
     l = log --decorate
-    lf = log --format='Fixes: %h ("%s")'
-    basedon = "!f() { git log -1 --abbrev=12 --format=\"Based on: $1 @ %h (\\\"%s\\\")\" \"$1\" ; }; f"
-    using = "!use() { git log -1 --abbrev=12 --format=\"Using: $(git remote get-url origin) @ %h (\\\"%s\\\")\" HEAD ; }; use"
-    ls = log --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s \" --decorate
-    lrv = log --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s \" --decorate --grep=\"Reviewed-by: Steen Hegelund\"
-    lso = log --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s \" --decorate --grep=\"Signed-off-by: Steen Hegelund\"
+    la = !git config -l | grep alias | cut -c 7-
     lb = log --pretty=format:\"    - %s\"
+    lf = log --format='Fixes: %h ("%s")'
+    li = "!gloginter() { git log --pretty=format:\"%C(yellow)%h%Creset : %Cgreen%as%Creset : %Cblue%an%Creset : %Cred%d%Creset %s\" --color=always $* | fzf --layout reverse --delimiter \":\" --ansi --preview 'git show {1} | delta --width=${FZF_PREVIEW_COLUMNS}' --preview-window=70% --preview-label='TAB: Opens diff(s) in editor, RIGHT:Expand' --color='preview-label:bright-red' --bind 'tab:execute(git difftool {1}~1 {1})' --bind 'right:execute(git show {1})'; }; gloginter"
     ll = log --decorate --stat
+    lrv = log --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s \" --decorate --grep=\"Reviewed-by: Steen Hegelund\"
+    ls = log --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s \" --decorate
+    lso = log --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s \" --decorate --grep=\"Signed-off-by: Steen Hegelund\"
     mt = mergetool
+    mt = mergetool
+    pat =  "!gitpatchsha() { git format-patch -M -C ${1-HEAD}~1..${1-HEAD} ; }; gitpatchsha"
     r = reset
     rh = !git reset --hard
+    s = status
     sh  =  !git show --no-patch
     shf =  !git show --name-only --format=""
     sho =  !git show --name-only
     shs =  "!diffstat()    { git diff --stat ${1-HEAD}~1..${1-HEAD} ; }; diffstat"
-    pat =  "!gitpatchsha() { git format-patch -M -C ${1-HEAD}~1..${1-HEAD} ; }; gitpatchsha"
     since = !git log --pretty=format:\"%aD|%H|%an|%s\" --no-merges HEAD --not
-    s = status
     tags = tag -l --color=always --format=\"%(align:50,left)%(refname:short)%(end) : %(taggerdate:iso) : %(objectname:short) : %(contents:subject)\"
+    ti = "!gtaginter() { git tag --color=always --sort=-creatordate --format=\"%(color:green)%(refname:short):%(color:yellow)%(creatordate:short):%(color:blue)%(objectname:short):%(color:reset)%(contents:subject)\" --list  | column -t -s: -l 4 | fzf --ansi --layout reverse --preview 'git log --color=always --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s\" {1}'; }; gtaginter"
+    ub =  "!gitupdatebranches() { ~/scripts/git_branches.py -m ; }; gitupdatebranches"
     unstage = !git reset HEAD --
     upda = !git commit --reset-author --amend
+    using = "!use() { git log -1 --abbrev=12 --format=\"Using: $(git remote get-url origin) @ %h (\\\"%s\\\")\" HEAD ; }; use"
     v = !git --version
     w = rev-parse --abbrev-ref HEAD
-    prune-branches =  "!gitprunebranches() { ~/scripts/git_branches.py -d ; }; gitprunebranches"
-    update-branches =  "!gitupdatebranches() { ~/scripts/git_branches.py -m ; }; gitupdatebranches"
-    delete-local =  "!gitdellocalbranches() { ~/scripts/git_branches.py -l ; }; gitdellocalbranches"
-    delete-remote =  "!gitdelremotebranches() { ~/scripts/git_branches.py -r ; }; gitdelremotebranches"
-    del-local =  "!gitdellocals() { ~/scripts/git_branches.py -l ; }; gitdellocals"
-    db = "!gitdiffblame() { ~/scripts/git_diff_blame.py $* ; }; gitdiffblame"
-    li = "!gloginter() { git log --pretty=format:\"%C(yellow)%h%Creset : %Cgreen%as%Creset : %Cblue%an%Creset : %Cred%d%Creset %s\" --color=always $* | fzf --layout reverse --delimiter \":\" --ansi --preview 'git show {1} | delta --width=${FZF_PREVIEW_COLUMNS}' --preview-window=70% --preview-label='TAB: Opens diff(s) in editor, RIGHT:Expand' --color='preview-label:bright-red' --bind 'tab:execute(git difftool {1}~1 {1})' --bind 'right:execute(git show {1})'; }; gloginter"
-    bi = "!gbranchinter() { git branch --sort=-committerdate --sort=-HEAD --format=\"%(HEAD) %(color:yellow)%(refname:short):%(color:green)(%(committerdate:relative)):%(color:blue)%(subject)%(color:reset)\" --color=always | column -t -s: -l 3 | fzf --ansi --layout reverse --preview 'git log --pretty=format:\"%C(yellow)%h%Creset : %Cgreen%as%Creset : %Cblue%an%Creset : %Cred%d%Creset %s\" --color=always {1}'; }; gbranchinter"
-    ti = "!gtaginter() { git tag --color=always --sort=-creatordate --format=\"%(color:green)%(refname:short):%(color:yellow)%(creatordate:short):%(color:blue)%(objectname:short):%(color:reset)%(contents:subject)\" --list  | column -t -s: -l 4 | fzf --ansi --layout reverse --preview 'git log --color=always --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s\" {1}'; }; gtaginter"
 
 [color]
     ui = true
