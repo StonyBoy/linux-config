@@ -26,6 +26,7 @@ let
         tmux
         direnv
         gawk          # GNU awk; mawk on Ubuntu lacks features
+        nodejs        # provides node, npm, npx
         plantuml
         smatch
         (lib.lowPrio sparse)   # sparse + smatch both ship man1/semind.1.gz; let smatch win
