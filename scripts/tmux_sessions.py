@@ -77,14 +77,14 @@ def attach(args):
         if args.inline:
             cmd = ['ssh', '-t', server, 'tmux', '-u', 'attach-session', '-t', session]
         else:
-            cmd = ['alacritty', '--title', title, '-e', 'ssh', '-t', server, 'tmux', '-u', 'attach-session', '-t', session]
+            cmd = ['alacritty', '-o', f'window.title="{title}"', '-e', 'ssh', '-t', server, 'tmux', '-u', 'attach-session', '-t', session]
     else:
         session = args.server_session
         title = f'{{{session}}}'
         if args.inline:
             cmd = ['tmux', '-u', 'attach-session', '-t', session]
         else:
-            cmd = ['alacritty', '--title', title, '-e', 'tmux', '-u', 'attach-session', '-t', session]
+            cmd = ['alacritty', '-o', f'window.title="{title}"', '-e', 'tmux', '-u', 'attach-session', '-t', session]
 
     # Specifying a pipe for the 3 std devices allows the process to run detached
     if args.verbose:
