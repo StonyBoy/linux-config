@@ -8,10 +8,34 @@ import datetime
 import glob
 import json
 import os
+import re
+import shlex
 import subprocess
 
 ROOT = os.path.expanduser("~/.claude/projects")
+RUNDIR = f"/tmp/claude-{os.getuid()}"
 HOME = os.path.expanduser("~")
+SID_RE = re.compile(r'/tasks$')
+UUID_RE = re.compile(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$')
+
+
+def parse_cmdline(cmd):
+    # --resume <sid> gives the exact session id; -n <name> gives sb's display name.
+    args = shlex.split(cmd)
+    sid = name = None
+    i = 0
+    while i < len(args):
+        if args[i] == "--resume" and i + 1 < len(args):
+            candidate = args[i + 1]
+            if UUID_RE.match(candidate):
+                sid = candidate
+            i += 2
+        elif args[i] == "-n" and i + 1 < len(args):
+            name = args[i + 1]
+            i += 2
+        else:
+            i += 1
+    return sid, name
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -20,20 +44,72 @@ def parse_arguments() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def read_title(entry, current):
-    if entry.get("type") == "custom-title":
-        current["name"] = entry.get("customTitle")
-    elif entry.get("type") == "agent-name" and current.get("name") is None:
-        current["name"] = entry.get("agentName")
+def find_session_id_via_fd(pid):
+    # older claude builds keep the per-session tasks dir open as an fd; fast path.
+    fd_dir = f"/proc/{pid}/fd"
+    try:
+        entries = os.listdir(fd_dir)
+    except OSError:
+        return None
+    for entry in entries:
+        try:
+            target = os.readlink(os.path.join(fd_dir, entry))
+        except OSError:
+            continue
+        if target.startswith(RUNDIR) and SID_RE.search(target):
+            return os.path.basename(os.path.dirname(target))
+    return None
 
 
-def find_session_id(cwd, started_after):
-    project_dir = os.path.join(ROOT, cwd.replace("/", "-"))
-    candidates = glob.glob(os.path.join(project_dir, "*.jsonl"))
-    candidates = [c for c in candidates if os.path.getmtime(c) >= started_after]
-    if not candidates:
-        return None, None
-    path = max(candidates, key=os.path.getmtime)
+def find_project_dir(cwd):
+    # the project dir is keyed by the launch/repo root, not necessarily the exact cwd.
+    parts = cwd.split("/")
+    for i in range(len(parts), 0, -1):
+        candidate = "/".join(parts[:i])
+        d = os.path.join(ROOT, candidate.replace("/", "-"))
+        if os.path.isdir(d):
+            return d
+    return None
+
+
+def find_session_id_via_transcript(cwd, started_after, used_sids):
+    # newer claude builds hold no fd marker; match a transcript by cwd and start time instead.
+    project_dir = find_project_dir(cwd)
+    if not project_dir:
+        return None
+    best_sid, best_ts = None, None
+    for path in glob.glob(os.path.join(project_dir, "*.jsonl")):
+        sid = os.path.splitext(os.path.basename(path))[0]
+        if sid in used_sids:
+            continue
+        try:
+            with open(path, encoding="utf-8") as f:
+                for _ in range(20):
+                    line = f.readline()
+                    if not line:
+                        break
+                    try:
+                        entry = json.loads(line)
+                    except ValueError:
+                        continue
+                    if entry.get("cwd") == cwd:
+                        ts = entry.get("timestamp", "")
+                        try:
+                            when = datetime.datetime.fromisoformat(ts.replace("Z", "+00:00")).timestamp()
+                        except ValueError:
+                            continue
+                        if when >= started_after - 5 and (best_ts is None or when < best_ts):
+                            best_sid, best_ts = sid, when
+                        break
+        except OSError:
+            continue
+    return best_sid
+
+
+def read_session_name(project_dir, sid):
+    if not project_dir or not sid:
+        return None
+    path = os.path.join(project_dir, f"{sid}.jsonl")
     name = None
     try:
         for line in open(path, encoding="utf-8"):
@@ -47,16 +123,21 @@ def find_session_id(cwd, started_after):
                 name = entry.get("agentName")
     except OSError:
         pass
-    sid = os.path.splitext(os.path.basename(path))[0]
-    return sid, name
+    return name
 
 
 class ClaudeSession:
-    def __init__(self, pid, started, cwd):
+    def __init__(self, pid, started, cwd, cmd, used_sids):
         self.pid = pid
         self.started = started
         self.cwd = cwd.replace(HOME, "~")
-        self.sid, self.name = find_session_id(cwd, started.timestamp())
+        cmd_sid, cmd_name = parse_cmdline(cmd)
+        self.sid = (cmd_sid or find_session_id_via_fd(pid)
+                    or find_session_id_via_transcript(cwd, started.timestamp(), used_sids))
+        if self.sid:
+            used_sids.add(self.sid)
+        project_dir = find_project_dir(cwd)
+        self.name = cmd_name or (read_session_name(project_dir, self.sid) if self.sid else None)
 
     def label(self):
         return self.name or (self.sid[:8] if self.sid else self.pid)
@@ -75,6 +156,7 @@ def get_running_sessions():
     cmd = ["ps", "-eo", "pid,lstart,cmd"]
     cp = subprocess.run(cmd, capture_output=True, text=True)
     sessions = []
+    used_sids = set()
     for line in cp.stdout.splitlines()[1:]:
         parts = line.split(None, 6)
         if len(parts) < 7:
@@ -91,7 +173,7 @@ def get_running_sessions():
             cwd = os.readlink(f"/proc/{pid}/cwd")
         except OSError:
             continue
-        sessions.append(ClaudeSession(pid, started, cwd))
+        sessions.append(ClaudeSession(pid, started, cwd, cmd, used_sids))
     return sessions
 
 
