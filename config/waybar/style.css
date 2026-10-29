@@ -76,8 +76,14 @@ tooltip {
 #idle_inhibitor,
 #mpd {
     padding: 0 10px;
+    margin: 2px 0;
     color: #ffffff;
     border-radius: 15px;
+}
+
+/* The network group box shares the #network id with its modules, so drop its own margin */
+.modules-right > widget > #network {
+    margin: 0;
 }
 
 #window,
