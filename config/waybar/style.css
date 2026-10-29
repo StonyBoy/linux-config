@@ -132,7 +132,6 @@ label:focus {
 }
 
 #cpu {
-    background-color: #e6ccff;
     color: #000000;
 }
 
@@ -142,7 +141,6 @@ label:focus {
 }
 
 #disk {
-    background-color: #e5e7e9;
     color: #000000;
 }
 
@@ -152,73 +150,16 @@ label:focus {
 
 #network {
     color: #000000;
-    background-color: #ccf2ff;
-}
-
-#network.disconnected {
-    background-color: #f0f0f0;
-}
-
-#network.wan.ethernet {
-    color: #0f0f0f;
-}
-
-#network.eth_black.ethernet,
-#network.tun.ethernet,
-#network.wifi.wifi {
-    color: #fcfcfc;
-    background-color: #3f3f3f;
-}
-
-#network.eth_red.ethernet {
-    color: #fcfcfc;
-    background-color: #c00000;
-}
-
-#network.eth_green.ethernet {
-    color: #000000;
-    background-color: #00c000;
-}
-
-#network.eth_blue.ethernet {
-    color: #fcfcfc;
-    background-color: #0000c0;
-}
-
-#network.eth_yellow.ethernet {
-    color: #000000;
-    background-color: #c0c000;
-}
-
-#pulseaudio {
-    background-image: linear-gradient(#fbfdce, #f8fba0);
-    color: #000000;
-}
-
-#pulseaudio.muted {
-    background-image: linear-gradient(#e7e9b4, #d8d8c5);
-    color: #8e9306;
-}
-
-#bluetooth {
-    background-color: #6495ED;
 }
 
 #bluetooth.off,
 #bluetooth.disabled {
-    background-color: #191970;
+    opacity: 0.6;
 }
 
 #mpris,
 #custom-media {
-    background-color: #66cc99;
-    color: #2a5c45;
     min-width: 100px;
-}
-
-#mpris.spotify,
-#custom-media.custom-spotify {
-    background-image: linear-gradient(#9fdfbf, #66cc99);
 }
 
 #mpris.vlc,
@@ -226,16 +167,8 @@ label:focus {
     background-color: #ffa000;
 }
 
-#temperature {
-    background-image: linear-gradient(lightblue, blue);
-}
-
 #temperature.critical {
     background-image: linear-gradient(yellow, red);
-}
-
-#tray {
-    background-color: #2980b9;
 }
 
 #tray > .passive {
@@ -280,36 +213,25 @@ label:focus {
 }
 
 #custom-power {
-    background-color: #f5cba7;
     color: #000000;
 }
 
 #custom-hostinfo {
-    background-color:  #aed6f1;
     color: #000000;
 }
 
 #custom-easytest {
-    background-color: #aeb6bf;
-    color: #000000;
-}
-
-#custom-memory.ok {
-    background-color: #48c9b0;
-    color: #000000;
-}
-
-#custom-systemd_unit.ok {
-    background-color: #48c9b0;
     color: #000000;
 }
 
 #custom-systemd_unit.warning {
+    background-image: none;
     background-color: #f4d03f;
     color: #000000;
 }
 
 #custom-systemd_unit.error {
+    background-image: none;
     background-color:  #ec7063;
     color: #000000;
 }
@@ -335,16 +257,131 @@ label:focus {
 }
 
 #custom-multi_clock {
-    background-color:  #d9d9d9;
-    color: #000000;
-}
-
-#custom-claude_status.ok {
-    background-color: #ffe5cc;
     color: #000000;
 }
 
 #custom-claude_status.idle {
+    background-image: none;
     background-color: #aeb6bf;
+    color: #000000;
+}
+
+/* Light gradient per widget, screen order (drawer leaders last in their group) from #c6cdff to #c3ff80 */
+#custom-media {
+    background-image: linear-gradient(#f1f2ff, #c6d0f8);
+    color: #000000;
+}
+
+#custom-claude_status {
+    background-image: linear-gradient(#f1f3fd, #c6d3f1);
+    color: #000000;
+}
+
+#network.wan {
+    background-image: linear-gradient(#f0f5f8, #c5dbdc);
+    color: #000000;
+}
+
+#network.tun {
+    background-image: linear-gradient(#f1f4fc, #c6d5ea);
+    color: #000000;
+}
+
+#network.wifi {
+    background-image: linear-gradient(#f1f4fa, #c5d8e3);
+    color: #000000;
+}
+
+#custom-hostinfo {
+    background-image: linear-gradient(#f0fbea, #c4f1a3);
+    color: #000000;
+}
+
+#bluetooth {
+    background-image: linear-gradient(#f0f6f6, #c5ded5);
+    color: #000000;
+}
+
+#disk.home {
+    background-image: linear-gradient(#f0f7f4, #c5e0ce);
+    color: #000000;
+}
+
+#disk.sys {
+    background-image: linear-gradient(#f0f7f3, #c5e3c7);
+    color: #000000;
+}
+
+#custom-memory {
+    background-image: linear-gradient(#f0f8f1, #c4e6c0);
+    color: #000000;
+}
+
+#custom-power {
+    background-image: linear-gradient(#f0f9ef, #c4e9b8);
+    color: #000000;
+}
+
+#temperature {
+    background-image: linear-gradient(#f0faed, #c4ecb1);
+    color: #000000;
+}
+
+#cpu {
+    background-image: linear-gradient(#f0faec, #c4eeaa);
+    color: #000000;
+}
+
+#custom-easytest {
+    background-image: linear-gradient(#f0fce8, #c4f49c);
+    color: #000000;
+}
+
+#custom-systemd_unit {
+    background-image: linear-gradient(#f0fce6, #c4f795);
+    color: #000000;
+}
+
+#custom-multi_clock {
+    background-image: linear-gradient(#f0fde4, #c3f98e);
+    color: #000000;
+}
+
+#pulseaudio {
+    background-image: linear-gradient(#f0fee3, #c3fc87);
+    color: #000000;
+}
+
+#tray {
+    background-image: linear-gradient(#f0fee1, #c3ff80);
+    color: #000000;
+}
+
+#network.disconnected {
+    background-image: linear-gradient(#f4f4f4, #e0e0e0);
+}
+
+#network.eth_black {
+    background-image: linear-gradient(#e6e6e6, #bdbdbd);
+    color: #000000;
+}
+
+#network.eth_red {
+    background-image: linear-gradient(#ffd6d6, #ffa8a8);
+    color: #000000;
+}
+
+#network.eth_green {
+    background-image: linear-gradient(#d6ffd6, #a8f0a8);
+    color: #000000;
+}
+
+#network.eth_blue {
+    background-image: linear-gradient(#d6e4ff, #a8c4ff);
+    color: #000000;
+}
+
+#network.eth_yellow {
+    background-image: linear-gradient(#ffffd0, #fff59d);
     color: #000000;
 }
