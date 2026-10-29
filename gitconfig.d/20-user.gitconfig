@@ -17,7 +17,7 @@
     l = log --decorate
     la = !git config -l | grep alias | cut -c 7-
     lb = log --pretty=format:\"    - %s\"
-    lf = log --format='Fixes: %h ("%s")'
+    lf = log --abbrev=12 --format='Fixes: %h ("%s")'
     li = "!gloginter() { git log --pretty=format:\"%C(yellow)%h%Creset : %Cgreen%as%Creset : %Cblue%an%Creset : %Cred%d%Creset %s\" --color=always $* | fzf --layout reverse --delimiter \":\" --ansi --preview 'git show {1} | delta --width=${FZF_PREVIEW_COLUMNS}' --preview-window=70% --preview-label='TAB: Opens diff(s) in editor, RIGHT:Expand' --color='preview-label:bright-red' --bind 'tab:execute(git difftool {1}~1 {1})' --bind 'right:execute(git show {1})'; }; gloginter"
     ll = log --decorate --stat
     lrv = log --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s \" --decorate --grep=\"Reviewed-by: Steen Hegelund\"
@@ -36,6 +36,7 @@
     since = !git log --pretty=format:\"%aD|%H|%an|%s\" --no-merges HEAD --not
     tags = tag -l --color=always --format=\"%(align:50,left)%(refname:short)%(end) : %(taggerdate:iso) : %(objectname:short) : %(contents:subject)\"
     ti = "!gtaginter() { git tag --color=always --sort=-creatordate --format=\"%(color:green)%(refname:short):%(color:yellow)%(creatordate:short):%(color:blue)%(objectname:short):%(color:reset)%(contents:subject)\" --list  | column -t -s: -l 4 | fzf --ansi --layout reverse --preview 'git log --color=always --pretty=format:\"%C(yellow)%h%Creset | %Cgreen%as%Creset | %Cblue%an%Creset | %Cred%d%Creset %s\" {1}'; }; gtaginter"
+    top = log -1 --name-status --date=iso --format='%H %s%nAuthor: %an <%ae>%nDate:   %ad'
     ub =  "!gitupdatebranches() { ~/scripts/git_branches.py -m ; }; gitupdatebranches"
     unstage = !git reset HEAD --
     upda = !git commit --reset-author --amend
