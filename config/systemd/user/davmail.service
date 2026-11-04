@@ -5,6 +5,7 @@ After=network-online.target
 
 [Service]
 Type=simple
+Environment="JAVA_TOOL_OPTIONS=-Djava.util.logging.config.file=%h/.config/davmail/logging.properties"
 ExecStart=/usr/bin/davmail -server %h/.config/davmail/davmail.properties -notray
 TimeoutSec=120
 Restart=always
