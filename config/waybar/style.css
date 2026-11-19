@@ -272,94 +272,94 @@ label:focus {
     color: #000000;
 }
 
-/* Light gradient per widget, screen order (drawer leaders last in their group) from #c6cdff to #c3ff80 */
+/* Light gradient per widget, screen order (drawer leaders last in their group) from #ccffcc via #ffcce0 (middle) to #ccebff */
 #custom-media {
-    background-image: linear-gradient(#f1f2ff, #c6d0f8);
+    background-image: linear-gradient(#f2fff2, #d2f9ce);
     color: #000000;
 }
 
 #custom-claude_status {
-    background-image: linear-gradient(#f1f3fd, #c6d3f1);
+    background-image: linear-gradient(#f4fef3, #d7f4d0);
     color: #000000;
 }
 
 #network.wan {
-    background-image: linear-gradient(#f0f5f8, #c5dbdc);
+    background-image: linear-gradient(#f8f9f4, #e8e3d7);
     color: #000000;
 }
 
 #network.tun {
-    background-image: linear-gradient(#f1f4fc, #c6d5ea);
+    background-image: linear-gradient(#f5fcf3, #ddeed3);
     color: #000000;
 }
 
 #network.wifi {
-    background-image: linear-gradient(#f1f4fa, #c5d8e3);
+    background-image: linear-gradient(#f6fbf4, #e3e8d5);
     color: #000000;
 }
 
 #custom-hostinfo {
-    background-image: linear-gradient(#f0fbea, #c4f1a3);
+    background-image: linear-gradient(#fbf5fa, #e8daee);
     color: #000000;
 }
 
 #bluetooth {
-    background-image: linear-gradient(#f0f6f6, #c5ded5);
+    background-image: linear-gradient(#f9f8f5, #eeddd9);
     color: #000000;
 }
 
 #disk.home {
-    background-image: linear-gradient(#f0f7f4, #c5e0ce);
+    background-image: linear-gradient(#fbf6f6, #f4d7dc);
     color: #000000;
 }
 
 #disk.sys {
-    background-image: linear-gradient(#f0f7f3, #c5e3c7);
+    background-image: linear-gradient(#fcf5f6, #f9d2de);
     color: #000000;
 }
 
 #custom-memory {
-    background-image: linear-gradient(#f0f8f1, #c4e6c0);
+    background-image: linear-gradient(#fef4f7, #ffcce0);
     color: #000000;
 }
 
 #custom-power {
-    background-image: linear-gradient(#f0f9ef, #c4e9b8);
+    background-image: linear-gradient(#fff2f7, #f9cfe3);
     color: #000000;
 }
 
 #temperature {
-    background-image: linear-gradient(#f0faed, #c4ecb1);
+    background-image: linear-gradient(#fef3f8, #f4d3e7);
     color: #000000;
 }
 
 #cpu {
-    background-image: linear-gradient(#f0faec, #c4eeaa);
+    background-image: linear-gradient(#fcf4f9, #eed6ea);
     color: #000000;
 }
 
 #custom-easytest {
-    background-image: linear-gradient(#f0fce8, #c4f49c);
+    background-image: linear-gradient(#f9f6fb, #e3ddf1);
     color: #000000;
 }
 
 #custom-systemd_unit {
-    background-image: linear-gradient(#f0fce6, #c4f795);
+    background-image: linear-gradient(#f8f6fc, #dde1f5);
     color: #000000;
 }
 
 #custom-multi_clock {
-    background-image: linear-gradient(#f0fde4, #c3f98e);
+    background-image: linear-gradient(#f6f8fc, #d7e4f8);
     color: #000000;
 }
 
 #pulseaudio {
-    background-image: linear-gradient(#f0fee3, #c3fc87);
+    background-image: linear-gradient(#f5f8fd, #d2e8fc);
     color: #000000;
 }
 
 #tray {
-    background-image: linear-gradient(#f0fee1, #c3ff80);
+    background-image: linear-gradient(#f4f9fe, #ccebff);
     color: #000000;
 }
 
