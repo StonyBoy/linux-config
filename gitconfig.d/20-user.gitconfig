@@ -6,6 +6,7 @@
     bra = !git branch --remotes --format='%(color:red)%(refname:short) %(color:green)%(committerdate:relative) %(color:blue)%(authorname)%(color:reset)' --sort=-committerdate --color=always | grep -v soak
     ca = commit --amend
     cas = commit --amend --signoff
+    obr = "!gitotherbranch() { b=\"$1\"; shift; git branch \"$b\" \"$(git commit-tree HEAD^{tree} -m \"$*\")\"; }; gitotherbranch"
     clb =  "!gitcleanupbranches() { ~/scripts/git_branches.py -c ; }; gitcleanupbranches"
     cp = cherry-pick
     db = "!gitdiffblame() { ~/scripts/git_diff_blame.py $* ; }; gitdiffblame"
