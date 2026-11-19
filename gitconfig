@@ -43,10 +43,6 @@
     path = ~/.gitconfig.d/30-editor-vim.gitconfig
     path = ~/.gitconfig.d/40-macos.gitconfig
 
-[sendemail]
-    aliasesfile = ~/.config/mutt/aliases
-    aliasfiletype = mutt
-
 [pull]
     rebase = true
 

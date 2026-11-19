@@ -2,5 +2,9 @@
 [sendemail]
         smtpserver = mx.microchip.com
         smtpserverport = 25
+        smtpencryption = tls
+        smtpsslcertpath =
+        aliasesfile = ~/.config/mutt/aliases
+        aliasfiletype = mutt
         tocover=true
         cccover=true
