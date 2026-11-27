@@ -308,12 +308,7 @@ label:focus {
     color: #000000;
 }
 
-#disk.home {
-    background-image: linear-gradient(#fbf6f6, #f4d7dc);
-    color: #000000;
-}
-
-#disk.sys {
+#disk.module {
     background-image: linear-gradient(#fcf5f6, #f9d2de);
     color: #000000;
 }
