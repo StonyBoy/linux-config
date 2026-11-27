@@ -78,8 +78,11 @@ class CleanupBranch:
         self.gone = track == '[gone]'
         self.shared_upstream = False  # set by get_cleanup_branches when >1 branch tracks the same upstream
         self.checked_out_elsewhere = False  # set by get_cleanup_branches when checked out in another worktree
+        self.remote_only = False  # set by get_cleanup_branches for remote branches without a local branch
 
     def status(self):
+        if self.remote_only:
+            return 'REMOTE'
         if self.upstream and self.shared_upstream:
             return 'SHARED'
         if self.upstream and self.gone:
@@ -95,6 +98,8 @@ class CleanupBranch:
         return self.current or self.checked_out_elsewhere or self.name in PROTECTED_BRANCHES
 
     def delete_local(self):
+        if self.remote_only:  # No local branch to delete
+            return
         run('git branch -D {}'.format(self.name))
 
     def push_delete_command(self):
@@ -114,7 +119,24 @@ def worktree_branch_names():
     return names
 
 
-def get_cleanup_branches():
+def get_remote_only_branches(remote, tracked_upstreams):
+    prefix = 'refs/remotes/{}/'.format(remote)
+    lines = run('git for-each-ref {} --format=%(refname)|%(subject)'.format(prefix))
+    branches = []
+    for line in lines:
+        fields = line.split('|', 1)
+        if len(fields) != 2 or not fields[0].startswith(prefix) or fields[0].endswith('/HEAD'):
+            continue
+        upstream = fields[0][len('refs/remotes/'):]
+        if upstream in tracked_upstreams:
+            continue
+        branch = CleanupBranch(['', upstream[len(remote) + 1:], upstream, '', fields[1]])
+        branch.remote_only = True
+        branches.append(branch)
+    return branches
+
+
+def get_cleanup_branches(remote):
     fmt = '%(HEAD)|%(refname)|%(upstream:short)|%(upstream:track)|%(subject)'
     lines = run('git for-each-ref refs/heads --format={}'.format(fmt))
     branches = []
@@ -137,6 +159,7 @@ def get_cleanup_branches():
         if not b.current and b.name in checked_out:
             b.checked_out_elsewhere = True
 
+    branches.extend(get_remote_only_branches(remote, set(upstream_counts)))
     return branches
 
 
@@ -189,7 +212,8 @@ def checklist(stdscr, branches, local_path, remotes, remote_urls, remote_idx):
             elif b.name in PROTECTED_BRANCHES:
                 mark = '# '
             else:
-                mark = '{}{}'.format('L' if marks[b]['local'] else ' ', 'R' if marks[b]['remote'] else ' ')
+                local_mark = 'L' if marks[b]['local'] and not b.remote_only else ' '
+                mark = '{}{}'.format(local_mark, 'R' if marks[b]['remote'] else ' ')
             line = '[{}] {:<5} {:<{name_width}}  {}'.format(mark, b.status(), b.name, b.subject, name_width=name_width)
             attr = curses.A_REVERSE if row - 4 == idx else curses.A_NORMAL
             stdscr.addstr(row, 0, line[:curses.COLS - 1], attr)
@@ -202,12 +226,20 @@ def checklist(stdscr, branches, local_path, remotes, remote_urls, remote_idx):
         elif key == ord('\t') and len(remotes) > 1:
             remote_idx = (remote_idx + 1) % len(remotes)
             prune_with_hourglass(stdscr, remotes[remote_idx])
+            branches = get_cleanup_branches(remotes[remote_idx])
+            marks = {b: {'local': False, 'remote': False} for b in branches}
+            idx = min(idx, len(branches) - 1)
+            name_width = max(len(b.name) for b in branches)
         elif key == curses.KEY_BTAB and len(remotes) > 1:
             remote_idx = (remote_idx - 1) % len(remotes)
             prune_with_hourglass(stdscr, remotes[remote_idx])
+            branches = get_cleanup_branches(remotes[remote_idx])
+            marks = {b: {'local': False, 'remote': False} for b in branches}
+            idx = min(idx, len(branches) - 1)
+            name_width = max(len(b.name) for b in branches)
         elif key in (ord(' '), curses.KEY_ENTER, 10, 13):
             branch = branches[idx]
-            if not branch.is_protected():
+            if not branch.is_protected() and not branch.remote_only:
                 marks[branch]['local'] = not marks[branch]['local']
                 if not marks[branch]['local']:
                     marks[branch]['remote'] = False
@@ -227,7 +259,7 @@ def checklist(stdscr, branches, local_path, remotes, remote_urls, remote_idx):
             for branch in both:
                 branch.delete_remote()
 
-            branches = get_cleanup_branches()
+            branches = get_cleanup_branches(remotes[remote_idx])
             if not branches:
                 return
             marks = {b: {'local': False, 'remote': False} for b in branches}
@@ -240,7 +272,7 @@ def checklist(stdscr, branches, local_path, remotes, remote_urls, remote_idx):
 def cleanup_branches(remote):
     print('Fetching from {}, please wait...'.format(remote))
     print(prune_remote_refs(remote))
-    branches = get_cleanup_branches()
+    branches = get_cleanup_branches(remote)
     if not branches:
         print('No local branches to clean up')
         return
