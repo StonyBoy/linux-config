@@ -110,31 +110,31 @@
     "network#eth_red": {
         "interface": "eth_red",
         "format-ethernet": "󰈀 {ipaddr}/{cidr}",
-        "format-disconnected": "󰈀 {ifname}",
+        "format-disconnected": "",
         "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
     },
     "network#eth_green": {
         "interface": "eth_green",
         "format-ethernet": "󰈀 {ipaddr}/{cidr}",
-        "format-disconnected": "󰈀 {ifname}",
+        "format-disconnected": "",
         "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
     },
     "network#eth_blue": {
         "interface": "eth_blue",
         "format-ethernet": "󰈀 {ipaddr}/{cidr}",
-        "format-disconnected": "󰈀 {ifname}",
+        "format-disconnected": "",
         "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
     },
     "network#eth_yellow": {
         "interface": "eth_yellow",
         "format-ethernet": "󰈀 {ipaddr}/{cidr}",
-        "format-disconnected": "󰈀 {ifname}",
+        "format-disconnected": "",
         "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
     },
     "network#eth_black": {
         "interface": "eth_black",
         "format-ethernet": "󰈀 {ipaddr}/{cidr}",
-        "format-disconnected": "󰈀 {ifname}",
+        "format-disconnected": "",
         "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
     },
     "network#wan": {
@@ -146,13 +146,13 @@
     "network#wifi": {
         "interface": "wifi",
         "format-wifi": " {essid} ({signalStrength}%)",
-        "format-disconnected": "{ifname}",
+        "format-disconnected": " {ifname}",
         "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
     },
     "network#tun": {
         "interface": "cscotun0",
         "format-ethernet": "󰖂 {ipaddr}/{cidr}",
-        "format-disconnected": "󰖂 {ifname}",
+        "format-disconnected": "",
         "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
     },
     "pulseaudio": {
